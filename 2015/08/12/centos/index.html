@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,经验&技巧," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="由于新项目需要在linux开发，于是我弄了一个CentOS6.5。使用Linux的过程才觉得以前真的是被微软宠坏了啊，尤其是这种不是最新版的CentOS，各种开发环境和软件的部署或多或少都会遇到一些坑。把这些坑都写出来，在强化巩固自己记忆的同时希望能给大家带来一点帮助。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS下的各种折腾">
+<meta property="og:url" content="http://zxh.site/2015/08/12/centos/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="由于新项目需要在linux开发，于是我弄了一个CentOS6.5。使用Linux的过程才觉得以前真的是被微软宠坏了啊，尤其是这种不是最新版的CentOS，各种开发环境和软件的部署或多或少都会遇到一些坑。把这些坑都写出来，在强化巩固自己记忆的同时希望能给大家带来一点帮助。">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/09/centos.jpg">
+<meta property="og:updated_time" content="2016-05-08T01:54:04.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS下的各种折腾">
+<meta name="twitter:description" content="由于新项目需要在linux开发，于是我弄了一个CentOS6.5。使用Linux的过程才觉得以前真的是被微软宠坏了啊，尤其是这种不是最新版的CentOS，各种开发环境和软件的部署或多或少都会遇到一些坑。把这些坑都写出来，在强化巩固自己记忆的同时希望能给大家带来一点帮助。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/09/centos.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> CentOS下的各种折腾 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CentOS下的各种折腾
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-12T23:47:57+08:00" content="2015-08-12">
+              2015-08-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/12/centos/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/centos/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/09/centos.jpg" alt="CentOS"><br>由于新项目需要在linux开发，于是我弄了一个CentOS6.5。使用Linux的过程才觉得以前真的是被微软宠坏了啊，尤其是这种不是最新版的CentOS，各种开发环境和软件的部署或多或少都会遇到一些坑。把这些坑都写出来，在强化巩固自己记忆的同时希望能给大家带来一点帮助。<br><a id="more"></a><br>一、CentOS6.5下输入法的安装</p>
+<p>其实正常情况下，用系统自带的输入法就好了，ibus是centos默认推荐的，直接在System–Preference–input method中设置输入法就好了。但是…如果你想要在SublimeText中输入中文的话…那么你需要安装fcitx才行。CentOS6.5安装fcitx需要先安装依赖包，fcitx的依赖包真心多：<pre class="prettyprint">yum install gettext gettext-devel libXft libXft-devel libXpm libXpm-devel automake autoconf libXtst-devel gtk+-devel gcc zlib-devel libpng-devel gtk2-devel glib-devel</pre><br>是的就是这么多…有可能一次性安装会失败，那就逐个手动安装（我人品比较差反正一次性安装是没成功的后来手动安装了没装上的）</p>
+<p>然后去下载3.x版本的fcitx，4.x的版本装不上。然后输入下面的命令：</p>
+<pre class="prettyprint">$ wget http://fcitx.googlecode.com/files/fcitx-3.6.4.tar.gz  
+$ tar zxvf fcitx-3.6.4.tar.gz  
+$ cd fcitx-3.6.4  
+$ ./autogen.sh  
+$ mkdir /usr/local/fcitx  
+$ ./configure --prefix=/usr/local/fcitx  
+$ make && make install  </pre>
+接下来输入
+<pre class="prettyprint">$ /usr/local/fcitx/bin/fcitx -h</pre>
+如果出现下列信息就说明安装成功了：
+<pre class="prettyprint">
+Usage: fcitx [OPTION]  
+ -d        run as daemon(default)  
+ -D        don't run as daemon  
+ -c        (re)create config file in home directory and then exit  
+ -n[im name]    run as specified name  
+ -v        display the version information and exit  
+ -h        display this help and exit  </pre>
+
+<p>接下来配置fcitx输入法</p>
+<p>1、创建fcitx输入法文件：</p>
+<pre class="prettyprint"># vim /etc/X11/xinit/xinput.d/fcitx.conf  
+XIM=fcitx  
+XIM_PROGRAM=/usr/local/fcitx/bin/fcitx  
+XIM_ARGS=”-d”  
+GTK_IM_MODULE=xim  
+QT_IM_MODULE =fcitx  </pre>
+
+<p>2、设置fcitx输入法文件为默认</p>
+<pre class="prettyprint">
+[root@localhost ~]$ mv /etc/alternatives/xinputrc /etc/alternatives/xinputrc.bak         //原来备份一下  
+[root@localhost ~]$ ln -s /etc/X11/xinit/xinput.d/fcitx.conf /etc/alternatives/xinputrc  //设置fcitx为默认输入法
+</pre>
+
+<p>3、设置个人环境变量</p>
+<pre class="prettyprint">
+[zxh@localhost ~]$ vim ~/.bashrc       //注意用户，最好是常用登录用户。修改一下内容  
+# User specific aliases and functions  
+# export GTK_IM_MODULE=ibus               //这是以前的  
+# export XMODIFIERS=@im=ibus  
+# export QT_IM_MODULE=ibus  
+#export LANG="zh_CN.UTF-8"                 //如果系统字符不是中文的话，这个要加，不然乱码  
+export XIM=fcitx                          //这是新的  
+export GTK_IM_MODULE=xim  
+export XMODIFIERS=@im=fcitx  
+export QT_IM_MODULE=fcitx  </pre>
+
+<p>二、让SublimeText支持中文输入</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/经验-技巧/" rel="tag">#经验&技巧</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/07/plugins/" rel="next" title="前端开发利器--SublimeText插件">
+                <i class="fa fa-chevron-left"></i> 前端开发利器--SublimeText插件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/13/martini/" rel="prev" title="Martini框架入门">
+                Martini框架入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/12/centos/"
+           data-title="CentOS下的各种折腾" data-url="http://zxh.site/2015/08/12/centos/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Thanks <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ansiz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

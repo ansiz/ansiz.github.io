@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端开发,工具," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Gulp是现在很火的前端自动化构建工具，跟grunt差不多，说白了就是它能替你干一些粗活儿和提高工作效率，比如用来压缩js文件、压缩css文件、使用browser-sync提高前端测试效率等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端自动化构建工具Gulp">
+<meta property="og:url" content="http://zxh.site/2015/11/02/gulp/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="Gulp是现在很火的前端自动化构建工具，跟grunt差不多，说白了就是它能替你干一些粗活儿和提高工作效率，比如用来压缩js文件、压缩css文件、使用browser-sync提高前端测试效率等等。">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/gulp.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/11/sync-demo.gif">
+<meta property="og:updated_time" content="2016-05-07T13:53:31.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端自动化构建工具Gulp">
+<meta name="twitter:description" content="Gulp是现在很火的前端自动化构建工具，跟grunt差不多，说白了就是它能替你干一些粗活儿和提高工作效率，比如用来压缩js文件、压缩css文件、使用browser-sync提高前端测试效率等等。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/gulp.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 前端自动化构建工具Gulp | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端自动化构建工具Gulp
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-02T00:18:58+08:00" content="2015-11-02">
+              2015-11-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/Gulp/" itemprop="url" rel="index">
+                    <span itemprop="name">Gulp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/02/gulp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/02/gulp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/gulp.png" alt="gulp"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/11/sync-demo.gif" target="_blank" rel="external"><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/11/sync-demo.gif" alt="sync-demo"></a></h2><p>Gulp是现在很火的前端自动化构建工具，跟grunt差不多，说白了就是它能替你干一些粗活儿和提高工作效率，比如用来压缩js文件、压缩css文件、使用browser-sync提高前端测试效率等等。</p>
+<a id="more"></a>
+<blockquote>
+<p><strong>gulp的优势：</strong></p>
+<p>易于使用</p>
+<p>通过代码优于配置的策略，Gulp 让简单的任务简单，复杂的任务可管理。</p>
+<p>构建快速</p>
+<p>利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。</p>
+<p>插件高质</p>
+<p>Gulp 严格的插件指南确保插件如你期望的那样简洁高质得工作。</p>
+<p>易于学习</p>
+<p>通过最少的 API，掌握 Gulp 毫不费力，构建工作尽在掌握：如同一系列流管道。<br><strong>使用步骤：</strong></p>
+</blockquote>
+<h3 id="1-安装node-js-和-git"><a href="#1-安装node-js-和-git" class="headerlink" title="1. 安装node.js 和 git"></a>1. 安装node.js 和 git</h3><p><a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br><a href="http://git-scm.com/download/" target="_blank" rel="external">http://git-scm.com/download/</a></p>
+<h3 id="2-安装配置npm"><a href="#2-安装配置npm" class="headerlink" title="2. 安装配置npm"></a>2. 安装配置npm</h3><p>打开git命令行工具，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone --recursive git://github.com/npm/npm.git</div><div class="line">node cli.js install npm -gf</div><div class="line">npm config set registry http://registry.npm.taobao.org/</div></pre></td></tr></table></figure></p>
+<h3 id="3-安装并启动gulp"><a href="#3-安装并启动gulp" class="headerlink" title="3. 安装并启动gulp"></a>3. 安装并启动gulp</h3><p><pre class="lang:default decode:true ">//在global环境和项目文件中都install gulp<br>npm install gulp -g   (global环境)<br>npm install gulp –save-dev (项目环境)</pre></p>
+<h3 id="4-安装所需的插件"><a href="#4-安装所需的插件" class="headerlink" title="4.安装所需的插件"></a>4.安装所需的插件</h3><p>这里我们主要用压缩css,js以及<code>browser-sync</code>这几个插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-minify-css gulp-concat gulp-uglify gulp-rename browser-sync del --save-dev</div></pre></td></tr></table></figure></p>
+<p>更多插件可以<a href="http://gratimax.net/search-gulp-plugins/" target="_blank" rel="external">这里</a>找到，另外如果用到的插件很多的话，可以用packages.json快速配置，也方便团队其他成员快速搭建构建工具，具体用法很简单就不啰嗦了。</p>
+<h3 id="5-编写配置文件gulpfile-js"><a href="#5-编写配置文件gulpfile-js" class="headerlink" title="5.编写配置文件gulpfile.js"></a>5.编写配置文件gulpfile.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//gulp 配置文件</span></div><div class="line"></div><div class="line"><span class="comment">//引用包声明</span></div><div class="line">gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</div><div class="line">	minifycss = <span class="built_in">require</span>(<span class="string">'gulp-minify-css'</span>),</div><div class="line">	concat = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>),</div><div class="line">	uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),</div><div class="line">	rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>),</div><div class="line">	del = <span class="built_in">require</span>(<span class="string">'del'</span>),</div><div class="line">	browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>).create();</div><div class="line"><span class="keyword">var</span> reload = browserSync.reload;</div><div class="line"></div><div class="line"><span class="comment">//声明browser-sync插件</span></div><div class="line">gulp.task(<span class="string">'browser-sync'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	browserSync.init(&#123;</div><div class="line">		<span class="attr">proxy</span>: <span class="string">"localhost:8080/LJ/1"</span>, <span class="comment">//这里设置的是browser-sync的动态模式，就是你动态环境的地址就行了</span></div><div class="line">		files: [<span class="string">"resources/ui/css/lj-ui/*.css"</span>, <span class="string">"../../Application/Home/View/Index/*.html"</span>]<span class="comment">//监视文件列表</span></div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//Compress CSS</span></div><div class="line">gulp.task(<span class="string">'minifycss'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> gulp.src(<span class="string">'resources/ui/css/lj-ui/*.css'</span>)  </div><div class="line">		.pipe(gulp.dest(<span class="string">'dist'</span>))</div><div class="line">		.pipe(rename(&#123;</div><div class="line">			<span class="attr">suffix</span>: <span class="string">'.min'</span></div><div class="line">		&#125;))</div><div class="line">		.pipe(minifycss());</div><div class="line">&#125;);</div><div class="line"><span class="comment">//Compress js</span></div><div class="line">gulp.task(<span class="string">'minifyjs'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> gulp.src(<span class="string">'resources/handlers/*.js'</span>)  <span class="comment">//声明源文件地址</span></div><div class="line">		.pipe(concat(<span class="string">'lj.js'</span>))              <span class="comment">//声明压缩后的名字</span></div><div class="line">		.pipe(gulp.dest(<span class="string">'dist'</span>))            <span class="comment">//输出到指定文件夹</span></div><div class="line">		.pipe(rename(&#123;</div><div class="line">			<span class="attr">suffix</span>: <span class="string">'.min'</span>              <span class="comment">//文件名后缀</span></div><div class="line">		&#125;))</div><div class="line">		.pipe(uglify())                     <span class="comment">//调用压缩插件</span></div><div class="line">		.pipe(gulp.dest(<span class="string">'dist'</span>));           <span class="comment">//输出到文件夹</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//Clean dist</span></div><div class="line">gulp.task(<span class="string">'clean'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</div><div class="line">	del([<span class="string">'dist/*'</span>], cb);                         <span class="comment">//清理目录，在gulp启动其他任务之前清空目标文件夹内的内容</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//gulp start</span></div><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">"clean"</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	gulp.start(<span class="string">'minifyjs'</span>, <span class="string">'browser-sync'</span>);      <span class="comment">//定义gulp默认执行的操作</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="6-启动"><a href="#6-启动" class="headerlink" title="6.启动"></a>6.启动</h3><p>在目录下启动cmd或者其他命令行窗口，输入<code>gulp</code>就可以啦~是不是so easy</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端开发/" rel="tag">#前端开发</a>
+          
+            <a href="/tags/工具/" rel="tag">#工具</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/" rel="next" title="jQuery性能优化">
+                <i class="fa fa-chevron-left"></i> jQuery性能优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/21/freedomnet/" rel="prev" title="让你的设备自由上网">
+                让你的设备自由上网 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/02/gulp/"
+           data-title="前端自动化构建工具Gulp" data-url="http://zxh.site/2015/11/02/gulp/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装node-js-和-git"><span class="nav-number">1.1.</span> <span class="nav-text">1. 安装node.js 和 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装配置npm"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装配置npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装并启动gulp"><span class="nav-number">1.3.</span> <span class="nav-text">3. 安装并启动gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装所需的插件"><span class="nav-number">1.4.</span> <span class="nav-text">4.安装所需的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-编写配置文件gulpfile-js"><span class="nav-number">1.5.</span> <span class="nav-text">5.编写配置文件gulpfile.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-启动"><span class="nav-number">1.6.</span> <span class="nav-text">6.启动</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Thanks <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ansiz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

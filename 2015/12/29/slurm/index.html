@@ -1,0 +1,757 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,后端开发,slurm,集群," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="SLURM 介绍SLURM 是一个可用于大型计算节点集群的高度可伸缩的集群管理器和作业调度系统。SLURM 维护着一个待处理工作的队列并管理此工作的整体资源利用。SLURM 将作业分发给一组已分配的节点来执行。本质上，SLURM 是一个强健的集群管理器，它高度可移植、可伸缩至大型节点集群、容错好，而且更重要的是它是开源的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLURM 安装与配置">
+<meta property="og:url" content="http://zxh.site/2015/12/29/slurm/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="SLURM 介绍SLURM 是一个可用于大型计算节点集群的高度可伸缩的集群管理器和作业调度系统。SLURM 维护着一个待处理工作的队列并管理此工作的整体资源利用。SLURM 将作业分发给一组已分配的节点来执行。本质上，SLURM 是一个强健的集群管理器，它高度可移植、可伸缩至大型节点集群、容错好，而且更重要的是它是开源的。">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/slurm.gif">
+<meta property="og:updated_time" content="2016-05-07T14:01:19.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SLURM 安装与配置">
+<meta name="twitter:description" content="SLURM 介绍SLURM 是一个可用于大型计算节点集群的高度可伸缩的集群管理器和作业调度系统。SLURM 维护着一个待处理工作的队列并管理此工作的整体资源利用。SLURM 将作业分发给一组已分配的节点来执行。本质上，SLURM 是一个强健的集群管理器，它高度可移植、可伸缩至大型节点集群、容错好，而且更重要的是它是开源的。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/slurm.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> SLURM 安装与配置 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SLURM 安装与配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-29T12:38:11+08:00" content="2015-12-29">
+              2015-12-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/经验-amp-技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">经验&amp;技巧</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/29/slurm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/slurm/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/slurm.gif" alt="slurm"></p>
+<h2 id="SLURM-介绍"><a href="#SLURM-介绍" class="headerlink" title="SLURM 介绍"></a>SLURM 介绍</h2><p>SLURM 是一个可用于大型计算节点集群的高度可伸缩的集群管理器和作业调度系统。SLURM 维护着一个待处理工作的队列并管理此工作的整体资源利用。SLURM 将作业分发给一组已分配的节点来执行。<br>本质上，SLURM 是一个强健的集群管理器，它高度可移植、可伸缩至大型节点集群、容错好，而且更重要的是它是开源的。<br><a id="more"></a><br>关于 SLURM 的架构可以参考 <a href="http://slurm.schedmd.com/" target="_blank" rel="external">http://slurm.schedmd.com/</a></p>
+<h2 id="SLURM安装"><a href="#SLURM安装" class="headerlink" title="SLURM安装"></a>SLURM安装</h2><p>这里安装都是以在CentOS6.5上安装为例。并且因为 SLURM 是在集群中使用，所以我们这里假定有三台相同版本的linux，机器名分别为mycentos6x，mycentos6x1和mycentos6x2，其中 mycentos6x 作为控制节点。</p>
+<h3 id="安装-MUNGE"><a href="#安装-MUNGE" class="headerlink" title="安装 MUNGE"></a>安装 MUNGE</h3><p>首先 SLURM 需要使用 MUNGE 来认证，所以我们要先来安装 MUNGE。</p>
+<p>从 MUNGE（<a href="https://github.com/dun/munge" target="_blank" rel="external">https://github.com/dun/munge</a>） 的官方网站下载安装包，这里使用 munge-0.5.11.tar.bz2 文件。使用 root 用户运行下面命令</p>
+<ul>
+<li><p>编译并安装 munge 包</p>
+<pre><code># rpmbuild -tb --clean munge-0.5.11.tar.bz2  
+# cd /root/rpmbuild/RPMS/x86_64
+# rpm --install munge*.rpm
+</code></pre><p>在编译rpm包和安装的过程中可能会提示需要一些第三方的软件包，此时可以使用 “yum install -y xxx” 来安装，我在安装的时候就是先安装了下面的软件包  </p>
+<pre><code># yum install -y rpm-build rpmdevtools bzip2-devel openssl-devel zlib-devel  
+</code></pre></li>
+<li><p>安装完成后，需要修改下面这些文件的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># chmod -Rf 700 /etc/munge</div><div class="line"># chmod -Rf 711 /var/lib/munge</div><div class="line"># chmod -Rf 700 /var/log/munge</div><div class="line"># chmod -Rf 0755 /var/run/munge</div></pre></td></tr></table></figure>
+<p>另外需要注意的是检查一下/etc/munge/munge.key文件，文件的 owner 和 group 必须是 munge，否则启动会失败。</p>
+<p>安装完成后，就可以启动 munge 服务了<br><pre class="lang:default decode:true "># /etc/init.d/munge start</pre><br>&nbsp;</p>
+<p>最后，需要把 /etc/munge/munge.key 复制到另外两台机器上，并确保文件权限和属主都相同。</p>
+</li>
+</ul>
+<h3 id="安装-SLURM"><a href="#安装-SLURM" class="headerlink" title="安装 SLURM"></a>安装 SLURM</h3><ul>
+<li><p>首先创建slurm用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># useradd slurm</div><div class="line"># passwd slurm</div></pre></td></tr></table></figure>
+<p>访问 SLURM（<a href="http://slurm.schedmd.com/" target="_blank" rel="external">http://slurm.schedmd.com/</a>）下载安装包，这里使用 slurm-14.11.8.tar.bz2 安装包。</p>
+</li>
+<li><p>编译并安装 slurm 包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># rpmbuild -ta --clean slurm-14.11.8.tar.bz2</div><div class="line"># cd /root/rpmbuild/RPMS/x86_64</div><div class="line"># rpm --install slurm*.rpm</div></pre></td></tr></table></figure>
+<p>在编译rpm包和安装的过程中提示我安装了下面的软件包</p>
+<pre><code># yum install -y readline-devel pam-devel perl-DBI perl-ExtUtils-MakeMaker
+</code></pre></li>
+<li><p>安装完成后，修改下面命令的属组</p>
+<pre><code># sudo chown slurm:slurm /var/spool
+</code></pre><p>  到这里，SLURM的安装就完成了，但是还不能启动，我们还需要做一下配置才可以启动slurm服务并提交作业。</p>
+</li>
+</ul>
+<h3 id="配置-SLURM"><a href="#配置-SLURM" class="headerlink" title="配置 SLURM"></a>配置 SLURM</h3><p>进入/etc/slurm/目录，复制slurm.conf.example文件成slurm.conf，然后编辑/etc/slurm/slurm.conf文件</p>
+<p>下面是我的文件中修改的部分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">ControlMachine=mycentos6x</div><div class="line">ControlAddr=192.168.145.100</div><div class="line">SlurmUser=slurm</div><div class="line">SelectType=select/cons_res</div><div class="line">SelectTypeParameters=CR_Core</div><div class="line">SlurmctldDebug=3</div><div class="line">SlurmctldLogFile=/var/log/slurmctld.log</div><div class="line">SlurmdDebug=3</div><div class="line">SlurmdLogFile=/var/log/slurmd.log</div><div class="line">NodeName=mycentos6x,mycentos6x1,mycentos6x2 CPUs=4 RealMemory=500 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 State=IDLE</div><div class="line">PartitionName=control Nodes=mycentos6x Default=YES MaxTime=INFINITE State=UP</div><div class="line">PartitionName=compute Nodes=mycentos6x1,mycentos6x2 Default=NO MaxTime=INFINITE State=UP</div></pre></td></tr></table></figure></p>
+<p><strong>注：这里需要将此配置文件部署到集群里的每台机器上。</strong></p>
+<p>保存文件，然后使用下面命令启动slurm服务</p>
+<pre><code># /etc/init.d/slurm start
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在启动了slurm服务之后，我们可以使用下面一些命令来查看集群状态并提交作业</p>
+<ul>
+<li><p>查看系统状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># sinfo</div><div class="line">PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST</div><div class="line">control*     up   infinite      1   idle mycentos6x</div><div class="line">compute      up   infinite      2   idle mycentos6x1,mycentos6x2</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示slurm报告</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># scontrol show slurm reports</div><div class="line">Active Steps             = NONE</div><div class="line">Actual CPUs              = 2</div><div class="line">Actual Boards            = 1</div><div class="line">Actual sockets           = 1</div><div class="line">Actual cores             = 2</div><div class="line">Actual threads per core  = 1</div><div class="line">Actual real memory       = 1464 MB</div><div class="line">Actual temp disk space   = 29644 MB</div><div class="line">Boot time                = 2015-07-22T09:50:34</div><div class="line">Hostname                 = mycentos6x</div><div class="line">Last slurmctld msg time  = 2015-07-22T09:50:37</div><div class="line">Slurmd PID               = 27755</div><div class="line">Slurmd Debug             = 3</div><div class="line">Slurmd Logfile           = /var/log/slurmd.log</div><div class="line">Version                  = 14.11.8</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示配置、队列、节点、任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># scontrol show config</div><div class="line"># scontrol show partition</div><div class="line"># scontrol show node</div><div class="line"># scontrol show jobs</div></pre></td></tr></table></figure>
+</li>
+<li><p>提交作业</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># srun hostname</div><div class="line">Mycentos6x</div><div class="line"># srun -N 3 -l hostname</div><div class="line">0: mycentos6x</div><div class="line">1: mycentos6x1</div><div class="line">2: mycentos6x2</div><div class="line"># srun sleep 60 &amp;amp;amp;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查询作业</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># squeue -a</div><div class="line">JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)</div><div class="line">77     debug    sleep   kongxx  R       0:06      1 mycentos6x</div></pre></td></tr></table></figure>
+</li>
+<li><p>取消作业</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scancel &amp;amp;lt;job_id&amp;amp;gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>SLURM：<a href="http://slurm.schedmd.com/" target="_blank" rel="external">http://slurm.schedmd.com/</a></p>
+<p>MUNGE: <a href="https://github.com/dun/munge" target="_blank" rel="external">https://github.com/dun/munge</a></p>
+<p>转载请以链接形式标明本文地址</p>
+<p>来自 &lt;<a href="http://blog.csdn.net/kongxx/article/details/48173829" target="_blank" rel="external">http://blog.csdn.net/kongxx/article/details/48173829</a>&gt;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/后端开发/" rel="tag">#后端开发</a>
+          
+            <a href="/tags/slurm/" rel="tag">#slurm</a>
+          
+            <a href="/tags/集群/" rel="tag">#集群</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/23/optimize-mysql-innodb/" rel="next" title="Mysql InnoDB性能优化">
+                <i class="fa fa-chevron-left"></i> Mysql InnoDB性能优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/08/s1000/" rel="prev" title="漫步者S1000评测">
+                漫步者S1000评测 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/29/slurm/"
+           data-title="SLURM 安装与配置" data-url="http://zxh.site/2015/12/29/slurm/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SLURM-介绍"><span class="nav-number">1.</span> <span class="nav-text">SLURM 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SLURM安装"><span class="nav-number">2.</span> <span class="nav-text">SLURM安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-MUNGE"><span class="nav-number">2.1.</span> <span class="nav-text">安装 MUNGE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-SLURM"><span class="nav-number">2.2.</span> <span class="nav-text">安装 SLURM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-SLURM"><span class="nav-number">2.3.</span> <span class="nav-text">配置 SLURM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">2.4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Thanks <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ansiz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
