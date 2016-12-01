@@ -71,7 +71,7 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="上一篇博客中介绍了如何安装部署Phabricator，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/hero.png">
-<meta property="og:updated_time" content="2016-12-01T15:23:27.273Z">
+<meta property="og:updated_time" content="2016-12-01T15:56:07.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phabricator仓库配置">
 <meta name="twitter:description" content="上一篇博客中介绍了如何安装部署Phabricator，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑">
@@ -323,7 +323,7 @@
 <p>注：<br>官方文档中写的是Disable掉Observe的那个URI，实际上应该是设置<code>I/O Type</code>为<code>No I/O</code></p>
 </blockquote>
 <h2 id="Clone-amp-Commit"><a href="#Clone-amp-Commit" class="headerlink" title="Clone &amp; Commit"></a>Clone &amp; Commit</h2><p>进入<code>Settings</code>-&gt;<code>Personal Settings</code>-&gt;<code>Edit</code>-&gt;<code>SSH Public Keys</code>把平时开发用的机器的Public Key放进去，到这里，就可以用<code>git clone</code>指定的代码库了。不过还没完，你还得安装学习一下如何用<code>Arcanist</code>提交代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 下载到任何目录</div><div class="line">mdkir cd /usr/local/phabricator</div><div class="line">cd /usr/local/phabricator</div><div class="line">git clone https://github.com/phacility/libphutil.git</div><div class="line">git clone https://github.com/phacility/arcanist.git</div></pre></td></tr></table></figure></p>
-<p>别忘了设置一下环境变量，vim /etc/profile.d/pha.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/usr/local/phabricator/arcanist/bin</div></pre></td></tr></table></figure></p>
+<p>第一次使用的时候，会提示输入一个Token，直接根据提示从你的Phabricator URL中就能获取到，另外别忘了设置一下环境变量，vim /etc/profile.d/pha.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/usr/local/phabricator/arcanist/bin</div></pre></td></tr></table></figure></p>
 <p>顺便可以设置一下开机启动啥的这里就不写了，<code>Arcanist</code>我简单的使用了一下，大概有这些好处：</p>
 <ul>
 <li>让你的提交信息变得更规范</li>
