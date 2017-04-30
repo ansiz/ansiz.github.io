@@ -223,6 +223,109 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/06/CentOS7AutoDeploy/" itemprop="url">
+                  CentOS7自动部署(PXE+Kickstart)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-06T16:07:04+08:00" content="2017-03-06">
+              2017-03-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/06/CentOS7AutoDeploy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/06/CentOS7AutoDeploy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2017/03/auto.jpg" alt="AutoDeploy"><br>在程序部署的过程中我们经常需要批量部署操作系统，本着“能自动化的绝不手动做”的原则，显然重复部署操作系统这种活儿，我们应该交给脚本去完成。这篇文章就跟大家分享一下如何基于<code>PXE</code>、<code>Kickstart</code>以及<code>dnsmasq</code>实现CentOS7自动部署。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/06/CentOS7AutoDeploy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/01/phabricator-2/" itemprop="url">
                   Phabricator仓库配置
                 </a>
@@ -1355,140 +1458,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/06/git-on-windows-server/" itemprop="url">
-                  在Windows server2008上搭建git仓库(Git+ copssh+TortoiseGit)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-06T23:00:11+08:00" content="2016-03-06">
-              2016-03-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/06/git-on-windows-server/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/git-on-windows-server/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/branches.png" alt="git"><br>从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一些坑，我反正是踩着这些坑弄了一下午才把这个仓库搭建好。所以就记录下来吧，我选择的方案是：Git+ copssh+TortoiseGit。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/06/git-on-windows-server/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1534,7 +1503,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

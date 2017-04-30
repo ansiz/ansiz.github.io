@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
+    <lastmod>2017-04-30T09:51:17.159Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7自动部署(PXE+Kickstart)</title>
+        <pubTime>2017-03-06T08:07:04.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>经验&amp;技巧</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2016/12/01/phabricator-2/</loc>
     <lastmod>2016-12-01T15:56:07.722Z</lastmod>
     <data>
@@ -411,9 +430,9 @@
         <title>WEIPHP部署在SAE上的技巧</title>
         <pubTime>2015-03-21T15:57:22.000Z</pubTime>
         
-        <tag>SAE</tag>
-         
         <tag>WEIPHP</tag>
+         
+        <tag>SAE</tag>
          
          
            
@@ -748,9 +767,9 @@
         <title>jQuery性能优化</title>
         <pubTime>2015-10-31T09:10:03.000Z</pubTime>
         
-        <tag>经验&amp;技巧</tag>
-         
         <tag>前端开发</tag>
+         
+        <tag>经验&amp;技巧</tag>
          
          
            
