@@ -4,8 +4,33 @@
 
     
   <url>
+    <loc>http://zxh.site/2017/04/01/web-tty/</loc>
+    <lastmod>2017-04-30T11:32:25.806Z</lastmod>
+    <data>
+        <display>
+        <title>Golang实现多节点Web终端</title>
+        <pubTime>2017-04-01T10:07:04.000Z</pubTime>
+        
+        <tag>后端开发</tag>
+         
+        <tag>Golang</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端开发" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Golang/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
-    <lastmod>2017-04-30T09:51:17.159Z</lastmod>
+    <lastmod>2017-04-30T10:17:12.679Z</lastmod>
     <data>
         <display>
         <title>CentOS7自动部署(PXE+Kickstart)</title>
@@ -17,6 +42,12 @@
          
          
            
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+             
+              <breadCrumb title="经验&amp;技巧" url="http://zxh.site/categories/Linux/%E7%BB%8F%E9%AA%8C-%E6%8A%80%E5%B7%A7/"/>
+          
         </display>
     </data>
     </url>
@@ -767,9 +798,9 @@
         <title>jQuery性能优化</title>
         <pubTime>2015-10-31T09:10:03.000Z</pubTime>
         
-        <tag>前端开发</tag>
-         
         <tag>经验&amp;技巧</tag>
+         
+        <tag>前端开发</tag>
          
          
            

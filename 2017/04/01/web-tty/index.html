@@ -1,0 +1,679 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="后端开发,Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang实现多节点Web终端">
+<meta property="og:url" content="http://zxh.site/2017/04/01/web-tty/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2017/04/screenshot.gif">
+<meta property="og:updated_time" content="2017-04-30T11:32:25.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Golang实现多节点Web终端">
+<meta name="twitter:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2017/04/screenshot.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Golang实现多节点Web终端 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Golang实现多节点Web终端
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-01T18:07:04+08:00" content="2017-04-01">
+              2017-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/后端开发/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/01/web-tty/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/web-tty/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2017/04/screenshot.gif" alt="Gotty"><br>熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。<a id="more"></a></p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>我在公司负责开发一款集群资源调度软件，其主要功能是通过Web界面，提交/记录/查看作业，实现集群监控、管理等功能。如果能够直接在Web界面上直接登陆任意一台管理或计算节点，将给用户带来更好的使用体验。而实现这一功能的几大难点在于：</p>
+<ol>
+<li>用户访问的Web服务启动在管理节点上，每个计算节点只与管理节点之间通过内网连接，没有外网；</li>
+<li>该系统支持多个用户同时操作；</li>
+<li>每个用户应该以自己的用户身份登陆节点。  </li>
+</ol>
+<p>要实现上述需求，首先WebServer要支持代理请求，并且在计算节点上要能够动态的同时启动多个tty服务。本着“避免重复造轮子”的原则，我先上著名同性交友网站GayHub进行了一番搜寻，最后发现了两个不错的工具能够实现我的需求：</p>
+<blockquote>
+<p><a href="https://github.com/yudai/gotty" target="_blank" rel="external">GoTTY</a> is a simple command line tool that turns your CLI tools into web applications.<br><a href="https://github.com/koding/websocketproxy" target="_blank" rel="external">WebsocketProxy </a> is an http.Handler interface build on top of gorilla/websocket that you can plug into your existing Go webserver to provide WebSocket reverse proxy.  </p>
+</blockquote>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="启动多个GoTTY实例"><a href="#启动多个GoTTY实例" class="headerlink" title="启动多个GoTTY实例"></a>启动多个GoTTY实例</h3><p>要支持多用户不同身份同时访问，显然我们必须启动多个GoTTY服务，因为无法预计用户的身份和规模，我们不能在计算机点上预先启动多个服务，而应该动态的接受管理节点的命令去启动服务。这一步很简单，最简单的方法是直接在管理节点上执行ssh命令，更好的方式则是在管理节点和计算节点之间实现消息队列的机制，计算节点上能获取到管理节点的命令并执行。这里我利用Redis在管理节点和计算节点之间实现了Agent，这不是这篇文章的中点，所以具体方法这里不赘述。<br>简而言之我已经实现了动态的在计算节点上接收命令以不同身份在不同的接口启动多个GoTTY。</p>
+<h3 id="反向代理GoTTY接口"><a href="#反向代理GoTTY接口" class="headerlink" title="反向代理GoTTY接口"></a>反向代理GoTTY接口</h3><p>下载GoTTY运行后发现这个程序做得非常巧妙，它利用go-bindata将所有静态文件都打包到了二进制文件中，程序编译后只有一个可执行程序，但却能够提供web服务，我通过Chrome调试工具查看了它的网络请求，摸清了它的基本原理，其前端核心是一个websocket请求。前端没有秘密，我只需要将静态文件拆分出来单独提供文件服务就可以使用。于是我尝试在一台计算节点上启动gotty服务，将接口设置了代理，拆分出静态文件，发现服务能正常工作，这意味着成功了一半。</p>
+<p>在Web服务中proxy是很常见的，但大都是通过专门的软件去实现，并且这还是一个Websocket的接口，而WebsocketProxy恰好提供了这样的功能。利用WebsocketProxy我们只需要添加几行简单的代码：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">agentURL := fmt.Sprintf(<span class="string">"ws://%s:%d/ws"</span>, nodeIP, ttyPort)</div><div class="line">u, err := url.Parse(agentURL)</div><div class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">       <span class="comment">// do something</span></div><div class="line">&#125;</div><div class="line">proxyHandler := websocketproxy.NewProxy(u)</div></pre></td></tr></table></figure></p>
+<p>接下来只需要动态新增这样一个Handler即可。</p>
+<h3 id="动态新增HTTP-Handler"><a href="#动态新增HTTP-Handler" class="headerlink" title="动态新增HTTP Handler"></a>动态新增HTTP Handler</h3><p>我的Web Server采用了Beego框架，仔细阅读框架文档和代码后发现Beego的<a href="https://godoc.org/github.com/astaxie/beego#Handler" target="_blank" rel="external">App.Handler</a>能用来添加一个新的HTTP Handler,如果我在一个已有的HTTP Handler中调用该方法，则可以实现动态的增加一个Handler。我们只需要在上述代码的基础上再添加两行：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wsURL := fmt.Sprintf(<span class="string">"/ws_%s%d"</span>, nodeName, ttyPort)</div><div class="line">beego.Handler(wsURL, proxyHandler)</div></pre></td></tr></table></figure></p>
+<p>如此一来我们就动态的新增了一个handler，并且它的url是根据节点名和端口号动态变化的，接下来我们只需要告诉前端去这个新的url上发起websocket链接即可。</p>
+<h3 id="修改GoTTY前端代码"><a href="#修改GoTTY前端代码" class="headerlink" title="修改GoTTY前端代码"></a>修改GoTTY前端代码</h3><p>简单分析一下GoTTY的前端代码，发现作者真的具备很强的工具整合能力，自己手写的代码只有寥寥数行，其余均是直接采用第三方库。上面我们已经成功的在计算节点上启动了GoTTY并且动态的新增了Handler，但前端代码中请求的地址是不会变的，所以我们要对它进行修改，让前端知道应该去访问哪个接口。<br>原理很简单，我们让Golang的HTTP Handler跳转到GoTTY的静态文件上，并且带上参数，让前端能获取并使用这个参数就行了，在Go中新增:<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">redirectURL := fmt.Sprintf(<span class="string">"/tty/index.html?NodeName=%s%d"</span>, nodeName, ttyPort)</div><div class="line">n.Redirect(redirectURL, <span class="number">302</span>)</div></pre></td></tr></table></figure></p>
+<p>在gotty.js中新增：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nodeName = getQueryString(<span class="string">"NodeName"</span>)</div><div class="line"><span class="keyword">var</span> url = (httpsEnabled ? <span class="string">'wss://'</span> : <span class="string">'ws://'</span>) + <span class="built_in">window</span>.location.host + <span class="string">'/ws_'</span> + nodeName;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>, <span class="string">"i"</span>);</div><div class="line">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</div><div class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大功告成~试试神奇的体验吧</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>虽然上述代码已经比较完美的实现了一个多用户多节点的Web终端，但是启动还有一些小问题比如HTTP新增的路由没有动态的得到释放，在用户规模极大的情况下会影响WebServer的性能，查看Beego源码后发现没有提供删除Handler的功能，后续有时间我会尝试解决该问题后向Beego提交Pull Request。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/后端开发/" rel="tag">#后端开发</a>
+          
+            <a href="/tags/Golang/" rel="tag">#Golang</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/06/CentOS7AutoDeploy/" rel="next" title="CentOS7自动部署(PXE+Kickstart)">
+                <i class="fa fa-chevron-left"></i> CentOS7自动部署(PXE+Kickstart)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/01/web-tty/"
+           data-title="Golang实现多节点Web终端" data-url="http://zxh.site/2017/04/01/web-tty/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析"><span class="nav-number">1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体实现"><span class="nav-number">2.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动多个GoTTY实例"><span class="nav-number">2.1.</span> <span class="nav-text">启动多个GoTTY实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理GoTTY接口"><span class="nav-number">2.2.</span> <span class="nav-text">反向代理GoTTY接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态新增HTTP-Handler"><span class="nav-number">2.3.</span> <span class="nav-text">动态新增HTTP Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改GoTTY前端代码"><span class="nav-number">2.4.</span> <span class="nav-text">修改GoTTY前端代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Thanks <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ansiz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
