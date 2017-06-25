@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
+    <lastmod>2017-06-25T11:11:29.465Z</lastmod>
+    <data>
+        <display>
+        <title>Golang实现 并行命令</title>
+        <pubTime>2017-06-24T06:16:08.000Z</pubTime>
+        
+        <tag>后端开发</tag>
+         
+        <tag>Golang</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端开发" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Golang/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2017/04/01/web-tty/</loc>
     <lastmod>2017-04-30T12:41:07.021Z</lastmod>
     <data>
