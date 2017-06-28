@@ -71,7 +71,7 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/dontcopy.jpg">
-<meta property="og:updated_time" content="2016-06-03T23:54:32.885Z">
+<meta property="og:updated_time" content="2017-06-28T15:02:28.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows平台OmniMarkupPreviewer配置引发的思考">
 <meta name="twitter:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
@@ -303,7 +303,8 @@
 <p>这时候我注意到<code>subprocess.Popen(browser_command)</code>中并不包含url的参数，而浏览器应该不仅仅打开自身，还需要跳转到对应的url上，所以参数应该是从<code>browser_command</code>中传入的，果然在<code>browser_command</code>中有一个{url}  </p>
 <pre><code>&quot;browser_command&quot;: [&quot;open&quot;, &quot;-a&quot;, &quot;Google Chrome&quot;, &quot;{url}&quot;]
 </code></pre><p>也就是说这个是不应该被修改的，于是我尝试将前面的所有参数替换为<code>&quot;C:/Program Files (x86)/Google/Chrome/Application/chrome.exe&quot;</code>，果然问题得到解决了。不过这时候我接着看了下面的代码，<code>if setting.browser_command:</code>下面有<code>else</code>，也就是说如果这一项没有配置，系统也会尝试用默认浏览器去打开这个链接，果然我将<code>browser_command</code>置空后依然能打开</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>所以结论是，Windows平台OmniMarkupPreviewer配置项<code>browser_command</code>应该设置为空（默认浏览器打开）或者<code>[&quot;browser_path&quot;,{url}]</code>  </p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>所以结论是，Windows平台OmniMarkupPreviewer配置项<code>browser_command</code>应该设置为空（默认浏览器打开）或者<code>[&quot;$your_browser_path&quot;,{url}]</code>  </p>
+<p>注：如果你按上述配置了，但依然不能用，控制台提示类似<code>TypeError: Type str doesn&#39;t support the buffer API</code>这样的错误，请参考这个<a href="https://github.com/timonwong/OmniMarkupPreviewer/pull/120" target="_blank" rel="external">Pull Request</a>进行修改</p>
 
       
     </div>
