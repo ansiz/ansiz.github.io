@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
+    <lastmod>2017-09-10T03:37:43.939Z</lastmod>
+    <data>
+        <display>
+        <title>Golang实现并行命令</title>
+        <pubTime>2017-06-24T06:16:08.000Z</pubTime>
+        
+        <tag>后端开发</tag>
+         
+        <tag>Golang</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端开发" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Golang/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2017/04/01/web-tty/</loc>
     <lastmod>2017-09-10T03:34:49.108Z</lastmod>
     <data>
@@ -47,31 +72,6 @@
           
              
               <breadCrumb title="实用技巧" url="http://zxh.site/categories/%E6%95%B0%E7%A0%81-%E6%8A%80%E5%B7%A7/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
-    <lastmod>2017-06-28T15:13:15.519Z</lastmod>
-    <data>
-        <display>
-        <title>Golang实现并行命令</title>
-        <pubTime>2017-06-24T06:16:08.000Z</pubTime>
-        
-        <tag>后端开发</tag>
-         
-        <tag>Golang</tag>
-         
-         
-           
-             
-              <breadCrumb title="后端开发" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-          
-             
-              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Golang/"/>
           
         </display>
     </data>
@@ -173,11 +173,11 @@
         <title>如何变得更高效</title>
         <pubTime>2016-10-21T14:33:07.000Z</pubTime>
         
+        <tag>经验&amp;技巧</tag>
+         
         <tag>生活</tag>
          
         <tag>总结</tag>
-         
-        <tag>经验&amp;技巧</tag>
          
          
            
@@ -540,9 +540,9 @@
         <title>SLURM 安装与配置</title>
         <pubTime>2015-12-29T04:38:11.000Z</pubTime>
         
-        <tag>后端开发</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>后端开发</tag>
          
         <tag>slurm</tag>
          
