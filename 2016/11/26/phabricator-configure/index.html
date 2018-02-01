@@ -65,13 +65,15 @@
 
 
 <meta name="description" content="Phabricator是一套完整的软件开发工具集，包含了任务管理、代码审查、类MarkDown的文档编辑、开发沟通等等，相较于Gerrit这样的代码审核软件，它显得更加现代化，并且集成的其他工具也能很好的和代码审核配合提高生产效率。">
+<meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS 7 Phabricator安装配置">
 <meta property="og:url" content="http://zxh.site/2016/11/26/phabricator-configure/index.html">
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="Phabricator是一套完整的软件开发工具集，包含了任务管理、代码审查、类MarkDown的文档编辑、开发沟通等等，相较于Gerrit这样的代码审核软件，它显得更加现代化，并且集成的其他工具也能很好的和代码审核配合提高生产效率。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/hero.png">
-<meta property="og:updated_time" content="2016-12-01T15:24:29.732Z">
+<meta property="og:updated_time" content="2016-12-01T15:24:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 7 Phabricator安装配置">
 <meta name="twitter:description" content="Phabricator是一套完整的软件开发工具集，包含了任务管理、代码审查、类MarkDown的文档编辑、开发沟通等等，相较于Gerrit这样的代码审核软件，它显得更加现代化，并且集成的其他工具也能很好的和代码审核配合提高生产效率。">
@@ -291,12 +293,12 @@
       
         <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/hero.png" alt="CLI"></p>
 <p>Phabricator是一套完整的软件开发工具集，包含了任务管理、代码审查、类MarkDown的文档编辑、开发沟通等等，相较于Gerrit这样的代码审核软件，它显得更加现代化，并且集成的其他工具也能很好的和代码审核配合提高生产效率。<a id="more"></a><br>我在CentOS 7下部署这套工具的时候遇到不少问题，不断摸索花了几个小时终于全部搞定了，整理了一下跟大家分享经验。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 切换到任意目录下，这里以/opt/software为例</div><div class="line"></div><div class="line">cd /opt/software</div><div class="line">wget https://raw.githubusercontent.com/phacility/phabricator/master/scripts/install/install_rhel-derivs.sh</div><div class="line">chmod +x install_rhel-derivs.sh</div><div class="line">./install_rhel-derivs.sh</div><div class="line"></div><div class="line"># 因为众所周知的原因，代码clone速度较慢，并且核心代码库比较大，加上clone时不支持断点续传</div><div class="line"># 建议在科学上网的环境下进行以上操作，如果不具备科学上网的条件，可以考虑去github上下载zip包</div></pre></td></tr></table></figure>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 切换到任意目录下，这里以/opt/software为例</span><br><span class="line"></span><br><span class="line">cd /opt/software</span><br><span class="line">wget https://raw.githubusercontent.com/phacility/phabricator/master/scripts/install/install_rhel-derivs.sh</span><br><span class="line">chmod +x install_rhel-derivs.sh</span><br><span class="line">./install_rhel-derivs.sh</span><br><span class="line"></span><br><span class="line"># 因为众所周知的原因，代码clone速度较慢，并且核心代码库比较大，加上clone时不支持断点续传</span><br><span class="line"># 建议在科学上网的环境下进行以上操作，如果不具备科学上网的条件，可以考虑去github上下载zip包</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：</p>
 <ul>
 <li><strong>如果将克隆后的仓库拷贝到远程主机上安装，用scp复制到远程主机后部分文件会出问题，应该执行<code>git reset --hard HEAD</code>恢复文件到最新版本，否则PHP脚本会报错</strong></li>
 </ul>
-<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>在完整执行过<code>install_rhel-derivs.sh</code>脚本后，系统应该已经有完整的<code>LAMP</code>环境了，执行如下操作进行Web服务器配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 将clone下来的代码放置到/var/www/html文件夹下</div><div class="line">mv /opt/software/* /var/www/html</div><div class="line"></div><div class="line"># 配置httpd服务</div><div class="line">vim /etc/httpd/conf/httpd.conf </div><div class="line"></div><div class="line"># 在119行附近修改（加入）以下内容</div><div class="line">DocumentRoot &quot;/var/www/html/phabricator/webroot&quot;</div><div class="line">DirectoryIndex index.php index.html index.html.var</div><div class="line"></div><div class="line">&lt;VirtualHost *&gt;</div><div class="line">  RewriteEngine on</div><div class="line">  RewriteRule ^/rsrc/(.*)     -                       [L,QSA]</div><div class="line">  RewriteRule ^/favicon.ico   -                       [L,QSA]</div><div class="line">  RewriteRule ^(.*)$          /index.php?__path__=$1  [B,L,QSA]</div><div class="line">&lt;/VirtualHost&gt;</div><div class="line"></div><div class="line"># 重启并设置开机启动httpd服务</div><div class="line">systemctl restart httpd</div><div class="line">systemctl enable httpd</div><div class="line"></div><div class="line"># 配置Phabricator域名</div><div class="line">./phabricator/bin/config set phabricator.base-uri &apos;http://example.com/&apos;</div><div class="line"></div><div class="line"># 初始化数据库</div><div class="line">./phabricator/bin/storage upgrade</div></pre></td></tr></table></figure></p>
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>在完整执行过<code>install_rhel-derivs.sh</code>脚本后，系统应该已经有完整的<code>LAMP</code>环境了，执行如下操作进行Web服务器配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 将clone下来的代码放置到/var/www/html文件夹下</span><br><span class="line">mv /opt/software/* /var/www/html</span><br><span class="line"></span><br><span class="line"># 配置httpd服务</span><br><span class="line">vim /etc/httpd/conf/httpd.conf </span><br><span class="line"></span><br><span class="line"># 在119行附近修改（加入）以下内容</span><br><span class="line">DocumentRoot &quot;/var/www/html/phabricator/webroot&quot;</span><br><span class="line">DirectoryIndex index.php index.html index.html.var</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *&gt;</span><br><span class="line">  RewriteEngine on</span><br><span class="line">  RewriteRule ^/rsrc/(.*)     -                       [L,QSA]</span><br><span class="line">  RewriteRule ^/favicon.ico   -                       [L,QSA]</span><br><span class="line">  RewriteRule ^(.*)$          /index.php?__path__=$1  [B,L,QSA]</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line"># 重启并设置开机启动httpd服务</span><br><span class="line">systemctl restart httpd</span><br><span class="line">systemctl enable httpd</span><br><span class="line"></span><br><span class="line"># 配置Phabricator域名</span><br><span class="line">./phabricator/bin/config set phabricator.base-uri &apos;http://example.com/&apos;</span><br><span class="line"></span><br><span class="line"># 初始化数据库</span><br><span class="line">./phabricator/bin/storage upgrade</span><br></pre></td></tr></table></figure></p>
 <p><strong>注</strong>：</p>
 <ul>
 <li>必须设置一个完整域名，否则会报错或者影响部分功能使用，没有公网域名可以修改客户机hosts文件配置主机域名 </li>
@@ -304,8 +306,8 @@
 </ul>
 <h2 id="Phabricator配置"><a href="#Phabricator配置" class="headerlink" title="Phabricator配置"></a>Phabricator配置</h2><p>完成上述步骤后，输入配置的域名应该就能看到Phabricator的管理员注册界面了，完成注册后进入主界面会看到还有十多个issues提醒，根据提示逐项修改<code>/etc/php.ini</code>和<code>/etc/my.cnf.d/server.cnf</code>,然后重启mariadb和httpd服务，这里提供一下我自己的配置文件供大家参考，环境相同且没有其他软件导致配置冲突的话可以考虑直接替换文件重启服务。</p>
 <ul>
-<li><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/php.ini" target="_blank" rel="external">php.ini</a></li>
-<li><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/server.cnf" target="_blank" rel="external">server.cnf</a>  </li>
+<li><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/php.ini" target="_blank" rel="noopener">php.ini</a></li>
+<li><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/11/server.cnf" target="_blank" rel="noopener">server.cnf</a>  </li>
 </ul>
 <p><strong>注</strong>：</p>
 <ul>
@@ -432,7 +434,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -440,7 +442,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -541,7 +543,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

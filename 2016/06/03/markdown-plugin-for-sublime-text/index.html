@@ -65,13 +65,15 @@
 
 
 <meta name="description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
+<meta name="keywords" content="工具,如何假装有思想">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows平台OmniMarkupPreviewer配置引发的思考">
 <meta property="og:url" content="http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/index.html">
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/dontcopy.jpg">
-<meta property="og:updated_time" content="2017-06-28T15:02:28.664Z">
+<meta property="og:updated_time" content="2017-06-28T15:02:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows平台OmniMarkupPreviewer配置引发的思考">
 <meta name="twitter:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
@@ -294,8 +296,8 @@
 <blockquote>
 <p>Don’t repeat yourself<br>And<br><strong>Don’t repeat others</strong>  </p>
 </blockquote>
-<h3 id="尝试解决问题"><a href="#尝试解决问题" class="headerlink" title="尝试解决问题"></a>尝试解决问题</h3><p>写了这么多废话，还是说一下Windows上这玩意儿怎么配置吧。由于没找到答案，所以我决定自己从源码中寻找答案，从来没写过python的我硬着头皮打开了源码，我定位到了这段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">launching_web_browser_for_url</span><span class="params">(url, success_msg_default=None, success_msg_user=None)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        setting = Setting.instance()</div><div class="line">        <span class="keyword">if</span> setting.browser_command:</div><div class="line">            browser_command = [os.path.expandvars(arg).format(url=url)</div><div class="line">                               <span class="keyword">for</span> arg <span class="keyword">in</span> setting.browser_command]</div><div class="line"></div><div class="line">            <span class="keyword">if</span> os.name == <span class="string">'nt'</span>:</div><div class="line">                <span class="comment"># unicode arguments broken under windows</span></div><div class="line">                encoding = locale.getpreferredencoding()</div><div class="line">                browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</div><div class="line"></div><div class="line">            subprocess.Popen(browser_command)</div><div class="line">            <span class="keyword">if</span> success_msg_user:</div><div class="line">                sublime.status_message(success_msg_user)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># Default web browser</span></div><div class="line">            desktop.open(url)</div><div class="line">            <span class="keyword">if</span> success_msg_default:</div><div class="line">                sublime.status_message(success_msg_default)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        <span class="keyword">if</span> setting.browser_command:</div><div class="line">            log.exception(<span class="string">'Error while launching user defined web browser'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            log.exception(<span class="string">'Error while launching default web browser'</span>)</div></pre></td></tr></table></figure></p>
-<p>显然这就是打开浏览器调用的函数，于是我将browser_command和url打印出来，发现传入的参数是跟配置文件中写的一样，但是<code>subprocess.Popen(browser_command)</code>却报错，看来参数有误<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">encoding = locale.getpreferredencoding()</div><div class="line">browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</div></pre></td></tr></table></figure></p>
+<h3 id="尝试解决问题"><a href="#尝试解决问题" class="headerlink" title="尝试解决问题"></a>尝试解决问题</h3><p>写了这么多废话，还是说一下Windows上这玩意儿怎么配置吧。由于没找到答案，所以我决定自己从源码中寻找答案，从来没写过python的我硬着头皮打开了源码，我定位到了这段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launching_web_browser_for_url</span><span class="params">(url, success_msg_default=None, success_msg_user=None)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        setting = Setting.instance()</span><br><span class="line">        <span class="keyword">if</span> setting.browser_command:</span><br><span class="line">            browser_command = [os.path.expandvars(arg).format(url=url)</span><br><span class="line">                               <span class="keyword">for</span> arg <span class="keyword">in</span> setting.browser_command]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> os.name == <span class="string">'nt'</span>:</span><br><span class="line">                <span class="comment"># unicode arguments broken under windows</span></span><br><span class="line">                encoding = locale.getpreferredencoding()</span><br><span class="line">                browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</span><br><span class="line"></span><br><span class="line">            subprocess.Popen(browser_command)</span><br><span class="line">            <span class="keyword">if</span> success_msg_user:</span><br><span class="line">                sublime.status_message(success_msg_user)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># Default web browser</span></span><br><span class="line">            desktop.open(url)</span><br><span class="line">            <span class="keyword">if</span> success_msg_default:</span><br><span class="line">                sublime.status_message(success_msg_default)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">if</span> setting.browser_command:</span><br><span class="line">            log.exception(<span class="string">'Error while launching user defined web browser'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            log.exception(<span class="string">'Error while launching default web browser'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>显然这就是打开浏览器调用的函数，于是我将browser_command和url打印出来，发现传入的参数是跟配置文件中写的一样，但是<code>subprocess.Popen(browser_command)</code>却报错，看来参数有误<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoding = locale.getpreferredencoding()</span><br><span class="line">browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</span><br></pre></td></tr></table></figure></p>
 <p>我又将<code>encoding</code>的值打印输出，系统拿到的值是cp936编码，查了一下这是GBK编码的别名，看来这并没有什么问题</p>
 <blockquote>
 <p>微软的CP936通常被视为等同GBK，连 IANA 也以“CP936”为“GBK”之别名[1]。事实上比较起来， GBK 定义之字符较 CP936 多出95字（15个非汉字及80个汉字）  </p>
@@ -304,7 +306,7 @@
 <pre><code>&quot;browser_command&quot;: [&quot;open&quot;, &quot;-a&quot;, &quot;Google Chrome&quot;, &quot;{url}&quot;]
 </code></pre><p>也就是说这个是不应该被修改的，于是我尝试将前面的所有参数替换为<code>&quot;C:/Program Files (x86)/Google/Chrome/Application/chrome.exe&quot;</code>，果然问题得到解决了。不过这时候我接着看了下面的代码，<code>if setting.browser_command:</code>下面有<code>else</code>，也就是说如果这一项没有配置，系统也会尝试用默认浏览器去打开这个链接，果然我将<code>browser_command</code>置空后依然能打开</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>所以结论是，Windows平台OmniMarkupPreviewer配置项<code>browser_command</code>应该设置为空（默认浏览器打开）或者<code>[&quot;$your_browser_path&quot;,{url}]</code>  </p>
-<p>注：如果你按上述配置了，但依然不能用，控制台提示类似<code>TypeError: Type str doesn&#39;t support the buffer API</code>这样的错误，请参考这个<a href="https://github.com/timonwong/OmniMarkupPreviewer/pull/120" target="_blank" rel="external">Pull Request</a>进行修改</p>
+<p>注：如果你按上述配置了，但依然不能用，控制台提示类似<code>TypeError: Type str doesn&#39;t support the buffer API</code>这样的错误，请参考这个<a href="https://github.com/timonwong/OmniMarkupPreviewer/pull/120" target="_blank" rel="noopener">Pull Request</a>进行修改</p>
 
       
     </div>
@@ -422,7 +424,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -430,7 +432,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -531,7 +533,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
