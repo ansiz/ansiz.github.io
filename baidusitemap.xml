@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
+    <lastmod>2018-05-25T09:01:46.134Z</lastmod>
+    <data>
+        <display>
+        <title>Slurm+Singularity打造轻量级容器云</title>
+        <pubTime>2018-05-25T04:29:09.000Z</pubTime>
+        
+        <tag>云技术</tag>
+         
+        <tag>虚拟化</tag>
+         
+         
+           
+             
+              <breadCrumb title="云技术" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
     <lastmod>2018-02-01T15:42:06.948Z</lastmod>
     <data>
@@ -485,9 +510,9 @@
         <title>前端Javascript编码规范</title>
         <pubTime>2015-08-22T14:14:09.000Z</pubTime>
         
-        <tag>前端开发</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>前端开发</tag>
          
          
            
@@ -535,9 +560,9 @@
         <title>JavaScript奇技淫巧</title>
         <pubTime>2016-02-29T03:18:12.000Z</pubTime>
         
-        <tag>前端开发</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>前端开发</tag>
          
          
            
