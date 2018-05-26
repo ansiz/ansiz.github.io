@@ -305,13 +305,133 @@
 
       
         
-          
-          Slurm是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。Singularity是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的Docker。那二者相结合会产生什么有趣的结果呢？
-应用场景我们先讨论一下这两个技术相结合的应用场景。假设你是一个高大上的用户，需要在一个集群上运行一些高大上的科学计算任务，例如利用集群实现DNA的快速比对，你还会用集群进行气象数据的预测、用集群进行汽车风阻数据模拟计算等等，总之你是一个会在集群中使用各种应用的用户，这样的应用场景在研究所或者高校是非常常见
-          ...
-
+          <p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p>
+<p><a href="https://slurm.schedmd.com/" target="_blank" rel="noopener">Slurm</a>是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。<a href="http://singularity.lbl.gov/user-guide" target="_blank" rel="noopener">Singularity</a>是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的<code>Docker</code>。那二者相结合会产生什么有趣的结果呢？
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/05/25/slurm-singularity/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/02/16/Linux定制化镜像制作指南/" itemprop="url">
+                  Linux定制化镜像制作指南
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-02-16T21:29:09+08:00" content="2018-02-16">
+              2018-02-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/02/16/Linux定制化镜像制作指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/16/Linux定制化镜像制作指南/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png" alt="image3"></p>
+<h2 id="为什么需要定制化？"><a href="#为什么需要定制化？" class="headerlink" title="为什么需要定制化？"></a>为什么需要定制化？</h2><p>一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成<del>垃圾</del>软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个<code>Dockerfile</code>或者<code>docker-compose.yml</code>，让用户开箱即用。但是如果用户需要从裸机开始部署呢？既然连系统都没有，当然是做成安装光盘。系统、软件、依赖环境一股脑全部部署。我们从头说起。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/02/16/Linux定制化镜像制作指南/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1359,141 +1479,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/12/redis-rpc/" itemprop="url">
-                  巧用Redis模拟RPC
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-12T21:29:09+08:00" content="2016-06-12">
-              2016-06-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/12/redis-rpc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/12/redis-rpc/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/rpc.jpg" alt="redis"></p>
-<p>Redis是一个非常灵活的工具，利用Redis我们可以很方便的完成一些数据的缓存和交换。这种数据交换不依赖语言，在各种语言下都有很简单方便的实现，并且redis-cli可以直接命令行操作，在脚本中也能很方便的实现数据交换。正是因为它具备这样的特性，就算是shell脚本，也可以很容易模拟实现RPC。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/redis-rpc/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1539,7 +1524,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

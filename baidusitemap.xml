@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
-    <lastmod>2018-05-25T09:01:46.134Z</lastmod>
+    <lastmod>2018-05-26T03:18:23.601Z</lastmod>
     <data>
         <display>
         <title>Slurm+Singularity打造轻量级容器云</title>
@@ -29,8 +29,28 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/02/16/Linux%E5%AE%9A%E5%88%B6%E5%8C%96%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2018-05-26T03:14:23.902Z</lastmod>
+    <data>
+        <display>
+        <title>Linux定制化镜像制作指南</title>
+        <pubTime>2018-02-16T13:29:09.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
-    <lastmod>2018-02-01T15:42:06.948Z</lastmod>
+    <lastmod>2018-05-26T03:10:02.214Z</lastmod>
     <data>
         <display>
         <title>简单聊聊元编程</title>
@@ -131,9 +151,9 @@
         <title>Windows平台OmniMarkupPreviewer配置引发的思考</title>
         <pubTime>2016-06-03T15:08:45.000Z</pubTime>
         
-        <tag>工具</tag>
-         
         <tag>如何假装有思想</tag>
+         
+        <tag>工具</tag>
          
          
            
@@ -462,9 +482,9 @@
         <title>WEIPHP部署在SAE上的技巧</title>
         <pubTime>2015-03-21T15:57:22.000Z</pubTime>
         
-        <tag>WEIPHP</tag>
-         
         <tag>SAE</tag>
+         
+        <tag>WEIPHP</tag>
          
          
            
@@ -510,9 +530,9 @@
         <title>前端Javascript编码规范</title>
         <pubTime>2015-08-22T14:14:09.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>前端开发</tag>
+         
+        <tag>javascript</tag>
          
          
            
@@ -560,9 +580,9 @@
         <title>JavaScript奇技淫巧</title>
         <pubTime>2016-02-29T03:18:12.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>前端开发</tag>
+         
+        <tag>javascript</tag>
          
          
            
