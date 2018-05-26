@@ -48,7 +48,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="云技术,虚拟化," />
+  <meta name="keywords" content="云技术,虚拟化,Slurm,Singularity," />
 
 
 
@@ -65,20 +65,20 @@
 
 
 <meta name="description" content="Slurm是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。Singularity是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的Docker。那二者相结合会产生什么有趣的结果呢？">
-<meta name="keywords" content="云技术,虚拟化">
+<meta name="keywords" content="云技术,虚拟化,Slurm,Singularity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Slurm+Singularity打造轻量级容器云">
 <meta property="og:url" content="http://zxh.site/2018/05/25/slurm-singularity/index.html">
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="Slurm是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。Singularity是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的Docker。那二者相结合会产生什么有趣的结果呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/srun-demo.jpeg">
-<meta property="og:updated_time" content="2018-05-26T03:18:23.601Z">
+<meta property="og:updated_time" content="2018-05-26T04:22:30.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Slurm+Singularity打造轻量级容器云">
 <meta name="twitter:description" content="Slurm是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。Singularity是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的Docker。那二者相结合会产生什么有趣的结果呢？">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg">
 
 
 
@@ -304,7 +304,7 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg" alt="vm_vs_container"></p>
 <p><a href="https://slurm.schedmd.com/" target="_blank" rel="noopener">Slurm</a>是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。<a href="http://singularity.lbl.gov/user-guide" target="_blank" rel="noopener">Singularity</a>是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的<code>Docker</code>。那二者相结合会产生什么有趣的结果呢？<a id="more"></a></p>
 <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>我们先讨论一下这两个技术相结合的应用场景。假设你是一个高大上的用户，需要在一个集群上运行一些高大上的科学计算任务，例如利用集群实现DNA的快速比对，你还会用集群进行气象数据的预测、用集群进行汽车风阻数据模拟计算等等，总之你是一个会在集群中使用各种应用的用户，这样的应用场景在研究所或者高校是非常常见的。显然这些应用都有各种不同的配套软件，而这些软件又可能在不同的系统中才有，那你会怎么办呢？你一定会想到应用容器技术。这就是Slurm结合Singularity的意义。关于为什么要使用Singularity而非Docker，我在<a href="http://" target="_blank" rel="noopener">另外一篇文章</a>中有介绍到，这里你只需要知道Singularity是非常适合HPC环境的容器技术即可。</p>
 <h2 id="技术分析"><a href="#技术分析" class="headerlink" title="技术分析"></a>技术分析</h2><p>如果你用过<code>OpenStack</code>，应该知道一个最基本的提供计算服务的云环境需要哪些基本服务，分别是<code>Nova</code>、<code>Neutron</code>、<code>Glance</code>和<code>Keystone</code>，它们分别提供计算、网络、镜像及整个系统的身份鉴权。<code>Nova</code>是<code>Openstack</code>的计算服务，负责启动实例、调度实例、管理系统计算资源，<code>Glance</code>则为实例提供镜像管理。<code>Slurm</code>和<code>Singularity</code>可以实现容器启动、资源调度和镜像使用这三个核心功能。这个过程很简单也很有趣，如果我们把启动指定容器的命令作为一个计算任务丢给<code>Slurm</code>，我们就在一台机器上启动了容器，<code>Slurm</code>能够通过<code>cgroups</code>限制作业对硬件资源的使用。如此一来我们就轻易的实现了一套简单粗暴的容器云。</p>
@@ -341,6 +341,10 @@
           
             <a href="/tags/虚拟化/" rel="tag">#虚拟化</a>
           
+            <a href="/tags/Slurm/" rel="tag">#Slurm</a>
+          
+            <a href="/tags/Singularity/" rel="tag">#Singularity</a>
+          
         </div>
       
 
@@ -348,8 +352,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/16/Linux定制化镜像制作指南/" rel="next" title="Linux定制化镜像制作指南">
-                <i class="fa fa-chevron-left"></i> Linux定制化镜像制作指南
+              <a href="/2018/05/15/Singularity/" rel="next" title="Singularity——HPC环境的绝佳容器解决方案">
+                <i class="fa fa-chevron-left"></i> Singularity——HPC环境的绝佳容器解决方案
               </a>
             
           </div>
@@ -429,7 +433,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -437,7 +441,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -446,7 +450,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

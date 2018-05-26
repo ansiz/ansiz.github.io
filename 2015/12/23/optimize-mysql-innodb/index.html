@@ -48,7 +48,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Mysql,InnoDB," />
+  <meta name="keywords" content="经验&技巧,后端,MySQL," />
 
 
 
@@ -65,17 +65,17 @@
 
 
 <meta name="description" content="为什么要学习InnoDB的调优InnoDB是为Mysql处理巨大数据量时的最大性 能设计。它的CPU效率可能是任何其它基于磁盘的关系数据库引擎所不能匹敌的。在数据量大的网站或是应用中Innodb是倍受青睐的。另一方面，在数据库的复制操作中Innodb也是能保证master和slave数据一致有一定的作用。InnoDB给MySQL提供了具有提交，回滚和崩溃恢复能力的事务安全（ACID兼容）存 储引">
-<meta name="keywords" content="Mysql,InnoDB">
+<meta name="keywords" content="经验&amp;技巧,后端,MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql InnoDB性能优化">
+<meta property="og:title" content="MySQL InnoDB性能优化">
 <meta property="og:url" content="http://zxh.site/2015/12/23/optimize-mysql-innodb/index.html">
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="为什么要学习InnoDB的调优InnoDB是为Mysql处理巨大数据量时的最大性 能设计。它的CPU效率可能是任何其它基于磁盘的关系数据库引擎所不能匹敌的。在数据量大的网站或是应用中Innodb是倍受青睐的。另一方面，在数据库的复制操作中Innodb也是能保证master和slave数据一致有一定的作用。InnoDB给MySQL提供了具有提交，回滚和崩溃恢复能力的事务安全（ACID兼容）存 储引">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/mysql.png">
-<meta property="og:updated_time" content="2016-05-07T13:25:41.000Z">
+<meta property="og:updated_time" content="2018-05-26T04:20:13.120Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql InnoDB性能优化">
+<meta name="twitter:title" content="MySQL InnoDB性能优化">
 <meta name="twitter:description" content="为什么要学习InnoDB的调优InnoDB是为Mysql处理巨大数据量时的最大性 能设计。它的CPU效率可能是任何其它基于磁盘的关系数据库引擎所不能匹敌的。在数据量大的网站或是应用中Innodb是倍受青睐的。另一方面，在数据库的复制操作中Innodb也是能保证master和slave数据一致有一定的作用。InnoDB给MySQL提供了具有提交，回滚和崩溃恢复能力的事务安全（ACID兼容）存 储引">
 <meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/mysql.png">
 
@@ -95,7 +95,7 @@
   };
 </script>
 
-  <title> Mysql InnoDB性能优化 | Ansiz </title>
+  <title> MySQL InnoDB性能优化 | Ansiz </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +225,7 @@
             
             
               
-                Mysql InnoDB性能优化
+                MySQL InnoDB性能优化
               
             
           </h1>
@@ -251,8 +251,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
+                  <a href="/categories/后端/" itemprop="url" rel="index">
+                    <span itemprop="name">后端</span>
                   </a>
                 </span>
 
@@ -263,7 +263,7 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/后端开发/经验-技巧/" itemprop="url" rel="index">
+                  <a href="/categories/后端/经验-技巧/" itemprop="url" rel="index">
                     <span itemprop="name">经验&技巧</span>
                   </a>
                 </span>
@@ -421,9 +421,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag">#Mysql</a>
+            <a href="/tags/经验-技巧/" rel="tag">#经验&技巧</a>
           
-            <a href="/tags/InnoDB/" rel="tag">#InnoDB</a>
+            <a href="/tags/后端/" rel="tag">#后端</a>
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
           
         </div>
       
@@ -472,7 +474,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/12/23/optimize-mysql-innodb/"
-           data-title="Mysql InnoDB性能优化" data-url="http://zxh.site/2015/12/23/optimize-mysql-innodb/">
+           data-title="MySQL InnoDB性能优化" data-url="http://zxh.site/2015/12/23/optimize-mysql-innodb/">
       </div>
     
   </div>
@@ -517,7 +519,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +527,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -534,7 +536,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
