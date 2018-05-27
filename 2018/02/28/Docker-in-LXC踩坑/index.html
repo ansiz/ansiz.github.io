@@ -48,7 +48,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="虚拟化,高性能运算,容器,Singularity," />
+  <meta name="keywords" content="虚拟化,容器,LXC," />
 
 
 
@@ -64,20 +64,23 @@
 
 
 
-<meta name="description" content="高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上">
-<meta name="keywords" content="虚拟化,高性能运算,容器,Singularity">
+<meta name="description" content="我们知道Docker是如今炙手可热的应用级容器，而LXC本质上它是一个轻量级的VM，可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。">
+<meta name="keywords" content="虚拟化,容器,LXC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Singularity——HPC环境的绝佳容器解决方案">
-<meta property="og:url" content="http://zxh.site/2018/05/15/Singularity/index.html">
+<meta property="og:title" content="Docker in LXC踩坑">
+<meta property="og:url" content="http://zxh.site/2018/02/28/Docker-in-LXC踩坑/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上">
+<meta property="og:description" content="我们知道Docker是如今炙手可热的应用级容器，而LXC本质上它是一个轻量级的VM，可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png">
-<meta property="og:updated_time" content="2018-05-26T04:21:04.588Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/LXC-Docker.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/05/UnixBench.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/05/FIO.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/05/Redis-benchmark.png">
+<meta property="og:updated_time" content="2018-05-26T04:52:46.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Singularity——HPC环境的绝佳容器解决方案">
-<meta name="twitter:description" content="高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png">
+<meta name="twitter:title" content="Docker in LXC踩坑">
+<meta name="twitter:description" content="我们知道Docker是如今炙手可热的应用级容器，而LXC本质上它是一个轻量级的VM，可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/LXC-Docker.png">
 
 
 
@@ -95,7 +98,7 @@
   };
 </script>
 
-  <title> Singularity——HPC环境的绝佳容器解决方案 | Ansiz </title>
+  <title> Docker in LXC踩坑 | Ansiz </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +228,7 @@
             
             
               
-                Singularity——HPC环境的绝佳容器解决方案
+                Docker in LXC踩坑
               
             
           </h1>
@@ -237,8 +240,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-15T11:24:27+08:00" content="2018-05-15">
-              2018-05-15
+            <time itemprop="dateCreated" datetime="2018-02-28T12:30:22+08:00" content="2018-02-28">
+              2018-02-28
             </time>
           </span>
 
@@ -251,19 +254,7 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/高性能运算/" itemprop="url" rel="index">
-                    <span itemprop="name">高性能运算</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/高性能运算/虚拟化/" itemprop="url" rel="index">
+                  <a href="/categories/虚拟化/" itemprop="url" rel="index">
                     <span itemprop="name">虚拟化</span>
                   </a>
                 </span>
@@ -275,7 +266,7 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/高性能运算/虚拟化/容器/" itemprop="url" rel="index">
+                  <a href="/categories/虚拟化/容器/" itemprop="url" rel="index">
                     <span itemprop="name">容器</span>
                   </a>
                 </span>
@@ -291,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/05/15/Singularity/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/15/Singularity/" itemprop="commentsCount"></span>
+                <a href="/2018/02/28/Docker-in-LXC踩坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/28/Docker-in-LXC踩坑/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,8 +306,60 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p>
-<p>高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上<a id="more"></a></p>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/LXC-Docker.png" alt="LXC-Docker"></p>
+<p>我们知道Docker是如今炙手可热的应用级容器，而LXC本质上它是一个轻量级的VM，可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。<a id="more"></a></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
+<li>Docker无法启动</li>
+<li>Docker中无法pull镜像</li>
+<li>配置文件中配置项升级后不兼容</li>
+<li>容器内Redis无法启动</li>
+</ol>
+<h3 id="Docker无法启动"><a href="#Docker无法启动" class="headerlink" title="Docker无法启动"></a>Docker无法启动</h3><p>在LXC容器中安装Docker后始终无法启动，最后发现是系统的问题，这里不是宿主机的系统有问题，而是LXC的系统。测试发现Ubuntu系统可以正常启动Docker，而CentOS则不行</p>
+<h3 id="Docker中无法pull镜像"><a href="#Docker中无法pull镜像" class="headerlink" title="Docker中无法pull镜像"></a>Docker中无法pull镜像</h3><p>使用docker pull命令拉取镜像，当镜像下载完成后会提示<code>failed to register layer: ApplyLayer exit status 1 stdout:  stderr: permission denied</code>导致无法完成镜像的下载。造成这个问题的原因是没有解除apparmor限制，在启动lxc容器之后，需要执行下列命令：</p>
+<blockquote>
+<p>NOTE: $HOST修改为对应的容器主机名</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt;/var/lib/lxc/<span class="variable">$HOST</span>/config &lt;&lt;EnD</span><br><span class="line">lxc.aa_profile = unconfined</span><br><span class="line">lxc.cgroup.devices.allow = a</span><br><span class="line">lxc.cap.drop =</span><br><span class="line">EnD</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NOTE: lxc.aa_profile = unconfined应该更正为lxc.apparmor.profile = unconfined，下文会提到</p>
+</blockquote>
+<p>然后修改<code>/etc/pve/lxc/$HOST.conf</code>文件，在文件末尾加上以下内容:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc.hook.mount =</span><br><span class="line">lxc.hook.post-stop =</span><br></pre></td></tr></table></figure>
+<h3 id="配置文件中配置项升级后不兼容"><a href="#配置文件中配置项升级后不兼容" class="headerlink" title="配置文件中配置项升级后不兼容"></a>配置文件中配置项升级后不兼容</h3><p>LXC配置文件中配置项名称发生了变化，导致启动报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The configuration file contains legacy configuration keys.</span><br><span class="line">Please update your configuration file!</span><br></pre></td></tr></table></figure>
+<p>好在LXC为我们提供了自动升级配置文件的工具<code>lxc-update-config</code>，切换到容器对应的配置文件目录下: <code>cd /var/lib/lxc/$HOST</code>。使用命令对配置文件进行升级:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-update-config -c config</span><br></pre></td></tr></table></figure>
+<p>其中<code>lxc.aa_profile = unconfined</code>被自动更正为了<code>lxc.apparmor.profile = unconfined</code></p>
+<h3 id="Redis无法启动"><a href="#Redis无法启动" class="headerlink" title="Redis无法启动"></a>Redis无法启动</h3><p>造成该问题的原因是redis的systemd启动脚本中试图使用一些高级权限，修改/etc/systemd/system/redis.service脚本中下列内容后即可正常使用：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">PrivateTmp</span>=<span class="literal">no</span></span><br><span class="line"><span class="attr">PrivateDevices</span>=<span class="literal">no</span></span><br><span class="line"><span class="attr">ProtectHome</span>=<span class="literal">no</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>那在LXC中运行docker性能如何呢？找了几个常见的工具进行性能测试，UnixBench综合测试性能几乎完全一致，fio磁盘测试性能几乎无损耗，性能差距仅1%，Redis-benchmark数据降低约10%（结果仅供参考）</p>
+<h3 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h3><ul>
+<li>UnixBench:</li>
+</ul>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/UnixBench.png" alt="UnixBench"></p>
+<ul>
+<li>fio</li>
+</ul>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/FIO.png" alt="FIO"></p>
+<ul>
+<li>redis-benchmark</li>
+</ul>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/Redis-benchmark.png" alt="Redis-benchmark"></p>
+<blockquote>
+<p>性能测试方案参考：<a href="https://serverscope.io/trials/GdEN#network" target="_blank" rel="noopener">https://serverscope.io/trials/GdEN#network</a></p>
+</blockquote>
+<hr>
+<h2 id="LXC的缺点"><a href="#LXC的缺点" class="headerlink" title="LXC的缺点"></a>LXC的缺点</h2><ul>
+<li>LXC社区热度远不如Docker，这导致除了问题能查询的有效资料并不如Docker丰富，当然也没有像Docker那么丰富的镜像资源。</li>
+<li>LXC还存在跨不同Linux发行版的功能支持不一致，LXC主要在Ubuntu平台上进行维护和开发。例如目前只有Ubuntu上通过<code>apt-get install docker.io</code>安装的Docker能无需加载任何内核补丁正常运行。</li>
+<li>LXC的官方文档不够详细，学习成本比Docker高。</li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://github.com/moby/moby/issues/6783" target="_blank" rel="noopener">GitHub Issues - Unable to run Docker 1.0 inside LXC</a></li>
+<li><a href="https://github.com/lxc/lxd/issues/3845" target="_blank" rel="noopener">GitHub Issues - All containers emit “The configuration file contains legacy configuration keys” after minor LXD upgrade</a></li>
+<li><a href="https://github.com/lxc/lxd/issues/3799" target="_blank" rel="noopener">GitHub Issues - cant install redis-server on a debian/buster container</a></li>
+</ul>
 
       
     </div>
@@ -340,11 +383,9 @@
           
             <a href="/tags/虚拟化/" rel="tag">#虚拟化</a>
           
-            <a href="/tags/高性能运算/" rel="tag">#高性能运算</a>
-          
             <a href="/tags/容器/" rel="tag">#容器</a>
           
-            <a href="/tags/Singularity/" rel="tag">#Singularity</a>
+            <a href="/tags/LXC/" rel="tag">#LXC</a>
           
         </div>
       
@@ -392,8 +433,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/05/15/Singularity/"
-           data-title="Singularity——HPC环境的绝佳容器解决方案" data-url="http://zxh.site/2018/05/15/Singularity/">
+      <div class="ds-thread" data-thread-key="2018/02/28/Docker-in-LXC踩坑/"
+           data-title="Docker in LXC踩坑" data-url="http://zxh.site/2018/02/28/Docker-in-LXC踩坑/">
       </div>
     
   </div>
@@ -446,7 +487,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -455,7 +496,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -522,7 +563,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker无法启动"><span class="nav-number">1.1.</span> <span class="nav-text">Docker无法启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker中无法pull镜像"><span class="nav-number">1.2.</span> <span class="nav-text">Docker中无法pull镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件中配置项升级后不兼容"><span class="nav-number">1.3.</span> <span class="nav-text">配置文件中配置项升级后不兼容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis无法启动"><span class="nav-number">1.4.</span> <span class="nav-text">Redis无法启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能测试"><span class="nav-number">2.</span> <span class="nav-text">性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试工具"><span class="nav-number">2.1.</span> <span class="nav-text">测试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LXC的缺点"><span class="nav-number">3.</span> <span class="nav-text">LXC的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
           </div>
         </section>

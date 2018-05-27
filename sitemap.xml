@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zxh.site/2018/02/28/Docker-in-LXC%E8%B8%A9%E5%9D%91/</loc>
+    
+    <lastmod>2018-05-26T04:52:46.788Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
     
     <lastmod>2018-05-26T04:23:57.524Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
     
     <lastmod>2018-05-26T04:22:30.263Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/05/15/Singularity/</loc>
-    
-    <lastmod>2018-05-26T04:21:04.588Z</lastmod>
     
   </url>
   
