@@ -48,7 +48,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="WordPress,后端,PHP," />
+  <meta name="keywords" content="后端,PHP,WordPress," />
 
 
 
@@ -65,7 +65,7 @@
 
 
 <meta name="description" content="由于SAE环境的特殊性（不支持在线写入）在SAE下使用Wordpress的时候会有一些比较蛋疼的问题。比如没法儿上传文件到uploads目录 原因很简单，因为不支持在线写入嘛，你非要上传呢，就在本地弄好了SVN提交到平台上，但是我们的代码空间很有限，大部分人都只有100MB的空间，如果媒体放在代码空间中，很快就会耗完所有的空间。所以最好的办法是启动SAE提供的storage服务。">
-<meta name="keywords" content="WordPress,后端,PHP">
+<meta name="keywords" content="后端,PHP,WordPress">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WordPress在SAE上部署的技巧">
 <meta property="og:url" content="http://zxh.site/2015/01/24/wordpress-on-sae/index.html">
@@ -280,7 +280,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/01/24/wordpress-on-sae/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/24/wordpress-on-sae/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/24/wordpress-on-sae/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -338,11 +338,11 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
       
         <div class="post-tags">
           
-            <a href="/tags/WordPress/" rel="tag">#WordPress</a>
-          
             <a href="/tags/后端/" rel="tag">#后端</a>
           
             <a href="/tags/PHP/" rel="tag">#PHP</a>
+          
+            <a href="/tags/WordPress/" rel="tag">#WordPress</a>
           
         </div>
       
@@ -379,15 +379,15 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
           </div>
           
 
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
 
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/01/24/wordpress-on-sae/"
-           data-title="WordPress在SAE上部署的技巧" data-url="http://zxh.site/2015/01/24/wordpress-on-sae/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -440,7 +440,7 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -449,7 +449,7 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -636,28 +636,30 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
 
   
 
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"ansiz"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-  
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ansiz-blog';
+      var disqus_identifier = '2015/01/24/wordpress-on-sae/';
+      var disqus_title = 'WordPress在SAE上部署的技巧';
+      var disqus_url = 'http://zxh.site/2015/01/24/wordpress-on-sae/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
 
 
 
