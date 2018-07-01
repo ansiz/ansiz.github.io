@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
+    
+    <lastmod>2018-07-01T07:54:36.711Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
     
     <lastmod>2018-07-01T07:15:20.151Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
     
     <lastmod>2018-05-26T04:23:50.482Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
-    
-    <lastmod>2018-05-26T04:22:30.263Z</lastmod>
     
   </url>
   

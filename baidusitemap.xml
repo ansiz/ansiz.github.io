@@ -4,6 +4,35 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
+    <lastmod>2018-07-01T07:54:36.711Z</lastmod>
+    <data>
+        <display>
+        <title>Slurm+Singularity打造轻量级容器云</title>
+        <pubTime>2018-05-25T04:29:09.000Z</pubTime>
+        
+        <tag>Slurm</tag>
+         
+        <tag>虚拟化</tag>
+         
+        <tag>Singularity</tag>
+         
+        <tag>云技术</tag>
+         
+         
+           
+             
+              <breadCrumb title="云技术" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
     <lastmod>2018-07-01T07:15:20.151Z</lastmod>
     <data>
@@ -164,35 +193,6 @@
           
              
               <breadCrumb title="PHP" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/PHP/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
-    <lastmod>2018-05-26T04:22:30.263Z</lastmod>
-    <data>
-        <display>
-        <title>Slurm+Singularity打造轻量级容器云</title>
-        <pubTime>2018-05-25T04:29:09.000Z</pubTime>
-        
-        <tag>Slurm</tag>
-         
-        <tag>虚拟化</tag>
-         
-        <tag>Singularity</tag>
-         
-        <tag>云技术</tag>
-         
-         
-           
-             
-              <breadCrumb title="云技术" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
           
         </display>
     </data>
