@@ -4,6 +4,33 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
+    <lastmod>2018-07-01T07:15:20.151Z</lastmod>
+    <data>
+        <display>
+        <title>HPC环境下使用Docker</title>
+        <pubTime>2018-07-01T04:29:09.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>HPC</tag>
+         
+        <tag>Slurm</tag>
+         
+         
+           
+             
+              <breadCrumb title="容器" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/06/24/x11/</loc>
     <lastmod>2018-06-25T06:48:10.114Z</lastmod>
     <data>
@@ -151,13 +178,13 @@
         <title>Slurm+Singularity打造轻量级容器云</title>
         <pubTime>2018-05-25T04:29:09.000Z</pubTime>
         
+        <tag>Slurm</tag>
+         
         <tag>虚拟化</tag>
          
         <tag>Singularity</tag>
          
         <tag>云技术</tag>
-         
-        <tag>Slurm</tag>
          
          
            
@@ -504,11 +531,11 @@
         <title>SLURM 安装与配置</title>
         <pubTime>2015-12-29T04:38:11.000Z</pubTime>
         
+        <tag>Slurm</tag>
+         
         <tag>Linux</tag>
          
         <tag>高性能运算</tag>
-         
-        <tag>Slurm</tag>
          
          
            
