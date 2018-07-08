@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/07/08/%E5%AE%89%E5%85%A8%E7%9A%84socks5%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2018-07-08T09:39:42.376Z</lastmod>
+    <data>
+        <display>
+        <title>安全的SOCKS5协议</title>
+        <pubTime>2018-07-08T07:27:48.000Z</pubTime>
+        
+        <tag>网络</tag>
+         
+        <tag>译文</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="译文" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
     <lastmod>2018-07-01T07:54:36.711Z</lastmod>
     <data>
@@ -11,11 +36,11 @@
         <title>Slurm+Singularity打造轻量级容器云</title>
         <pubTime>2018-05-25T04:29:09.000Z</pubTime>
         
-        <tag>Slurm</tag>
-         
         <tag>虚拟化</tag>
          
         <tag>Singularity</tag>
+         
+        <tag>Slurm</tag>
          
         <tag>云技术</tag>
          
@@ -531,11 +556,11 @@
         <title>SLURM 安装与配置</title>
         <pubTime>2015-12-29T04:38:11.000Z</pubTime>
         
-        <tag>Slurm</tag>
-         
         <tag>Linux</tag>
          
         <tag>高性能运算</tag>
+         
+        <tag>Slurm</tag>
          
          
            
