@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zxh.site/2018/07/15/Deepin-%E4%BC%98%E7%A7%80%E7%9A%84%E5%9B%BD%E4%BA%A7Linux%E5%8F%91%E8%A1%8C%E7%89%88/</loc>
+    
+    <lastmod>2018-07-15T08:26:00.344Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zxh.site/2018/07/08/%E5%AE%89%E5%85%A8%E7%9A%84socks5%E5%8D%8F%E8%AE%AE/</loc>
     
     <lastmod>2018-07-08T15:03:02.368Z</lastmod>
@@ -11,28 +18,28 @@
   <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
     
-    <lastmod>2018-07-01T07:54:36.711Z</lastmod>
+    <lastmod>2018-07-01T07:54:36.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
     
-    <lastmod>2018-07-01T07:15:20.151Z</lastmod>
+    <lastmod>2018-07-01T07:15:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/06/24/x11/</loc>
     
-    <lastmod>2018-06-25T06:48:10.114Z</lastmod>
+    <lastmod>2018-06-25T06:48:10.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/05/15/Singularity/</loc>
     
-    <lastmod>2018-06-10T10:35:34.413Z</lastmod>
+    <lastmod>2018-06-10T10:35:34.000Z</lastmod>
     
   </url>
   
@@ -46,56 +53,56 @@
   <url>
     <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
     
-    <lastmod>2018-05-26T04:23:57.524Z</lastmod>
+    <lastmod>2018-05-26T04:23:57.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
     
-    <lastmod>2018-05-26T04:23:50.482Z</lastmod>
+    <lastmod>2018-05-26T04:23:50.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/04/08/port-mapping/</loc>
     
-    <lastmod>2018-05-26T04:20:52.347Z</lastmod>
+    <lastmod>2018-05-26T04:20:52.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/11/26/phabricator-configure/</loc>
     
-    <lastmod>2018-05-26T04:20:44.475Z</lastmod>
+    <lastmod>2018-05-26T04:20:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/12/01/phabricator-2/</loc>
     
-    <lastmod>2018-05-26T04:20:37.406Z</lastmod>
+    <lastmod>2018-05-26T04:20:37.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/12/23/optimize-mysql-innodb/</loc>
     
-    <lastmod>2018-05-26T04:20:13.120Z</lastmod>
+    <lastmod>2018-05-26T04:20:13.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
     
-    <lastmod>2018-05-26T04:19:54.519Z</lastmod>
+    <lastmod>2018-05-26T04:19:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/</loc>
     
-    <lastmod>2018-05-26T04:19:42.290Z</lastmod>
+    <lastmod>2018-05-26T04:19:42.000Z</lastmod>
     
   </url>
   
@@ -109,133 +116,133 @@
   <url>
     <loc>http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/</loc>
     
-    <lastmod>2018-05-26T04:18:45.498Z</lastmod>
+    <lastmod>2018-05-26T04:18:45.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/09/29/http-cache/</loc>
     
-    <lastmod>2018-05-26T04:18:29.767Z</lastmod>
+    <lastmod>2018-05-26T04:18:29.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/09/28/fswatch/</loc>
     
-    <lastmod>2018-05-26T04:18:03.138Z</lastmod>
+    <lastmod>2018-05-26T04:18:03.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/11/21/freedomnet/</loc>
     
-    <lastmod>2018-05-26T04:17:49.182Z</lastmod>
+    <lastmod>2018-05-26T04:17:49.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
     
-    <lastmod>2018-05-26T04:14:22.670Z</lastmod>
+    <lastmod>2018-05-26T04:14:22.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/07/01/first-anniversary/</loc>
     
-    <lastmod>2018-05-26T04:00:11.058Z</lastmod>
+    <lastmod>2018-05-26T04:00:11.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2017/04/01/web-tty/</loc>
     
-    <lastmod>2018-05-26T03:59:03.356Z</lastmod>
+    <lastmod>2018-05-26T03:59:03.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/12/29/slurm/</loc>
     
-    <lastmod>2018-05-26T03:58:54.761Z</lastmod>
+    <lastmod>2018-05-26T03:58:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/01/08/s1000/</loc>
     
-    <lastmod>2018-05-26T03:57:54.960Z</lastmod>
+    <lastmod>2018-05-26T03:57:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/06/03/redis/</loc>
     
-    <lastmod>2018-05-26T03:57:42.452Z</lastmod>
+    <lastmod>2018-05-26T03:57:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/06/12/redis-rpc/</loc>
     
-    <lastmod>2018-05-26T03:57:27.270Z</lastmod>
+    <lastmod>2018-05-26T03:57:27.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
     
-    <lastmod>2018-05-26T03:56:26.086Z</lastmod>
+    <lastmod>2018-05-26T03:56:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/07/22/newlife/</loc>
     
-    <lastmod>2018-05-26T03:56:01.583Z</lastmod>
+    <lastmod>2018-05-26T03:56:01.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/08/22/javascript-convention/</loc>
     
-    <lastmod>2018-05-26T03:54:35.035Z</lastmod>
+    <lastmod>2018-05-26T03:54:35.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/02/29/javascript-artifice/</loc>
     
-    <lastmod>2018-05-26T03:54:26.607Z</lastmod>
+    <lastmod>2018-05-26T03:54:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/03/06/git-on-windows-server/</loc>
     
-    <lastmod>2018-05-26T03:53:59.451Z</lastmod>
+    <lastmod>2018-05-26T03:53:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/10/21/efficient/</loc>
     
-    <lastmod>2018-05-26T03:51:19.222Z</lastmod>
+    <lastmod>2018-05-26T03:51:19.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/05/20/customized-error/</loc>
     
-    <lastmod>2018-05-26T03:51:01.065Z</lastmod>
+    <lastmod>2018-05-26T03:51:01.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/01/26/command-find/</loc>
     
-    <lastmod>2018-05-26T03:50:49.175Z</lastmod>
+    <lastmod>2018-05-26T03:50:49.000Z</lastmod>
     
   </url>
   
