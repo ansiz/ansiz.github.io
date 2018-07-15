@@ -48,7 +48,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="Linux,深度学习," />
 
 
 
@@ -64,23 +64,22 @@
 
 
 
-<meta name="description" content="去年毕业，因为各种原因决定来北京工作，于是被学校赶走之后就来了北京。一晃竟然就是一年。回顾过去这一年，感觉竟然是活了23年以来最为充实的一年，充实意味着大部分日子没有虚度，这是这一年最为满意的地方。我始终相信无论是财富还是知识的积累都是复利的，善于理财的人手头的财富会越来越多增长越来越快，知识也一样。">
-<meta name="keywords" content="生活">
+<meta name="description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
+<meta name="keywords" content="Linux,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="入职一年工作总结">
-<meta property="og:url" content="http://zxh.site/2016/07/01/first-anniversary/index.html">
+<meta property="og:title" content="在Deepin上安装TensorFlow">
+<meta property="og:url" content="http://zxh.site/2018/07/15/在Deepin上安装TensorFlow/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="去年毕业，因为各种原因决定来北京工作，于是被学校赶走之后就来了北京。一晃竟然就是一年。回顾过去这一年，感觉竟然是活了23年以来最为充实的一年，充实意味着大部分日子没有虚度，这是这一年最为满意的地方。我始终相信无论是财富还是知识的积累都是复利的，善于理财的人手头的财富会越来越多增长越来越快，知识也一样。">
+<meta property="og:description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/look.jpg">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/team.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/code.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/hacker.jpg">
-<meta property="og:updated_time" content="2018-05-26T04:00:11.000Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/nvidia-smi.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/demo.png">
+<meta property="og:updated_time" content="2018-07-15T13:19:53.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="入职一年工作总结">
-<meta name="twitter:description" content="去年毕业，因为各种原因决定来北京工作，于是被学校赶走之后就来了北京。一晃竟然就是一年。回顾过去这一年，感觉竟然是活了23年以来最为充实的一年，充实意味着大部分日子没有虚度，这是这一年最为满意的地方。我始终相信无论是财富还是知识的积累都是复利的，善于理财的人手头的财富会越来越多增长越来越快，知识也一样。">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/look.jpg">
+<meta name="twitter:title" content="在Deepin上安装TensorFlow">
+<meta name="twitter:description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png">
 
 
 
@@ -98,7 +97,7 @@
   };
 </script>
 
-  <title> 入职一年工作总结 | Ansiz </title>
+  <title> 在Deepin上安装TensorFlow | Ansiz </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -228,7 +227,7 @@
             
             
               
-                入职一年工作总结
+                在Deepin上安装TensorFlow
               
             
           </h1>
@@ -240,8 +239,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-01T22:33:07+08:00" content="2016-07-01">
-              2016-07-01
+            <time itemprop="dateCreated" datetime="2018-07-15T19:51:33+08:00" content="2018-07-15">
+              2018-07-15
             </time>
           </span>
 
@@ -254,8 +253,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -270,8 +281,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/01/first-anniversary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/01/first-anniversary/" itemprop="commentsCount"></span>
+                <a href="/2018/07/15/在Deepin上安装TensorFlow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/15/在Deepin上安装TensorFlow/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -294,53 +305,38 @@
       
 
       
-        <img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/look.jpg" class="full-image" alt="回顾">
-<p>去年毕业，因为各种原因决定来北京工作，于是被学校赶走之后就来了北京。一晃竟然就是一年。回顾过去这一年，感觉竟然是活了23年以来最为充实的一年，充实意味着大部分日子没有虚度，这是这一年最为满意的地方。我始终相信无论是财富还是知识的积累都是复利的，善于理财的人手头的财富会越来越多增长越来越快，知识也一样。<br><a id="more"></a>公司有一个较为特别的规定，每天下班之前花几分钟发送一封不一定会有人看的邮件，内容是今天都做了什么，明天打算做什么。这样做的好处很多，不仅可以让一起工作的同事知道你的工作进度，更能让自己的思路和工作计划变得清晰，回顾过去一周、一月、一年的report邮件，也能总结出这一段时间都完成了什么工作。如果可以的话，决定以后每一年都为过去一年做记录和计划。  </p>
-<h3 id="过去一年学习到的新东西"><a href="#过去一年学习到的新东西" class="headerlink" title="过去一年学习到的新东西"></a>过去一年学习到的新东西</h3><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/team.png" class="full-image" alt="Team">
-<ul>
-<li><strong>对团队重要性的认识</strong><br>上大学的时候我开发过两个小项目，一个是基于微信公众平台的小区物业管理，一个是学校的在线打印店。每当看到现在市面上类似的产品，我都会想到这两个奇葩的小东西。首先值得肯定的是当初弄这些玩意儿的想法还是挺先进的，虽然谈不上开创者，但是那时候确实市面上的竞品不多，可惜我们是在天津弄了个地方几个人凑在一起瞎搞，我是唯一的开发，然后还有一个集产品和美工于一体的大黄加上一些酱油的小学弟。我并不是什么天才程序员，再加上这样简陋的配置自然不可能成什么大事。这段经历最大的回报就是瞎折腾的过程中提高了自己学习的能力。<br>去年我也见证了一个小团队的解散，这是几个朋友一起搞的小团队，他们想做视频交互，合伙人中有视频行业从业多年的精英、就职与微软多年的资深开发。由于这个东西确实很好玩，我也在闲暇之余投入了一些精力协助他们做一些开发。但是显然这个新的方向也并不是这么一个几个人的小团队能做起来的。我认为失败最大的原因是团队人员配置问题，最主要的是技术开发能力不足、人手不足、缺乏配合。最资深的技术常年工作的内容是C++相关的，并且在微软呆了太久缺乏对新技术的热情，而另一个开发水平有限，我这种友情场外援助显然不能挽救场面，最后项目自然无疾而终。<br>我坚信我迟早会开发出一个还不错的自己的产品，但是现在我明白了一个人很难做成一件大事，无论你能力有多强，想要做好一款互联网时代的优秀产品，孤军奋战是几乎不可能完成的。众多的互联网从业者中，有很多看起来并没有任何卵用的角色，但是真正想做一个东西出来任何事情都亲力亲为的时候就会发现效率是极低的。人类社会之所以像现在这样分工明确显然是有道理的，各司其职又能互相配合的团队才是成就一个伟大产品最重要的因素。<strong>而我目前需要做的是在找到这样的团队之前，不断提升自己的能力</strong>。 </li>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png" alt="NVIDIA-SMI"><br>Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。<a id="more"></a></p>
+<h2 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h2><ul>
+<li>Deepin 15.6桌面版</li>
+<li>NVIDIA 1060GTX</li>
+<li>显卡驱动版本：387.34-3deepin</li>
+<li>CUDA版本：8.0</li>
+<li>Tensorflow版本：Tensorflow-GPU(1.4.1)</li>
+<li>cuDNN版本：6.0</li>
 </ul>
-<img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/code.png" class="full-image" alt="Code">
-<ul>
-<li><p><strong>对编程的重新认识</strong><br>又要提到大学时候做的那两个奇葩的项目了。那时候可以算是什么都不会，要用到什么就现学现用，好在我学习能力还不错于是就把各种东西<code>ThinkPHP</code>、<code>Bootstrap</code>、<code>jQuery</code>还有一堆乱七八糟的插件拼凑到一起，随便写了一堆代码部署到<code>SAE</code>上，奇葩的是他们竟然能正常运行上线服务。那时候并不在意代码规范，不懂得如何规划项目，只知道我要做什么，只要实现了就好。于是入职后的第一个周我的内心的崩溃的，完全看不懂项目里的那些上万行的<code>Javascript</code>代码，也有太多的概念不懂，满脑子里面塞的都是新东西：<code>单页应用</code>、<code>Restful接口</code>、<code>代码规范</code>、<code>前端构建</code>、<code>插件封装</code>、<code>前后端分离</code>、<code>代码调试</code>、<code>性能调优</code>……一下子感觉自己什么都不懂，连代码都看不懂，下个月应该就可以被开除了吧……<strong>最深刻的认识就是以前写的代码真是玩具代码，我根本不会编程</strong>。后来又开始学习<code>Golang</code>，看了很多别人的代码在大牛们的悉心指导下才逐渐对<code>设计模式</code>、<code>接口设计</code>、<code>远程调用</code>……这些东西有所了解。而越是深入学习，越是发现自己什么都不会，而计算机行业技术永远保持着快速的迭代更新，穷尽一生也不可能将所有的东西都掌握。<strong>优秀的开发者应该永远保持对技术和学习的热情</strong>。</p>
-</li>
-<li><p><strong>技术上的提升</strong><br><code>Javascript</code>和<code>Golang</code>的编码水平得到了很大的提升，确切说是以前根本不会，现在算是入门了。熟悉了<code>Linux</code>系统，现在也能完成基本的系统部署，<code>Shell</code>、<code>Docker</code>、<code>Torque</code>、<code>Slurm</code>、<code>Redis</code>……也都能玩得来，还能随手撸出来一段解放双手的脚本。对项目的基础构建有了一定的认识。最最最重要的是学习的能力得到了提高，不会的东西看看文档就能开始尝试，在知识的复利条件下这意味着未来如果我能保持去年的精力投入一定会得到更多的回报。  </p>
-</li>
-</ul>
-<h3 id="过去一年看过的书"><a href="#过去一年看过的书" class="headerlink" title="过去一年看过的书"></a>过去一年看过的书</h3><ul>
-<li>已看  <ul>
-<li>《JavaScript语言精粹》</li>
-<li>《JavaScript权威指南》</li>
-<li>《Go语言程序设计》</li>
-<li>《Go语言编程》</li>
-<li>《黑客与画家》</li>
-<li>《如何变得有思想》</li>
-<li>《解忧杂货铺》</li>
-<li>《异类》</li>
-<li>《冰与火之歌第二卷》</li>
-<li>《从0到1》</li>
-<li>《创业小败局》</li>
-<li>《浪潮之巅》</li>
-<li>《穷爸爸富爸爸》</li>
-<li>《Web全栈工程师的自我修养》</li>
-<li>《极简欧洲史》</li>
-</ul>
-</li>
-<li>在看  <ul>
-<li>《代码整洁之道》</li>
-<li>《JavaScript设计模式》</li>
-<li>《新生》  </li>
-</ul>
-</li>
-<li>年度好评书籍<br>  <img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/07/hacker.jpg" alt="黑客与画家">    </li>
-</ul>
-<h3 id="未来一年的计划"><a href="#未来一年的计划" class="headerlink" title="未来一年的计划"></a>未来一年的计划</h3><ul>
-<li>继续提高JavaScript和Golang的编程能力</li>
-<li>尝试完成一个完全属于自己的项目</li>
-<li>阅读数量不少于去年的书</li>
-</ul>
-<hr>
-<p>愿明年总结的时候，能同样觉得充实。  </p>
+<blockquote>
+<p>注意：请务必注意上述版本，Tensorflow安装最大的坑就在于官方文档总是提供最新的版本，而实际上最新的版本不一定适应于你当前的硬件！</p>
+</blockquote>
+<h2 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h2><p>Deepin默认使用的是开源驱动，该驱动兼容性较好但是性能比NVIDIA原生闭源驱动要差。所以我们要先切换一下驱动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nvidia-driver <span class="comment">#安装驱动包</span></span><br></pre></td></tr></table></figure>
+<p>安装完成后重启系统，在终端中执行nvidia-smi将会看到类似输出：</p>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/nvidia-smi.png" alt="NVIDIA-SMI"></p>
+<blockquote>
+<p>注意: NVIDIA官网目前提供的最新驱动版本是390，但我安装之后导致系统黑屏驱动无法工作，如无必要不建议安装NVIDIA官网提供的最新版本。</p>
+</blockquote>
+<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>因为Deepin和Ubuntu实际上都是基于Debian的，所以我们可以看Tensorflow中Ubuntu的文档进行安装，根据Tensorflow官网提供的链接，NVIDIA将建议安装CUDA9.2，不过这里我们直接用源内提供的8.0版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nvidia-cuda-dev nvidia-cuda-toolkit nvidia-nsight nvidia-visual-profiler</span><br></pre></td></tr></table></figure>
+<h2 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h2><p>安装cuDNN需要进行简单的注册并填写一个简单的调查问卷，注册完成之后即可下载。</p>
+<p>cuDNN也要分很多版本（<a href="https://developer.nvidia.com/rdp/cudnn-archive" target="_blank" rel="noopener">版本列表</a>），这里我们选择<code>cuDNN v6.0 (April 27, 2017), for CUDA 8.0</code>这个版本。直接下载压缩包(<a href="https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v6/prod/8.0_20170307/cudnn-8.0-linux-x64-v6.0-tgz" target="_blank" rel="noopener">cuDNN v6.0 Library for Linux</a>)解压就好：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.<span class="built_in">local</span> <span class="comment"># 如果没有这个文件夹请手动新建</span></span><br><span class="line">tar zxvf ~/Software/cudnn-8.0-linux-x64-v6.0.tgz</span><br></pre></td></tr></table></figure>
+<p>配置LD_LIBRARY_PATH：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建议直接将这个写到bashrc或者zshrc中</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=~/.<span class="built_in">local</span>/cuda/lib64</span><br></pre></td></tr></table></figure>
+<h2 id="安装Tensorflow"><a href="#安装Tensorflow" class="headerlink" title="安装Tensorflow"></a>安装Tensorflow</h2><p>首先安装python和pip，然后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.4.1</span><br></pre></td></tr></table></figure>
+<p>验证一下安装情况，在python交互模式中输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow</span><br></pre></td></tr></table></figure>
+<p>如果没有任何报错就说明安装好了，跑一个官网最简单的<a href="https://www.tensorflow.org/get_started/get_started_for_beginners?hl=zh-cn" target="_blank" rel="noopener">对鸢尾花进行分类</a>的demo试试吧，你将看到类似这样的输出：</p>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/demo.png" alt="NVIDIA-SMI"></p>
 
       
     </div>
@@ -362,7 +358,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag">#生活</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/深度学习/" rel="tag">#深度学习</a>
           
         </div>
       
@@ -371,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/12/redis-rpc/" rel="next" title="巧用Redis模拟RPC">
-                <i class="fa fa-chevron-left"></i> 巧用Redis模拟RPC
+              <a href="/2018/07/15/Deepin-优秀的国产Linux发行版/" rel="next" title="Deepin——优秀的国产Linux发行版">
+                <i class="fa fa-chevron-left"></i> Deepin——优秀的国产Linux发行版
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/21/efficient/" rel="prev" title="如何变得更高效">
-                如何变得更高效 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,7 +534,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#过去一年学习到的新东西"><span class="nav-number">1.</span> <span class="nav-text">过去一年学习到的新东西</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过去一年看过的书"><span class="nav-number">2.</span> <span class="nav-text">过去一年看过的书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未来一年的计划"><span class="nav-number">3.</span> <span class="nav-text">未来一年的计划</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统配置"><span class="nav-number">1.</span> <span class="nav-text">系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装NVIDIA显卡驱动"><span class="nav-number">2.</span> <span class="nav-text">安装NVIDIA显卡驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA"><span class="nav-number">3.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装cuDNN"><span class="nav-number">4.</span> <span class="nav-text">安装cuDNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Tensorflow"><span class="nav-number">5.</span> <span class="nav-text">安装Tensorflow</span></a></li></ol></div>
             
           </div>
         </section>
@@ -666,9 +660,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'ansiz-blog';
-      var disqus_identifier = '2016/07/01/first-anniversary/';
-      var disqus_title = '入职一年工作总结';
-      var disqus_url = 'http://zxh.site/2016/07/01/first-anniversary/';
+      var disqus_identifier = '2018/07/15/在Deepin上安装TensorFlow/';
+      var disqus_title = '在Deepin上安装TensorFlow';
+      var disqus_url = 'http://zxh.site/2018/07/15/在Deepin上安装TensorFlow/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

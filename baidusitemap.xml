@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/07/15/%E5%9C%A8Deepin%E4%B8%8A%E5%AE%89%E8%A3%85TensorFlow/</loc>
+    <lastmod>2018-07-15T13:19:53.400Z</lastmod>
+    <data>
+        <display>
+        <title>在Deepin上安装TensorFlow</title>
+        <pubTime>2018-07-15T11:51:33.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>深度学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+             
+              <breadCrumb title="深度学习" url="http://zxh.site/categories/Linux/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/07/15/Deepin-%E4%BC%98%E7%A7%80%E7%9A%84%E5%9B%BD%E4%BA%A7Linux%E5%8F%91%E8%A1%8C%E7%89%88/</loc>
     <lastmod>2018-07-15T08:26:00.344Z</lastmod>
     <data>
@@ -728,9 +753,9 @@
         <title>前端Javascript编码规范</title>
         <pubTime>2015-08-22T14:14:09.000Z</pubTime>
         
-        <tag>JavaScript</tag>
-         
         <tag>前端</tag>
+         
+        <tag>JavaScript</tag>
          
          
            
@@ -753,9 +778,9 @@
         <title>JavaScript奇技淫巧</title>
         <pubTime>2016-02-29T03:18:12.000Z</pubTime>
         
-        <tag>JavaScript</tag>
-         
         <tag>前端</tag>
+         
+        <tag>JavaScript</tag>
          
          
            
