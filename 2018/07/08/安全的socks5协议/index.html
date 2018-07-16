@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络,译文," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="背景在HTTP/HTTPS的世界里，TCP/IP数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。">
+<meta name="keywords" content="网络,译文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全的SOCKS5协议">
+<meta property="og:url" content="http://zxh.site/2018/07/08/安全的socks5协议/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="背景在HTTP/HTTPS的世界里，TCP/IP数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/free-client-server.gif">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/blocking.gif">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/proxying.gif">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif">
+<meta property="og:updated_time" content="2018-07-08T15:03:02.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安全的SOCKS5协议">
+<meta name="twitter:description" content="背景在HTTP/HTTPS的世界里，TCP/IP数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 安全的SOCKS5协议 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安全的SOCKS5协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-08T15:27:48+08:00" content="2018-07-08">
+              2018-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络/译文/" itemprop="url" rel="index">
+                    <span itemprop="name">译文</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/08/安全的socks5协议/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/08/安全的socks5协议/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png" alt="malicious"></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。<a id="more"></a></p>
+<p>目前已知的攻击手段包括：</p>
+<ul>
+<li>IP封锁 - 对指定IP地址的任何连接尝试都会被恶意的第三方阻止。</li>
+<li>DNS欺骗 - 返回错误的IP地址。</li>
+<li>包过滤 - 当包中被检测到特定的词句时该数据包将会被阻止或丢弃。</li>
+<li>TCP RST - 对在黑名单中的目的地址进行访问时会发送<code>RST</code>包，TCP连接将会立即中断。</li>
+<li>深度学习 - 利用集群深度学习，恶意方可以快速找到可疑的IP地址。</li>
+</ul>
+<p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p>
+<p>解决方案是利用强加密算法的<a href="https://zh.wikipedia.org/wiki/SOCKS" target="_blank" rel="noopener">SOCKS5</a>协议。</p>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
+<li>穿透防火墙封锁</li>
+<li>隐藏所有数据包数据，包括源，目标，载荷等</li>
+</ul>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>下面介绍常见的安全SOCKS5代理的开发技术及其工作原理</p>
+<h3 id="工作模式介绍"><a href="#工作模式介绍" class="headerlink" title="工作模式介绍"></a>工作模式介绍</h3><h4 id="自由网络"><a href="#自由网络" class="headerlink" title="自由网络"></a>自由网络</h4><p>在没有恶意攻击者的情况下，客户端与服务器端可以正常通讯。</p>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/free-client-server.gif" alt="free"></p>
+<h4 id="被封锁的网络"><a href="#被封锁的网络" class="headerlink" title="被封锁的网络"></a>被封锁的网络</h4><p>恶意攻击者可以在客户端和服务器之间部署类似防火墙的系统，这样任何请求都不会到达服务器。因此，最终用户无法从服务器获取任何数据。</p>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/blocking.gif" alt="blocked"></p>
+<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>一种合理的方法是在防火墙之外设置代理服务器。所有流量都需要先通过代理服务器，然后由代理服务器中继。目前代理技术包括HTTP代理，Socks服务，VPN服务，SSH隧道等。SOCKS5也是其中一种代理协议。</p>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/proxying.gif" alt="proxy"></p>
+<p>举个例子，当请求通过SSH隧道传输时，防火墙无法识别流量，因为数据已加密。但问题是，在创建隧道时进行SSH握手时，很可能会发现代理服务器被用作代理。因此防火墙可以阻止SSH隧道创建步骤的网络连接。</p>
+<h4 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h4><p>安全的socks代理不应向防火墙公开以下信息：</p>
+<ul>
+<li>任何表明它被用作代理的特征</li>
+<li>任何真实传输的数据</li>
+</ul>
+<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif" alt="secure-proxy"></p>
+<p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p>
+<p>上图中SOCKS5的工作原理主要可以概括为以下几步：</p>
+<ul>
+<li>客户端通过<code>SOCKS5</code>协议向本地代理发送请求。</li>
+<li>本地代理通过<code>HTTP</code>协议发送加密后的请求数据。</li>
+<li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li>
+<li>远程代理服务器解密数据后中继到真实服务。</li>
+<li>真实服务将响应返回到远程代理服务器，并通过相同的路径传播回客户端。</li>
+</ul>
+<h3 id="使用SOCKS5作为本地代理协议"><a href="#使用SOCKS5作为本地代理协议" class="headerlink" title="使用SOCKS5作为本地代理协议"></a>使用SOCKS5作为本地代理协议</h3><p><code>SOCKS5</code>在客户端有广泛的支持。我们很容易得到通过SOCKS5从客户端传输数据到本地代理服务器的好处。 SOCKS5在第5层上执行数据传输。</p>
+<p>下面的curl命令演示了客户端能够使用SOCKS5连接到SOCKS5代理服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 127.0.0.1:1080 https://google.com</span><br></pre></td></tr></table></figure>
+<h3 id="为什么使用HTTP作为传输协议"><a href="#为什么使用HTTP作为传输协议" class="headerlink" title="为什么使用HTTP作为传输协议"></a>为什么使用HTTP作为传输协议</h3><p>HTTP可能是整个互联网上最常见的流量类型。选择HTTP作为传输协议以突破防火墙使得数据包和服务器不太可能被识别用于代理使用。</p>
+<p>HTTPS不适合防火墙突破。因为HTTPS的设计目的是：</p>
+<ul>
+<li>避免恶意方改变内容</li>
+<li>避免恶意方伪装成目标服务器</li>
+<li>数据加密</li>
+</ul>
+<p>而代理软件的目的应满足以下要求：</p>
+<ul>
+<li>避免目标服务器被识别</li>
+<li>避免代理服务器被识别为代理</li>
+<li>数据加密</li>
+</ul>
+<p>基于以上原因，HTTP是突破防火墙比HTTPS或任何其他协议更好的选择。</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>密码算法对数据进行加密和解密，这样任何人都无法从加密流中读取数据，除了LocalProxy和RemoteProxy。由于<code>AEAD</code>密码同时提供机密性，完整性和真实性，建议选择下面列出的AEAD系列之一作为在本地代理和远程代理中使用的密码算法：</p>
+<ul>
+<li>chacha20-ietf-poly1305</li>
+<li>aes-256-gcm</li>
+<li>aes-128-gcm</li>
+</ul>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>Shadowsocks是一款出色的安全socks5代理解决方案。查看其<a href="https://shadowsocks.org/en/index.html" target="_blank" rel="noopener">官方网站</a>了解更多信息。</p>
+<h2 id="挑战和风险"><a href="#挑战和风险" class="headerlink" title="挑战和风险"></a>挑战和风险</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ul>
+<li>恶意方可以在客户端安装干扰软件，以阻止本地软件和LocalProxy之间的连接。<ul>
+<li>这可以通过强制安装来实现</li>
+<li>它也可以通过嵌入广泛安装的软件来实现</li>
+</ul>
+</li>
+<li>恶意方可能会强制该人卸载LocalProxy</li>
+</ul>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>必须将服务器端部署到没有防火墙阻止的环境中</p>
+<ul>
+<li>恶意方可以强制云提供商或潜入云服务器做以下事情：<ul>
+<li>窃取服务器日志文件</li>
+<li>杀死ServerProxy进程</li>
+</ul>
+</li>
+<li>恶意方也可以是云提供商</li>
+</ul>
+<h3 id="不安全的加密算法"><a href="#不安全的加密算法" class="headerlink" title="不安全的加密算法"></a>不安全的加密算法</h3><p>使用何种加密算法取决于用户，如果最终用户选择不安全的密码算法，可能会增加服务器被识别为代理服务器的风险。提供代理服务的服务器将被封锁。</p>
+<h3 id="IP白名单限制"><a href="#IP白名单限制" class="headerlink" title="IP白名单限制"></a>IP白名单限制</h3><p>如果最终用户只能连接到选定范围的IP列表（即IP白名单），则用户无法使用SOCKS5服务器，因为SOCKS5服务器IP不太可能包含在IP白名单中。</p>
+<h3 id="进一步的风险"><a href="#进一步的风险" class="headerlink" title="进一步的风险"></a>进一步的风险</h3><p>当最终用户泄露密码密钥和流量历史记录时，恶意方可以解密过去的所有流量。</p>
+<h3 id="执法监管"><a href="#执法监管" class="headerlink" title="执法监管"></a>执法监管</h3><p>即使使用安全的SOCKS5代理，也要注意不要泄露任何个人信息。卸载掉那些不可信任的安全证书和软件，据说<code>Shadowsocks</code>的发明者因为通过QQ与朋友聊天最后被“喝茶”。 :)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过秘密部署安全的SOCKS5代理服务器并选择强密码算法，人们可以突破严重的网络封锁。 <code>Shadowsocks</code>可能是您的首选。</p>
+<hr>
+<p><br>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/28566058" target="_blank" rel="noopener">什么是AEAD加密</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag">#网络</a>
+          
+            <a href="/tags/译文/" rel="tag">#译文</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/01/docker-on-cluster/" rel="next" title="HPC环境下使用Docker">
+                <i class="fa fa-chevron-left"></i> HPC环境下使用Docker
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/15/Deepin-优秀的国产Linux发行版/" rel="prev" title="Deepin——优秀的国产Linux发行版">
+                Deepin——优秀的国产Linux发行版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用途"><span class="nav-number">2.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">3.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作模式介绍"><span class="nav-number">3.1.</span> <span class="nav-text">工作模式介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自由网络"><span class="nav-number">3.1.1.</span> <span class="nav-text">自由网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#被封锁的网络"><span class="nav-number">3.1.2.</span> <span class="nav-text">被封锁的网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理"><span class="nav-number">3.1.3.</span> <span class="nav-text">代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全代理"><span class="nav-number">3.1.4.</span> <span class="nav-text">安全代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用SOCKS5作为本地代理协议"><span class="nav-number">3.2.</span> <span class="nav-text">使用SOCKS5作为本地代理协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用HTTP作为传输协议"><span class="nav-number">3.3.</span> <span class="nav-text">为什么使用HTTP作为传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密算法"><span class="nav-number">3.4.</span> <span class="nav-text">加密算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">3.5.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挑战和风险"><span class="nav-number">4.</span> <span class="nav-text">挑战和风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端"><span class="nav-number">4.1.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端"><span class="nav-number">4.2.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不安全的加密算法"><span class="nav-number">4.3.</span> <span class="nav-text">不安全的加密算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP白名单限制"><span class="nav-number">4.4.</span> <span class="nav-text">IP白名单限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步的风险"><span class="nav-number">4.5.</span> <span class="nav-text">进一步的风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执法监管"><span class="nav-number">4.6.</span> <span class="nav-text">执法监管</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ansiz-blog';
+      var disqus_identifier = '2018/07/08/安全的socks5协议/';
+      var disqus_title = '安全的SOCKS5协议';
+      var disqus_url = 'http://zxh.site/2018/07/08/安全的socks5协议/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

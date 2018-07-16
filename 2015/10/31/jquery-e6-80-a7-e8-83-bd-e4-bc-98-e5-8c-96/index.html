@@ -1,0 +1,689 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,jQuery," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="作为一个前端新手，经常会偷懒使用jquery代替JavaScript原生语法执行一些操作，虽然知道无论如何优化jquery的性能总是赶不上原生的，但是如果能在使用jquery的时候注意一些细节，就能很大程度上提升性能。看了很多文章，这里简单做个归纳总结。">
+<meta name="keywords" content="前端,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery性能优化">
+<meta property="og:url" content="http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="作为一个前端新手，经常会偷懒使用jquery代替JavaScript原生语法执行一些操作，虽然知道无论如何优化jquery的性能总是赶不上原生的，但是如果能在使用jquery的时候注意一些细节，就能很大程度上提升性能。看了很多文章，这里简单做个归纳总结。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/jquery.jpg">
+<meta property="og:updated_time" content="2018-05-26T04:18:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery性能优化">
+<meta name="twitter:description" content="作为一个前端新手，经常会偷懒使用jquery代替JavaScript原生语法执行一些操作，虽然知道无论如何优化jquery的性能总是赶不上原生的，但是如果能在使用jquery的时候注意一些细节，就能很大程度上提升性能。看了很多文章，这里简单做个归纳总结。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/jquery.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> jQuery性能优化 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jQuery性能优化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-10-31T17:10:03+08:00" content="2015-10-31">
+              2015-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/经验-技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">经验&技巧</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/jquery.jpg" alt="jQuery"></p>
+<p>作为一个前端新手，经常会偷懒使用jquery代替JavaScript原生语法执行一些操作，虽然知道无论如何优化jquery的性能总是赶不上原生的，但是如果能在使用jquery的时候注意一些细节，就能很大程度上提升性能。看了很多文章，这里简单做个归纳总结。<br><a id="more"></a></p>
+<h3 id="一、尽可能使用最快的选择器"><a href="#一、尽可能使用最快的选择器" class="headerlink" title="一、尽可能使用最快的选择器"></a>一、尽可能使用最快的选择器</h3><p>速度上id选择器&gt;tag选择器&gt;类选择器&gt;伪类选择器<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#content'</span>).hide();   <span class="comment">//id选择器速度是最快的</span></span><br><span class="line"><span class="comment">//或者从ID选择器继承来选择多个元素:</span></span><br><span class="line">$(<span class="string">'#content p'</span>).hide();</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、将对象缓存后再进行后续的操作"><a href="#二、将对象缓存后再进行后续的操作" class="headerlink" title="二、将对象缓存后再进行后续的操作"></a>二、将对象缓存后再进行后续的操作</h3><p>选中某一个网页元素，是开销很大的步骤。所以，使用选择器的次数应该越少越好，并且尽可能缓存选中的结果，便于以后反复使用。子查询应该缓存父对象，另外find的效率比上下文查找高<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> header = $(<span class="string">'#header'</span>); <span class="comment">//缓存query对象，子查询时也应缓存父对象</span></span><br><span class="line"><span class="keyword">var</span> menu = header.find(<span class="string">'.menu'</span>);</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">var</span> menu = $(<span class="string">'.menu'</span>, header);</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、使用链式写法"><a href="#三、使用链式写法" class="headerlink" title="三、使用链式写法"></a>三、使用链式写法</h3><p>jQuery的一大特点，就是允许使用链式写法.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div'</span>).find(<span class="string">'h3'</span>).eq(<span class="number">2</span>).html(<span class="string">'Hello'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>采用链式写法时，jQuery自动缓存每一步的结果，因此比非链式写法要快。根据测试，链式写法比（不使用缓存的）非链式写法，大约快了25%。</p>
+<h3 id="四、事件的委托处理"><a href="#四、事件的委托处理" class="headerlink" title="四、事件的委托处理"></a>四、事件的委托处理</h3><p>除非在特殊情况下, 否则每一个js事件(例如:click, mouseover等.)都会冒泡到父级节点。当我们需要给多个元素调用同个函数时这点会很有用。代替这种效率很差的多元素事件监听的方法就是,你只需向它们的父节点绑定一次。比如,我们要为一个拥有很多输入框的表单绑定这样的行为: 当输入框被选中时为它添加一个class传统的做法是，直接选中input，然后绑定focus等，如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#entryform input"</span>).bind(<span class="string">"focus"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       $(<span class="keyword">this</span>).addClass(<span class="string">"selected"</span>);</span><br><span class="line">   &#125;).bind(<span class="string">"blur"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       $(<span class="keyword">this</span>).removeClass(<span class="string">"selected"</span>);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>更高效的做法是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#entryform"</span>).bind(<span class="string">"focus"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> $cell = $(e.target); <span class="comment">// e.target 捕捉到触发的目标元素</span></span><br><span class="line">        $cell.addClass(<span class="string">"selected"</span>);</span><br><span class="line">    &#125;).bind(<span class="string">"blur"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> $cell = $(e.target);</span><br><span class="line">        $cell.removeClass(<span class="string">"selected"</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="五、减少DOM操作"><a href="#五、减少DOM操作" class="headerlink" title="五、减少DOM操作"></a>五、减少DOM操作</h3><p>当要进行DOM插入时，将所有元素封装成一个元素，直接的DOM操作很慢。尽可能少的去更改HTML结构。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> menu = <span class="string">'&amp;lt;ul id="menu"&amp;gt;'</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &amp;lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">menu += <span class="string">'&amp;lt;li&amp;gt;'</span> + i + <span class="string">'&amp;lt;/li&amp;gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line">menu += <span class="string">'&amp;lt;/ul&amp;gt;'</span>;</span><br><span class="line">$(<span class="string">'#header'</span>).prepend(menu);</span><br><span class="line"><span class="comment">// 千万不要这样做：</span></span><br><span class="line">$(<span class="string">'#header'</span>).prepend(<span class="string">'&amp;lt;ul id="menu"&amp;gt;&amp;lt;/ul&amp;gt;'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &amp;lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">$(<span class="string">'#menu'</span>).append(<span class="string">'&amp;lt;li&amp;gt;'</span> + i + <span class="string">'&amp;lt;/li&amp;gt;'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们应该将整套元素字符串在插入进dom中之前先全部创建好，如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> top_100_list = [],$mylist = $(<span class="string">"#mylist"</span>), top_100_li = <span class="string">""</span>; <span class="comment">// 这个变量将用来存储我们的列表元素</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>, l=top_100_list.length; i&amp;lt;l; i++)&#123;</span><br><span class="line">   top_100_li += <span class="string">"&amp;lt;li&amp;gt;"</span> + top_100_list[i] + <span class="string">"&amp;lt;/li&amp;gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$mylist.html(top_100_li);</span><br></pre></td></tr></table></figure></p>
+<h3 id="六、尽量少生成jQuery对象"><a href="#六、尽量少生成jQuery对象" class="headerlink" title="六、尽量少生成jQuery对象"></a>六、尽量少生成jQuery对象</h3><p>每当你使用一次选择器（比如$(‘#id’)），就会生成一个jQuery对象。jQuery对象是一个很庞大的对象，带有很多属性和方法，会占用不少资源。所以，尽量少生成jQuery对象。</p>
+<h3 id="七、采用jQuery的内部函数data-来存储状态"><a href="#七、采用jQuery的内部函数data-来存储状态" class="headerlink" title="七、采用jQuery的内部函数data()来存储状态"></a>七、采用jQuery的内部函数data()来存储状态</h3><p>不要忘了采用.data()函数来存储信息：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#head'</span>).data(<span class="string">'name'</span>, <span class="string">'value'</span>);</span><br><span class="line"><span class="comment">// 之后在你的应用中调用:</span></span><br><span class="line">$(<span class="string">'#head'</span>).data(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="八、事件绑定"><a href="#八、事件绑定" class="headerlink" title="八、事件绑定"></a>八、事件绑定</h3><p>将事件绑定推迟到$(window).load，有时候采用$(window).load()比$(document).ready()更快<br>，因为后者不等所有的DOM元素都下载完之前执行。你应该在使用它之前测试它。</p>
+<h3 id="九、优化选择器以适用Sizzle的“从右至左”模型"><a href="#九、优化选择器以适用Sizzle的“从右至左”模型" class="headerlink" title="九、优化选择器以适用Sizzle的“从右至左”模型"></a>九、优化选择器以适用Sizzle的“从右至左”模型</h3><p>自版本1.3之后，jQuery采用了Sizzle库，与之前的版本在选择器引擎上的表现形式有很大的不同。<br>它用“从左至右”的模型代替了“从右至左”的模型。确保最右的选择器具体些，而左边的选择器选择范围较宽泛些：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> linkContacts = $(<span class="string">'.contact-links div.side-wrapper'</span>);</span><br><span class="line"><span class="comment">//而不要使用</span></span><br><span class="line"><span class="keyword">var</span> linkContacts = $(<span class="string">'a.contact-links .side-wrapper'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="十、尽可能使用最新的jquery版本"><a href="#十、尽可能使用最新的jquery版本" class="headerlink" title="十、尽可能使用最新的jquery版本"></a>十、尽可能使用最新的jquery版本</h3>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
+          
+            <a href="/tags/jQuery/" rel="tag">#jQuery</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/29/http-cache/" rel="next" title="浏览器 HTTP 协议缓存机制">
+                <i class="fa fa-chevron-left"></i> 浏览器 HTTP 协议缓存机制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/21/freedomnet/" rel="prev" title="让你的设备自由上网">
+                让你的设备自由上网 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、尽可能使用最快的选择器"><span class="nav-number">1.</span> <span class="nav-text">一、尽可能使用最快的选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、将对象缓存后再进行后续的操作"><span class="nav-number">2.</span> <span class="nav-text">二、将对象缓存后再进行后续的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、使用链式写法"><span class="nav-number">3.</span> <span class="nav-text">三、使用链式写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、事件的委托处理"><span class="nav-number">4.</span> <span class="nav-text">四、事件的委托处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、减少DOM操作"><span class="nav-number">5.</span> <span class="nav-text">五、减少DOM操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、尽量少生成jQuery对象"><span class="nav-number">6.</span> <span class="nav-text">六、尽量少生成jQuery对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、采用jQuery的内部函数data-来存储状态"><span class="nav-number">7.</span> <span class="nav-text">七、采用jQuery的内部函数data()来存储状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、事件绑定"><span class="nav-number">8.</span> <span class="nav-text">八、事件绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、优化选择器以适用Sizzle的“从右至左”模型"><span class="nav-number">9.</span> <span class="nav-text">九、优化选择器以适用Sizzle的“从右至左”模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十、尽可能使用最新的jquery版本"><span class="nav-number">10.</span> <span class="nav-text">十、尽可能使用最新的jquery版本</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ansiz-blog';
+      var disqus_identifier = '2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/';
+      var disqus_title = 'jQuery性能优化';
+      var disqus_url = 'http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

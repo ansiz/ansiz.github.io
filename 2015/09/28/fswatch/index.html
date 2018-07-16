@@ -1,0 +1,684 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="因为懒所以要写个脚本今天早上到公司打开电脑，发现电脑又自动重启了，所有的虚拟机和正在调试的程序都被关闭了，于是我又不厌其烦的打开Skype、QQ、ThunderBird、启动两台虚拟机、启动四个Putty、打开OneNote看看开发环境的服务启动方式，输入一行一行的命令……从进入系统到调试环境和服务启动起来浪费了20分钟，于是想干脆写个脚本吧。于是我就现学现用写了个sh脚本完成了开发环境的一键启">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用fswatch工具进行热编译">
+<meta property="og:url" content="http://zxh.site/2015/09/28/fswatch/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="因为懒所以要写个脚本今天早上到公司打开电脑，发现电脑又自动重启了，所有的虚拟机和正在调试的程序都被关闭了，于是我又不厌其烦的打开Skype、QQ、ThunderBird、启动两台虚拟机、启动四个Putty、打开OneNote看看开发环境的服务启动方式，输入一行一行的命令……从进入系统到调试环境和服务启动起来浪费了20分钟，于是想干脆写个脚本吧。于是我就现学现用写了个sh脚本完成了开发环境的一键启">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/auto.jpg">
+<meta property="og:updated_time" content="2018-05-26T04:18:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用fswatch工具进行热编译">
+<meta name="twitter:description" content="因为懒所以要写个脚本今天早上到公司打开电脑，发现电脑又自动重启了，所有的虚拟机和正在调试的程序都被关闭了，于是我又不厌其烦的打开Skype、QQ、ThunderBird、启动两台虚拟机、启动四个Putty、打开OneNote看看开发环境的服务启动方式，输入一行一行的命令……从进入系统到调试环境和服务启动起来浪费了20分钟，于是想干脆写个脚本吧。于是我就现学现用写了个sh脚本完成了开发环境的一键启">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/auto.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 使用fswatch工具进行热编译 | Ansiz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ansiz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">迎风向前是唯一的方法</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用fswatch工具进行热编译
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-09-28T21:48:10+08:00" content="2015-09-28">
+              2015-09-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/fswatch/" itemprop="url" rel="index">
+                    <span itemprop="name">fswatch</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/28/fswatch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/28/fswatch/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/05/auto.jpg" alt="auto"></p>
+<h3 id="因为懒所以要写个脚本"><a href="#因为懒所以要写个脚本" class="headerlink" title="因为懒所以要写个脚本"></a>因为懒所以要写个脚本</h3><p>今天早上到公司打开电脑，发现电脑又自动重启了，所有的虚拟机和正在调试的程序都被关闭了，于是我又不厌其烦的打开Skype、QQ、ThunderBird、启动两台虚拟机、启动四个Putty、打开OneNote看看开发环境的服务启动方式，输入一行一行的命令……从进入系统到调试环境和服务启动起来浪费了20分钟，于是想干脆写个脚本吧。于是我就现学现用写了个sh脚本完成了开发环境的一键启动，不过这个效率还不算高，最好再弄个热编译，于是找到了这个：<a href="https://github.com/codeskyblue/fswatch" title="项目地址" target="_blank" rel="noopener">fswatch项目地址</a><br><a id="more"></a></p>
+<h3 id="fswatch用来干嘛？"><a href="#fswatch用来干嘛？" class="headerlink" title="fswatch用来干嘛？"></a>fswatch用来干嘛？</h3><blockquote>
+<p>“fswatch是一个工具, 通过检测文件的变化,并触发指定的命令”</p>
+</blockquote>
+<p>所以说这就是一个热编译的工具，一旦检测到文件发生了变化，就可以执行一系列的指令重新编译环境，让你可以专注于代码的编写从枯燥又(不)低(能)效(偷)率(懒)的手动编译中跳出来。</p>
+<h3 id="fswatch的使用"><a href="#fswatch的使用" class="headerlink" title="fswatch的使用"></a>fswatch的使用</h3><h4 id="安装-amp-使用"><a href="#安装-amp-使用" class="headerlink" title="安装&amp;使用"></a>安装&amp;使用</h4><p><pre class="lang:default decode:true ">go get github.com/codeskyblue/fswatch</pre><br>windows和linux以及mac都可以使用，如果没有编译出fswatch来就执行一下这个试试</p>
+<p><pre class="lang:default decode:true ">go build github.com/codeskyblue/fswatch</pre><br>好了然后把fswatch拷贝到bin目录下方便以后的使用，接下来cd到需要监听的项目目录下，执行一下fswatch，会提示是否新建一个配置文件，新建好之后用vim打开修改一下，大概是这样子的：</p>
+<p><pre class="lang:default decode:true ">{<br>    “paths”: [“.”],   //通常直接写个.就行了，监听当前目录，可以添加多个目录<br>    “depth”: 4,       //定义搜索深度<br>    “exclude”: [],    //排除文件<br>    “include”: [ “\.(go|h)$”],    //监听文件类型<br>    “command”: “/etc/init.d/runChess.sh 5”,  //需要执行的命令，这里我写的是一个编译脚本<br>    “env”: {<br>        “POWERD_BY”: “ansiz”<br>    },<br>    “autorestart”: false,<br>    “restart-interval”: 0,        //可以定义自动编译时间间隔<br>    “kill-signal”: “KILL”<br>}<br></pre><br>好了大功告成，再在当前目录下输入一下fswatch就启动监听了，在这之后一旦你指定的那些文件发生了改动就会自动编译啦是不是很方便哈哈哈哈。顺便记录一下今天现学现用写的shell脚本，OK收工<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line"># Description : Run Chess in development environment</span><br><span class="line">echo &quot;=========Function Select=========&quot;</span><br><span class="line">echo &quot;Input Function number:&quot;</span><br><span class="line">echo &quot;1:Run it!!!&quot;</span><br><span class="line">echo &quot;2:Only run Backend server&quot;</span><br><span class="line">echo &quot;3:Only run Webserver&quot;</span><br><span class="line">echo &quot;4:Only restart database server&quot;</span><br><span class="line">echo &quot;5:Auto Compile&quot;</span><br><span class="line">echo &quot;=================================&quot;</span><br><span class="line">if [[ $# -lt 1 ]]; then</span><br><span class="line">	echo &quot;Please input a number:&quot;</span><br><span class="line">	read OPTION</span><br><span class="line">else</span><br><span class="line">	OPTION=$1</span><br><span class="line">fi</span><br><span class="line">if [[ $OPTION == 1 ]]; then</span><br><span class="line">	. ~/.profile</span><br><span class="line">	. $SCHED_ROOT/src/clustertech.com/cls/setenv.sh</span><br><span class="line">	screen -S b -d -m go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-backend/*.go</span><br><span class="line">	screen -S f -d -m go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-webserver/ctschd-webserver.go</span><br><span class="line">elif [[ $OPTION == 2 ]]; then</span><br><span class="line">	echo &quot;Backend server will restart in development environment&quot;</span><br><span class="line">	/etc/init.d/ctschd-backend stop</span><br><span class="line">	. ~/.profile</span><br><span class="line">	. $SCHED_ROOT/src/clustertech.com/cls/setenv.sh</span><br><span class="line">	go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-backend/*.go</span><br><span class="line">elif [[ $OPTION == 3 ]]; then</span><br><span class="line">	echo &quot;Webserver will restart&quot;</span><br><span class="line">	/etc/init.d/ctschd-webserver stop</span><br><span class="line">	. ~/.profile</span><br><span class="line">	go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-webserver/ctschd-webserver.go</span><br><span class="line">elif [[ $OPTION == 4 ]]; then</span><br><span class="line">	echo &quot;Mysql restarted!!...&quot;</span><br><span class="line">	/etc/init.d/mysqld stop</span><br><span class="line">	rm -f /var/lib/mysql/mysql.sock</span><br><span class="line">	/etc/init.d/mysqld start</span><br><span class="line">elif [[ $OPTION == 5 ]]; then</span><br><span class="line">	ps -ef|grep ctschd|awk &apos;&#123;printf(&quot;kill -9 %s\n&quot;,$2)&#125;&apos;</span><br><span class="line">	screen -wipe</span><br><span class="line">	screen -S b -d -m go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-backend/*.go</span><br><span class="line">	screen -S f -d -m go run /opt/workspace/ct-scheduler/src/clustertech.com/main/ctschd-webserver/ctschd-webserver.go</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<p>等等，似乎忘了点什么，最后感谢为此提供灵感的女神@Esther</p>
+<p>2015年9月28日 22:56:03</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag">#工具</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/22/javascript-convention/" rel="next" title="前端Javascript编码规范">
+                <i class="fa fa-chevron-left"></i> 前端Javascript编码规范
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/29/http-cache/" rel="prev" title="浏览器 HTTP 协议缓存机制">
+                浏览器 HTTP 协议缓存机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+               alt="张稀虹" />
+          <p class="site-author-name" itemprop="name">张稀虹</p>
+          <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ansiz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/ANSIZ/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#因为懒所以要写个脚本"><span class="nav-number">1.</span> <span class="nav-text">因为懒所以要写个脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fswatch用来干嘛？"><span class="nav-number">2.</span> <span class="nav-text">fswatch用来干嘛？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fswatch的使用"><span class="nav-number">3.</span> <span class="nav-text">fswatch的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-amp-使用"><span class="nav-number">3.1.</span> <span class="nav-text">安装&amp;使用</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+    </div>
+
+
+    
+    <div class="player">
+    <embed src="http://www.xiami.com/widget/8528997_1012996,1775755430,1025186,1771573819,1775828374,_235_346_000000_fffFFF_0/multiPlayer.swf" type="application/x-shockwave-flash" width="235" height="346" wmode="opaque"></embed>
+    
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'ansiz-blog';
+      var disqus_identifier = '2015/09/28/fswatch/';
+      var disqus_title = '使用fswatch工具进行热编译';
+      var disqus_url = 'http://zxh.site/2015/09/28/fswatch/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
