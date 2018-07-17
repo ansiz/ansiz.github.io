@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用VNC或RDP进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同">
+<meta name="keywords" content="Linux,工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有趣的X11">
+<meta property="og:url" content="http://zxh.site/2018/06/24/x11/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用VNC或RDP进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png">
+<meta property="og:updated_time" content="2018-07-17T12:11:06.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有趣的X11">
+<meta name="twitter:description" content="大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用VNC或RDP进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://zxh.site/2018/06/24/x11/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>有趣的X11 | Ansiz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ansiz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">迎风向前是唯一的方法</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">33</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">36</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/06/24/x11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张稀虹">
+      <meta itemprop="description" content="迎风向前是唯一的方法">
+      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ansiz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">有趣的X11
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-24 16:07:04" itemprop="dateCreated datePublished" datetime="2018-06-24T16:07:04+08:00">2018-06-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-17 20:11:06" itemprop="dateModified" datetime="2018-07-17T20:11:06+08:00">2018-07-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/24/x11/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/24/x11/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用<code>VNC</code>或<code>RDP</code>进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：<br><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png" alt="x11"><br><a id="more"></a></p>
+<h2 id="什么是X11？"><a href="#什么是X11？" class="headerlink" title="什么是X11？"></a>什么是X11？</h2><p>这项有趣的技术自1984年第一版X1发布至今已经有三十多年，可以称得上是古老的技术了。1987年9月15日首次发布现有X窗口系统所用的协议<code>X11</code>（Protocol），后续发布的版本命名为<code>X11R2</code>、<code>X11R3</code>…而今最新的引用实现（引用性、示范性的实现体）版本则是2012年发布的X11R7.7（X11 Release 7.7），所以后来就简称<code>X11</code>了。</p>
+<blockquote>
+<p>X窗口系统（X Window System，也常称为X11或X）是一种以位图方式显示的软件窗口系统。最初是1984年麻省理工学院的研究，之后变成UNIX、类UNIX、以及OpenVMS等操作系统所一致适用的标准化软件工具包及显示架构的运作协定。X窗口系统通过软件工具及架构协定来创建操作系统所用的图形用户界面，此后则逐渐扩展适用到各形各色的其他操作系统上。现在几乎所有的操作系统都能支持与使用X。更重要的是，今日知名的桌面环境——GNOME和KDE也都是以X窗口系统为基础建构成的。————<a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1#.E5.8F.82.E8.A7.81" target="_blank" rel="noopener">维基百科-X窗口系统</a></p>
+</blockquote>
+<p><code>X11</code>最大的特点是它的C/S架构和我们一般认为的Server运行在远端Client运行在本地恰好相反，<code>X11</code>的Server反而通常运行在用户本地的机器上，而运行在远端的Client也并非特指某一个或一种程序，而是一切基于<code>X11</code>开发的GUI。通常我们把X Server安装在本地并启动，例如<code>Windows</code>上的<code>XManager</code>，<code>macOS</code>上的<code>XQuartz</code>等软件，用以接收远端的图像信号并将鼠标、键盘输入转发到远端。你可以把X11理解为将图像数据处理运行在服务器上，但显示信号通过网络输出到另外一台机器上，想象将平时我们使用显示器的HDMI或者DVI线被换成了一根网线。</p>
+<h2 id="X11的优点"><a href="#X11的优点" class="headerlink" title="X11的优点"></a>X11的优点</h2><h3 id="让显示输出更加灵活"><a href="#让显示输出更加灵活" class="headerlink" title="让显示输出更加灵活"></a>让显示输出更加灵活</h3><p>客户端可以在远程服务器上执行计算任务，而X Server仅负责图形显示。既可以充分利用服务器的强大性能进行运算，还不用给服务器安装桌面环境或连接显示器就能看到图像输出，这种场景在集群环境下非常常见。</p>
+<h3 id="让GUI变得可移植"><a href="#让GUI变得可移植" class="headerlink" title="让GUI变得可移植"></a>让GUI变得可移植</h3><p>只有X Server服务端与硬件打交道，所有的客户端都与硬件无关，这让不同的平台上的移植变得很容易。</p>
+<h3 id="风格可自定义"><a href="#风格可自定义" class="headerlink" title="风格可自定义"></a>风格可自定义</h3><p>X系统只负责显示图形，并不限制显示和操作的风格，因此不同的X Window的风格并不相同，用户可以根据自己的喜好进行选择。</p>
+<h2 id="X11的缺点"><a href="#X11的缺点" class="headerlink" title="X11的缺点"></a>X11的缺点</h2><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>X Window的C/S体系（C/S架构）设计在应用程序和视频硬件之间多加了一层软件，导致绘图效率下降，所以引起了一些批评。因此开发了若干扩展，在设备和客户机在同一个系统上时，通过在获取适当许可的情况下，以直接访问设备来改善这一问题。而在Linux上，一些视频驱动已经部分移入内核以提高效率。</p>
+<h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>另一方面，X也被批评为需要（或者提供）了过多的对硬件的直接访问，从而影响了系统稳定性。行为不良的显卡驱动（有时也可能是应用程序）甚至能够导致整个系统崩溃或者重启；有时即使操作系统仍在工作，它也不能继续渲染其显示（这时除了重启，缺乏好的恢复手段）。目前所有的桌面GUI操作系统都提供某种对硬件的直接访问，支持者认为市场已经证明为了提供图形性能牺牲一点稳定性是值得的。或许将来随着技术和用户的演化这一平衡会有所变化。</p>
+<h3 id="不规范的用户界面"><a href="#不规范的用户界面" class="headerlink" title="不规范的用户界面"></a>不规范的用户界面</h3><p>X刻意不去规范用户界面和程序之间大多数的通信，导致出现了许多非常不同的界面，同时造成程序之间协同的困难；而客户机之间的互操作规范ICCCM以难以正确实现而闻名。后来的标准化尝试，如Motif和CDE，也于事无补。长久以来这已经成为用户和程序员的噩梦。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>X缺乏良好的网络与透明的音效系统。当用户对音效日益期盼时，各种不兼容的音效子系统便出现了。过去，大多数程序员只好忽略网络问题，简单地使用本地操作专用的音效API。第一代客户端-服务端音效系统有rplay和Network Audio System。而最近的努力产生了EsounD（GNOME）和ARts（KDE），而这也并非标准。而其他系统如Media Application Server则正在开发当中。<br>直到最近，X也没有好地解决显示与打印机所打印的内容一致性（所见即所得）的解决方案。许多X客户机完全用PostScript实现打印，而这与发送到服务端的几乎是分离的。从X11R6.3起包含了Xprint，此时客户端已经不错，但是服务器实现还不行。而从X11R6.8起实现的质量已经很好，并且获得了组件支持。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>X11是一个功能非常强大的 C/S 图形显示系统，具有很好的跨网络性能，也易于进行扩展，是一个值得学习研究的技术。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">X窗口系统</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/" target="_blank" rel="noopener">X Window 系统的窗口显示原理</a></li>
+<li><a href="https://baike.baidu.com/item/X%20Window/7249336" target="_blank" rel="noopener">X Window</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6sdpimwf.bkt.clouddn.com/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6sdpimwf.bkt.clouddn.com/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/25/slurm-singularity/" rel="next" title="Slurm+Singularity打造轻量级容器云">
+                <i class="fa fa-chevron-left"></i> Slurm+Singularity打造轻量级容器云
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/01/docker-on-cluster/" rel="prev" title="HPC环境下使用Docker">
+                HPC环境下使用Docker <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                alt="张稀虹" />
+            
+              <p class="site-author-name" itemprop="name">张稀虹</p>
+              <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ansiz" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zzz332191120@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是X11？"><span class="nav-number">1.</span> <span class="nav-text">什么是X11？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X11的优点"><span class="nav-number">2.</span> <span class="nav-text">X11的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#让显示输出更加灵活"><span class="nav-number">2.1.</span> <span class="nav-text">让显示输出更加灵活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让GUI变得可移植"><span class="nav-number">2.2.</span> <span class="nav-text">让GUI变得可移植</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风格可自定义"><span class="nav-number">2.3.</span> <span class="nav-text">风格可自定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X11的缺点"><span class="nav-number">3.</span> <span class="nav-text">X11的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">3.1.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稳定性"><span class="nav-number">3.2.</span> <span class="nav-text">稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不规范的用户界面"><span class="nav-number">3.3.</span> <span class="nav-text">不规范的用户界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://ansiz-blog.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://zxh.site/2018/06/24/x11/';
+        this.page.identifier = '2018/06/24/x11/';
+        this.page.title = '有趣的X11';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ansiz-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+  
+    
+  
+  <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
