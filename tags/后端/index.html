@@ -43,6 +43,8 @@
 
 
 
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
 
 
 
@@ -950,9 +952,7 @@
 
   
 
-  
-    <script id="dsq-count-scr" src="https://ansiz-blog.disqus.com/count.js" async></script>
-  
+
 
   
 
@@ -969,7 +969,30 @@
 
 
 
-
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'DiMwS9dCwM7ojW7o3BNJ1ETz-gzGzoHsz',
+        appKey: '6KwKWihhxM4tDrKx6y9UVeEp',
+        placeholder: '欢迎留言交流',
+        avatar:'retro',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 
