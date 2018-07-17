@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2018-07-15T13:19:53.400Z</updated>
+  <updated>2018-07-17T12:11:06.144Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://zxh.site/2018/07/17/Singularity/"/>
+    <id>http://zxh.site/2018/07/17/Singularity/</id>
+    <published>2018-07-17T12:11:06.144Z</published>
+    <updated>2018-07-17T12:11:06.144Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://zxh.site/2018/07/17/slurm-singularity/"/>
+    <id>http://zxh.site/2018/07/17/slurm-singularity/</id>
+    <published>2018-07-17T12:11:06.144Z</published>
+    <updated>2018-07-17T12:11:06.144Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://zxh.site/2018/07/17/docker-on-cluster/"/>
+    <id>http://zxh.site/2018/07/17/docker-on-cluster/</id>
+    <published>2018-07-17T12:11:06.144Z</published>
+    <updated>2018-07-17T12:11:06.144Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://zxh.site/2018/07/17/x11/"/>
+    <id>http://zxh.site/2018/07/17/x11/</id>
+    <published>2018-07-17T12:11:06.144Z</published>
+    <updated>2018-07-17T12:11:06.144Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>在Deepin上安装TensorFlow</title>
@@ -75,9 +131,9 @@
     <link href="http://zxh.site/2018/07/08/%E5%AE%89%E5%85%A8%E7%9A%84socks5%E5%8D%8F%E8%AE%AE/"/>
     <id>http://zxh.site/2018/07/08/安全的socks5协议/</id>
     <published>2018-07-08T07:27:48.000Z</published>
-    <updated>2018-07-08T15:03:02.368Z</updated>
+    <updated>2018-07-17T12:11:09.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png" alt="malicious"></p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。<a id="more"></a></p><p>目前已知的攻击手段包括：</p><ul><li>IP封锁 - 对指定IP地址的任何连接尝试都会被恶意的第三方阻止。</li><li>DNS欺骗 - 返回错误的IP地址。</li><li>包过滤 - 当包中被检测到特定的词句时该数据包将会被阻止或丢弃。</li><li>TCP RST - 对在黑名单中的目的地址进行访问时会发送<code>RST</code>包，TCP连接将会立即中断。</li><li>深度学习 - 利用集群深度学习，恶意方可以快速找到可疑的IP地址。</li></ul><p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p><p>解决方案是利用强加密算法的<a href="https://zh.wikipedia.org/wiki/SOCKS" target="_blank" rel="noopener">SOCKS5</a>协议。</p><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul><li>穿透防火墙封锁</li><li>隐藏所有数据包数据，包括源，目标，载荷等</li></ul><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>下面介绍常见的安全SOCKS5代理的开发技术及其工作原理</p><h3 id="工作模式介绍"><a href="#工作模式介绍" class="headerlink" title="工作模式介绍"></a>工作模式介绍</h3><h4 id="自由网络"><a href="#自由网络" class="headerlink" title="自由网络"></a>自由网络</h4><p>在没有恶意攻击者的情况下，客户端与服务器端可以正常通讯。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/free-client-server.gif" alt="free"></p><h4 id="被封锁的网络"><a href="#被封锁的网络" class="headerlink" title="被封锁的网络"></a>被封锁的网络</h4><p>恶意攻击者可以在客户端和服务器之间部署类似防火墙的系统，这样任何请求都不会到达服务器。因此，最终用户无法从服务器获取任何数据。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/blocking.gif" alt="blocked"></p><h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>一种合理的方法是在防火墙之外设置代理服务器。所有流量都需要先通过代理服务器，然后由代理服务器中继。目前代理技术包括HTTP代理，Socks服务，VPN服务，SSH隧道等。SOCKS5也是其中一种代理协议。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/proxying.gif" alt="proxy"></p><p>举个例子，当请求通过SSH隧道传输时，防火墙无法识别流量，因为数据已加密。但问题是，在创建隧道时进行SSH握手时，很可能会发现代理服务器被用作代理。因此防火墙可以阻止SSH隧道创建步骤的网络连接。</p><h4 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h4><p>安全的socks代理不应向防火墙公开以下信息：</p><ul><li>任何表明它被用作代理的特征</li><li>任何真实传输的数据</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif" alt="secure-proxy"></p><p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p><p>上图中SOCKS5的工作原理主要可以概括为以下几步：</p><ul><li>客户端通过<code>SOCKS5</code>协议向本地代理发送请求。</li><li>本地代理通过<code>HTTP</code>协议发送加密后的请求数据。</li><li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li><li>远程代理服务器解密数据后中继到真实服务。</li><li>真实服务将响应返回到远程代理服务器，并通过相同的路径传播回客户端。</li></ul><h3 id="使用SOCKS5作为本地代理协议"><a href="#使用SOCKS5作为本地代理协议" class="headerlink" title="使用SOCKS5作为本地代理协议"></a>使用SOCKS5作为本地代理协议</h3><p><code>SOCKS5</code>在客户端有广泛的支持。我们很容易得到通过SOCKS5从客户端传输数据到本地代理服务器的好处。 SOCKS5在第5层上执行数据传输。</p><p>下面的curl命令演示了客户端能够使用SOCKS5连接到SOCKS5代理服务器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 127.0.0.1:1080 https://google.com</span><br></pre></td></tr></table></figure><h3 id="为什么使用HTTP作为传输协议"><a href="#为什么使用HTTP作为传输协议" class="headerlink" title="为什么使用HTTP作为传输协议"></a>为什么使用HTTP作为传输协议</h3><p>HTTP可能是整个互联网上最常见的流量类型。选择HTTP作为传输协议以突破防火墙使得数据包和服务器不太可能被识别用于代理使用。</p><p>HTTPS不适合防火墙突破。因为HTTPS的设计目的是：</p><ul><li>避免恶意方改变内容</li><li>避免恶意方伪装成目标服务器</li><li>数据加密</li></ul><p>而代理软件的目的应满足以下要求：</p><ul><li>避免目标服务器被识别</li><li>避免代理服务器被识别为代理</li><li>数据加密</li></ul><p>基于以上原因，HTTP是突破防火墙比HTTPS或任何其他协议更好的选择。</p><h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>密码算法对数据进行加密和解密，这样任何人都无法从加密流中读取数据，除了LocalProxy和RemoteProxy。由于<code>AEAD</code>密码同时提供机密性，完整性和真实性，建议选择下面列出的AEAD系列之一作为在本地代理和远程代理中使用的密码算法：</p><ul><li>chacha20-ietf-poly1305</li><li>aes-256-gcm</li><li>aes-128-gcm</li></ul><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>Shadowsocks是一款出色的安全socks5代理解决方案。查看其<a href="https://shadowsocks.org/en/index.html" target="_blank" rel="noopener">官方网站</a>了解更多信息。</p><h2 id="挑战和风险"><a href="#挑战和风险" class="headerlink" title="挑战和风险"></a>挑战和风险</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ul><li>恶意方可以在客户端安装干扰软件，以阻止本地软件和LocalProxy之间的连接。<ul><li>这可以通过强制安装来实现</li><li>它也可以通过嵌入广泛安装的软件来实现</li></ul></li><li>恶意方可能会强制该人卸载LocalProxy</li></ul><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>必须将服务器端部署到没有防火墙阻止的环境中</p><ul><li>恶意方可以强制云提供商或潜入云服务器做以下事情：<ul><li>窃取服务器日志文件</li><li>杀死ServerProxy进程</li></ul></li><li>恶意方也可以是云提供商</li></ul><h3 id="不安全的加密算法"><a href="#不安全的加密算法" class="headerlink" title="不安全的加密算法"></a>不安全的加密算法</h3><p>使用何种加密算法取决于用户，如果最终用户选择不安全的密码算法，可能会增加服务器被识别为代理服务器的风险。提供代理服务的服务器将被封锁。</p><h3 id="IP白名单限制"><a href="#IP白名单限制" class="headerlink" title="IP白名单限制"></a>IP白名单限制</h3><p>如果最终用户只能连接到选定范围的IP列表（即IP白名单），则用户无法使用SOCKS5服务器，因为SOCKS5服务器IP不太可能包含在IP白名单中。</p><h3 id="进一步的风险"><a href="#进一步的风险" class="headerlink" title="进一步的风险"></a>进一步的风险</h3><p>当最终用户泄露密码密钥和流量历史记录时，恶意方可以解密过去的所有流量。</p><h3 id="执法监管"><a href="#执法监管" class="headerlink" title="执法监管"></a>执法监管</h3><p>即使使用安全的SOCKS5代理，也要注意不要泄露任何个人信息。卸载掉那些不可信任的安全证书和软件，据说<code>Shadowsocks</code>的发明者因为通过QQ与朋友聊天最后被“喝茶”。 :)</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过秘密部署安全的SOCKS5代理服务器并选择强密码算法，人们可以突破严重的网络封锁。 <code>Shadowsocks</code>可能是您的首选。</p><hr><p><br>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">原文</a></li><li><a href="https://zhuanlan.zhihu.com/p/28566058" target="_blank" rel="noopener">什么是AEAD加密</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png" alt="malicious"></p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。<a id="more"></a></p><p>目前已知的攻击手段包括：</p><ul><li>IP封锁 - 对指定IP地址的任何连接尝试都会被恶意的第三方阻止。</li><li>DNS欺骗 - 返回错误的IP地址。</li><li>包过滤 - 当包中被检测到特定的词句时该数据包将会被阻止或丢弃。</li><li>TCP RST - 对在黑名单中的目的地址进行访问时会发送<code>RST</code>包，TCP连接将会立即中断。</li><li>深度学习 - 利用集群深度学习，恶意方可以快速找到可疑的IP地址。</li></ul><p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p><p>解决方案是利用强加密算法的<a href="https://zh.wikipedia.org/wiki/SOCKS" target="_blank" rel="noopener">SOCKS5</a>协议。</p><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul><li>穿透防火墙封锁</li><li>隐藏所有数据包数据，包括源，目标，载荷等</li></ul><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>下面介绍常见的安全SOCKS5代理的开发技术及其工作原理</p><h3 id="工作模式介绍"><a href="#工作模式介绍" class="headerlink" title="工作模式介绍"></a>工作模式介绍</h3><h4 id="自由网络"><a href="#自由网络" class="headerlink" title="自由网络"></a>自由网络</h4><p>在没有恶意攻击者的情况下，客户端与服务器端可以正常通讯。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/free-client-server.gif" alt="free"></p><h4 id="被封锁的网络"><a href="#被封锁的网络" class="headerlink" title="被封锁的网络"></a>被封锁的网络</h4><p>恶意攻击者可以在客户端和服务器之间部署类似防火墙的系统，这样任何请求都不会到达服务器。因此，最终用户无法从服务器获取任何数据。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/blocking.gif" alt="blocked"></p><h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>一种合理的方法是在防火墙之外设置代理服务器。所有流量都需要先通过代理服务器，然后由代理服务器中继。目前代理技术包括HTTP代理，Socks服务，VPN服务，SSH隧道等。SOCKS5也是其中一种代理协议。</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/proxying.gif" alt="proxy"></p><p>举个例子，当请求通过SSH隧道传输时，防火墙无法识别流量，因为数据已加密。但问题是，在创建隧道时进行SSH握手时，很可能会发现代理服务器被用作代理。因此防火墙可以阻止SSH隧道创建步骤的网络连接。</p><h4 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h4><p>安全的socks代理不应向防火墙公开以下信息：</p><ul><li>任何表明它被用作代理的特征</li><li>任何真实传输的数据</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif" alt="secure-proxy"></p><p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p><p>上图中SOCKS5的工作原理主要可以概括为以下几步：</p><ul><li>客户端通过<code>SOCKS5</code>协议向本地代理发送请求。</li><li>本地代理通过<code>HTTP</code>协议发送加密后的请求数据。</li><li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li><li>远程代理服务器解密数据后中继到真实服务。</li><li>真实服务将响应返回到远程代理服务器，并通过相同的路径传播回客户端。</li></ul><h3 id="使用SOCKS5作为本地代理协议"><a href="#使用SOCKS5作为本地代理协议" class="headerlink" title="使用SOCKS5作为本地代理协议"></a>使用SOCKS5作为本地代理协议</h3><p><code>SOCKS5</code>在客户端有广泛的支持。我们很容易得到通过SOCKS5从客户端传输数据到本地代理服务器的好处。 SOCKS5在第5层上执行数据传输。</p><p>下面的curl命令演示了客户端能够使用SOCKS5连接到SOCKS5代理服务器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 127.0.0.1:1080 https://google.com</span><br></pre></td></tr></table></figure><h3 id="为什么使用HTTP作为传输协议"><a href="#为什么使用HTTP作为传输协议" class="headerlink" title="为什么使用HTTP作为传输协议"></a>为什么使用HTTP作为传输协议</h3><p>HTTP可能是整个互联网上最常见的流量类型。选择HTTP作为传输协议以突破防火墙使得数据包和服务器不太可能被识别用于代理使用。</p><p>HTTPS不适合防火墙突破。因为HTTPS的设计目的是：</p><ul><li>避免恶意方改变内容</li><li>避免恶意方伪装成目标服务器</li><li>数据加密</li></ul><p>而代理软件的目的应满足以下要求：</p><ul><li>避免目标服务器被识别</li><li>避免代理服务器被识别为代理</li><li>数据加密</li></ul><p>基于以上原因，HTTP是突破防火墙比HTTPS或任何其他协议更好的选择。</p><h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>密码算法对数据进行加密和解密，这样任何人都无法从加密流中读取数据，除了LocalProxy和RemoteProxy。由于<code>AEAD</code>密码同时提供机密性，完整性和真实性，建议选择下面列出的AEAD系列之一作为在本地代理和远程代理中使用的密码算法：</p><ul><li>chacha20-ietf-poly1305</li><li>aes-256-gcm</li><li>aes-128-gcm</li></ul><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>Shadowsocks是一款出色的安全socks5代理解决方案。查看其<a href="https://shadowsocks.org/en/index.html" target="_blank" rel="noopener">官方网站</a>了解更多信息。</p><h2 id="挑战和风险"><a href="#挑战和风险" class="headerlink" title="挑战和风险"></a>挑战和风险</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ul><li>恶意方可以在客户端安装干扰软件，以阻止本地软件和LocalProxy之间的连接。<ul><li>这可以通过强制安装来实现</li><li>它也可以通过嵌入广泛安装的软件来实现</li></ul></li><li>恶意方可能会强制该人卸载LocalProxy</li></ul><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>必须将服务器端部署到没有防火墙阻止的环境中</p><ul><li>恶意方可以强制云提供商或潜入云服务器做以下事情：<ul><li>窃取服务器日志文件</li><li>杀死ServerProxy进程</li></ul></li><li>恶意方也可以是云提供商</li></ul><h3 id="不安全的加密算法"><a href="#不安全的加密算法" class="headerlink" title="不安全的加密算法"></a>不安全的加密算法</h3><p>使用何种加密算法取决于用户，如果最终用户选择不安全的密码算法，可能会增加服务器被识别为代理服务器的风险。提供代理服务的服务器将被封锁。</p><h3 id="IP白名单限制"><a href="#IP白名单限制" class="headerlink" title="IP白名单限制"></a>IP白名单限制</h3><p>如果最终用户只能连接到选定范围的IP列表（即IP白名单），则用户无法使用SOCKS5服务器，因为SOCKS5服务器IP不太可能包含在IP白名单中。</p><h3 id="进一步的风险"><a href="#进一步的风险" class="headerlink" title="进一步的风险"></a>进一步的风险</h3><p>当最终用户泄露密码密钥和流量历史记录时，恶意方可以解密过去的所有流量。</p><h3 id="执法监管"><a href="#执法监管" class="headerlink" title="执法监管"></a>执法监管</h3><p>即使使用安全的SOCKS5代理，也要注意不要泄露任何个人信息。卸载掉那些不可信任的安全证书和软件，据说<code>Shadowsocks</code>的发明者因为通过QQ与朋友聊天最后被“喝茶”。 :)</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过秘密部署安全的SOCKS5代理服务器并选择强密码算法，人们可以突破严重的网络封锁。 <code>Shadowsocks</code>可能是您的首选。</p><hr><p>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">原文</a></li><li><a href="https://zhuanlan.zhihu.com/p/28566058" target="_blank" rel="noopener">什么是AEAD加密</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -94,124 +150,6 @@
       <category term="网络" scheme="http://zxh.site/tags/%E7%BD%91%E7%BB%9C/"/>
     
       <category term="译文" scheme="http://zxh.site/tags/%E8%AF%91%E6%96%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HPC环境下使用Docker</title>
-    <link href="http://zxh.site/2018/07/01/docker-on-cluster/"/>
-    <id>http://zxh.site/2018/07/01/docker-on-cluster/</id>
-    <published>2018-07-01T04:29:09.000Z</published>
-    <updated>2018-07-01T07:15:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/docker-banner2.jpg" alt="docker"><br>HPC应用总类繁多，各种软件可能运行在不同的系统平台之上，容器技术正是解决这类问题的绝佳手段。我在<a href="http://blog.zxh.site/2018/05/15/Singularity/" target="_blank" rel="noopener"><em>Singularity——HPC环境的绝佳容器解决方案</em></a>一文中介绍了<code>Singularity</code>这个HPC下非常适合的容器技术。但是Singularity也有一些不尽人意的地方，例如缺少虚拟化网络、热度不如<code>Docker</code>高等。那如果想在一个高性能集群中使用Docker又会遇到什么问题呢？有没有什么好的解决方案？<a id="more"></a></p><h2 id="需要解决的问题"><a href="#需要解决的问题" class="headerlink" title="需要解决的问题"></a>需要解决的问题</h2><h3 id="非root用户运行Docker"><a href="#非root用户运行Docker" class="headerlink" title="非root用户运行Docker"></a>非root用户运行Docker</h3><p>在许多系统中你尝试以普通用户身份运行Docker指令，通常会得到如下提示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.37/containers/json: dial unix /var/run/docker.sock: connect: permission denied</span><br></pre></td></tr></table></figure><p>Docker默认不支持普通用户直接运行Docker命令，这里有一篇不错的文章说明了为什么我们不允许非root用户直接运行Docker命令：<a href="http://dockone.io/article/589" target="_blank" rel="noopener"><em>为什么我们不允许非root用户在CentOS、Fedora和RHEL上直接运行Docker命令</em></a>,文章中提到了两个解决方案：</p><ul><li>将非root用户加入<code>docker</code>用户组</li><li>设置<code>sudo</code>规则</li></ul><p>但是这样会给管理员带来一些额外的工作量，不方便与类似<code>Slurm</code>之类的软件配合使用。</p><h3 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h3><p>Docker运行指令实际上会由Docker daemon去执行，所以当你将启动容器的指令包装到一个脚本中再通过调度系统去运行时，集群资源限制会失去作用。原因是它们是由完全不相关的进程去负责启动的，<code>cgroup</code>限制自然会失效。这样一来虽然环境是隔离了，但是失去了资源限制，会影响集群资源分配策略。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>为了解决上述问题，我查询了很多资料，有一篇IEEE论文中提出了一个思路： <a href="https://ieeexplore.ieee.org/document/7923813/" target="_blank" rel="noopener"><em>Enabling Docker Containers for High-Performance and Many-Task Computing</em></a>，我用<code>Golang</code>按照作者的思路开发了一个名为<code>go-socker</code>的工具（GitHub仓库：<a href="https://github.com/ansiz/go-socker" target="_blank" rel="noopener">go-socker</a>）。针对上面的两个问题，<code>go-socker</code>给出了解决方案。<code>go-socker</code>本质上就是封装了一些基本的Docker指令，然后我们将编译后的可执行程序owner设置为root，再为其加上特殊的<code>s</code>权限位，这样普通用户执行的命令就会在程序内被提升到root。<br>关于这个特殊的<code>s</code>权限位介绍： <a href="http://cn.linux.vbird.org/linux_basic/0220filemanager_4.php#suid" target="_blank" rel="noopener">鸟哥的Linux私房菜——第七章、Linux文件与目录管理</a></p><blockquote><p>当 s 这个标志出现在文件拥有者的 x 权限上时，例如刚刚提到的 /usr/bin/passwd 这个文件的权限状态：『-rwsr-xr-x』，此时就被称为 Set UID，简称为 SUID 的特殊权限。 那么SUID的权限对於一个文件的特殊功能是什么呢？基本上SUID有这样的限制与功能：</p><ul><li>SUID 权限仅对二进位程序(binary program)有效；</li><li>运行者对於该程序需要具有 x 的可运行权限；</li><li>本权限仅在运行该程序的过程中有效 (run-time)；</li><li>运行者将具有该程序拥有者 (owner) 的权限。</li></ul></blockquote><p>这样就解决了运行权限的问题，由于我们只封装了容器作业必要的基本指令，所以权限的提升不会带来严重的安全问题。</p><p>对于资源限制的问题，本质上Slurm的资源限制是通过<code>cgroup</code>实现的，所以我们只需要将容器内运行的进程定位到，再将其放到对应的<code>Slurm</code>作业所在的资源限制组中，就实现了资源限制，关于上述问题的详细实现方式可以直接读<a href="https://github.com/ansiz/go-socker" target="_blank" rel="noopener">go-socker</a>的代码了解，也欢迎提交issue和PR！</p><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><a href="https://ieeexplore.ieee.org/document/7923813/" target="_blank" rel="noopener"><em>Enabling Docker Containers for High-Performance and Many-Task Computing</em></a></li><li><a href="http://dockone.io/article/589" target="_blank" rel="noopener"><em>为什么我们不允许非root用户在CentOS、Fedora和RHEL上直接运行Docker命令</em></a></li><li><a href="http://cn.linux.vbird.org/linux_basic/0220filemanager_4.php#suid" target="_blank" rel="noopener">鸟哥的Linux私房菜——第七章、Linux文件与目录管理</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/2018/07/docker-banner2.jpg&quot; alt=&quot;docker&quot;&gt;&lt;br&gt;HPC应用总类繁多，各种软件可能运行在不同的系统平台之上，容器技术正是解决这类问题的绝佳手段。我在&lt;a href=&quot;http://blog.zxh.site/2018/05/15/Singularity/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;em&gt;Singularity——HPC环境的绝佳容器解决方案&lt;/em&gt;&lt;/a&gt;一文中介绍了&lt;code&gt;Singularity&lt;/code&gt;这个HPC下非常适合的容器技术。但是Singularity也有一些不尽人意的地方，例如缺少虚拟化网络、热度不如&lt;code&gt;Docker&lt;/code&gt;高等。那如果想在一个高性能集群中使用Docker又会遇到什么问题呢？有没有什么好的解决方案？
-    
-    </summary>
-    
-      <category term="容器" scheme="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="HPC" scheme="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
-    
-    
-      <category term="Docker" scheme="http://zxh.site/tags/Docker/"/>
-    
-      <category term="HPC" scheme="http://zxh.site/tags/HPC/"/>
-    
-      <category term="Slurm" scheme="http://zxh.site/tags/Slurm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>有趣的X11</title>
-    <link href="http://zxh.site/2018/06/24/x11/"/>
-    <id>http://zxh.site/2018/06/24/x11/</id>
-    <published>2018-06-24T08:07:04.000Z</published>
-    <updated>2018-06-25T06:48:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用<code>VNC</code>或<code>RDP</code>进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：<br><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png" alt="x11"><br><a id="more"></a></p><h2 id="什么是X11？"><a href="#什么是X11？" class="headerlink" title="什么是X11？"></a>什么是X11？</h2><p>这项有趣的技术自1984年第一版X1发布至今已经有三十多年，可以称得上是古老的技术了。1987年9月15日首次发布现有X窗口系统所用的协议<code>X11</code>（Protocol），后续发布的版本命名为<code>X11R2</code>、<code>X11R3</code>…而今最新的引用实现（引用性、示范性的实现体）版本则是2012年发布的X11R7.7（X11 Release 7.7），所以后来就简称<code>X11</code>了。</p><blockquote><p>X窗口系统（X Window System，也常称为X11或X）是一种以位图方式显示的软件窗口系统。最初是1984年麻省理工学院的研究，之后变成UNIX、类UNIX、以及OpenVMS等操作系统所一致适用的标准化软件工具包及显示架构的运作协定。X窗口系统通过软件工具及架构协定来创建操作系统所用的图形用户界面，此后则逐渐扩展适用到各形各色的其他操作系统上。现在几乎所有的操作系统都能支持与使用X。更重要的是，今日知名的桌面环境——GNOME和KDE也都是以X窗口系统为基础建构成的。————<a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1#.E5.8F.82.E8.A7.81" target="_blank" rel="noopener">维基百科-X窗口系统</a></p></blockquote><p><code>X11</code>最大的特点是它的C/S架构和我们一般认为的Server运行在远端Client运行在本地恰好相反，<code>X11</code>的Server反而通常运行在用户本地的机器上，而运行在远端的Client也并非特指某一个或一种程序，而是一切基于<code>X11</code>开发的GUI。通常我们把X Server安装在本地并启动，例如<code>Windows</code>上的<code>XManager</code>，<code>macOS</code>上的<code>XQuartz</code>等软件，用以接收远端的图像信号并将鼠标、键盘输入转发到远端。你可以把X11理解为将图像数据处理运行在服务器上，但显示信号通过网络输出到另外一台机器上，想象将平时我们使用显示器的HDMI或者DVI线被换成了一根网线。</p><h2 id="X11的优点"><a href="#X11的优点" class="headerlink" title="X11的优点"></a>X11的优点</h2><h3 id="让显示输出更加灵活"><a href="#让显示输出更加灵活" class="headerlink" title="让显示输出更加灵活"></a>让显示输出更加灵活</h3><p>客户端可以在远程服务器上执行计算任务，而X Server仅负责图形显示。既可以充分利用服务器的强大性能进行运算，还不用给服务器安装桌面环境或连接显示器就能看到图像输出，这种场景在集群环境下非常常见。</p><h3 id="让GUI变得可移植"><a href="#让GUI变得可移植" class="headerlink" title="让GUI变得可移植"></a>让GUI变得可移植</h3><p>只有X Server服务端与硬件打交道，所有的客户端都与硬件无关，这让不同的平台上的移植变得很容易。</p><h3 id="风格可自定义"><a href="#风格可自定义" class="headerlink" title="风格可自定义"></a>风格可自定义</h3><p>X系统只负责显示图形，并不限制显示和操作的风格，因此不同的X Window的风格并不相同，用户可以根据自己的喜好进行选择。</p><h2 id="X11的缺点"><a href="#X11的缺点" class="headerlink" title="X11的缺点"></a>X11的缺点</h2><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>X Window的C/S体系（C/S架构）设计在应用程序和视频硬件之间多加了一层软件，导致绘图效率下降，所以引起了一些批评。因此开发了若干扩展，在设备和客户机在同一个系统上时，通过在获取适当许可的情况下，以直接访问设备来改善这一问题。而在Linux上，一些视频驱动已经部分移入内核以提高效率。</p><h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>另一方面，X也被批评为需要（或者提供）了过多的对硬件的直接访问，从而影响了系统稳定性。行为不良的显卡驱动（有时也可能是应用程序）甚至能够导致整个系统崩溃或者重启；有时即使操作系统仍在工作，它也不能继续渲染其显示（这时除了重启，缺乏好的恢复手段）。目前所有的桌面GUI操作系统都提供某种对硬件的直接访问，支持者认为市场已经证明为了提供图形性能牺牲一点稳定性是值得的。或许将来随着技术和用户的演化这一平衡会有所变化。</p><h3 id="不规范的用户界面"><a href="#不规范的用户界面" class="headerlink" title="不规范的用户界面"></a>不规范的用户界面</h3><p>X刻意不去规范用户界面和程序之间大多数的通信，导致出现了许多非常不同的界面，同时造成程序之间协同的困难；而客户机之间的互操作规范ICCCM以难以正确实现而闻名。后来的标准化尝试，如Motif和CDE，也于事无补。长久以来这已经成为用户和程序员的噩梦。</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>X缺乏良好的网络与透明的音效系统。当用户对音效日益期盼时，各种不兼容的音效子系统便出现了。过去，大多数程序员只好忽略网络问题，简单地使用本地操作专用的音效API。第一代客户端-服务端音效系统有rplay和Network Audio System。而最近的努力产生了EsounD（GNOME）和ARts（KDE），而这也并非标准。而其他系统如Media Application Server则正在开发当中。<br>直到最近，X也没有好地解决显示与打印机所打印的内容一致性（所见即所得）的解决方案。许多X客户机完全用PostScript实现打印，而这与发送到服务端的几乎是分离的。从X11R6.3起包含了Xprint，此时客户端已经不错，但是服务器实现还不行。而从X11R6.8起实现的质量已经很好，并且获得了组件支持。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>X11是一个功能非常强大的 C/S 图形显示系统，具有很好的跨网络性能，也易于进行扩展，是一个值得学习研究的技术。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">X窗口系统</a></li><li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/" target="_blank" rel="noopener">X Window 系统的窗口显示原理</a></li><li><a href="https://baike.baidu.com/item/X%20Window/7249336" target="_blank" rel="noopener">X Window</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用&lt;code&gt;VNC&lt;/code&gt;或&lt;code&gt;RDP&lt;/code&gt;进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：&lt;br&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png&quot; alt=&quot;x11&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://zxh.site/categories/Linux/"/>
-    
-      <category term="工具" scheme="http://zxh.site/categories/Linux/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Linux" scheme="http://zxh.site/tags/Linux/"/>
-    
-      <category term="工具" scheme="http://zxh.site/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Slurm+Singularity打造轻量级容器云</title>
-    <link href="http://zxh.site/2018/05/25/slurm-singularity/"/>
-    <id>http://zxh.site/2018/05/25/slurm-singularity/</id>
-    <published>2018-05-25T04:29:09.000Z</published>
-    <updated>2018-07-01T07:54:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg" alt="vm_vs_container"></p><p><a href="https://slurm.schedmd.com/" target="_blank" rel="noopener">Slurm</a>是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。<a href="http://singularity.lbl.gov/user-guide" target="_blank" rel="noopener">Singularity</a>是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的<code>Docker</code>。那二者相结合会产生什么有趣的结果呢？<a id="more"></a></p><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>我们先讨论一下这两个技术相结合的应用场景。假设你是一个高大上的用户，需要在一个集群上运行一些高大上的科学计算任务，例如利用集群实现DNA的快速比对，你还会用集群进行气象数据的预测、用集群进行汽车风阻数据模拟计算等等，总之你是一个会在集群中使用各种应用的用户，这样的应用场景在研究所或者高校是非常常见的。显然这些应用都有各种不同的配套软件，而这些软件又可能在不同的系统中才有，那你会怎么办呢？你一定会想到应用容器技术。这就是Slurm结合Singularity的意义。关于为什么要使用Singularity而非Docker，我在<a href="http://blog.zxh.site/2018/05/15/Singularity/#more" target="_blank" rel="noopener">另外一篇文章</a>中有介绍到，这里你只需要知道Singularity是非常适合HPC环境的容器技术即可。</p><h2 id="技术分析"><a href="#技术分析" class="headerlink" title="技术分析"></a>技术分析</h2><p>如果你用过<code>OpenStack</code>，应该知道一个最基本的提供计算服务的云环境需要哪些基本服务，分别是<code>Nova</code>、<code>Neutron</code>、<code>Glance</code>和<code>Keystone</code>，它们分别提供计算、网络、镜像及整个系统的身份鉴权。<code>Nova</code>是<code>Openstack</code>的计算服务，负责启动实例、调度实例、管理系统计算资源，<code>Glance</code>则为实例提供镜像管理。<code>Slurm</code>和<code>Singularity</code>可以实现容器启动、资源调度和镜像使用这三个核心功能。这个过程很简单也很有趣，如果我们把启动指定容器的命令作为一个计算任务丢给<code>Slurm</code>，我们就在一台机器上启动了容器，<code>Slurm</code>能够通过<code>cgroups</code>限制作业对硬件资源的使用。如此一来我们就轻易的实现了一套简单粗暴的容器云。</p><p>上面的内容简单总结就是: <strong>将启动容器这个操作，作为一个作业由<code>Slurm</code>调度到某个计算节点上执行</strong></p><h2 id="技术验证"><a href="#技术验证" class="headerlink" title="技术验证"></a>技术验证</h2><p>我们在一套实验环境中进行上述实验，先在两台安装CentOS系统的机器上部署<code>Slurm</code>及<code>Singularity</code>，克隆一个<code>Ubuntu</code>的系统镜像，然后写一个简单的脚本:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 这个脚本就是让singularity在`Ubuntu`的镜像中运行bash。</span></span><br><span class="line">singularity <span class="built_in">exec</span> ubuntu.simg bash</span><br></pre></td></tr></table></figure><p>再往调度系统中提交这个作业:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srun -p demo01 -w node01 --pty test.sh</span><br></pre></td></tr></table></figure><p>看看效果吧：<br><img src="http://o6sdpimwf.bkt.clouddn.com/srun-demo.jpeg" alt="demo"></p><p>node01本身安装的系统是CentOS，从输出我们可以看到我们的bash实际运行在Ubuntu的系统内。并且这是一个Slurm的作业，这个环境下使用的硬件资源、时长等等都可以被限制。这样一来，有了资源调度、限制、环境隔离……再深入一点，我们如果能让用户随时重新连接到这个环境内，提供命令行或者web的操作，这不就是一个轻量级的容器云了吗？事实上笔者已经实现了上述内容，细节太多就不展开说了。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一次有趣且有价值的尝试，也是一次技术的融合与碰撞。经过这次尝试再反观目前的虚拟化技术，以OpenStack为代表的一站式解决方案实际上是对各种虚拟化技术的整合，其中包含了许多云和虚拟化相关的技术，他们有多种替代品，而将各个组件拆分出来独立使用也可以打造出新的东西，打开新世界的大门。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg&quot; alt=&quot;vm_vs_container&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://slurm.schedmd.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Slurm&lt;/a&gt;是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。&lt;a href=&quot;http://singularity.lbl.gov/user-guide&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Singularity&lt;/a&gt;是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的&lt;code&gt;Docker&lt;/code&gt;。那二者相结合会产生什么有趣的结果呢？
-    
-    </summary>
-    
-      <category term="云技术" scheme="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="虚拟化" scheme="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-    
-      <category term="虚拟化" scheme="http://zxh.site/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-      <category term="Singularity" scheme="http://zxh.site/tags/Singularity/"/>
-    
-      <category term="Slurm" scheme="http://zxh.site/tags/Slurm/"/>
-    
-      <category term="云技术" scheme="http://zxh.site/tags/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Singularity——HPC环境的绝佳容器解决方案</title>
-    <link href="http://zxh.site/2018/05/15/Singularity/"/>
-    <id>http://zxh.site/2018/05/15/Singularity/</id>
-    <published>2018-05-15T03:24:27.000Z</published>
-    <updated>2018-06-10T10:35:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p><p>高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。<a id="more"></a>但是HPC环境和传统的应用环境又有一些区别，比起Docker，Singularity才是HPC环境下的绝佳容器解决方案。</p><h2 id="为什么不用Docker？"><a href="#为什么不用Docker？" class="headerlink" title="为什么不用Docker？"></a>为什么不用Docker？</h2><p><code>Docker</code>绝对是目前最热的容器技术，但是它却不特别适合HPC环境。有几个重要的原因：</p><ol><li>调度管理器的资源限制无法施加到容器中</li><li>非root用户使用授权问题</li></ol><p>集群中的资源使用通常需要由调度管理器来进行分配，例如<code>Slurm</code>/<code>PBS</code>等系统负责资源分配。调度管理器根据用户需求为每个作业分配一定的资源，实质上是利用<code>cgroups</code>针对每个作业进行配置实现的。而<code>Docker</code>镜像的启动实际上是由<code>Docker Daemon</code>去执行的，如此一来资源限制自然会失效。并且<code>Docker Daemon</code>是由root用户启动的，无论是为普通用户设置<code>sudoer</code>还是将普通用户添加到docker用户组中都不是一个安全的方式。</p><h2 id="Singularity的优势"><a href="#Singularity的优势" class="headerlink" title="Singularity的优势"></a>Singularity的优势</h2><p><code>Singularity</code>拥有容器技术所包含的大多数优势，例如启动迅速、资源开销小、轻松的迁移和扩展等等。除此之外，相较于<code>Docker</code>这样的容器技术，它还有一些独特的优势：</p><ul><li><p>更加轻松的环境打包迁徙：<code>Singularity</code>所依赖的东西都在镜像文件中，不需要再单独打包/导入，直接拷贝走镜像即可。没有复杂的缓存机制，并且该镜像已经过压缩，只需占用非常少的磁盘空间。</p></li><li><p>和现有系统无缝整合：系统用户权限、网络等均直接继承宿主机配置，并且无需进入某个镜像后再执行命令，可以直接在外部调用镜像内的指令，就像执行一个本地安装的指令一样。</p></li><li><p>无需运行daemon进程：<code>Singularity</code>提供的完全是一个运行时的环境，在不使用时不需要单独的进程，不占用任何资源。不由daemon进程代为执行指令，资源限制和权限问题也得以解决。</p></li></ul><p>除了这些优势之外，<code>Singularity</code>还支持多种镜像和容器文件格式，甚至可以直接使用Docker提供的镜像，就像从Docker Hub去pull一个镜像一样简单。<code>Singularity</code>可以轻易的现有的HPC系统整合，几乎无需任何额外的开发就能让现有的HPC变成一个轻量级的容器云。</p><h2 id="Singularity的缺点"><a href="#Singularity的缺点" class="headerlink" title="Singularity的缺点"></a>Singularity的缺点</h2><p>上面提到了很多优势，但singularity也并非绝对完美的。</p><ul><li>缺少网络虚拟化的支持</li><li>目前未实现PID Namespace</li><li>认知度较低</li><li>由于众所周知的原因在国内下载镜像比较困难</li></ul><p><code>Singularity</code>应该是为了解决HPC环境下的软件不兼容而设计的应用容器，所以它并没有像<code>Docker</code>那样提供非常完善的隔离和虚拟化，例如没有PID namespace隔离、没有网络虚拟化。并且它的知名度远不如Docker，社区支持较少，在国内也没有镜像源导致下载镜像速度非常慢甚至失败。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说<code>Singularity</code>目前是绝佳的HPC环境下的容器解决方案，它的一些缺点也可以通过其他方式去克服，另外上面提到的<code>Docker</code>的缺点事实上也有一些特殊的方法去解决。我将在后续的文章中进行介绍。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png&quot; alt=&quot;vm_vs_container&quot;&gt;&lt;/p&gt;
-&lt;p&gt;高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。
-    
-    </summary>
-    
-      <category term="高性能运算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/"/>
-    
-      <category term="虚拟化" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-      <category term="容器" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
-    
-    
-      <category term="虚拟化" scheme="http://zxh.site/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-      <category term="容器" scheme="http://zxh.site/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="高性能运算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/"/>
-    
-      <category term="Singularity" scheme="http://zxh.site/tags/Singularity/"/>
     
   </entry>
   

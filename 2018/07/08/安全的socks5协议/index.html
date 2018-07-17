@@ -35,12 +35,6 @@
 
 
 
-  
-  
-    
-  
-  <link rel="stylesheet" media="all" href="https://cdn.bootcss.com/Han/3.3.0/han.min.css">
-
 
 
 
@@ -133,7 +127,7 @@
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/blocking.gif">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/proxying.gif">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif">
-<meta property="og:updated_time" content="2018-07-08T15:03:02.368Z">
+<meta property="og:updated_time" content="2018-07-17T12:11:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安全的SOCKS5协议">
 <meta name="twitter:description" content="背景在HTTP/HTTPS的世界里，TCP/IP数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。">
@@ -363,12 +357,24 @@
                 
               
 
-              <time title="创建时间：2018-07-08 15:27:48 / 修改时间：23:03:02" itemprop="dateCreated datePublished" datetime="2018-07-08T15:27:48+08:00">2018-07-08</time>
+              <time title="创建时间：2018-07-08 15:27:48" itemprop="dateCreated datePublished" datetime="2018-07-08T15:27:48+08:00">2018-07-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-17 20:11:09" itemprop="dateModified" datetime="2018-07-17T20:11:09+08:00">2018-07-17</time>
               
             
           </span>
@@ -432,7 +438,7 @@
     
     
     
-    <div class="post-body han-init-context" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -440,15 +446,15 @@
       
         <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png" alt="malicious"></p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。<a id="more"></a></p>
-<p>目前已知的攻击手段包括：</p>
+<p>目前已知的攻击手段包括：</p>
 <ul>
 <li>IP封锁 - 对指定IP地址的任何连接尝试都会被恶意的第三方阻止。</li>
-<li>DNS欺骗 - 返回错误的IP地址。</li>
+<li>DNS欺骗 - 返回错误的IP地址。</li>
 <li>包过滤 - 当包中被检测到特定的词句时该数据包将会被阻止或丢弃。</li>
 <li>TCP RST - 对在黑名单中的目的地址进行访问时会发送<code>RST</code>包，TCP连接将会立即中断。</li>
 <li>深度学习 - 利用集群深度学习，恶意方可以快速找到可疑的IP地址。</li>
 </ul>
-<p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p>
+<p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p>
 <p>解决方案是利用强加密算法的<a href="https://zh.wikipedia.org/wiki/SOCKS" target="_blank" rel="noopener">SOCKS5</a>协议。</p>
 <h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
 <li>穿透防火墙封锁</li>
@@ -468,12 +474,12 @@
 <li>任何真实传输的数据</li>
 </ul>
 <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/secure-proxy.gif" alt="secure-proxy"></p>
-<p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p>
+<p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p>
 <p>上图中SOCKS5的工作原理主要可以概括为以下几步：</p>
 <ul>
 <li>客户端通过<code>SOCKS5</code>协议向本地代理发送请求。</li>
 <li>本地代理通过<code>HTTP</code>协议发送加密后的请求数据。</li>
-<li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li>
+<li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li>
 <li>远程代理服务器解密数据后中继到真实服务。</li>
 <li>真实服务将响应返回到远程代理服务器，并通过相同的路径传播回客户端。</li>
 </ul>
@@ -524,7 +530,7 @@
 <h3 id="执法监管"><a href="#执法监管" class="headerlink" title="执法监管"></a>执法监管</h3><p>即使使用安全的SOCKS5代理，也要注意不要泄露任何个人信息。卸载掉那些不可信任的安全证书和软件，据说<code>Shadowsocks</code>的发明者因为通过QQ与朋友聊天最后被“喝茶”。 :)</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过秘密部署安全的SOCKS5代理服务器并选择强密码算法，人们可以突破严重的网络封锁。 <code>Shadowsocks</code>可能是您的首选。</p>
 <hr>
-<p><br>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p>
+<p>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">原文</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/28566058" target="_blank" rel="noopener">什么是AEAD加密</a></li>
@@ -608,8 +614,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/01/docker-on-cluster/" rel="next" title="HPC环境下使用Docker">
-                <i class="fa fa-chevron-left"></i> HPC环境下使用Docker
+              <a href="/2018/02/28/Docker-in-LXC踩坑/" rel="next" title="Docker in LXC踩坑">
+                <i class="fa fa-chevron-left"></i> Docker in LXC踩坑
               </a>
             
           </div>
@@ -787,7 +793,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -878,7 +884,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

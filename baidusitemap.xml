@@ -4,6 +4,91 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/07/08/%E5%AE%89%E5%85%A8%E7%9A%84socks5%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2018-07-17T12:11:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>安全的SOCKS5协议</title>
+        <pubTime>2018-07-08T07:27:48.000Z</pubTime>
+        
+        <tag>网络</tag>
+         
+        <tag>译文</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="译文" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/17/x11/</loc>
+    <lastmod>2018-07-17T12:11:06.144Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-07-17T12:11:06.144Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/17/docker-on-cluster/</loc>
+    <lastmod>2018-07-17T12:11:06.144Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-07-17T12:11:06.144Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/17/slurm-singularity/</loc>
+    <lastmod>2018-07-17T12:11:06.144Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-07-17T12:11:06.144Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/17/Singularity/</loc>
+    <lastmod>2018-07-17T12:11:06.144Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-07-17T12:11:06.144Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/07/15/%E5%9C%A8Deepin%E4%B8%8A%E5%AE%89%E8%A3%85TensorFlow/</loc>
     <lastmod>2018-07-15T13:19:53.400Z</lastmod>
     <data>
@@ -47,144 +132,6 @@
           
              
               <breadCrumb title="评测" url="http://zxh.site/categories/Linux/%E8%AF%84%E6%B5%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/08/%E5%AE%89%E5%85%A8%E7%9A%84socks5%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2018-07-08T15:03:02.368Z</lastmod>
-    <data>
-        <display>
-        <title>安全的SOCKS5协议</title>
-        <pubTime>2018-07-08T07:27:48.000Z</pubTime>
-        
-        <tag>网络</tag>
-         
-        <tag>译文</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-             
-              <breadCrumb title="译文" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
-    <lastmod>2018-07-01T07:54:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>Slurm+Singularity打造轻量级容器云</title>
-        <pubTime>2018-05-25T04:29:09.000Z</pubTime>
-        
-        <tag>虚拟化</tag>
-         
-        <tag>Singularity</tag>
-         
-        <tag>Slurm</tag>
-         
-        <tag>云技术</tag>
-         
-         
-           
-             
-              <breadCrumb title="云技术" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E4%BA%91%E6%8A%80%E6%9C%AF/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
-    <lastmod>2018-07-01T07:15:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC环境下使用Docker</title>
-        <pubTime>2018-07-01T04:29:09.000Z</pubTime>
-        
-        <tag>Docker</tag>
-         
-        <tag>HPC</tag>
-         
-        <tag>Slurm</tag>
-         
-         
-           
-             
-              <breadCrumb title="容器" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/06/24/x11/</loc>
-    <lastmod>2018-06-25T06:48:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>有趣的X11</title>
-        <pubTime>2018-06-24T08:07:04.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
-          
-             
-              <breadCrumb title="工具" url="http://zxh.site/categories/Linux/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/05/15/Singularity/</loc>
-    <lastmod>2018-06-10T10:35:34.000Z</lastmod>
-    <data>
-        <display>
-        <title>Singularity——HPC环境的绝佳容器解决方案</title>
-        <pubTime>2018-05-15T03:24:27.000Z</pubTime>
-        
-        <tag>虚拟化</tag>
-         
-        <tag>容器</tag>
-         
-        <tag>高性能运算</tag>
-         
-        <tag>Singularity</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能运算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-          
-             
-              <breadCrumb title="容器" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
           
         </display>
     </data>
