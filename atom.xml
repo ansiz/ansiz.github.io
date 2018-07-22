@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2018-07-15T13:19:53.400Z</updated>
+  <updated>2018-07-22T14:27:31.942Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HPC系列文章(1)：开篇</title>
+    <link href="http://zxh.site/2018/07/22/HPC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-1-%EF%BC%9A%E5%BC%80%E7%AF%87/"/>
+    <id>http://zxh.site/2018/07/22/HPC系列文章-1-：开篇/</id>
+    <published>2018-07-22T05:47:50.000Z</published>
+    <updated>2018-07-22T14:27:31.942Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg" alt="Cover"></p><h1 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h1><p>HPC系列文章是一系列关于高性能计算的技术文章，计划每周更新至少一篇高性能计算相关的文章。为什么要写这些文章呢？首要原因是我个人从事相关的研发工作，我一直认为<code>Learning by teaching</code>是最佳的学习和验证学习效果的方式，所以我想将个人了解的相关知识在这里进行梳理。另外一方面是高性能运算实际上服务于我们每个人的日常生活中，被许多热门技术和行业所依赖，但鲜有人深入了解，真正从事这个行业的人并不像Web开发、深度学习等多，针对高性能运算的技术文章也相对较少，我想将这些文章整理成一个系列供感兴趣的朋友学习了解。<a id="more"></a></p><p>高性能运算涉及的技术领域非常广泛，从高性能硬件基础设施、网络、存储、复杂的调度系统、异构计算、并行计算、繁多的应用软件、虚拟化、云计算等等都会涵盖。可以说每个知识面单独拿出来讲都非常复杂，我自然也不是每个领域都深入了解和涉及，我个人主要从事的是调度系统及虚拟化技术的研究，所以该系列文章也主要包含这些内容。</p><p>高性能运算能用在很多领域，包括科学计算、模拟运算、编解码、深度学习等等都可以通过高性能运算成倍的提速。近几年人工智能产业越来越热，也为高性能计算带来新的生机，高性能计算人才稀缺，整体来说高性能运算是一个非常有价值且正在逐步发展的研究方向。但是正如前面所说，高性能运算涵盖的知识非常多，门槛比较高，我希望这个系列文章能为大家打开这扇门，降低学习的曲线，系统地学习和掌握高性能运算相关的技术。</p><p>我在学习高性能计算相关技术的过程，因为每个领域都有很多可以学习的东西，持续学习的过程可以说是惊喜不断。我也希望能通过这个系列文章为大家带来一些技术上的突破，和大家一起共同进步。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg&quot; alt=&quot;Cover&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;写在最前&quot;&gt;&lt;a href=&quot;#写在最前&quot; class=&quot;headerlink&quot; title=&quot;写在最前&quot;&gt;&lt;/a&gt;写在最前&lt;/h1&gt;&lt;p&gt;HPC系列文章是一系列关于高性能计算的技术文章，计划每周更新至少一篇高性能计算相关的文章。为什么要写这些文章呢？首要原因是我个人从事相关的研发工作，我一直认为&lt;code&gt;Learning by teaching&lt;/code&gt;是最佳的学习和验证学习效果的方式，所以我想将个人了解的相关知识在这里进行梳理。另外一方面是高性能运算实际上服务于我们每个人的日常生活中，被许多热门技术和行业所依赖，但鲜有人深入了解，真正从事这个行业的人并不像Web开发、深度学习等多，针对高性能运算的技术文章也相对较少，我想将这些文章整理成一个系列供感兴趣的朋友学习了解。
+    
+    </summary>
+    
+      <category term="高性能计算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+    
+    
+      <category term="高性能计算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/tags/HPC/"/>
+    
+  </entry>
   
   <entry>
     <title>在Deepin上安装TensorFlow</title>
@@ -117,9 +144,9 @@
       <category term="HPC" scheme="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
     
     
-      <category term="Docker" scheme="http://zxh.site/tags/Docker/"/>
-    
       <category term="HPC" scheme="http://zxh.site/tags/HPC/"/>
+    
+      <category term="Docker" scheme="http://zxh.site/tags/Docker/"/>
     
       <category term="Slurm" scheme="http://zxh.site/tags/Slurm/"/>
     
@@ -187,29 +214,29 @@
     <link href="http://zxh.site/2018/05/15/Singularity/"/>
     <id>http://zxh.site/2018/05/15/Singularity/</id>
     <published>2018-05-15T03:24:27.000Z</published>
-    <updated>2018-07-17T12:11:06.156Z</updated>
+    <updated>2018-07-22T05:48:47.761Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p><p>高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。<a id="more"></a>但是HPC环境和传统的应用环境又有一些区别，比起Docker，Singularity才是HPC环境下的绝佳容器解决方案。</p><h2 id="为什么不用Docker？"><a href="#为什么不用Docker？" class="headerlink" title="为什么不用Docker？"></a>为什么不用Docker？</h2><p><code>Docker</code>绝对是目前最热的容器技术，但是它却不特别适合HPC环境。有几个重要的原因：</p><ol><li>调度管理器的资源限制无法施加到容器中</li><li>非root用户使用授权问题</li></ol><p>集群中的资源使用通常需要由调度管理器来进行分配，例如<code>Slurm</code>/<code>PBS</code>等系统负责资源分配。调度管理器根据用户需求为每个作业分配一定的资源，实质上是利用<code>cgroups</code>针对每个作业进行配置实现的。而<code>Docker</code>镜像的启动实际上是由<code>Docker Daemon</code>去执行的，如此一来资源限制自然会失效。并且<code>Docker Daemon</code>是由root用户启动的，无论是为普通用户设置<code>sudoer</code>还是将普通用户添加到docker用户组中都不是一个安全的方式。</p><h2 id="Singularity的优势"><a href="#Singularity的优势" class="headerlink" title="Singularity的优势"></a>Singularity的优势</h2><p><code>Singularity</code>拥有容器技术所包含的大多数优势，例如启动迅速、资源开销小、轻松的迁移和扩展等等。除此之外，相较于<code>Docker</code>这样的容器技术，它还有一些独特的优势：</p><ul><li><p>更加轻松的环境打包迁徙：<code>Singularity</code>所依赖的东西都在镜像文件中，不需要再单独打包/导入，直接拷贝走镜像即可。没有复杂的缓存机制，并且该镜像已经过压缩，只需占用非常少的磁盘空间。</p></li><li><p>和现有系统无缝整合：系统用户权限、网络等均直接继承宿主机配置，并且无需进入某个镜像后再执行命令，可以直接在外部调用镜像内的指令，就像执行一个本地安装的指令一样。</p></li><li><p>无需运行daemon进程：<code>Singularity</code>提供的完全是一个运行时的环境，在不使用时不需要单独的进程，不占用任何资源。不由daemon进程代为执行指令，资源限制和权限问题也得以解决。</p></li></ul><p>除了这些优势之外，<code>Singularity</code>还支持多种镜像和容器文件格式，甚至可以直接使用Docker提供的镜像，就像从Docker Hub去pull一个镜像一样简单。<code>Singularity</code>可以轻易的现有的HPC系统整合，几乎无需任何额外的开发就能让现有的HPC变成一个轻量级的容器云。</p><h2 id="Singularity的缺点"><a href="#Singularity的缺点" class="headerlink" title="Singularity的缺点"></a>Singularity的缺点</h2><p>上面提到了很多优势，但singularity也并非绝对完美的。</p><ul><li>缺少网络虚拟化的支持</li><li>目前未实现PID Namespace</li><li>认知度较低</li><li>由于众所周知的原因在国内下载镜像比较困难</li></ul><p><code>Singularity</code>应该是为了解决HPC环境下的软件不兼容而设计的应用容器，所以它并没有像<code>Docker</code>那样提供非常完善的隔离和虚拟化，例如没有PID namespace隔离、没有网络虚拟化。并且它的知名度远不如Docker，社区支持较少，在国内也没有镜像源导致下载镜像速度非常慢甚至失败。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说<code>Singularity</code>目前是绝佳的HPC环境下的容器解决方案，它的一些缺点也可以通过其他方式去克服，另外上面提到的<code>Docker</code>的缺点事实上也有一些特殊的方法去解决。我将在后续的文章中进行介绍。</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p><p>高性能计算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。<a id="more"></a>但是HPC环境和传统的应用环境又有一些区别，比起Docker，Singularity才是HPC环境下的绝佳容器解决方案。</p><h2 id="为什么不用Docker？"><a href="#为什么不用Docker？" class="headerlink" title="为什么不用Docker？"></a>为什么不用Docker？</h2><p><code>Docker</code>绝对是目前最热的容器技术，但是它却不特别适合HPC环境。有几个重要的原因：</p><ol><li>调度管理器的资源限制无法施加到容器中</li><li>非root用户使用授权问题</li></ol><p>集群中的资源使用通常需要由调度管理器来进行分配，例如<code>Slurm</code>/<code>PBS</code>等系统负责资源分配。调度管理器根据用户需求为每个作业分配一定的资源，实质上是利用<code>cgroups</code>针对每个作业进行配置实现的。而<code>Docker</code>镜像的启动实际上是由<code>Docker Daemon</code>去执行的，如此一来资源限制自然会失效。并且<code>Docker Daemon</code>是由root用户启动的，无论是为普通用户设置<code>sudoer</code>还是将普通用户添加到docker用户组中都不是一个安全的方式。</p><h2 id="Singularity的优势"><a href="#Singularity的优势" class="headerlink" title="Singularity的优势"></a>Singularity的优势</h2><p><code>Singularity</code>拥有容器技术所包含的大多数优势，例如启动迅速、资源开销小、轻松的迁移和扩展等等。除此之外，相较于<code>Docker</code>这样的容器技术，它还有一些独特的优势：</p><ul><li><p>更加轻松的环境打包迁徙：<code>Singularity</code>所依赖的东西都在镜像文件中，不需要再单独打包/导入，直接拷贝走镜像即可。没有复杂的缓存机制，并且该镜像已经过压缩，只需占用非常少的磁盘空间。</p></li><li><p>和现有系统无缝整合：系统用户权限、网络等均直接继承宿主机配置，并且无需进入某个镜像后再执行命令，可以直接在外部调用镜像内的指令，就像执行一个本地安装的指令一样。</p></li><li><p>无需运行daemon进程：<code>Singularity</code>提供的完全是一个运行时的环境，在不使用时不需要单独的进程，不占用任何资源。不由daemon进程代为执行指令，资源限制和权限问题也得以解决。</p></li></ul><p>除了这些优势之外，<code>Singularity</code>还支持多种镜像和容器文件格式，甚至可以直接使用Docker提供的镜像，就像从Docker Hub去pull一个镜像一样简单。<code>Singularity</code>可以轻易的现有的HPC系统整合，几乎无需任何额外的开发就能让现有的HPC变成一个轻量级的容器云。</p><h2 id="Singularity的缺点"><a href="#Singularity的缺点" class="headerlink" title="Singularity的缺点"></a>Singularity的缺点</h2><p>上面提到了很多优势，但singularity也并非绝对完美的。</p><ul><li>缺少网络虚拟化的支持</li><li>目前未实现PID Namespace</li><li>认知度较低</li><li>由于众所周知的原因在国内下载镜像比较困难</li></ul><p><code>Singularity</code>应该是为了解决HPC环境下的软件不兼容而设计的应用容器，所以它并没有像<code>Docker</code>那样提供非常完善的隔离和虚拟化，例如没有PID namespace隔离、没有网络虚拟化。并且它的知名度远不如Docker，社区支持较少，在国内也没有镜像源导致下载镜像速度非常慢甚至失败。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说<code>Singularity</code>目前是绝佳的HPC环境下的容器解决方案，它的一些缺点也可以通过其他方式去克服，另外上面提到的<code>Docker</code>的缺点事实上也有一些特殊的方法去解决。我将在后续的文章中进行介绍。</p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png&quot; alt=&quot;vm_vs_container&quot;&gt;&lt;/p&gt;
-&lt;p&gt;高性能运算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。
+&lt;p&gt;高性能计算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。
     
     </summary>
     
-      <category term="高性能运算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/"/>
+      <category term="高性能计算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
     
-      <category term="虚拟化" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+      <category term="虚拟化" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
-      <category term="容器" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
+      <category term="容器" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
     
     
       <category term="虚拟化" scheme="http://zxh.site/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
       <category term="容器" scheme="http://zxh.site/tags/%E5%AE%B9%E5%99%A8/"/>
     
-      <category term="高性能运算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%BF%90%E7%AE%97/"/>
+      <category term="高性能计算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
     
       <category term="Singularity" scheme="http://zxh.site/tags/Singularity/"/>
     
@@ -522,33 +549,6 @@
       <category term="OmniMarkupPreviewer" scheme="http://zxh.site/tags/OmniMarkupPreviewer/"/>
     
       <category term="Windows" scheme="http://zxh.site/tags/Windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>多机高可用Redis Sentinel配置</title>
-    <link href="http://zxh.site/2016/06/03/redis/"/>
-    <id>http://zxh.site/2016/06/03/redis/</id>
-    <published>2016-06-03T12:35:56.000Z</published>
-    <updated>2018-05-26T03:57:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/sentinel.png" alt="CLI"></p><h3 id="Redis-Sentinel是什么"><a href="#Redis-Sentinel是什么" class="headerlink" title="Redis Sentinel是什么"></a>Redis Sentinel是什么</h3><p>Redis是一个高性能的<code>key-value</code>存储系统，说白了就是一种小巧而又高效的数据库。作为一种存储系统，自然应该考虑到<code>HA(High Available)</code>,Redis的各种设计都让人觉得很简单、高效、贴心，所以贴心的Redis从2.6版本之后开始支持HA配置，并且它提供了一套易于配置又方便使用的HA系统<a id="more"></a>，这就是<code>Redis Sentinel</code><br><code>HA</code>的实现其实主要做以下几件事： </p><ol><li>master将数据导出成<code>RDB</code>文件(这也是持久化实现的基础)</li><li>将文件同步给slave</li><li>slave将文件导入系统  </li></ol><p>如果只是做系统数据备份，以上就够了，这种情况显然并不需要一个sentinel，sentinel额外的工作是在master挂了之后，从其他的机器中”投票选举”一个新的master，是的真的是民主投票选举，感兴趣的可以去<a href="http://redis.io/topics/sentinel" target="_blank" rel="noopener">官方文档</a>看看具体的实现，sentinel要干的活：  </p><ol><li>实时监测系统中机器的状态</li><li>如果检测到master挂掉之后，选出新的master</li></ol><blockquote><p>Q：一定要选一个新的master吗？为什么？<br>A：slave机器正常情况下是没有写数据的权限的，当然你要是非要修改配置文件，也可以让slave拥有写数据的权限，但是这样一来很可能引起数据出错，所以默认情况下slave应该是只读权限，所以挂掉之后需要升级为master才能继续工作。（多master的配置不在讨论范围内）</p></blockquote><h3 id="用前须知"><a href="#用前须知" class="headerlink" title="用前须知"></a><strong>用前须知</strong></h3><ul><li>一个具有良好<code>&quot;鲁棒性&quot;</code>的Redis Sentinel环境至少需要三台能互相通讯的机器</li><li>如果需要设置密码，多台机器必须使用相同的密码</li><li>任何一个HA系统都不能百分百保证数据的完整和正确性，尤其是配置好之后不好好测试就开始用的…… </li></ul><h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a><strong>环境介绍</strong></h3><ul><li>系统环境：CentOS 7.2</li><li>三台机器(IP)：<ul><li>master(13.40.11.96)</li><li>slave(13.40.11.102)</li><li>sentinel(13.40.11.101)</li></ul></li><li>Redis版本：2.8.19 </li></ul><h3 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h3><h4 id="master配置"><a href="#master配置" class="headerlink" title="master配置"></a>master配置</h4><p>master不需要做sentinel相关的配置，不过大多数情况下，我们都应该给系统设置一个密码，<strong>注意：</strong> <em>如果设置了密码，系统中每一台机器都应该设置相同的密码</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass &quot;b840fc02d524045429941cc15f59e41cb7be6c52&quot;</span><br></pre></td></tr></table></figure></p><h4 id="slave配置"><a href="#slave配置" class="headerlink" title="slave配置"></a>slave配置</h4><p>salve中做如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">##slave</span><br><span class="line">slaveof 13.40.11.95 6379</span><br><span class="line">masterauth b840fc02d524045429941cc15f59e41cb7be6c52</span><br></pre></td></tr></table></figure></p><h4 id="sentinel配置"><a href="#sentinel配置" class="headerlink" title="sentinel配置"></a>sentinel配置</h4><p>正确安装好redis之后/etc目录下有一个redis-sentinel.conf的文件，这是一个范例文件，里面详细的写了配置说明，我们参照它的说明手动创建一个配置文件，名字随意位置随意，你能找到在哪儿就行，这里我建立的是/etc/sentinel.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##sentinel</span><br><span class="line">port 26379</span><br><span class="line">sentinel monitor mymaster 13.40.11.95 6379 1</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel auth-pass mymaster b840fc02d524045429941cc15f59e41cb7be6c52</span><br><span class="line">sentinel config-epoch mymaster 2</span><br><span class="line">sentinel leader-epoch mymaster 2</span><br></pre></td></tr></table></figure></p><p>好了就这么简单，将master和slave上的redis服务直接重启，然后在sentinel上执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /etc/sentinel.conf --sentinel</span><br></pre></td></tr></table></figure></p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="数据备份测试"><a href="#数据备份测试" class="headerlink" title="数据备份测试"></a>数据备份测试</h4><p>环境搭建好了，接下来进行一波测试，在master上随便写点东西，在slave上去读取，如果你没配置错的话，一定能读取到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##master上</span><br><span class="line">SET test 123</span><br><span class="line">##slave上</span><br><span class="line">GET test</span><br><span class="line">##返回123</span><br></pre></td></tr></table></figure></p><h4 id="模拟宕机"><a href="#模拟宕机" class="headerlink" title="模拟宕机"></a>模拟宕机</h4><p>在master和slave的<code>redis-cli</code>中分别执行<code>info replication</code>命令可以查看到主从关系，然后将master的redis服务停止掉，sentinel会在你设置的<code>down-after-milliseconds</code>毫秒后检测到master失去联系，此时sentinel会将slave升级为master  </p><hr><p>是不是so easy，以上~</p><h5 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h5><p>redis官方文档：<a href="http://redis.io/topics/sentinel" target="_blank" rel="noopener">redis.io/topics/sentinel</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/sentinel.png&quot; alt=&quot;CLI&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Redis-Sentinel是什么&quot;&gt;&lt;a href=&quot;#Redis-Sentinel是什么&quot; class=&quot;headerlink&quot; title=&quot;Redis Sentinel是什么&quot;&gt;&lt;/a&gt;Redis Sentinel是什么&lt;/h3&gt;&lt;p&gt;Redis是一个高性能的&lt;code&gt;key-value&lt;/code&gt;存储系统，说白了就是一种小巧而又高效的数据库。作为一种存储系统，自然应该考虑到&lt;code&gt;HA(High Available)&lt;/code&gt;,Redis的各种设计都让人觉得很简单、高效、贴心，所以贴心的Redis从2.6版本之后开始支持HA配置，并且它提供了一套易于配置又方便使用的HA系统
-    
-    </summary>
-    
-      <category term="后端" scheme="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-      <category term="工具" scheme="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="后端" scheme="http://zxh.site/tags/%E5%90%8E%E7%AB%AF/"/>
-    
-      <category term="Redis" scheme="http://zxh.site/tags/Redis/"/>
     
   </entry>
   
