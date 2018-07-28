@@ -116,17 +116,20 @@
 
 
 
-  <meta name="description" content="迎风向前是唯一的方法">
+  <meta name="description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算通常指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
+<meta name="keywords" content="高性能计算,HPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ansiz">
+<meta property="og:title" content="HPC系列文章(2)：HPC技术概览">
 <meta property="og:url" content="http://zxh.site/2018/07/28/HPC系列文章-2-：HPC技术概览/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="迎风向前是唯一的方法">
+<meta property="og:description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算通常指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-28T15:23:10.585Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg">
+<meta property="og:updated_time" content="2018-07-28T15:24:02.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ansiz">
-<meta name="twitter:description" content="迎风向前是唯一的方法">
+<meta name="twitter:title" content="HPC系列文章(2)：HPC技术概览">
+<meta name="twitter:description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算通常指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg">
 
 
 
@@ -145,7 +148,7 @@
   };
 </script>
 
-  <title> | Ansiz</title>
+  <title>HPC系列文章(2)：HPC技术概览 | Ansiz</title>
   
 
 
@@ -327,7 +330,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">HPC系列文章(2)：HPC技术概览
               
             
           </h2>
@@ -352,12 +355,41 @@
                 
               
 
-              <time title="创建时间：2018-07-28 23:23:10" itemprop="dateCreated datePublished" datetime="2018-07-28T23:23:10+08:00">2018-07-28</time>
+              <time title="创建时间：2018-07-28 16:57:13 / 修改时间：23:24:02" itemprop="dateCreated datePublished" datetime="2018-07-28T16:57:13+08:00">2018-07-28</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -396,7 +428,35 @@
       
 
       
-        
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg" alt="Cover"></p>
+<h2 id="什么是高性能运算"><a href="#什么是高性能运算" class="headerlink" title="什么是高性能运算"></a>什么是高性能运算</h2><p>在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算通常指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。<a id="more"></a></p>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>首先是“大量高性能计算硬件堆叠而成的计算集群”，也就是说通常不止一台。为什么不止一台呢？因为就目前的计算机科技水平而言，一台计算机的计算力是非常有限的，而提升单台机器的计算力难度是比较大的，相较之下更简单粗暴的办法就是采用更多的机器，将它们组合到一起，这听上去颇有些暴力美学的味道，集群将一组松散集成的计算机软件和/或硬件连接起来高度紧密地协作完成计算工作。</p>
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>然后是“特定的计算任务”，当机器不止一台的时候，想让它们完成同一个任务，这个任务就需要具备一些特殊性。想象一下如果将你写了一段代码或者一个脚本，假设一共100行代码，你将这段代码简单粗暴地拆分成两个50行的文件，分别拿到两台机器上各自运行，会发生什么？显然是无法工作的。那什么样的程序或者代码才能在集群上运行呢？通常该程序需要支持并行运算或者是互不干涉的进行分布式运算。集群的并行运算与我们在拥有多核处理器的单台计算机上并行运行的多线程程序有一些类似，不过集群上的并行运算更复杂一些，因为这些程序运行在不同的机器上，通常并不会直接包含其他同时运行的程序的上下文，而是通过某些特殊的通讯协议来协同作业。或者它们本就是互相不相关的独立作业，每个作业各自完成自己的工作，不必等待其他作业完成后才可以运行，互相之间也没有锁或者资源竞争。只有这样才能充分的利用集群的性能。</p>
+<blockquote>
+<p>并行计算（parallel computing）一般是指许多指令得以同时进行的计算模式。在同时进行的前提下，可以将计算的过程分解成小部分，之后以并发方式来加以解决。</p>
+<p>电脑软件可以被分成数个运算步骤来运行。为了解决某个特定问题，软件采用某个算法，以一连串指令运行来完成。传统上，这些指令都被送至单一的中央处理器，以循序方式运行完成。在这种处理方式下，单一时间中，只有单一指令被运行(processor level: 比较微处理器，CISC, 和RISC，即流水线Pipeline的概念，以及后来在Pipeline基础上以提高指令处理效率为目的的硬件及软件发展，比如branch-prediction, 比如forwarding，比如在每个运算单元前的指令堆栈，汇编程序员对programm code的顺序改写)。并行运算采用了多个运算单元，同时运行，以解决问题。</p>
+</blockquote>
+<h3 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h3><p>最后一个关键词是“高性能”，这就有别于一般的分布式计算（不过它们也有很多相通之处）。不知道大家是否有了解过一些分布式计算的项目，它们召集一些志愿者贡献出自己电脑空闲的计算力，一起为一些科学计算做出贡献，这些节点对于计算节点的性能没有特别严格的限制，甚至可以不限制硬件平台，如果你愿意参与你就可以为这些计算项目贡献一点力量，这是一种更加松散的架构，包括现在有的“挖矿”项目也是类似这样的分布式计算。而高性能运算更加强调性能，包括计算单元（CPU、GPU、FPGA等）、内存、存储、网络等等一系列的硬件都应该具备很强的性能，所以高性能运算还会涉及到异构计算、并行文件系统、高速网络等等。</p>
+<h2 id="高性能计算能做什么"><a href="#高性能计算能做什么" class="headerlink" title="高性能计算能做什么"></a>高性能计算能做什么</h2><p>高性能计算实际上服务于我们的日常生活之中，只是它的存在感很低。举个最简单的例子，天气预报。气象预测实际上应该叫做气象模拟计算，简单的说就是把卫星收集到的大量数据（你可以尽可能想象它的大），通过一些科学的计算模型进行模拟计算并推演，以此为基础来推断未来的天气。如果没有足够强大的计算力，这显然是一项无法完成的任务。提高计算力能够提高模拟计算的速度和精度，这也是为什么这些年天气预报越来越准，能预报的时间越来越长的重要原因。HPC还能应用到各种领域，例如：</p>
+<ul>
+<li>科学计算：例如生物科学上计算DNA序列、化学上有机化学分子计算、物理学中复杂的模型推演、数学中复杂的计算等等。</li>
+<li>工业领域：基于现代力学理论的数值仿真技术广泛应用于航天航空、汽车、船舶、机械、建筑、电子等行业领域。</li>
+<li>人工智能：计算能力的提升和可获得的数据的增加是深度学习的两个关键驱动因素，近些年非常热门的人工智能相关技术都依赖庞大的计算力。</li>
+</ul>
+<p>除此之外，计算金融、国防科技、医学成像、图像编解码、大数据分析等等各种领域都是HPC的用武之地。HPC系统最常见的用户是科学研究人员，工程师和学术机构以及一些政府机构。可以说一切需要计算力解决问题的地方，都可以使用HPC成倍的提升效率。</p>
+<h2 id="我们要学些什么"><a href="#我们要学些什么" class="headerlink" title="我们要学些什么"></a>我们要学些什么</h2><p>集群中的计算力需要有一个合理规范的调度系统，负责分配作业调度,提高集群资源使用率。所以我们需要了解学习HPC集群调度系统。目前常见的HPC集群作业调度系统有Altair公司的<code>PBS</code>、开源的<code>Slurm</code>和IBM公司的<code>LSF</code>，这个系列中主要围绕<code>Slurm</code>进行介绍。</p>
+<p>集群中运行的任务具备一些特殊性，要想发挥出集群的优势，作业需要支持并行运算，或者在集群上运行不相互依赖的分布式作业，所以会简单介绍并行计算以及一些分布式计算相关的知识和技巧。</p>
+<p>大量的设备需要有一个高效可靠的监控和管理系统，所以我也会了解一些分布式监控系统以及一些常见的集群运维手段和工具。</p>
+<p>目前云服务和虚拟化非常火热，并且也可以说是未来的一种技术趋势，在了解和掌握基本的高性能运算基础之上，我还会额外介绍一些虚拟化和云相关的知识，探讨一下高性能计算和云计算如何结合等等。</p>
+<p>概括一下大概有以下内容：</p>
+<ul>
+<li>集群调度系统</li>
+<li>并行计算及部分应用</li>
+<li>集群监控及管理</li>
+<li>云及容器技术</li>
+</ul>
+<p>我个人能力和水平有限，有的东西也是在不断学习的过程中，有任何讲的不对或者不合理的地方，欢迎大家在评论区进行讨论，共同学习进步。</p>
+
       
     </div>
 
@@ -442,6 +502,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
+          
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
+          
+        </div>
       
 
       
@@ -527,8 +595,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -776,6 +853,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是高性能运算"><span class="nav-number">1.</span> <span class="nav-text">什么是高性能运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群"><span class="nav-number">1.1.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行"><span class="nav-number">1.2.</span> <span class="nav-text">并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高性能"><span class="nav-number">1.3.</span> <span class="nav-text">高性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能计算能做什么"><span class="nav-number">2.</span> <span class="nav-text">高性能计算能做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们要学些什么"><span class="nav-number">3.</span> <span class="nav-text">我们要学些什么</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
