@@ -116,22 +116,20 @@
 
 
 
-  <meta name="description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
-<meta name="keywords" content="Linux,深度学习">
+  <meta name="description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
+<meta name="keywords" content="高性能计算,HPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Deepin上安装TensorFlow">
-<meta property="og:url" content="http://zxh.site/2018/07/15/在Deepin上安装TensorFlow/index.html">
+<meta property="og:title" content="HPC系列文章(2)：HPC技术概览">
+<meta property="og:url" content="http://zxh.site/2018/07/28/HPC系列文章-2-：HPC技术概览/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
+<meta property="og:description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/nvidia-smi.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/demo.png">
-<meta property="og:updated_time" content="2018-07-15T13:19:53.400Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg">
+<meta property="og:updated_time" content="2018-07-28T10:48:13.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Deepin上安装TensorFlow">
-<meta name="twitter:description" content="Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png">
+<meta name="twitter:title" content="HPC系列文章(2)：HPC技术概览">
+<meta name="twitter:description" content="什么是高性能运算在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg">
 
 
 
@@ -140,7 +138,7 @@
 
 
 
-  <link rel="canonical" href="http://zxh.site/2018/07/15/在Deepin上安装TensorFlow/"/>
+  <link rel="canonical" href="http://zxh.site/2018/07/28/HPC系列文章-2-：HPC技术概览/"/>
 
 
 
@@ -150,7 +148,7 @@
   };
 </script>
 
-  <title>在Deepin上安装TensorFlow | Ansiz</title>
+  <title>HPC系列文章(2)：HPC技术概览 | Ansiz</title>
   
 
 
@@ -315,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/07/15/在Deepin上安装TensorFlow/">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/07/28/HPC系列文章-2-：HPC技术概览/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
@@ -332,7 +330,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">在Deepin上安装TensorFlow
+          <h2 class="post-title" itemprop="name headline">HPC系列文章(2)：HPC技术概览
               
             
           </h2>
@@ -357,7 +355,7 @@
                 
               
 
-              <time title="创建时间：2018-07-15 19:51:33 / 修改时间：21:19:53" itemprop="dateCreated datePublished" datetime="2018-07-15T19:51:33+08:00">2018-07-15</time>
+              <time title="创建时间：2018-07-28 16:57:13 / 修改时间：18:48:13" itemprop="dateCreated datePublished" datetime="2018-07-28T16:57:13+08:00">2018-07-28</time>
             
 
             
@@ -379,14 +377,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
 
                 
                 
@@ -401,8 +399,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/15/在Deepin上安装TensorFlow/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/15/在Deepin上安装TensorFlow/" itemprop="commentCount"></span>
+                <a href="/2018/07/28/HPC系列文章-2-：HPC技术概览/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/28/HPC系列文章-2-：HPC技术概览/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -430,38 +428,30 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png" alt="NVIDIA-SMI"><br>Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。<a id="more"></a></p>
-<h2 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h2><ul>
-<li>Deepin 15.6桌面版</li>
-<li>NVIDIA 1060GTX</li>
-<li>显卡驱动版本：387.34-3deepin</li>
-<li>CUDA版本：8.0</li>
-<li>Tensorflow版本：Tensorflow-GPU(1.4.1)</li>
-<li>cuDNN版本：6.0</li>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg" alt="Cover"></p>
+<h2 id="什么是高性能运算"><a href="#什么是高性能运算" class="headerlink" title="什么是高性能运算"></a>什么是高性能运算</h2><p>在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，<br>高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。<a id="more"></a></p>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>首先是“大量高性能计算硬件堆叠而成的计算集群”，也就是说通常不止一台。为什么不止一台呢？因为就目前的计算机科技水平而言，一台计算机的计算力是非常有限的，而提升单台机器的计算力难度是比较大的，相较之下更简单粗暴的办法就是采用更多的机器，将它们组合到一起，这听上去颇有些暴力美学的味道。</p>
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>然后是“特定的计算任务”。而当机器不止一台的时候，想让它们完成同一个任务，这个任务就需要具备一些特殊性。想象一下如果将你写了一段代码或者一个脚本，假设一共100行代码，你将这段代码简单粗暴地拆分成两个50行的文件，分别拿到两台机器上各自运行，会发生什么？显然是无法工作的。所以这个计算任务必须能够支持并行处理。</p>
+<h3 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h3><p>最后一个关键词是“高性能”，这就有别于一般的分布式计算（不过它们也有很多相通之处）。不知道大家是否有了解过一些分布式计算的项目，它们召集一些志愿者贡献出自己电脑空闲的计算力，一起为一些科学计算做出贡献，这些节点对于计算节点的性能没有特别严格的限制，甚至可以不限制硬件平台，如果你愿意参与你就可以为这些计算项目贡献一点力量，这是一种更加松散的架构，包括现在有的“挖矿”项目也是类似这样的分布式计算。而高性能运算更加强调性能，包括计算单元（CPU、GPU、FPGA等）、内存、存储、网络等等一系列的硬件都应该具备很强的性能，所以高性能运算还会涉及到异构计算、并行文件系统、高速网络等等。</p>
+<h2 id="高性能计算能做什么"><a href="#高性能计算能做什么" class="headerlink" title="高性能计算能做什么"></a>高性能计算能做什么</h2><p>高性能计算实际上服务于我们的日常生活之中，只是它的存在感很低。举个最简单的例子，天气预报。气象预测实际上应该叫做气象模拟计算，简单的说就是把卫星收集到的大量数据（你可以尽可能想象它的大），通过一些科学的计算模型进行模拟计算并推演，以此为基础来推断未来的天气。如果没有足够强大的计算力，这显然是一项无法完成的任务。提高计算力能够提高模拟计算的速度和精度，这也是为什么这些年天气预报越来越准，能预报的时间越来越长的重要原因。HPC还能应用到各种领域，例如：</p>
+<ul>
+<li>科学计算：例如生物科学上计算DNA序列、化学上有机化学分子计算、物理学中复杂的模型推演、数学中复杂的计算等等。</li>
+<li>工业领域：基于现代力学理论的数值仿真技术广泛应用于航天航空、汽车、船舶、机械、建筑、电子等行业领域。</li>
+<li>人工智能：近些年非常热门的深度学习等技术都依赖庞大的计算力。</li>
 </ul>
-<blockquote>
-<p>注意：请务必注意上述版本，Tensorflow安装最大的坑就在于官方文档总是提供最新的版本，而实际上最新的版本不一定适应于你当前的硬件！</p>
-</blockquote>
-<h2 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h2><p>Deepin默认使用的是开源驱动，该驱动兼容性较好但是性能比NVIDIA原生闭源驱动要差。所以我们要先切换一下驱动。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nvidia-driver <span class="comment">#安装驱动包</span></span><br></pre></td></tr></table></figure>
-<p>安装完成后重启系统，在终端中执行nvidia-smi将会看到类似输出：</p>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/nvidia-smi.png" alt="NVIDIA-SMI"></p>
-<blockquote>
-<p>注意: NVIDIA官网目前提供的最新驱动版本是390，但我安装之后导致系统黑屏驱动无法工作，如无必要不建议安装NVIDIA官网提供的最新版本。</p>
-</blockquote>
-<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>因为Deepin和Ubuntu实际上都是基于Debian的，所以我们可以看Tensorflow中Ubuntu的文档进行安装，根据Tensorflow官网提供的链接，NVIDIA将建议安装CUDA9.2，不过这里我们直接用源内提供的8.0版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nvidia-cuda-dev nvidia-cuda-toolkit nvidia-nsight nvidia-visual-profiler</span><br></pre></td></tr></table></figure>
-<h2 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h2><p>安装cuDNN需要进行简单的注册并填写一个简单的调查问卷，注册完成之后即可下载。</p>
-<p>cuDNN也要分很多版本（<a href="https://developer.nvidia.com/rdp/cudnn-archive" target="_blank" rel="noopener">版本列表</a>），这里我们选择<code>cuDNN v6.0 (April 27, 2017), for CUDA 8.0</code>这个版本。直接下载压缩包(<a href="https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v6/prod/8.0_20170307/cudnn-8.0-linux-x64-v6.0-tgz" target="_blank" rel="noopener">cuDNN v6.0 Library for Linux</a>)解压就好：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.<span class="built_in">local</span> <span class="comment"># 如果没有这个文件夹请手动新建</span></span><br><span class="line">tar zxvf ~/Software/cudnn-8.0-linux-x64-v6.0.tgz</span><br></pre></td></tr></table></figure>
-<p>配置LD_LIBRARY_PATH：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建议直接将这个写到bashrc或者zshrc中</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=~/.<span class="built_in">local</span>/cuda/lib64</span><br></pre></td></tr></table></figure>
-<h2 id="安装Tensorflow"><a href="#安装Tensorflow" class="headerlink" title="安装Tensorflow"></a>安装Tensorflow</h2><p>首先安装python和pip，然后执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.4.1</span><br></pre></td></tr></table></figure>
-<p>验证一下安装情况，在python交互模式中输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow</span><br></pre></td></tr></table></figure>
-<p>如果没有任何报错就说明安装好了，跑一个官网最简单的<a href="https://www.tensorflow.org/get_started/get_started_for_beginners?hl=zh-cn" target="_blank" rel="noopener">对鸢尾花进行分类</a>的demo试试吧，你将看到类似这样的输出：</p>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/demo.png" alt="NVIDIA-SMI"></p>
+<p>除此之外，计算金融、国防科技、医学成像、图像编解码、大数据分析等等各种领域都是HPC的用武之地。HPC系统最常见的用户是科学研究人员，工程师和学术机构以及一些政府机构。可以说一切需要计算力解决问题的地方，都可以使用HPC成倍的提升效率。</p>
+<h2 id="我们要学些什么"><a href="#我们要学些什么" class="headerlink" title="我们要学些什么"></a>我们要学些什么</h2><p>集群中的计算力需要有一个合理规范的调度系统，所以我们需要了解学习调度系统。目前常见的调度系统有Altair公司的<code>PBS</code>、开源的<code>Slurm</code>和IBM公司的<code>LSF</code>，这个系列中主要围绕<code>Slurm</code>进行介绍。</p>
+<p>集群中运行的任务具备一些特殊性，会简单介绍并行计算以及一些分布式计算相关的知识和技巧。</p>
+<p>大量的设备需要有一个高效可靠的监控和管理系统，所以我们也会了解一些分布式监控系统以及一些常见的集群运维手段和工具。</p>
+<p>目前云服务和虚拟化非常火热，并且也可以说是未来的一种技术趋势，在了解和掌握基本的高性能运算基础之上，我还会额外介绍一些虚拟化和云相关的知识，探讨一下高性能计算和云计算如何结合等等。</p>
+<p>概括一下大概有以下内容：</p>
+<ul>
+<li>集群调度系统</li>
+<li>并行计算及部分应用</li>
+<li>集群监控及管理</li>
+<li>云及容器技术</li>
+</ul>
+<p>我个人能力和水平有限，有的东西也是在不断学习的过程中，有任何讲的不对或者不合理的地方，欢迎大家在评论区进行讨论，共同学习进步。</p>
 
       
     </div>
@@ -511,9 +501,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
           
         </div>
       
@@ -541,8 +531,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/15/Deepin-优秀的国产Linux发行版/" rel="next" title="Deepin——优秀的国产Linux发行版">
-                <i class="fa fa-chevron-left"></i> Deepin——优秀的国产Linux发行版
+              <a href="/2018/07/22/HPC系列文章-1-：开篇/" rel="next" title="HPC系列文章(1)：开篇">
+                <i class="fa fa-chevron-left"></i> HPC系列文章(1)：开篇
               </a>
             
           </div>
@@ -550,10 +540,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/22/HPC系列文章-1-：开篇/" rel="prev" title="HPC系列文章(1)：开篇">
-                HPC系列文章(1)：开篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -873,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统配置"><span class="nav-number">1.</span> <span class="nav-text">系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装NVIDIA显卡驱动"><span class="nav-number">2.</span> <span class="nav-text">安装NVIDIA显卡驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA"><span class="nav-number">3.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装cuDNN"><span class="nav-number">4.</span> <span class="nav-text">安装cuDNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Tensorflow"><span class="nav-number">5.</span> <span class="nav-text">安装Tensorflow</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是高性能运算"><span class="nav-number">1.</span> <span class="nav-text">什么是高性能运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群"><span class="nav-number">1.1.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行"><span class="nav-number">1.2.</span> <span class="nav-text">并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高性能"><span class="nav-number">1.3.</span> <span class="nav-text">高性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能计算能做什么"><span class="nav-number">2.</span> <span class="nav-text">高性能计算能做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们要学些什么"><span class="nav-number">3.</span> <span class="nav-text">我们要学些什么</span></a></li></ol></div>
             
 
           </div>
