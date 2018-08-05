@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zxh.site/2018/08/05/HPC-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-3-Slurm%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%A7%88/</loc>
+    
+    <lastmod>2018-08-05T07:44:29.066Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zxh.site/2018/07/28/HPC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-2-%EF%BC%9AHPC%E6%8A%80%E6%9C%AF%E6%A6%82%E8%A7%88/</loc>
     
-    <lastmod>2018-07-28T15:24:02.472Z</lastmod>
+    <lastmod>2018-07-28T15:24:02.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/07/22/HPC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-1-%EF%BC%9A%E5%BC%80%E7%AF%87/</loc>
     
-    <lastmod>2018-07-22T14:27:31.942Z</lastmod>
+    <lastmod>2018-07-22T14:27:31.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/12/29/slurm/</loc>
     
-    <lastmod>2018-07-22T05:48:47.761Z</lastmod>
+    <lastmod>2018-07-22T05:48:47.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/05/15/Singularity/</loc>
     
-    <lastmod>2018-07-22T05:48:47.761Z</lastmod>
+    <lastmod>2018-07-22T05:48:47.000Z</lastmod>
     
   </url>
   
@@ -39,42 +46,42 @@
   <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
     
-    <lastmod>2018-07-17T12:11:06.156Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
-    
-    <lastmod>2018-07-17T12:11:06.156Z</lastmod>
+    <lastmod>2018-07-17T12:11:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/06/24/x11/</loc>
     
-    <lastmod>2018-07-17T12:11:06.156Z</lastmod>
+    <lastmod>2018-07-17T12:11:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
+    
+    <lastmod>2018-07-17T12:11:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/07/15/%E5%9C%A8Deepin%E4%B8%8A%E5%AE%89%E8%A3%85TensorFlow/</loc>
     
-    <lastmod>2018-07-15T13:19:53.400Z</lastmod>
+    <lastmod>2018-07-15T13:19:53.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/07/15/Deepin-%E4%BC%98%E7%A7%80%E7%9A%84%E5%9B%BD%E4%BA%A7Linux%E5%8F%91%E8%A1%8C%E7%89%88/</loc>
     
-    <lastmod>2018-07-15T08:26:00.344Z</lastmod>
+    <lastmod>2018-07-15T08:26:00.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/02/28/Docker-in-LXC%E8%B8%A9%E5%9D%91/</loc>
     
-    <lastmod>2018-05-27T02:02:03.381Z</lastmod>
+    <lastmod>2018-05-27T02:02:03.000Z</lastmod>
     
   </url>
   
@@ -137,7 +144,7 @@
   <url>
     <loc>http://zxh.site/2018/02/16/Linux%E5%AE%9A%E5%88%B6%E5%8C%96%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97/</loc>
     
-    <lastmod>2018-05-26T04:19:20.306Z</lastmod>
+    <lastmod>2018-05-26T04:19:20.000Z</lastmod>
     
   </url>
   

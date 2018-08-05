@@ -116,28 +116,20 @@
 
 
 
-  <meta name="description" content="为什么需要定制化？一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成垃圾软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个Dockerfile或者docker-compo">
-<meta name="keywords" content="Linux">
+  <meta name="description" content="初识集群作业调度系统经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？  系统中存在若干进程，操作系统会如何安排计算机资源？ 是否可以为某些特定进程分配更多的资源？ 如果我们使用的是多核心处理器">
+<meta name="keywords" content="高性能计算,HPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux定制化镜像制作指南">
-<meta property="og:url" content="http://zxh.site/2018/02/16/Linux定制化镜像制作指南/index.html">
+<meta property="og:title" content="HPC 系列文章(3):调度系统概览">
+<meta property="og:url" content="http://zxh.site/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="为什么需要定制化？一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成垃圾软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个Dockerfile或者docker-compo">
+<meta property="og:description" content="初识集群作业调度系统经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？  系统中存在若干进程，操作系统会如何安排计算机资源？ 是否可以为某些特定进程分配更多的资源？ 如果我们使用的是多核心处理器">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-1.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-2.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-4.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-5.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-6.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-7.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-8.png">
-<meta property="og:updated_time" content="2018-05-26T04:19:20.000Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/schedule.png">
+<meta property="og:updated_time" content="2018-08-05T07:44:29.066Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux定制化镜像制作指南">
-<meta name="twitter:description" content="为什么需要定制化？一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成垃圾软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个Dockerfile或者docker-compo">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png">
+<meta name="twitter:title" content="HPC 系列文章(3):调度系统概览">
+<meta name="twitter:description" content="初识集群作业调度系统经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？  系统中存在若干进程，操作系统会如何安排计算机资源？ 是否可以为某些特定进程分配更多的资源？ 如果我们使用的是多核心处理器">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/schedule.png">
 
 
 
@@ -146,7 +138,7 @@
 
 
 
-  <link rel="canonical" href="http://zxh.site/2018/02/16/Linux定制化镜像制作指南/"/>
+  <link rel="canonical" href="http://zxh.site/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/"/>
 
 
 
@@ -156,7 +148,7 @@
   };
 </script>
 
-  <title>Linux定制化镜像制作指南 | Ansiz</title>
+  <title>HPC 系列文章(3):调度系统概览 | Ansiz</title>
   
 
 
@@ -321,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/02/16/Linux定制化镜像制作指南/">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
@@ -338,7 +330,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Linux定制化镜像制作指南
+          <h2 class="post-title" itemprop="name headline">HPC 系列文章(3):调度系统概览
               
             
           </h2>
@@ -363,24 +355,12 @@
                 
               
 
-              <time title="创建时间：2018-02-16 21:29:09" itemprop="dateCreated datePublished" datetime="2018-02-16T21:29:09+08:00">2018-02-16</time>
+              <time title="创建时间：2018-08-05 09:12:33 / 修改时间：15:44:29" itemprop="dateCreated datePublished" datetime="2018-08-05T09:12:33+08:00">2018-08-05</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-05-26 12:19:20" itemprop="dateModified" datetime="2018-05-26T12:19:20+08:00">2018-05-26</time>
               
             
           </span>
@@ -397,7 +377,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
 
                 
                 
@@ -412,8 +399,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/16/Linux定制化镜像制作指南/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/02/16/Linux定制化镜像制作指南/" itemprop="commentCount"></span>
+                <a href="/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -441,93 +428,119 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png" alt="image3"></p>
-<h2 id="为什么需要定制化？"><a href="#为什么需要定制化？" class="headerlink" title="为什么需要定制化？"></a>为什么需要定制化？</h2><p>一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成<del>垃圾</del>软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个<code>Dockerfile</code>或者<code>docker-compose.yml</code>，让用户开箱即用。但是如果用户需要从裸机开始部署呢？既然连系统都没有，当然是做成安装光盘。系统、软件、依赖环境一股脑全部部署。我们从头说起。<a id="more"></a></p>
-<h2 id="当我谈“定制化Linux安装镜像”，我在定制什么？"><a href="#当我谈“定制化Linux安装镜像”，我在定制什么？" class="headerlink" title="当我谈“定制化Linux安装镜像”，我在定制什么？"></a>当我谈“定制化Linux安装镜像”，我在定制什么？</h2><ul>
-<li>安装界面定制化<ul>
-<li>🎨  <code>Boot Menu</code>定制化</li>
-<li>🎨  <code>Anaconda</code>图形界面定制化</li>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/schedule.png" alt="Cover"></p>
+<h2 id="初识集群作业调度系统"><a href="#初识集群作业调度系统" class="headerlink" title="初识集群作业调度系统"></a>初识集群作业调度系统</h2><p>经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？</p>
+<ol>
+<li>系统中存在若干进程，操作系统会如何安排计算机资源？</li>
+<li>是否可以为某些特定进程分配更多的资源？</li>
+<li>如果我们使用的是多核心处理器，能否让特定的一个或多个核心运行某个程序？<a id="more"></a></li>
+</ol>
+<p>相信如果上学时学过计算机组成原理和操作系统的同学都能对上面几个问题有一些简单的认识。平时我们不用关心这些细节，是因为操作系统已经实现了进程的管理和调度。可见资源调度对于操作系统而言至关重要，集群是由若干台计算机组成的一个系统，它同样需要管理分配计算资源，这就是调度系统存在的意义。</p>
+<p>但集群的调度系统和计算机操作系统的调度系统又有许多不同之处，集群的计算资源分散在系统中由网络互联，我们不可能像使用本地的计算资源一样使用它们。并且我们也不希望某个作业的资源发生竞争而影响执行效率，所以我们也不会采用轮转的方式。<strong>集群调度系统采用的是一种资源隔离和预分配的机制来调度资源。</strong>除此之外它还提供不同的资源分配策略和管理策略，我们再来思考几个问题：</p>
+<ol>
+<li>当系统中空闲的资源不能满足更多的作业时如何处理作业？</li>
+<li>如何保证系统容纳尽可能多的资源？（类似背包问题）</li>
+<li>我能否让特定的作业优先获得资源？</li>
+<li>能否让特定的作业运行在特定配置的节点上？</li>
+<li>在多用户环境下能否限制某些用户的资源用量？</li>
+<li>能否统计每个用户的资源使用量？</li>
+</ol>
+<p>以上这些都是集群调度系统所要处理的问题，并且实际情况会更加复杂。一个优秀的调度系统应该具备多种灵活的调度策略，资源分配时要考虑多种复杂的因素来为作业分配资源，例如CPU、内存、GPU甚至节点所处的网络等，提供资源使用记录及管理，同时它还要能监控和管理节点的工作状态和资源使用情况，为集群提供尽可能高的使用效率。</p>
+<h2 id="调度系统对比"><a href="#调度系统对比" class="headerlink" title="调度系统对比"></a>调度系统对比</h2><p>我们不会因为要做电子表格就自己做一个Excel出来，显然我们也不必因为要使用集群而自行开发这么一套系统，那市面上有哪些集群调度系统呢？打开Google搜索<code>Cluster Scheduler</code>，出来一大堆结果，这里我将我所了解的目前主流的调度系统为大家做一个简单的对比和梳理：</p>
+<div class="note info"><p>如果你用中文搜索“集群调度系统”，得到的结果与我们所讨论的集群作业调度系统有一些区别，国内对相关领域的研究的可参考文献较少，中文搜索的结果与我们要讨论的内容有偏差。建议使用Google进行相关资料检索 </p></div>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>厂商</th>
+<th>授权许可</th>
+<th>平台支持</th>
+<th>最大节点数</th>
+<th>是否收费</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenLava</td>
+<td>Teraproc</td>
+<td>GPL</td>
+<td>Linux</td>
+<td>数千</td>
+<td>免费</td>
+</tr>
+<tr>
+<td>PBS Pro</td>
+<td>Altari</td>
+<td>商业授权</td>
+<td>Linux,Windows</td>
+<td>50k+</td>
+<td>付费</td>
+</tr>
+<tr>
+<td>TORQUE</td>
+<td>Adaptive Computing</td>
+<td>商业授权</td>
+<td>Linux, Unix</td>
+<td>数千</td>
+<td>付费</td>
+</tr>
+<tr>
+<td>Moab Cluster Suite</td>
+<td>Adaptive Computing</td>
+<td>商业授权</td>
+<td>多平台</td>
+<td>数千</td>
+<td>付费</td>
+</tr>
+<tr>
+<td>Platform LSF</td>
+<td>IBM</td>
+<td>商业授权</td>
+<td>Unix, Linux, Windows</td>
+<td>未知</td>
+<td>付费</td>
+</tr>
+<tr>
+<td>Slurm</td>
+<td>SchedMD</td>
+<td>GPL</td>
+<td>Linux,Unix</td>
+<td>120k+</td>
+<td>免费</td>
+</tr>
+</tbody>
+</table>
+<h3 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h3><p>本文中讨论的“调度系统”实际应该分成<code>Workload Manager</code>和<code>Resource Manager</code>分别讨论，但为了便于理解，我们讨论的“调度系统”即二者的合称。关于它们的区别：</p>
+<ul>
+<li>Resource Manager<ul>
+<li>为集群资源提供作业队列管理</li>
+<li>创建作业队列</li>
 </ul>
 </li>
-<li>📃  自定义安装信息收集</li>
-<li>📦  配套软件打包</li>
-<li>🤖️  安装自动化</li>
+<li>Workload Manager<ul>
+<li>整合了一个或多个Resource Manager的调度管理器，给Resource Manager下指令</li>
+<li>监控作业运行状态</li>
+<li>收集和统计作业及资源使用信息</li>
+<li>实现资源限制和策略制定等</li>
 </ul>
-<h2 id="Linux安装光盘分析"><a href="#Linux安装光盘分析" class="headerlink" title="Linux安装光盘分析"></a>Linux安装光盘分析</h2><p>在网上下载一个Linux系统安装镜像，这里我用的是<code>CentOS-7-x86_64-Minimal-1511.iso</code>，将镜像挂载到开发环境中</p>
+</li>
+</ul>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>上面这些调度系统，实际上有一些有一些渊源。早期的LSF是开源的，后来成为了商用软件，<code>OpenLava</code>就是基于早期的<code>LSF</code>（Platform LSF 4.2)开发的开源软件。</p>
+<p>然后我们说一说<code>PBS</code>，它最初是由<code>MRJ Technology Solutions</code>这家软件外包商于1991年6月开始为NASA所研发的作业调度系统，MRJ于20世纪90年代末被Veridian收购，2003年<code>Altair</code>公司通过收购Veridian获得了所有PBS技术和知识产权的权利。目前市面上有几个它的衍生产品：</p>
 <ul>
-<li>Linux:</li>
+<li>OpenPBS - 由MRJ于1998年发布的原始开源版本</li>
+<li>TORQUE - 由Adaptive Computing公司（前身为Cluster Resources公司）维护的OpenPBS分支</li>
+<li>PBS Professional（PBS Pro） - <code>Altair Engineering</code>提供的PBS版本。</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">mount -t iso9660 ./CentOS-7-x86_64-Minimal-1511.iso /tmp/CentOS7</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Mac:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">hdiutil attach -nomount ./CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line">mount -t cd9660 /dev/disk4 /tmp/CentOS7</span><br></pre></td></tr></table></figure>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-1.png" alt="image1"></p>
-<p>上图即该镜像包含的所有文件，分别介绍一下：</p>
-<ul>
-<li>EFI 负责引导的，包含bootloader</li>
-<li>images PXE安装时需要的内核和引导程序（其实和isolinux中的内核及引导程序是相同的，不知道为啥放两个…）</li>
-</ul>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-2.png" alt="image2"></p>
-<ul>
-<li>isolinux 系统内核及引导程序</li>
-<li>LiveOS 包含了压缩的rootfs.img</li>
-<li>Packages rpm包</li>
-<li>repodata 安装包源信息</li>
-</ul>
-<p>对于光盘的定制化，我们通常不需要对EFI/images进行任何操作，需要定制的是isolinux、LiveOS中的rootfs.img以及Packages，isolinux影响到进入安装的第一步，rootfs中包含的文件影响安装过程，Packages则是放我们所需要的第三方软件rpm安装包。</p>
-<hr>
-<h2 id="Linux安装流程分析"><a href="#Linux安装流程分析" class="headerlink" title="Linux安装流程分析"></a>Linux安装流程分析</h2><blockquote>
-<p>以下实验环境为CentOS(7.2.1511)，其他发行版本可能略有区别</p>
-</blockquote>
-<p>当我们启动安装光盘时，我们看到的是什么？<br>首先是ISOLINUX Boot Menu</p>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png" alt="image3"></p>
-<p>然后是Anaconda</p>
-<blockquote>
-<p>Anaconda is the installer used by Red Hat Enterprise Linux, Fedora, and their derivatives.</p>
-</blockquote>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-4.png" alt="image"></p>
-<p>从光盘加载到系统安装完成经历了什么呢？</p>
-<ol>
-<li>开机</li>
-<li>BIOS检测（硬件检测、引导顺序等）</li>
-<li>读取并运行装置内 MBR 的 boot Loader</li>
-<li>加载内核</li>
-<li>启动liveCD或Anaconda</li>
-<li>由用户配置安装选项或解析kickstart配置</li>
-<li>分区并挂载文件系统</li>
-<li>完成安装，重启</li>
-</ol>
-<blockquote>
-<p>NOTE: 步骤7时的rootfs是LiveOS/squashfs.img中的rootfs.img，而完成安装后的rootfs目前在/mnt/sysimage中</p>
-</blockquote>
-<p>⚠️ <strong>但是我们缺少了重要的“定制化安装信息收集”</strong>，从上面的流程分析可知，可以在Boot Menu和Anaconda之间插一脚（4～5步骤中增加一步），额外收集一些用户提供的安装信息。</p>
-<p>我们需要先找到Anaconda的启动入口，上面已经介绍了如何挂载光盘，接下来我们需要把光盘里面的文件继续展开。因为挂载的ISO是只读的，所以我们需要将文件复制出来，分析修改完文件之后，再重新打包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载光盘💿</span></span><br><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">hdiutil attach -nomount ./CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line">mount -t cd9660 /dev/disk4 /tmp/CentOS7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件</span></span><br><span class="line">mkdir CentOS-7-x86_64-Minimal-1511</span><br><span class="line">rsync -avz /tmp/CentOS7/ CentOS-7-x86_64-Minimal-1511</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制LiveOS</span></span><br><span class="line">cp -r CentOS-7-x86_64-Minimal-1511/LiveOS ./LiveOS</span><br></pre></td></tr></table></figure>
-<p>现在得到了一个包含了squashfs.img的LiveOS文件夹，squashfs.img是干啥的？简单的说它是一个高压缩率的压缩文件，压缩了整个rootfs，看上去只有200多MB，实际上有2GB</p>
-<blockquote>
-<p>Squashfs is a compressed read-only file system for Linux. Squashfs compresses files, inodes and directories, and supports block sizes up to 1 MB for greater compression. Several compression algorithms are supported. Squashfs is also the name of free software, licensed under the GPL, for accessing Squashfs filesystems.</p>
-</blockquote>
-<p>执行命令解压开，你会得到一个包含了<code>LiveOS/rootfs.img</code>的名为<code>squashfs-root</code>的文件夹</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unsquashfs squashfs.img</span><br></pre></td></tr></table></figure>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-5.png" alt="image"><br>可以看到该文件其实是<code>ext4</code>的文件系统，启动一个Linux环境，挂载该文件，就能看到里面的所有东西了。这里我用docker启动了一个centos7环境<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-6.png" alt="image"><br>是不是跟Linux的根目录文件一样？这就是在安装时系统加载的rootfs，而Anaconda的入口文件就是usr/sbin/anaconda，这是一个Python脚本。我们打开它找到它的入口，在这里调用其他的脚本或者程序，就可以在Anaconda之前插一脚了。这里我自己写了一个小程序来收集用户的信息，在anaconda的入口处先调用这个程序。<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-7.png" alt="image"></p>
-<p>修改完毕之后，我们需要重新压缩squashfs.img</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mksquashfs squashfs-root squashfs.img -b 1024k -comp xz</span><br></pre></td></tr></table></figure>
-<p>把新的squashfs.img替换复制出来的光盘镜像文件中的squashfs.img。用dd命令将原来的iso引导信息导出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp squashfs.img CentOS-7-x86_64-Minimal-1511/LiveOS/</span><br><span class="line">dd <span class="keyword">if</span>=CentOS-7-x86_64-Minimal-1511.iso bs=512 count=1 of=boot.mbr</span><br></pre></td></tr></table></figure>
-<p>最后重新制作iso镜像，这里我用的是<code>xorriso</code>，命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xorriso -pathspecs as_mkisofs -as mkisofs -iso-level 3 -full-iso9660-filenames -volid <span class="string">"CentOS 7 x86_64"</span> -appid  -publisher  -preparer <span class="string">"prepared by me"</span> -eltorito-boot isolinux/isolinux.bin -eltorito-catalog isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -isohybrid-mbr ../boot.mbr -eltorito-alt-boot -e images/efiboot.img -no-emul-boot -isohybrid-gpt-basdat -output ../repacked.iso .</span><br></pre></td></tr></table></figure>
-<p>现在让我们看看repacked.iso运行起来是什么样的吧：<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-8.png" alt="image"></p>
-<hr>
-<h2 id="界面定制化"><a href="#界面定制化" class="headerlink" title="界面定制化"></a>界面定制化</h2><h3 id="Boot-Menu定制"><a href="#Boot-Menu定制" class="headerlink" title="Boot Menu定制"></a>Boot Menu定制</h3><p>只需要修改isolinux/isolinux.cfg文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-boot-menu-customization" target="_blank" rel="noopener">boot-menu-customization</a> </p>
-<h3 id="Anaconda界面定制"><a href="#Anaconda界面定制" class="headerlink" title="Anaconda界面定制"></a>Anaconda界面定制</h3><p>Anaconda界面定制的修改稍微复杂一些，需要修改css文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-anaconda-visuals#sect-anaconda-visuals-graphics" target="_blank" rel="noopener">customized-anaconda</a></p>
-<hr>
-<h2 id="自动化脚本（未完待续）"><a href="#自动化脚本（未完待续）" class="headerlink" title="自动化脚本（未完待续）"></a>自动化脚本（未完待续）</h2><h3 id="kickstart"><a href="#kickstart" class="headerlink" title="kickstart"></a>kickstart</h3><h3 id="程序部署脚本"><a href="#程序部署脚本" class="headerlink" title="程序部署脚本"></a>程序部署脚本</h3><hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/" target="_blank" rel="noopener">ANACONDA CUSTOMIZATION GUIDE</a> </li>
-<li><a href="https://anaconda-installer.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">anaconda文档</a></li>
-<li><a href="http://blog.csdn.net/trochiluses/article/details/17674415" target="_blank" rel="noopener">Linux安装过程分析</a></li>
-<li><a href="https://www.ibm.com/developerworks/cn/linux/1306_qinzl_squashfs/" target="_blank" rel="noopener">基于 SquashFS 构建 Linux 可读写文件系统</a></li>
+<p><code>Torque</code>其实是基于<code>OpenPBS</code>开发的，早期的Torque也是开源免费软件，不过2018年6月开始TORQUE不再开源。<code>Moab</code>的前生叫<code>Maui</code>，Torque自带的scheduler功能比较弱，所以通常是需要配合Maui使用的，Torque+Maui才是我们讨论的调度系统，Maui之前是开源免费的，后来变成了商用软件<code>Moab</code>后不再免费。PBS Pro截止2016年6月之前都是商用付费软件，从2016年6月起，Altair公司宣布提供开源许可并逐步开放源码。</p>
+<p><code>Slurm</code>前期主要由劳伦斯利弗莫尔国家实验室，SchedMD，Linux NetworX，Hewlett-Packard和Groupe Bull负责开发，它受到封闭源Quadrics RMS的启发，并且具有相似的语法。目前由社区和SchedMD公司共同维护，保持开源和免费，由SchedMD公司提供商业支持。</p>
+<h2 id="调度系统选择"><a href="#调度系统选择" class="headerlink" title="调度系统选择"></a>调度系统选择</h2><p>上面已经分析和介绍了几款主流的调度系统，他们中的大多数如今都是商业软件，商业软件缺点是需要付费并且通常价格高昂，但它们提供一些开源免费软件所不具备的优势。例如PBS Pro背靠Altair，Altair生产了一些工业界常用的数值模拟软件，因为属于同一家公司，所以当你恰好需要的就是这些应用软件时，PBS Pro也许是不错的选择。LSF也有一些行业内的应用软件支持，并且它们都提供一些商业技术支持以及相关的完整的解决方案。所以如果你是商用并且不差钱，这些商用调度系统是不错的选择。</p>
+<p>但是综合考虑的话，我更倾向于推荐Slurm作为调度管理器。首先它是开源且免费的，我们可以学习它的源码，基于Slurm开发产品。其次它具备非常优秀的设计和性能，目前全球许多超算中心和超大规模的集群包括我国的天河二号等都采用Slurm作为调度系统。而且Slurm目前仍然处于活跃的开发和维护中，社区占有率和话题度都比较高，相关的学习资料也相当完善，并且官方提供了足够详细的使用文档。</p>
+<p>后续的文章我将更加详细的介绍Slurm及其使用。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_cluster_software" target="_blank" rel="noopener">Comparison of cluster software</a></li>
+<li><a href="https://www.mir.wustl.edu/Portals/0/Documents/Uploads/CHPC/WashU_2_moab.pdf" target="_blank" rel="noopener">Job Scheduling with Moab Cluster Suite</a></li>
+<li><a href="https://en.wikipedia.org/wiki/TORQUE" target="_blank" rel="noopener">TORQUE</a></li>
 </ul>
 
       
@@ -578,7 +591,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
+          
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
           
         </div>
       
@@ -606,8 +621,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/01/meta-programming/" rel="next" title="简单聊聊元编程">
-                <i class="fa fa-chevron-left"></i> 简单聊聊元编程
+              <a href="/2018/07/28/HPC系列文章-2-：HPC技术概览/" rel="next" title="HPC系列文章(2)：HPC技术概览">
+                <i class="fa fa-chevron-left"></i> HPC系列文章(2)：HPC技术概览
               </a>
             
           </div>
@@ -615,10 +630,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/28/Docker-in-LXC踩坑/" rel="prev" title="Docker in LXC踩坑">
-                Docker in LXC踩坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -938,7 +949,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要定制化？"><span class="nav-number">1.</span> <span class="nav-text">为什么需要定制化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当我谈“定制化Linux安装镜像”，我在定制什么？"><span class="nav-number">2.</span> <span class="nav-text">当我谈“定制化Linux安装镜像”，我在定制什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux安装光盘分析"><span class="nav-number">3.</span> <span class="nav-text">Linux安装光盘分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux安装流程分析"><span class="nav-number">4.</span> <span class="nav-text">Linux安装流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面定制化"><span class="nav-number">5.</span> <span class="nav-text">界面定制化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-Menu定制"><span class="nav-number">5.1.</span> <span class="nav-text">Boot Menu定制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anaconda界面定制"><span class="nav-number">5.2.</span> <span class="nav-text">Anaconda界面定制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化脚本（未完待续）"><span class="nav-number">6.</span> <span class="nav-text">自动化脚本（未完待续）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kickstart"><span class="nav-number">6.1.</span> <span class="nav-text">kickstart</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序部署脚本"><span class="nav-number">6.2.</span> <span class="nav-text">程序部署脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初识集群作业调度系统"><span class="nav-number">1.</span> <span class="nav-text">初识集群作业调度系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度系统对比"><span class="nav-number">2.</span> <span class="nav-text">调度系统对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#术语解释"><span class="nav-number">2.1.</span> <span class="nav-text">术语解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#历史"><span class="nav-number">2.2.</span> <span class="nav-text">历史</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度系统选择"><span class="nav-number">3.</span> <span class="nav-text">调度系统选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
