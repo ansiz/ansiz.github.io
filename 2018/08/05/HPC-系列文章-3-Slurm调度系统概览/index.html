@@ -125,7 +125,7 @@
 <meta property="og:description" content="初识集群作业调度系统经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？  系统中存在若干进程，操作系统会如何安排计算机资源？ 是否可以为某些特定进程分配更多的资源？ 如果我们使用的是多核心处理器">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/schedule.png">
-<meta property="og:updated_time" content="2018-08-08T02:09:30.540Z">
+<meta property="og:updated_time" content="2018-08-11T10:37:34.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(3):调度系统概览">
 <meta name="twitter:description" content="初识集群作业调度系统经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？  系统中存在若干进程，操作系统会如何安排计算机资源？ 是否可以为某些特定进程分配更多的资源？ 如果我们使用的是多核心处理器">
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">39</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">40</span></a>
   </li>
 
       
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-08 10:09:30" itemprop="dateModified" datetime="2018-08-08T10:09:30+08:00">2018-08-08</time>
+                <time title="修改时间：2018-08-11 18:37:34" itemprop="dateModified" datetime="2018-08-11T18:37:34+08:00">2018-08-11</time>
               
             
           </span>
@@ -546,8 +546,8 @@
 </ul>
 <p><code>Torque</code>其实是基于<code>OpenPBS</code>开发的，早期的Torque也是开源免费软件，不过2018年6月开始TORQUE不再开源。<code>Moab</code>的前生叫<code>Maui</code>，Torque自带的scheduler功能比较弱，所以通常是需要配合Maui使用的，Torque+Maui才是我们讨论的调度系统，Maui之前是开源免费的，后来变成了商用软件<code>Moab</code>后不再免费。PBS Pro截止2016年6月之前都是商用付费软件，从2016年6月起，Altair公司宣布提供开源许可并逐步开放源码。</p>
 <p><code>Slurm</code>前期主要由劳伦斯利弗莫尔国家实验室，SchedMD，Linux NetworX，Hewlett-Packard和Groupe Bull负责开发，它受到封闭源Quadrics RMS的启发，并且具有相似的语法。目前由社区和SchedMD公司共同维护，保持开源和免费，由SchedMD公司提供商业支持。</p>
-<h2 id="调度系统选择"><a href="#调度系统选择" class="headerlink" title="调度系统选择"></a>调度系统选择</h2><p>上面已经分析和介绍了几款主流的调度系统，他们中的大多数如今都是商业软件，商业软件缺点是需要付费并且通常价格高昂，但它们提供一些开源免费软件所不具备的优势。例如PBS Pro背靠Altair，Altair生产了一些工业界常用的数值模拟软件，因为属于同一家公司，所以当你恰好需要的就是这些应用软件时，PBS Pro也许是不错的选择。LSF也有一些行业内的应用软件支持，并且它们都提供一些商业技术支持以及相关的完整的解决方案。所以如果你是商用并且不差钱，这些商用调度系统是不错的选择。</p>
-<p>但是综合考虑的话，我更倾向于推荐Slurm作为调度管理器。首先它是开源且免费的，我们可以学习它的源码，基于Slurm开发产品。其次它具备非常优秀的设计和性能，目前全球许多超算中心和超大规模的集群包括我国的天河二号等都采用Slurm作为调度系统。而且Slurm目前仍然处于活跃的开发和维护中，社区占有率和话题度都比较高，相关的学习资料也相当完善，并且官方提供了足够详细的使用文档。</p>
+<h2 id="调度系统选择"><a href="#调度系统选择" class="headerlink" title="调度系统选择"></a>调度系统选择</h2><p>上面已经分析和介绍了几款主流的调度系统，他们中的大多数如今都是商业软件，商业软件缺点是需要付费并且通常价格高昂，但它们提供一些开源免费软件所不具备的优势。例如PBS Pro背靠Altair，Altair生产了一些工业界常用的数值模拟软件，因为属于同一家公司，所以当你恰好需要的就是这些应用软件时，PBS Pro也许是不错的选择。LSF也有一些行业内的应用软件支持，并且它们都提供一些商业技术支持以及相关的完整的解决方案。所以如果你是商用、依赖特定厂商提供的应用层配套软件并且不差钱，这些商用调度系统是不错的选择。</p>
+<p>但是综合考虑的话，我更倾向于推荐Slurm作为调度管理器。首先它是开源且免费的，我们可以学习它的源码，基于Slurm开发产品。其次从对比数据可以看出来它具备非常优秀的设计和性能，目前全球许多超算中心和超大规模的集群包括我国的天河二号等都采用Slurm作为调度系统。而且Slurm目前仍然处于活跃的开发和维护中，社区占有率和话题度都比较高，相关的学习资料也相当完善，并且官方提供了足够详细的使用文档。</p>
 <p>后续的文章我将更加详细的介绍Slurm及其使用。</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><a href="https://en.wikipedia.org/wiki/Comparison_of_cluster_software" target="_blank" rel="noopener">Comparison of cluster software</a></li>
@@ -644,6 +644,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/11/HPC-系列文章-4-Slurm概览/" rel="prev" title="HPC 系列文章(4):Slurm概览">
+                HPC 系列文章(4):Slurm概览 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -723,7 +727,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
