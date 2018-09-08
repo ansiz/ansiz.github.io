@@ -116,20 +116,20 @@
 
 
 
-  <meta name="description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
-<meta name="keywords" content="假装有思想,OmniMarkupPreviewer,Windows">
+  <meta name="description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
+<meta name="keywords" content="高性能计算,HPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows平台OmniMarkupPreviewer配置引发的思考">
-<meta property="og:url" content="http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/index.html">
+<meta property="og:title" content="HPC 系列文章(8):第一个Slurm作业">
+<meta property="og:url" content="http://zxh.site/2018/09/08/HPC-系列文章-8-第一个Slurm作业/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
+<meta property="og:description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/dontcopy.jpg">
-<meta property="og:updated_time" content="2018-05-26T04:19:42.000Z">
+<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/concept.gif">
+<meta property="og:updated_time" content="2018-09-08T12:47:25.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows平台OmniMarkupPreviewer配置引发的思考">
-<meta name="twitter:description" content="假装思考这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个markdown的插件，也就是OmniMarkup">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/dontcopy.jpg">
+<meta name="twitter:title" content="HPC 系列文章(8):第一个Slurm作业">
+<meta name="twitter:description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
+<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/concept.gif">
 
 
 
@@ -138,7 +138,7 @@
 
 
 
-  <link rel="canonical" href="http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/"/>
+  <link rel="canonical" href="http://zxh.site/2018/09/08/HPC-系列文章-8-第一个Slurm作业/"/>
 
 
 
@@ -148,7 +148,7 @@
   };
 </script>
 
-  <title>Windows平台OmniMarkupPreviewer配置引发的思考 | Ansiz</title>
+  <title>HPC 系列文章(8):第一个Slurm作业 | Ansiz</title>
   
 
 
@@ -313,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/09/08/HPC-系列文章-8-第一个Slurm作业/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
@@ -330,7 +330,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Windows平台OmniMarkupPreviewer配置引发的思考
+          <h2 class="post-title" itemprop="name headline">HPC 系列文章(8):第一个Slurm作业
               
             
           </h2>
@@ -355,24 +355,12 @@
                 
               
 
-              <time title="创建时间：2016-06-03 23:08:45" itemprop="dateCreated datePublished" datetime="2016-06-03T23:08:45+08:00">2016-06-03</time>
+              <time title="创建时间：2018-09-08 18:00:04 / 修改时间：20:47:25" itemprop="dateCreated datePublished" datetime="2018-09-08T18:00:04+08:00">2018-09-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-05-26 12:19:42" itemprop="dateModified" datetime="2018-05-26T12:19:42+08:00">2018-05-26</time>
               
             
           </span>
@@ -389,7 +377,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/假装有思想/" itemprop="url" rel="index"><span itemprop="name">假装有思想</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
 
                 
                 
@@ -404,8 +399,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/06/03/markdown-plugin-for-sublime-text/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/06/03/markdown-plugin-for-sublime-text/" itemprop="commentCount"></span>
+                <a href="/2018/09/08/HPC-系列文章-8-第一个Slurm作业/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/HPC-系列文章-8-第一个Slurm作业/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -433,22 +428,49 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/06/dontcopy.jpg" alt="git"></p>
-<h3 id="假装思考"><a href="#假装思考" class="headerlink" title="假装思考"></a>假装思考</h3><p>这篇博客其实并不是教程，只是记录一下今天遇到的我觉得值得吐槽的一件事情。事情是这样的，今天下午我打算回来写个博客，因为博客是用Hexo搭建的，所以写的时候自然想使用markdown来写。平时我都用Atom来写因为它提供了实时预览的功能，但是最近Atom是越用越卡，而在线编辑的又感觉太麻烦，我感觉还是Sublime用起来爽于是就试着找了一个<code>markdown</code>的插件，也就是<code>OmniMarkupPreviewer</code>。配置好之后体验了一把（这篇博客就是用这个插件写的）。<a id="more"></a><code>OmniMarkupPreviewer</code>确实是一个不错的插件，不过…好像现在程序员们都很有钱嘛，不管是百度还是谷歌搜出来的教程都是Mac的配置，我试着配置了一下，发现别的功能都是正常的，但是无法直接在Sublime中按<code>Ctrl+Alt+O</code>打开浏览器实时预览，而这正是我需要的最核心的功能啊。于是我又尝试用我蹩脚的英文开始搜索，仅有的几个提问竟然都没有人回答。我不禁开始深思难道真的是我太low了吗作为一个程序员我竟然不用Mac真可耻！不过作为一个程序员，不手动解决这个问题我是绝对不会善罢甘休的，于是我继续搜索，整整用了一个小时，依然没有解决这个问题。<br>我突然发现我浏览过的数十篇介绍如何配置的文章几乎全都如出一辙，<strong>copied and pasted, again and again</strong>，所以虽然我点开了几十个链接，真正有用的信息其实就那么几条，有的人用的是Windows粘贴在自己博客里面的教程却是Mac的配置文件，我真想问他真的使用这个插件了吗？<del>还是说这个插件其实以前Windows也是这么配置的？</del>（后来我看了源码并不是这样配置的）还有的人直接就是原封不动的复制粘贴了别人的教程，哦，不过他们却不辞辛劳的把原文链接和原作者名匿去了，这样显得更像自己写的？<br>互联网的开放性使得越来越多的信息变得冗余，相比没有网络的时代，我们能获取知识的途径更多了更便捷了，但是冗余的信息也让我们耗费更多本不应该耗费的时间在搜索和提取信息上。而造成这些信息冗余的正是我们这些互联网的使用者。有时候我在想，网上那么多错误、虚假、重复的信息是否能有一种技术或者一批“网络卫士”来清除这些信息只保留那些有价值的不重复的信息呢？我这么一个不知名初出茅庐不久的程序员当然不是想喊出什么和谐网络净化知识的口号，现阶段更没有这个能力去开发实现，我只是觉得作为一个技术从业者，参考、总结、整理优秀的技术文档存入自己的知识库无可厚非，但直接复制粘贴别人的文章到自己的博客中，甚至没有验证过是否可行，除了让信息变得更加冗余之外有什么意义呢？  </p>
-<blockquote>
-<p>Don’t repeat yourself<br>And<br><strong>Don’t repeat others</strong>  </p>
-</blockquote>
-<h3 id="尝试解决问题"><a href="#尝试解决问题" class="headerlink" title="尝试解决问题"></a>尝试解决问题</h3><p>写了这么多废话，还是说一下Windows上这玩意儿怎么配置吧。由于没找到答案，所以我决定自己从源码中寻找答案，从来没写过python的我硬着头皮打开了源码，我定位到了这段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launching_web_browser_for_url</span><span class="params">(url, success_msg_default=None, success_msg_user=None)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        setting = Setting.instance()</span><br><span class="line">        <span class="keyword">if</span> setting.browser_command:</span><br><span class="line">            browser_command = [os.path.expandvars(arg).format(url=url)</span><br><span class="line">                               <span class="keyword">for</span> arg <span class="keyword">in</span> setting.browser_command]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> os.name == <span class="string">'nt'</span>:</span><br><span class="line">                <span class="comment"># unicode arguments broken under windows</span></span><br><span class="line">                encoding = locale.getpreferredencoding()</span><br><span class="line">                browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</span><br><span class="line"></span><br><span class="line">            subprocess.Popen(browser_command)</span><br><span class="line">            <span class="keyword">if</span> success_msg_user:</span><br><span class="line">                sublime.status_message(success_msg_user)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># Default web browser</span></span><br><span class="line">            desktop.open(url)</span><br><span class="line">            <span class="keyword">if</span> success_msg_default:</span><br><span class="line">                sublime.status_message(success_msg_default)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">if</span> setting.browser_command:</span><br><span class="line">            log.exception(<span class="string">'Error while launching user defined web browser'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            log.exception(<span class="string">'Error while launching default web browser'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>显然这就是打开浏览器调用的函数，于是我将browser_command和url打印出来，发现传入的参数是跟配置文件中写的一样，但是<code>subprocess.Popen(browser_command)</code>却报错，看来参数有误<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoding = locale.getpreferredencoding()</span><br><span class="line">browser_command = [arg.encode(encoding) <span class="keyword">for</span> arg <span class="keyword">in</span> browser_command]</span><br></pre></td></tr></table></figure></p>
-<p>我又将<code>encoding</code>的值打印输出，系统拿到的值是cp936编码，查了一下这是GBK编码的别名，看来这并没有什么问题</p>
-<blockquote>
-<p>微软的CP936通常被视为等同GBK，连 IANA 也以“CP936”为“GBK”之别名[1]。事实上比较起来， GBK 定义之字符较 CP936 多出95字（15个非汉字及80个汉字）  </p>
-</blockquote>
-<p>这时候我注意到<code>subprocess.Popen(browser_command)</code>中并不包含url的参数，而浏览器应该不仅仅打开自身，还需要跳转到对应的url上，所以参数应该是从<code>browser_command</code>中传入的，果然在<code>browser_command</code>中有一个{url}  </p>
-<pre><code>&quot;browser_command&quot;: [&quot;open&quot;, &quot;-a&quot;, &quot;Google Chrome&quot;, &quot;{url}&quot;]
-</code></pre><p>也就是说这个是不应该被修改的，于是我尝试将前面的所有参数替换为<code>&quot;C:/Program Files (x86)/Google/Chrome/Application/chrome.exe&quot;</code>，果然问题得到解决了。不过这时候我接着看了下面的代码，<code>if setting.browser_command:</code>下面有<code>else</code>，也就是说如果这一项没有配置，系统也会尝试用默认浏览器去打开这个链接，果然我将<code>browser_command</code>置空后依然能打开</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>所以结论是，Windows平台OmniMarkupPreviewer配置项<code>browser_command</code>应该设置为空（默认浏览器打开）或者<code>[&quot;$your_browser_path&quot;,{url}]</code>  </p>
-<p>注：如果你按上述配置了，但依然不能用，控制台提示类似<code>TypeError: Type str doesn&#39;t support the buffer API</code>这样的错误，请参考这个<a href="https://github.com/timonwong/OmniMarkupPreviewer/pull/120" target="_blank" rel="noopener">Pull Request</a>进行修改</p>
+        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/concept.gif" alt="concept"></p>
+<p>我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在<a href="http://blog.zxh.site/2018/08/11/HPC-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-4-Slurm%E6%A6%82%E8%A7%88/#more" target="_blank" rel="noopener">HPC 系列文章(4):Slurm概览</a>中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。</p>
+<p>介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：<a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Sample /etc/slurm.conf</span><br><span class="line">################################################</span><br><span class="line">#           SCHEDULING &amp; ALLOCATION            #</span><br><span class="line">################################################</span><br><span class="line">FastSchedule=2</span><br><span class="line">#</span><br><span class="line">################################################</span><br><span class="line">#           Nodes Configurations           #</span><br><span class="line">################################################</span><br><span class="line">NodeName=master Sockets=2 CoresPerSocket=8 ThreadsPerCore=1 Gres=gpu:tesla:no_consume:2 RealMemory=65535 TmpDisk=100000 Weight=6 Feature=video</span><br><span class="line">NodeName=node01 CPUs=8 RealMemory=4096 TmpDisk=14190</span><br><span class="line">#</span><br><span class="line">################################################</span><br><span class="line">#           Partition Configurations           #</span><br><span class="line">################################################</span><br><span class="line">PartitionName=node-all Nodes=master,node01 State=UP Default=YES MaxTime=60</span><br><span class="line">PartitionName=master-only MaxTime=UNLIMITED Nodes=master State=UP</span><br></pre></td></tr></table></figure>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>先说节点，对于Slurm系统而言，每一台安装并正确配置了slurmd进程的服务器就是一个节点。安装了slurmctld的节点虽然我们称之为主控节点，但实际上它并不是我们这里讨论的节点，这里指的节点即计算资源。为了使节点的概念更符合我们的直觉，我们可以认为每个计算节点就是一台服务器。</p>
+<h3 id="节点配置"><a href="#节点配置" class="headerlink" title="节点配置"></a>节点配置</h3><p>回到配置文件中，我们先看master的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NodeName=master Sockets=2 CoresPerSocket=8 ThreadsPerCore=1 RealMemory=65535 TmpDisk=100000 Weight=6 Gres=gpu:tesla:no_consume:2 Feature=video</span><br></pre></td></tr></table></figure>
+<p>每一项简单介绍一下：</p>
+<ul>
+<li>NodeName=master 即节点名为master</li>
+<li>Sockets=2 CPU插槽两个</li>
+<li>CoresPerSocket=8 每个插槽上CPU的核心数量，这里即8核处理器</li>
+<li>ThreadsPerCore=1 单个物理核心中的逻辑线程数</li>
+</ul>
+<div class="note info"><p>CPU数量计算公式：CPUs = Sockets*CoresPerSocket*ThreadsPerCore，上面master包含16个逻辑CPU,也可以直接通过CPUs来设定逻辑CPU数量，上面node01就直接采用了CPUs配置项。</p></div>
+<ul>
+<li>RealMemory=65535 节点上实内存的大小，以兆字节为单位，即该节点内存为64G</li>
+<li>TmpDisk=100000 临时磁盘存储的总大小，以兆字节为单位，该节点有100G临时存储空间</li>
+<li>Weight=6 节点权重为6，在所有条件相同的情况下，作业将被分配到满足其要求的最低权重的节点。</li>
+<li>Gres=gpu:tesla:no_consume:2 GRES是Slurm中的通用资源配置项，属于比较高级的配置项，这个留到后面再仔细介绍，这里只需要知道根据配置文件显示该节点配备了两块Tesla的GPU</li>
+<li>Feature=video 以逗号分隔的任意字符串列表，表示与节点相关的某些特征。简单的说就是给节点打的tag。</li>
+</ul>
+<p>关于节点的配置项其实还有很多，更多内容可以参考<a href="https://slurm.schedmd.com/slurm.conf.html" target="_blank" rel="noopener">slurm.conf</a>，这里我们先就介绍这些。</p>
+<p>为什么要配置这些东西呢？原因很简单，调度系统的核心功能说白了就是帮你把作业分配到最合适的节点上运行。什么是合适的节点呢？能满足你作业需求并且符合当前分配策略的最优解就是合适的节点。你为节点和作业配置的参数越详尽，越能精细化分配条件。</p>
+<h3 id="配置我可以瞎写吗？"><a href="#配置我可以瞎写吗？" class="headerlink" title="配置我可以瞎写吗？"></a>配置我可以瞎写吗？</h3><p>答案是可以，我在配置文件中设置了FastSchedule=2，该设置项一共有三个有效值(0,1,2)，0则会严格检查节点的实际配置，1会使用配置文件中的值作为配置但会将实际低于配置值的节点自动设置为DRAIN状态（表示资源耗尽，该状态的节点不会接受任何作业），而2则完全不校验实际配置，你想怎么配置就怎么配置，这可以方便我们超配，也方便测试学习。</p>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>分区将一组节点组合成逻辑上的一个集合，也有人称之为“队列”，实际上节点间并没有队列的概念，所以我认为“分区”是一个更合适的翻译。</p>
+<h3 id="分区配置"><a href="#分区配置" class="headerlink" title="分区配置"></a>分区配置</h3><p>回到配置文件中，我配置了两个队列，分别是node-all包含了master和node01节点，master-only则只包含master节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PartitionName=node-all Nodes=master,node01 State=UP Default=YES MaxTime=60</span><br><span class="line">PartitionName=master-only MaxTime=UNLIMITED Nodes=master State=UP</span><br></pre></td></tr></table></figure>
+<p>以node-all为例简单介绍一下各个配置项：</p>
+<ul>
+<li>PartitionName=node-all 分区名</li>
+<li>Nodes=master,node01 包含的节点，可以用逗号分隔开，也可以使用类似node[01-05]这样的批量配置。</li>
+<li>State=UP 队列的状态</li>
+<li>Default=YES 是否为默认分区，如果没有给作业指明分区，则会分配到默认分区中。</li>
+<li>MaxTime=60 作业的最大运行时间限制。支持多种格式，默认为分钟。这里表示该队列中运行的作业最多可以运行60分钟。</li>
+</ul>
+<p>关于分区的配置项更多内容可以参考<a href="https://slurm.schedmd.com/slurm.conf.html" target="_blank" rel="noopener">slurm.conf</a>，后面我们也会更深入的去讲解一些高级的配置。</p>
+<h2 id="作业提交"><a href="#作业提交" class="headerlink" title="作业提交"></a>作业提交</h2><p><strong>特定时间为用户进行的一次资源申请或分配即可看作一个作业</strong>。这和我们惯性思维中的作业概念并不一致，传统意义上我们总是认为作业应该是某个运行的脚本或者程序，但事实上Slurm的作业只代表一次资源申请或分配。理解这个区别将有利于你理解Slurm中一些比较高级的用法。</p>
+<p>Slurm中有多种作业提交方式，分别是sbatch、srun和salloc，关于它们的区别和用法我们留到后面仔细讲解，这里我们就以sbatch为例提交作业。你需要将你要运行的内容编辑成脚本，然后由sbatch命令指定参数和该脚本。我们先编辑一个最简单的bash脚本命名为<code>test.sh</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Hello world"</span></span><br><span class="line">date</span><br><span class="line">hostname</span><br><span class="line">sleep 60</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Bye"</span></span><br></pre></td></tr></table></figure>
+<p>该脚本会依次输出”Hello world”、当前时间、节点名，休眠60秒后会输出Bye，我们试着提交它：</p>
+<p><code>sbatch -p master-only test.sh</code></p>
+<p>一切正常的话，你将得到一个slurm-1.out文件，其中包含了上述输出。你已经成功的提交了一个脚本并且slurm将其分配到了master节点上运行。不过似乎没有体现出调度系统的优势？下一节我们将继续探讨作业提交。</p>
 
       
     </div>
@@ -498,11 +520,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/假装有思想/" rel="tag"># 假装有思想</a>
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
           
-            <a href="/tags/OmniMarkupPreviewer/" rel="tag"># OmniMarkupPreviewer</a>
-          
-            <a href="/tags/Windows/" rel="tag"># Windows</a>
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
           
         </div>
       
@@ -530,8 +550,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/03/redis/" rel="next" title="多机高可用Redis Sentinel配置">
-                <i class="fa fa-chevron-left"></i> 多机高可用Redis Sentinel配置
+              <a href="/2018/09/02/HPC-系列文章-7-Debian-Ubuntu安装Slurm/" rel="next" title="HPC 系列文章(7):Debian/Ubuntu安装Slurm">
+                <i class="fa fa-chevron-left"></i> HPC 系列文章(7):Debian/Ubuntu安装Slurm
               </a>
             
           </div>
@@ -539,10 +559,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/12/redis-rpc/" rel="prev" title="巧用Redis模拟RPC">
-                巧用Redis模拟RPC <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -862,7 +878,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#假装思考"><span class="nav-number">1.</span> <span class="nav-text">假装思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试解决问题"><span class="nav-number">2.</span> <span class="nav-text">尝试解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点"><span class="nav-number">1.</span> <span class="nav-text">节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点配置"><span class="nav-number">1.1.</span> <span class="nav-text">节点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置我可以瞎写吗？"><span class="nav-number">1.2.</span> <span class="nav-text">配置我可以瞎写吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分区配置"><span class="nav-number">2.1.</span> <span class="nav-text">分区配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业提交"><span class="nav-number">3.</span> <span class="nav-text">作业提交</span></a></li></ol></div>
             
 
           </div>
