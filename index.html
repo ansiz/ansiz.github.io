@@ -373,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-09 08:12:23" itemprop="dateModified" datetime="2018-10-09T08:12:23+08:00">2018-10-09</time>
+                <time title="修改时间：2018-10-09 08:13:59" itemprop="dateModified" datetime="2018-10-09T08:13:59+08:00">2018-10-09</time>
               
             
           </span>
@@ -443,7 +443,7 @@
       
         
           <p>前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用<code>sbatch</code>命令提交是最为常见的方式，不过这种方式存在弊端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候<code>srun</code>和<code>salloc</code>则是更好的方式。</p>
-<h2 id="salloc"><a href="#salloc" class="headerlink" title="salloc"></a>salloc</h2><p>salloc从字面上就能看出来，实际上是”slurm allocate”的缩写，在解释salloc之前，我们先回顾一下之前我对于作业和作业步的定义：</p>
+<h2 id="salloc"><a href="#salloc" class="headerlink" title="salloc"></a>salloc</h2><p>salloc从字面上就能看出来，实际上是”slurm allocate”的缩写，在解释salloc之前，我们先回顾一下之前对于作业和作业步的定义：</p>
 <blockquote>
 <ul>
 <li>作业（job）：<strong>特定时间为用户进行的一次资源申请或分配即可看作一个作业</strong>。这和我们惯性思维中的作业概念并不一致，传统意义上我们总是认为作业应该是某个运行的脚本或者程序，但事实上Slurm的作业只代表一次资源申请或分配。理解这个区别将有利于你理解Slurm中一些比较高级的用法。</li>
