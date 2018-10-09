@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2018-10-01T14:57:45.244Z</updated>
+  <updated>2018-10-09T00:11:00.462Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HPC 系列文章(12):交互作业</title>
+    <link href="http://zxh.site/2018/10/08/HPC-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-12-%E4%BA%A4%E4%BA%92%E4%BD%9C%E4%B8%9A/"/>
+    <id>http://zxh.site/2018/10/08/HPC-系列文章-12-交互作业/</id>
+    <published>2018-10-08T12:12:15.000Z</published>
+    <updated>2018-10-09T00:11:00.462Z</updated>
+    
+    <content type="html"><![CDATA[<p>前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用<code>sbatch</code>命令提交是最为常见的方式，不过这种方式存在弊端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候<code>srun</code>和<code>salloc</code>则是更好的方式。</p><h2 id="salloc"><a href="#salloc" class="headerlink" title="salloc"></a>salloc</h2><p>salloc从字面上就能看出来，实际上是”slurm allocate”的缩写，在解释salloc之前，我们先回顾一下之前我对于作业和作业步的定义：</p><blockquote><ul><li>作业（job）：<strong>特定时间为用户进行的一次资源申请或分配即可看作一个作业</strong>。这和我们惯性思维中的作业概念并不一致，传统意义上我们总是认为作业应该是某个运行的脚本或者程序，但事实上Slurm的作业只代表一次资源申请或分配。理解这个区别将有利于你理解Slurm中一些比较高级的用法。</li><li>作业步（job step）：Slurm中有作业步的概念，你可以理解为子作业。这允许我们在某个作业中分步骤的细分使用计算资源。<a id="more"></a></li></ul></blockquote><p>无论是sbatch、srun还是salloc，<strong>其本质都是一种对资源的申请并将你所要执行的内容运行在限定的资源内的一种行为</strong>，三者提交时对资源指定的参数都是一样的，例如：</p><pre><code>salloc -N 2 -n 2 -p node-all</code></pre><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/10/salloc.png" alt="salloc"></p><p>如果当前资源满足的话，将会显示该资源已分配，你似乎没察觉到任何变化，但实际上你当前使用的shell程序（泛指sh、bash、zsh等）已经发生了变化。你进入了一个新的环境下，不信你可以试试执行exit，你会得到如下输出：</p><pre><code>salloc: Relinquishing job allocation 5914</code></pre><p>这正是退出salloc任务的方式。</p><p>那么这个新的环境有什么玄机呢？实际上slurm在这个过程中完成了资源的申请，然后为新的bash进程配置了一堆环境变量，我们可以通过env来查看，会得到类似如下输出：</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/10/env.png" alt="env"></p><p>可以看到其包含了本次作业的各项参数，包括申请到的资源等信息。你肯定好奇那如果我手动修改环境变量，是不是可以改变本次作业的资源呢？答案是当然不能。这些环境变量是可读的，但仅仅是为了让你的作业可以获知这些信息，作业真正的资源分配信息依然是保存在特定的文件中的（这个后面再介绍）</p><p>在这个环境下你可以通过<code>srun</code>命令提交任意命令，根据我的设置，每条命令会执行两次，分别在两个节点上。我们可以通过执行命令验证一下：</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/10/salloc-srun.png" alt="srun"></p><p>这就是salloc的使用方式。</p><h2 id="srun"><a href="#srun" class="headerlink" title="srun"></a>srun</h2><p>上面的试验中，我们使用了srun提交命令，看到一次输出了两个hostname，证明该命令同时在两个节点上被执行了。事实上在作业中通过srun执行命令才是是slurm中正确使用多个节点资源的方式。srun不仅仅可以在salloc中使用，你可以在sbatch的脚本中使用srun，还可以直接使用srun，在某个作业中多次调用srun指令会生成多个作业步。</p><p>你还可以单独使用srun，这样会生成一个单步的作业，执行完成后就会退出。</p><p>如果我们执行下面的命令，会发生什么呢？</p><pre><code>srun bash</code></pre><p>slurm会为你分配一个节点并运行bash，此时你执行的任何操作，都相当于在该分配的节点上运行，如果我们加上–pty参数，就会更明了了。</p><pre><code>srun --pty bash</code></pre><p>这样你会得到类似salloc的体验，不过当前运行的bash是运行在你分配到的节点上的。</p><p>上面的内容，一定要自己手动操作一遍才会彻底理解。后面我们会介绍一下这样的使用方式具体能实现什么功能。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用&lt;code&gt;sbatch&lt;/code&gt;命令提交是最为常见的方式，不过这种方式存在弊端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候&lt;code&gt;srun&lt;/code&gt;和&lt;code&gt;salloc&lt;/code&gt;则是更好的方式。&lt;/p&gt;
+&lt;h2 id=&quot;salloc&quot;&gt;&lt;a href=&quot;#salloc&quot; class=&quot;headerlink&quot; title=&quot;salloc&quot;&gt;&lt;/a&gt;salloc&lt;/h2&gt;&lt;p&gt;salloc从字面上就能看出来，实际上是”slurm allocate”的缩写，在解释salloc之前，我们先回顾一下之前我对于作业和作业步的定义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;作业（job）：&lt;strong&gt;特定时间为用户进行的一次资源申请或分配即可看作一个作业&lt;/strong&gt;。这和我们惯性思维中的作业概念并不一致，传统意义上我们总是认为作业应该是某个运行的脚本或者程序，但事实上Slurm的作业只代表一次资源申请或分配。理解这个区别将有利于你理解Slurm中一些比较高级的用法。&lt;/li&gt;
+&lt;li&gt;作业步（job step）：Slurm中有作业步的概念，你可以理解为子作业。这允许我们在某个作业中分步骤的细分使用计算资源。
+    
+    </summary>
+    
+      <category term="高性能计算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+    
+    
+      <category term="高性能计算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/tags/HPC/"/>
+    
+  </entry>
   
   <entry>
     <title>HPC 系列文章(11):节点状态</title>
@@ -554,29 +585,6 @@
       <category term="容器" scheme="http://zxh.site/tags/%E5%AE%B9%E5%99%A8/"/>
     
       <category term="LXC" scheme="http://zxh.site/tags/LXC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux定制化镜像制作指南</title>
-    <link href="http://zxh.site/2018/02/16/Linux%E5%AE%9A%E5%88%B6%E5%8C%96%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97/"/>
-    <id>http://zxh.site/2018/02/16/Linux定制化镜像制作指南/</id>
-    <published>2018-02-16T13:29:09.000Z</published>
-    <updated>2018-05-26T04:19:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png" alt="image3"></p><h2 id="为什么需要定制化？"><a href="#为什么需要定制化？" class="headerlink" title="为什么需要定制化？"></a>为什么需要定制化？</h2><p>一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成<del>垃圾</del>软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个<code>Dockerfile</code>或者<code>docker-compose.yml</code>，让用户开箱即用。但是如果用户需要从裸机开始部署呢？既然连系统都没有，当然是做成安装光盘。系统、软件、依赖环境一股脑全部部署。我们从头说起。<a id="more"></a></p><h2 id="当我谈“定制化Linux安装镜像”，我在定制什么？"><a href="#当我谈“定制化Linux安装镜像”，我在定制什么？" class="headerlink" title="当我谈“定制化Linux安装镜像”，我在定制什么？"></a>当我谈“定制化Linux安装镜像”，我在定制什么？</h2><ul><li>安装界面定制化<ul><li>🎨  <code>Boot Menu</code>定制化</li><li>🎨  <code>Anaconda</code>图形界面定制化</li></ul></li><li>📃  自定义安装信息收集</li><li>📦  配套软件打包</li><li>🤖️  安装自动化</li></ul><h2 id="Linux安装光盘分析"><a href="#Linux安装光盘分析" class="headerlink" title="Linux安装光盘分析"></a>Linux安装光盘分析</h2><p>在网上下载一个Linux系统安装镜像，这里我用的是<code>CentOS-7-x86_64-Minimal-1511.iso</code>，将镜像挂载到开发环境中</p><ul><li>Linux:</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">mount -t iso9660 ./CentOS-7-x86_64-Minimal-1511.iso /tmp/CentOS7</span><br></pre></td></tr></table></figure><ul><li>Mac:</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">hdiutil attach -nomount ./CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line">mount -t cd9660 /dev/disk4 /tmp/CentOS7</span><br></pre></td></tr></table></figure><p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-1.png" alt="image1"></p><p>上图即该镜像包含的所有文件，分别介绍一下：</p><ul><li>EFI 负责引导的，包含bootloader</li><li>images PXE安装时需要的内核和引导程序（其实和isolinux中的内核及引导程序是相同的，不知道为啥放两个…）</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-2.png" alt="image2"></p><ul><li>isolinux 系统内核及引导程序</li><li>LiveOS 包含了压缩的rootfs.img</li><li>Packages rpm包</li><li>repodata 安装包源信息</li></ul><p>对于光盘的定制化，我们通常不需要对EFI/images进行任何操作，需要定制的是isolinux、LiveOS中的rootfs.img以及Packages，isolinux影响到进入安装的第一步，rootfs中包含的文件影响安装过程，Packages则是放我们所需要的第三方软件rpm安装包。</p><hr><h2 id="Linux安装流程分析"><a href="#Linux安装流程分析" class="headerlink" title="Linux安装流程分析"></a>Linux安装流程分析</h2><blockquote><p>以下实验环境为CentOS(7.2.1511)，其他发行版本可能略有区别</p></blockquote><p>当我们启动安装光盘时，我们看到的是什么？<br>首先是ISOLINUX Boot Menu</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png" alt="image3"></p><p>然后是Anaconda</p><blockquote><p>Anaconda is the installer used by Red Hat Enterprise Linux, Fedora, and their derivatives.</p></blockquote><p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-4.png" alt="image"></p><p>从光盘加载到系统安装完成经历了什么呢？</p><ol><li>开机</li><li>BIOS检测（硬件检测、引导顺序等）</li><li>读取并运行装置内 MBR 的 boot Loader</li><li>加载内核</li><li>启动liveCD或Anaconda</li><li>由用户配置安装选项或解析kickstart配置</li><li>分区并挂载文件系统</li><li>完成安装，重启</li></ol><blockquote><p>NOTE: 步骤7时的rootfs是LiveOS/squashfs.img中的rootfs.img，而完成安装后的rootfs目前在/mnt/sysimage中</p></blockquote><p>⚠️ <strong>但是我们缺少了重要的“定制化安装信息收集”</strong>，从上面的流程分析可知，可以在Boot Menu和Anaconda之间插一脚（4～5步骤中增加一步），额外收集一些用户提供的安装信息。</p><p>我们需要先找到Anaconda的启动入口，上面已经介绍了如何挂载光盘，接下来我们需要把光盘里面的文件继续展开。因为挂载的ISO是只读的，所以我们需要将文件复制出来，分析修改完文件之后，再重新打包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载光盘💿</span></span><br><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">hdiutil attach -nomount ./CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line">mount -t cd9660 /dev/disk4 /tmp/CentOS7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件</span></span><br><span class="line">mkdir CentOS-7-x86_64-Minimal-1511</span><br><span class="line">rsync -avz /tmp/CentOS7/ CentOS-7-x86_64-Minimal-1511</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制LiveOS</span></span><br><span class="line">cp -r CentOS-7-x86_64-Minimal-1511/LiveOS ./LiveOS</span><br></pre></td></tr></table></figure><p>现在得到了一个包含了squashfs.img的LiveOS文件夹，squashfs.img是干啥的？简单的说它是一个高压缩率的压缩文件，压缩了整个rootfs，看上去只有200多MB，实际上有2GB</p><blockquote><p>Squashfs is a compressed read-only file system for Linux. Squashfs compresses files, inodes and directories, and supports block sizes up to 1 MB for greater compression. Several compression algorithms are supported. Squashfs is also the name of free software, licensed under the GPL, for accessing Squashfs filesystems.</p></blockquote><p>执行命令解压开，你会得到一个包含了<code>LiveOS/rootfs.img</code>的名为<code>squashfs-root</code>的文件夹</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unsquashfs squashfs.img</span><br></pre></td></tr></table></figure><p><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-5.png" alt="image"><br>可以看到该文件其实是<code>ext4</code>的文件系统，启动一个Linux环境，挂载该文件，就能看到里面的所有东西了。这里我用docker启动了一个centos7环境<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-6.png" alt="image"><br>是不是跟Linux的根目录文件一样？这就是在安装时系统加载的rootfs，而Anaconda的入口文件就是usr/sbin/anaconda，这是一个Python脚本。我们打开它找到它的入口，在这里调用其他的脚本或者程序，就可以在Anaconda之前插一脚了。这里我自己写了一个小程序来收集用户的信息，在anaconda的入口处先调用这个程序。<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-7.png" alt="image"></p><p>修改完毕之后，我们需要重新压缩squashfs.img</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mksquashfs squashfs-root squashfs.img -b 1024k -comp xz</span><br></pre></td></tr></table></figure><p>把新的squashfs.img替换复制出来的光盘镜像文件中的squashfs.img。用dd命令将原来的iso引导信息导出</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp squashfs.img CentOS-7-x86_64-Minimal-1511/LiveOS/</span><br><span class="line">dd <span class="keyword">if</span>=CentOS-7-x86_64-Minimal-1511.iso bs=512 count=1 of=boot.mbr</span><br></pre></td></tr></table></figure><p>最后重新制作iso镜像，这里我用的是<code>xorriso</code>，命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xorriso -pathspecs as_mkisofs -as mkisofs -iso-level 3 -full-iso9660-filenames -volid <span class="string">"CentOS 7 x86_64"</span> -appid  -publisher  -preparer <span class="string">"prepared by me"</span> -eltorito-boot isolinux/isolinux.bin -eltorito-catalog isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -isohybrid-mbr ../boot.mbr -eltorito-alt-boot -e images/efiboot.img -no-emul-boot -isohybrid-gpt-basdat -output ../repacked.iso .</span><br></pre></td></tr></table></figure><p>现在让我们看看repacked.iso运行起来是什么样的吧：<br><img src="http://o6sdpimwf.bkt.clouddn.com/customized-cd-8.png" alt="image"></p><hr><h2 id="界面定制化"><a href="#界面定制化" class="headerlink" title="界面定制化"></a>界面定制化</h2><h3 id="Boot-Menu定制"><a href="#Boot-Menu定制" class="headerlink" title="Boot Menu定制"></a>Boot Menu定制</h3><p>只需要修改isolinux/isolinux.cfg文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-boot-menu-customization" target="_blank" rel="noopener">boot-menu-customization</a> </p><h3 id="Anaconda界面定制"><a href="#Anaconda界面定制" class="headerlink" title="Anaconda界面定制"></a>Anaconda界面定制</h3><p>Anaconda界面定制的修改稍微复杂一些，需要修改css文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-anaconda-visuals#sect-anaconda-visuals-graphics" target="_blank" rel="noopener">customized-anaconda</a></p><hr><h2 id="自动化脚本（未完待续）"><a href="#自动化脚本（未完待续）" class="headerlink" title="自动化脚本（未完待续）"></a>自动化脚本（未完待续）</h2><h3 id="kickstart"><a href="#kickstart" class="headerlink" title="kickstart"></a>kickstart</h3><h3 id="程序部署脚本"><a href="#程序部署脚本" class="headerlink" title="程序部署脚本"></a>程序部署脚本</h3><hr><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/" target="_blank" rel="noopener">ANACONDA CUSTOMIZATION GUIDE</a> </li><li><a href="https://anaconda-installer.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">anaconda文档</a></li><li><a href="http://blog.csdn.net/trochiluses/article/details/17674415" target="_blank" rel="noopener">Linux安装过程分析</a></li><li><a href="https://www.ibm.com/developerworks/cn/linux/1306_qinzl_squashfs/" target="_blank" rel="noopener">基于 SquashFS 构建 Linux 可读写文件系统</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/customized-cd-3.png&quot; alt=&quot;image3&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;为什么需要定制化？&quot;&gt;&lt;a href=&quot;#为什么需要定制化？&quot; class=&quot;headerlink&quot; title=&quot;为什么需要定制化？&quot;&gt;&lt;/a&gt;为什么需要定制化？&lt;/h2&gt;&lt;p&gt;一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成&lt;del&gt;垃圾&lt;/del&gt;软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个&lt;code&gt;Dockerfile&lt;/code&gt;或者&lt;code&gt;docker-compose.yml&lt;/code&gt;，让用户开箱即用。但是如果用户需要从裸机开始部署呢？既然连系统都没有，当然是做成安装光盘。系统、软件、依赖环境一股脑全部部署。我们从头说起。
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://zxh.site/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://zxh.site/tags/Linux/"/>
     
   </entry>
   
