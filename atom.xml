@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2018-10-09T00:13:59.491Z</updated>
+  <updated>2018-10-14T15:30:20.155Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HPC 系列文章(13):GPU调度</title>
+    <link href="http://zxh.site/2018/10/14/HPC-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-13-GPU%E8%B0%83%E5%BA%A6/"/>
+    <id>http://zxh.site/2018/10/14/HPC-系列文章-13-GPU调度/</id>
+    <published>2018-10-14T13:47:13.000Z</published>
+    <updated>2018-10-14T15:30:20.155Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/gres-gpu.png" alt="gres-gpu"></p><p>前面介绍过了如何为作业指定资源参数，不过我们只涉及到了节点数量、CPU和内存相关的指定。而专业的集群调度系统，应该支持多种复杂的硬件资源管理调度策略，为集群内各种硬件提供统一的资源调度管理。例如目前很火热的GPU集群，就需要统一管理调度GPU资源。通用资源包括但不限于GPU、MIC、NIC等设备的管理，Slurm通过一种灵活的插件机制实现了“通用资源”的管理，你甚至可以自己开发专用的通用资源管理插件以支持特殊的设备管理。GPU是最为常见的，所以我们这里以GPU为例进行介绍。<a id="more"></a></p><h2 id="通用资源管理配置"><a href="#通用资源管理配置" class="headerlink" title="通用资源管理配置"></a>通用资源管理配置</h2><p>Slurm中通用资源被称之为GRES(Generic Resource)，默认情况下Slurm是没有开启该功能的，我们需要修改一下slurm.conf配置文件，在GresTypes中指定要管理的资源类型，例如gpu。</p><p>然后你需要为节点配置具体的通用资源参数，参数格式：<code>&lt;name&gt;[:&lt;type&gt;][:no_consume]:&lt;number&gt;[K|M|G]</code>：</p><ul><li>name: 即通用资源的名称，与GresTypes相对应</li><li>type：可选的参数，你可以通过设置Type来标记不同的设备型号</li><li>no_consume：设置为no_consume则作业不会独占该设备</li><li>number[K|M|G]：数量及其单位，例如1，或者4G</li></ul><p>多个设备资源应以逗号分隔开，示例配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Configure support for our four GPUs</span><br><span class="line">GresTypes=gpu,bandwidth</span><br><span class="line">NodeName=node02 Gres=gpu:tesla:2,gpu:kepler:2,bandwidth:lustre:no_consume:4G</span><br></pre></td></tr></table></figure><h2 id="通用资源配置"><a href="#通用资源配置" class="headerlink" title="通用资源配置"></a>通用资源配置</h2><p>上述文件让<code>Slurmctld</code>知道了系统中有哪些通用资源可以调配，不过<code>Slurmd</code>却还不知道具体如何使用它们，所以配置完上述信息后，我们还要为每一个具有通用资源设备的计算节点编写配置<code>gres.conf</code>文件，它通常和slurm.conf位于同一文件夹中，如果没有你需要手动创建该文件。该文件描述了节点上所存在的通用资源设备具体的数量、关联的设备文件以及可使用的核心等信息，具体包含了：</p><ul><li>Name：即通用资源的名称，与GresTypes相对应</li><li>Count：资源量，默认情况下等于指定的设备文件的数量，但对于某些特殊的资源，例如共享存储空间等，你可以为其添加单位[K/M/G]</li><li>CPUs：允许使用的核心，不指定则默认所有核心均可用</li><li>File：与资源关联的设备文件的完整路径名，这对于资源限制来说至关重要，因为Slurm中需要使用cgroups进行资源限制，而cgroups则需要配置具体的设备文件。（关于slurm的资源限制原理我们后面再展开讲）</li><li>Type：可选的参数，你可以通过设置Type来标记不同的设备型号。</li></ul><p>示例配置文件（包含了两个不同的型号的4张GPU卡）：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Configure support for our four GPUs, plus bandwidth</span><br><span class="line">Name=gpu Type=tesla  File=/dev/nvidia0 CPUs=0,1</span><br><span class="line">Name=gpu Type=tesla  File=/dev/nvidia1 CPUs=0,1</span><br><span class="line">Name=gpu Type=kepler File=/dev/nvidia2 CPUs=2,3</span><br><span class="line">Name=gpu Type=kepler File=/dev/nvidia3 CPUs=2,3</span><br></pre></td></tr></table></figure><h2 id="提交作业"><a href="#提交作业" class="headerlink" title="提交作业"></a>提交作业</h2><p>配置完成之后，我们需要重启所有的slurmd及slurmctld服务，然后就可以通过作业提交时的<code>--gres</code>参数申请具体的通用资源了，我编写了一个脚本来验证通用资源的使用，内容如下(<code>nvidia-smi</code>是NVIDIA系列显卡提供的命令行显卡管理工具）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">date</span><br><span class="line">nvidia-smi</span><br><span class="line">hostname</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"done"</span></span><br></pre></td></tr></table></figure><p>用如下命令提交：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srun -p calulate -w node02 --gres=gpu:2 ./nv.sh</span><br></pre></td></tr></table></figure><p>输出结果：</p><p><img src="http://o6sdpimwf.bkt.clouddn.com/gres-gpu.png" alt="gres-gpu"></p><p>该输出结果表明这个运行在node02上的作业得到了2张GPU卡的资源。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/gres-gpu.png&quot; alt=&quot;gres-gpu&quot;&gt;&lt;/p&gt;
+&lt;p&gt;前面介绍过了如何为作业指定资源参数，不过我们只涉及到了节点数量、CPU和内存相关的指定。而专业的集群调度系统，应该支持多种复杂的硬件资源管理调度策略，为集群内各种硬件提供统一的资源调度管理。例如目前很火热的GPU集群，就需要统一管理调度GPU资源。通用资源包括但不限于GPU、MIC、NIC等设备的管理，Slurm通过一种灵活的插件机制实现了“通用资源”的管理，你甚至可以自己开发专用的通用资源管理插件以支持特殊的设备管理。GPU是最为常见的，所以我们这里以GPU为例进行介绍。
+    
+    </summary>
+    
+      <category term="高性能计算" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+    
+    
+      <category term="高性能计算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="HPC" scheme="http://zxh.site/tags/HPC/"/>
+    
+  </entry>
   
   <entry>
     <title>HPC 系列文章(12):交互作业</title>
@@ -549,42 +576,13 @@
       <category term="容器" scheme="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="虚拟化" scheme="http://zxh.site/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-      <category term="容器" scheme="http://zxh.site/tags/%E5%AE%B9%E5%99%A8/"/>
-    
       <category term="高性能计算" scheme="http://zxh.site/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
     
-      <category term="Singularity" scheme="http://zxh.site/tags/Singularity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker in LXC踩坑</title>
-    <link href="http://zxh.site/2018/02/28/Docker-in-LXC%E8%B8%A9%E5%9D%91/"/>
-    <id>http://zxh.site/2018/02/28/Docker-in-LXC踩坑/</id>
-    <published>2018-02-28T04:30:22.000Z</published>
-    <updated>2018-05-27T02:02:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://o6sdpimwf.bkt.clouddn.com/LXC-Docker.png" alt="LXC-Docker"></p><p>我们知道Docker是如今炙手可热的应用级容器，而LXC可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。<a id="more"></a></p><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol><li>Docker无法启动</li><li>Docker中无法pull镜像</li><li>配置文件中配置项升级后不兼容</li><li>容器内Redis无法启动</li></ol><h3 id="Docker无法启动"><a href="#Docker无法启动" class="headerlink" title="Docker无法启动"></a>Docker无法启动</h3><p>在LXC容器中安装Docker后始终无法启动，最后发现是系统的问题，这里不是宿主机的系统有问题，而是LXC的系统。测试发现Ubuntu系统可以正常启动Docker，而CentOS则不行</p><h3 id="Docker中无法pull镜像"><a href="#Docker中无法pull镜像" class="headerlink" title="Docker中无法pull镜像"></a>Docker中无法pull镜像</h3><p>使用docker pull命令拉取镜像，当镜像下载完成后会提示<code>failed to register layer: ApplyLayer exit status 1 stdout:  stderr: permission denied</code>导致无法完成镜像的下载。造成这个问题的原因是没有解除apparmor限制，在启动lxc容器之后，需要执行下列命令：</p><blockquote><p>NOTE: $HOST修改为对应的容器主机名</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt;/var/lib/lxc/<span class="variable">$HOST</span>/config &lt;&lt;EnD</span><br><span class="line">lxc.aa_profile = unconfined</span><br><span class="line">lxc.cgroup.devices.allow = a</span><br><span class="line">lxc.cap.drop =</span><br><span class="line">EnD</span><br></pre></td></tr></table></figure><blockquote><p>NOTE: lxc.aa_profile = unconfined应该更正为lxc.apparmor.profile = unconfined，下文会提到</p></blockquote><p>然后修改<code>/etc/pve/lxc/$HOST.conf</code>文件，在文件末尾加上以下内容:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc.hook.mount =</span><br><span class="line">lxc.hook.post-stop =</span><br></pre></td></tr></table></figure><h3 id="配置文件中配置项升级后不兼容"><a href="#配置文件中配置项升级后不兼容" class="headerlink" title="配置文件中配置项升级后不兼容"></a>配置文件中配置项升级后不兼容</h3><p>LXC配置文件中配置项名称发生了变化，导致启动报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The configuration file contains legacy configuration keys.</span><br><span class="line">Please update your configuration file!</span><br></pre></td></tr></table></figure><p>好在LXC为我们提供了自动升级配置文件的工具<code>lxc-update-config</code>，切换到容器对应的配置文件目录下: <code>cd /var/lib/lxc/$HOST</code>。使用命令对配置文件进行升级:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-update-config -c config</span><br></pre></td></tr></table></figure><p>其中<code>lxc.aa_profile = unconfined</code>被自动更正为了<code>lxc.apparmor.profile = unconfined</code></p><h3 id="Redis无法启动"><a href="#Redis无法启动" class="headerlink" title="Redis无法启动"></a>Redis无法启动</h3><p>造成该问题的原因是redis的systemd启动脚本中试图使用一些高级权限，修改/etc/systemd/system/redis.service脚本中下列内容后即可正常使用：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">PrivateTmp</span>=<span class="literal">no</span></span><br><span class="line"><span class="attr">PrivateDevices</span>=<span class="literal">no</span></span><br><span class="line"><span class="attr">ProtectHome</span>=<span class="literal">no</span></span><br></pre></td></tr></table></figure><hr><h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>那在LXC中运行docker性能如何呢？找了几个常见的工具进行性能测试，UnixBench综合测试性能几乎完全一致，fio磁盘测试性能几乎无损耗，性能差距仅1%，Redis-benchmark数据降低约10%（结果仅供参考）</p><h3 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h3><ul><li>UnixBench:</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/UnixBench.png" alt="UnixBench"></p><ul><li>fio</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/FIO.png" alt="FIO"></p><ul><li>redis-benchmark</li></ul><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/Redis-benchmark.png" alt="Redis-benchmark"></p><blockquote><p>性能测试方案参考：<a href="https://serverscope.io/trials/GdEN#network" target="_blank" rel="noopener">https://serverscope.io/trials/GdEN#network</a></p></blockquote><hr><h2 id="LXC的缺点"><a href="#LXC的缺点" class="headerlink" title="LXC的缺点"></a>LXC的缺点</h2><ul><li>LXC社区热度远不如Docker，这导致除了问题能查询的有效资料并不如Docker丰富，当然也没有像Docker那么丰富的镜像资源。</li><li>LXC还存在跨不同Linux发行版的功能支持不一致，LXC主要在Ubuntu平台上进行维护和开发。例如目前只有Ubuntu上通过<code>apt-get install docker.io</code>安装的Docker能无需加载任何内核补丁正常运行。</li><li>LXC的官方文档不够详细，学习成本比Docker高。</li></ul><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><a href="https://github.com/moby/moby/issues/6783" target="_blank" rel="noopener">GitHub Issues - Unable to run Docker 1.0 inside LXC</a></li><li><a href="https://github.com/lxc/lxd/issues/3845" target="_blank" rel="noopener">GitHub Issues - All containers emit “The configuration file contains legacy configuration keys” after minor LXD upgrade</a></li><li><a href="https://github.com/lxc/lxd/issues/3799" target="_blank" rel="noopener">GitHub Issues - cant install redis-server on a debian/buster container</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://o6sdpimwf.bkt.clouddn.com/LXC-Docker.png&quot; alt=&quot;LXC-Docker&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我们知道Docker是如今炙手可热的应用级容器，而LXC可以看作是系统级的容器。那么问题来了，是否可以在一个系统级的容器里面运行一个应用级的容器呢？答案是可以的，不过过程并没有想象的那么容易，百般折腾后部署成功了，在这个过程中也发现了一些问题。
-    
-    </summary>
-    
-      <category term="虚拟化" scheme="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-      <category term="容器" scheme="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
-    
-    
       <category term="虚拟化" scheme="http://zxh.site/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
       <category term="容器" scheme="http://zxh.site/tags/%E5%AE%B9%E5%99%A8/"/>
     
-      <category term="LXC" scheme="http://zxh.site/tags/LXC/"/>
+      <category term="Singularity" scheme="http://zxh.site/tags/Singularity/"/>
     
   </entry>
   
