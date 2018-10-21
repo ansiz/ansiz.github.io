@@ -27,7 +27,7 @@
   
     
   
-  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
 
 
 
@@ -259,7 +259,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">50</span></a>
   </li>
 
       
@@ -310,12 +310,209 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/08/11/HPC-系列文章-4-Slurm概览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张稀虹">
+      <meta itemprop="description" content="迎风向前是唯一的方法">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ansiz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/11/HPC-系列文章-4-Slurm概览/" itemprop="url">
+                  HPC 系列文章(4):Slurm概览
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-11 18:25:31" itemprop="dateCreated datePublished" datetime="2018-08-11T18:25:31+08:00">2018-08-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/11/HPC-系列文章-4-Slurm概览/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/11/HPC-系列文章-4-Slurm概览/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://img.chinahpc.club/2018/08/slurm-better-thumbnail.png" alt="Cover"></p>
+<p>经过前一篇文章的学习，大家应该对HPC集群调度系统有了初步的认识。接下来我们将以Slurm作为调度系统进行HPC作业相关的学习，会深入介绍Slurm的架构、配置及使用。</p>
+<h2 id="Slurm概述"><a href="#Slurm概述" class="headerlink" title="Slurm概述"></a>Slurm概述</h2><p>Slurm是一个可工作于各种不同规模的Linux集群之上的开源、具备容错性和高度可扩展性的集群管理和作业调度系统。作为一款集群作业调度管理系统，Slurm包含三大主要功能：</p>
+<ol>
+<li>资源分配：在特定时间段内为用户分配对计算资源的独占或非独占访问权限，以便他们可以执行作业。简单的说就是为作业提供对计算资源的授权和分配。</li>
+<li>作业管理：它提供了在分配的节点上启动、执行和监控作业（通常是并行作业）的框架。</li>
+<li>作业调度：通过管理待处理作业的队列来仲裁资源的争用。例如根据优先级或不同当调度策略调整资源的分配顺序。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/11/HPC-系列文章-4-Slurm概览/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/08/05/HPC-系列文章-3-Slurm调度系统概览/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -373,7 +570,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-11 18:37:34" itemprop="dateModified" datetime="2018-08-11T18:37:34+08:00">2018-08-11</time>
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -442,7 +639,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/schedule.png" alt="Cover"></p>
+          <p><img src="http://img.chinahpc.club/2018/08/schedule.png" alt="Cover"></p>
 <h2 id="初识集群作业调度系统"><a href="#初识集群作业调度系统" class="headerlink" title="初识集群作业调度系统"></a>初识集群作业调度系统</h2><p>经过前面的简单学习，大家应该了解了HPC和集群的基本概念，集群有强大的运算力，那么如何管理集群资源的分配呢？如何管理和实现集群作业调度呢？平时我们在使用一台服务器进行一些作业时，只需要简单的登陆这台服务器执行相关指令即可。不过你是否思考过下面这些问题呢？</p>
 <ol>
 <li>系统中存在若干进程，操作系统会如何安排计算机资源？</li>
@@ -511,7 +708,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -552,12 +749,24 @@
                 
               
 
-              <time title="创建时间：2018-07-28 16:57:13 / 修改时间：23:24:02" itemprop="dateCreated datePublished" datetime="2018-07-28T16:57:13+08:00">2018-07-28</time>
+              <time title="创建时间：2018-07-28 16:57:13" itemprop="dateCreated datePublished" datetime="2018-07-28T16:57:13+08:00">2018-07-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -626,7 +835,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg" alt="Cover"></p>
+          <p><img src="http://img.chinahpc.club/2018/07/AI-HPC.jpg" alt="Cover"></p>
 <h2 id="什么是高性能运算"><a href="#什么是高性能运算" class="headerlink" title="什么是高性能运算"></a>什么是高性能运算</h2><p>在正式学习之前，我们先了解一个非常基本的问题：“究竟什么是高性能计算（HPC）？广义上来说，高性能运算就是使用高性能的计算机完成特定的计算任务。我知道这听上去是一句正确的废话，那我们将这个定义得更详细一些，就目前而言，高性能运算通常指的是通过大量的高性能的计算硬件堆叠而成的计算集群完成特定的计算任务。这里有几个关键词我们分开讨论。
           <!--noindex-->
           <div class="post-button text-center">
@@ -691,7 +900,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -732,12 +941,24 @@
                 
               
 
-              <time title="创建时间：2018-07-22 13:47:50 / 修改时间：22:27:31" itemprop="dateCreated datePublished" datetime="2018-07-22T13:47:50+08:00">2018-07-22</time>
+              <time title="创建时间：2018-07-22 13:47:50" itemprop="dateCreated datePublished" datetime="2018-07-22T13:47:50+08:00">2018-07-22</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
               
             
           </span>
@@ -806,7 +1027,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/AI-HPC.jpg" alt="Cover"></p>
+          <p><img src="http://img.chinahpc.club/2018/07/AI-HPC.jpg" alt="Cover"></p>
 <h1 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h1><p>HPC系列文章是一系列关于高性能计算的技术文章，计划每周更新至少一篇高性能计算相关的文章。为什么要写这些文章呢？首要原因是我个人从事相关的研发工作，我一直认为<code>Learning by teaching</code>是最佳的学习和验证学习效果的方式，所以我想将个人了解的相关知识在这里进行梳理。另外一方面是高性能运算实际上服务于我们每个人的日常生活中，被许多热门技术和行业所依赖，但鲜有人深入了解，真正从事这个行业的人并不像Web开发、深度学习等多，针对高性能运算的技术文章也相对较少，我想将这些文章整理成一个系列供感兴趣的朋友学习了解。
           <!--noindex-->
           <div class="post-button text-center">
@@ -871,7 +1092,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -912,12 +1133,24 @@
                 
               
 
-              <time title="创建时间：2018-07-15 19:51:33 / 修改时间：21:19:53" itemprop="dateCreated datePublished" datetime="2018-07-15T19:51:33+08:00">2018-07-15</time>
+              <time title="创建时间：2018-07-15 19:51:33" itemprop="dateCreated datePublished" datetime="2018-07-15T19:51:33+08:00">2018-07-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -986,7 +1219,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/tensorflowdeepin.png" alt="NVIDIA-SMI"><br>Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。
+          <p><img src="http://img.chinahpc.club/2018/07/tensorflowdeepin.png" alt="NVIDIA-SMI"><br>Tensorflow是目前热门的深度学习框架，官方提供了较为详细的安装文档，不过是针对主流操作系统的，并不包含Deepin这种国产发行版，所以在安装过程中遇到一些问题，这里简单记录一下安装流程。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/15/在Deepin上安装TensorFlow/#more" rel="contents">
@@ -1050,7 +1283,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1091,12 +1324,24 @@
                 
               
 
-              <time title="创建时间：2018-07-15 12:01:27 / 修改时间：16:26:00" itemprop="dateCreated datePublished" datetime="2018-07-15T12:01:27+08:00">2018-07-15</time>
+              <time title="创建时间：2018-07-15 12:01:27" itemprop="dateCreated datePublished" datetime="2018-07-15T12:01:27+08:00">2018-07-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
               
             
           </span>
@@ -1165,7 +1410,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/desktop.png" alt="Desktop"></p>
+          <p><img src="http://img.chinahpc.club/2018/07/desktop.png" alt="Desktop"></p>
 <p>最近想接触一下深度学习相关的东西，需要用到高性能的GPU做支持，家里吃灰大半年的PC终于有机会重新发光发热了。之前购买这台PC主要是为了玩一些大型的单机游戏，配置还算凑合，有1060GTX的显卡+双固态硬盘，装的当然是Window的操作系统。不过Windows真的不太适合用来做这方面的开发，所以就打算在第二块移动硬盘上安装Linux的操作系统。</p>
 <p>我平时做开发都是在Linux下，所以对Linux还算比较熟悉，但是平时几乎从来不用桌面环境，不过这次需要比较直观的图像输出，就选了Deepin这款基于Debian的国产桌面操作系统。
           <!--noindex-->
@@ -1231,7 +1476,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1289,7 +1534,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-17 20:11:09" itemprop="dateModified" datetime="2018-07-17T20:11:09+08:00">2018-07-17</time>
+                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
               
             
           </span>
@@ -1358,7 +1603,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/malicious.png" alt="malicious"></p>
+          <p><img src="http://img.chinahpc.club/2018/07/malicious.png" alt="malicious"></p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。
           <!--noindex-->
           <div class="post-button text-center">
@@ -1423,7 +1668,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1481,7 +1726,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-17 20:11:06" itemprop="dateModified" datetime="2018-07-17T20:11:06+08:00">2018-07-17</time>
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -1550,7 +1795,7 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/07/docker-banner2.jpg" alt="docker"><br>HPC应用总类繁多，各种软件可能运行在不同的系统平台之上，容器技术正是解决这类问题的绝佳手段。我在<a href="http://blog.zxh.site/2018/05/15/Singularity/" target="_blank" rel="noopener"><em>Singularity——HPC环境的绝佳容器解决方案</em></a>一文中介绍了<code>Singularity</code>这个HPC下非常适合的容器技术。但是Singularity也有一些不尽人意的地方，例如缺少虚拟化网络、热度不如<code>Docker</code>高等。那如果想在一个高性能集群中使用Docker又会遇到什么问题呢？有没有什么好的解决方案？
+          <p><img src="http://img.chinahpc.club/2018/07/docker-banner2.jpg" alt="docker"><br>HPC应用总类繁多，各种软件可能运行在不同的系统平台之上，容器技术正是解决这类问题的绝佳手段。我在<a href="http://blog.zxh.site/2018/05/15/Singularity/" target="_blank" rel="noopener"><em>Singularity——HPC环境的绝佳容器解决方案</em></a>一文中介绍了<code>Singularity</code>这个HPC下非常适合的容器技术。但是Singularity也有一些不尽人意的地方，例如缺少虚拟化网络、热度不如<code>Docker</code>高等。那如果想在一个高性能集群中使用Docker又会遇到什么问题呢？有没有什么好的解决方案？
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/01/docker-on-cluster/#more" rel="contents">
@@ -1614,7 +1859,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1672,7 +1917,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-17 20:11:06" itemprop="dateModified" datetime="2018-07-17T20:11:06+08:00">2018-07-17</time>
+                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
               
             
           </span>
@@ -1741,7 +1986,7 @@
 
       
         
-          <p>大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用<code>VNC</code>或<code>RDP</code>进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：<br><img src="http://o6sdpimwf.bkt.clouddn.com/2018/05/x11-fs8.png" alt="x11"><br>
+          <p>大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用<code>VNC</code>或<code>RDP</code>进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：<br><img src="http://img.chinahpc.club/2018/05/x11-fs8.png" alt="x11"><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/24/x11/#more" rel="contents">
@@ -1805,7 +2050,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1863,7 +2108,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-17 20:11:06" itemprop="dateModified" datetime="2018-07-17T20:11:06+08:00">2018-07-17</time>
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -1932,210 +2177,11 @@
 
       
         
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/container-blog.jpg" alt="vm_vs_container"></p>
+          <p><img src="http://img.chinahpc.club/container-blog.jpg" alt="vm_vs_container"></p>
 <p><a href="https://slurm.schedmd.com/" target="_blank" rel="noopener">Slurm</a>是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。<a href="http://singularity.lbl.gov/user-guide" target="_blank" rel="noopener">Singularity</a>是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的<code>Docker</code>。那二者相结合会产生什么有趣的结果呢？
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/25/slurm-singularity/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/05/15/Singularity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="张稀虹">
-      <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ansiz">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/15/Singularity/" itemprop="url">
-                  Singularity——HPC环境的绝佳容器解决方案
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-05-15 11:24:27" itemprop="dateCreated datePublished" datetime="2018-05-15T11:24:27+08:00">2018-05-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-22 13:48:47" itemprop="dateModified" datetime="2018-07-22T13:48:47+08:00">2018-07-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/虚拟化/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/虚拟化/容器/" itemprop="url" rel="index"><span itemprop="name">容器</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/15/Singularity/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/15/Singularity/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://o6sdpimwf.bkt.clouddn.com/vm_vs_container.png" alt="vm_vs_container"></p>
-<p>高性能计算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/15/Singularity/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2213,7 +2259,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
                 alt="张稀虹" />
             
               <p class="site-author-name" itemprop="name">张稀虹</p>
@@ -2227,7 +2273,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2569,7 +2615,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
   
 
 
@@ -2666,7 +2712,7 @@
   
     
   
-  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
 
   <script>
     

@@ -27,7 +27,7 @@
   
     
   
-  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
 
 
 
@@ -124,14 +124,14 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="经过前一篇文章的学习，大家应该对HPC集群调度系统有了初步的认识。接下来我们将以Slurm作为调度系统进行HPC作业相关的学习，会深入介绍Slurm的架构、配置及使用。 Slurm概述Slurm是一个可工作于各种不同规模的Linux集群之上的开源、具备容错性和高度可扩展性的集群管理和作业调度系统。作为一款集群作业调度管理系统，Slurm包含三大主要功能：  资源分配：在特定时间段内为用户分配对计">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/slurm-better-thumbnail.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/slurm-arch.gif">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/concept.gif">
-<meta property="og:updated_time" content="2018-08-12T00:41:53.063Z">
+<meta property="og:image" content="http://img.chinahpc.club/2018/08/slurm-better-thumbnail.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/08/slurm-arch.gif">
+<meta property="og:image" content="http://img.chinahpc.club/2018/08/concept.gif">
+<meta property="og:updated_time" content="2018-10-21T10:57:46.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(4):Slurm概览">
 <meta name="twitter:description" content="经过前一篇文章的学习，大家应该对HPC集群调度系统有了初步的认识。接下来我们将以Slurm作为调度系统进行HPC作业相关的学习，会深入介绍Slurm的架构、配置及使用。 Slurm概述Slurm是一个可工作于各种不同规模的Linux集群之上的开源、具备容错性和高度可扩展性的集群管理和作业调度系统。作为一款集群作业调度管理系统，Slurm包含三大主要功能：  资源分配：在特定时间段内为用户分配对计">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/08/slurm-better-thumbnail.png">
+<meta name="twitter:image" content="http://img.chinahpc.club/2018/08/slurm-better-thumbnail.png">
 
 
 
@@ -264,7 +264,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">50</span></a>
   </li>
 
       
@@ -320,7 +320,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-12 08:41:53" itemprop="dateModified" datetime="2018-08-12T08:41:53+08:00">2018-08-12</time>
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -442,7 +442,7 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/slurm-better-thumbnail.png" alt="Cover"></p>
+        <p><img src="http://img.chinahpc.club/2018/08/slurm-better-thumbnail.png" alt="Cover"></p>
 <p>经过前一篇文章的学习，大家应该对HPC集群调度系统有了初步的认识。接下来我们将以Slurm作为调度系统进行HPC作业相关的学习，会深入介绍Slurm的架构、配置及使用。</p>
 <h2 id="Slurm概述"><a href="#Slurm概述" class="headerlink" title="Slurm概述"></a>Slurm概述</h2><p>Slurm是一个可工作于各种不同规模的Linux集群之上的开源、具备容错性和高度可扩展性的集群管理和作业调度系统。作为一款集群作业调度管理系统，Slurm包含三大主要功能：</p>
 <ol>
@@ -451,7 +451,7 @@
 <li>作业调度：通过管理待处理作业的队列来仲裁资源的争用。例如根据优先级或不同当调度策略调整资源的分配顺序。<a id="more"></a></li>
 </ol>
 <p>除此之外还提供了可选的插件用于计费、资源预留、多种调度策略、拓扑优化的资源选择、基于用户或账户的资源限制以及复杂的多因素作业优先级算法等功能。</p>
-<h2 id="Slurm架构"><a href="#Slurm架构" class="headerlink" title="Slurm架构"></a>Slurm架构</h2><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/slurm-arch.gif" alt="架构图"></p>
+<h2 id="Slurm架构"><a href="#Slurm架构" class="headerlink" title="Slurm架构"></a>Slurm架构</h2><p><img src="http://img.chinahpc.club/2018/08/slurm-arch.gif" alt="架构图"></p>
 <p>先来看看这张官方提供的架构图，图中描述的是单集群内Slurm核心组件的架构及依赖关系。之所以强调单集群，是因为Slurm事实上支持多集群的部署，但为了便于理解，我们这里只介绍单集群的架构，理解之后自然会对多集群部署架构有一个清晰的概念。下面我们根据该图进行详细介绍：</p>
 <h3 id="slurmctld"><a href="#slurmctld" class="headerlink" title="slurmctld"></a>slurmctld</h3><p>Slurm有至少一个集中管理器<code>slurmctld</code>用于监控资源和作业，因为slurmctld对于整个集群管理来说至关重要，所以为了保证系统的高可用，你可以选择部署多个备用的<code>slurmctld</code>用以容灾。绝大多数功能和状态都是由slurmctld提供和管理的，安装了slurmctld的节点我们称之为主控节点，它就像是系统中的指挥官，掌控全局信息并指挥其他程序完成作业，包含以下作用：</p>
 <ul>
@@ -512,7 +512,7 @@
 <li>Task Affinity: 提供绑定作业的机制，并将其各个任务分配给特定的处理器。</li>
 <li>Network Topology：根据网络拓扑优化资源选择。用于工作分配和高级预约。</li>
 </ul>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/08/concept.gif" alt="concept"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="http://img.chinahpc.club/2018/08/concept.gif" alt="concept"></p>
 <p>要正确理解Slurm的工作流程，我们需要先了解一些基本概念：</p>
 <ul>
 <li>节点（node）：每一台安装并正确配置了slurmd进程的服务器就是一个节点。安装了slurmctld的节点虽然我们称之为主控节点，但实际上它并不是我们这里讨论的节点，这里指的节点即计算资源。</li>
@@ -546,14 +546,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://o6sdpimwf.bkt.clouddn.com/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://o6sdpimwf.bkt.clouddn.com/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
         <p>支付宝</p>
       </div>
     
@@ -681,7 +681,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
                 alt="张稀虹" />
             
               <p class="site-author-name" itemprop="name">张稀虹</p>
@@ -695,7 +695,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1053,7 +1053,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
   
 
 
@@ -1154,7 +1154,7 @@
   
     
   
-  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
 
   <script>
     

@@ -27,7 +27,7 @@
   
     
   
-  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
 
 
 
@@ -124,13 +124,13 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="前面介绍过了如何为作业指定资源参数，不过我们只涉及到了节点数量、CPU和内存相关的指定。而专业的集群调度系统，应该支持多种复杂的硬件资源管理调度策略，为集群内各种硬件提供统一的资源调度管理。例如目前很火热的GPU集群，就需要统一管理调度GPU资源。通用资源包括但不限于GPU、MIC、NIC等设备的管理，Slurm通过一种灵活的插件机制实现了“通用资源”的管理，你甚至可以自己开发专用的通用资源管理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p3i1wb2iy.bkt.clouddn.com/2018/10gres-gpu.png">
-<meta property="og:image" content="http://p3i1wb2iy.bkt.clouddn.com/2018/10gres-gpu.png">
-<meta property="og:updated_time" content="2018-10-14T15:32:15.536Z">
+<meta property="og:image" content="http://img.chinahpc.club/2018/10/gres-gpu.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/10/gres-gpu.png">
+<meta property="og:updated_time" content="2018-10-21T11:11:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(13):GPU调度">
 <meta name="twitter:description" content="前面介绍过了如何为作业指定资源参数，不过我们只涉及到了节点数量、CPU和内存相关的指定。而专业的集群调度系统，应该支持多种复杂的硬件资源管理调度策略，为集群内各种硬件提供统一的资源调度管理。例如目前很火热的GPU集群，就需要统一管理调度GPU资源。通用资源包括但不限于GPU、MIC、NIC等设备的管理，Slurm通过一种灵活的插件机制实现了“通用资源”的管理，你甚至可以自己开发专用的通用资源管理">
-<meta name="twitter:image" content="http://p3i1wb2iy.bkt.clouddn.com/2018/10gres-gpu.png">
+<meta name="twitter:image" content="http://img.chinahpc.club/2018/10/gres-gpu.png">
 
 
 
@@ -263,7 +263,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">50</span></a>
   </li>
 
       
@@ -319,7 +319,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -356,12 +356,24 @@
                 
               
 
-              <time title="创建时间：2018-10-14 21:47:13 / 修改时间：23:32:15" itemprop="dateCreated datePublished" datetime="2018-10-14T21:47:13+08:00">2018-10-14</time>
+              <time title="创建时间：2018-10-14 21:47:13" itemprop="dateCreated datePublished" datetime="2018-10-14T21:47:13+08:00">2018-10-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 19:11:12" itemprop="dateModified" datetime="2018-10-21T19:11:12+08:00">2018-10-21</time>
               
             
           </span>
@@ -429,7 +441,7 @@
       
 
       
-        <p><img src="http://p3i1wb2iy.bkt.clouddn.com/2018/10gres-gpu.png" alt="gres-gpu"></p>
+        <p><img src="http://img.chinahpc.club/2018/10/gres-gpu.png" alt="gres-gpu"></p>
 <p>前面介绍过了如何为作业指定资源参数，不过我们只涉及到了节点数量、CPU和内存相关的指定。而专业的集群调度系统，应该支持多种复杂的硬件资源管理调度策略，为集群内各种硬件提供统一的资源调度管理。例如目前很火热的GPU集群，就需要统一管理调度GPU资源。通用资源包括但不限于GPU、MIC、NIC等设备的管理，Slurm通过一种灵活的插件机制实现了“通用资源”的管理，你甚至可以自己开发专用的通用资源管理插件以支持特殊的设备管理。GPU是最为常见的，所以我们这里以GPU为例进行介绍。<a id="more"></a></p>
 <h2 id="通用资源管理配置"><a href="#通用资源管理配置" class="headerlink" title="通用资源管理配置"></a>通用资源管理配置</h2><p>Slurm中通用资源被称之为GRES(Generic Resource)，默认情况下Slurm是没有开启该功能的，我们需要修改一下slurm.conf配置文件，在GresTypes中指定要管理的资源类型，例如gpu。</p>
 <p>然后你需要为节点配置具体的通用资源参数，参数格式：<code>&lt;name&gt;[:&lt;type&gt;][:no_consume]:&lt;number&gt;[K|M|G]</code>：</p>
@@ -456,7 +468,7 @@
 <p>用如下命令提交：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srun -p calulate -w node02 --gres=gpu:2 ./nv.sh</span><br></pre></td></tr></table></figure>
 <p>输出结果：</p>
-<p><img src="http://p3i1wb2iy.bkt.clouddn.com/2018/10gres-gpu.png" alt="gres-gpu"></p>
+<p><img src="http://img.chinahpc.club/2018/10/gres-gpu.png" alt="gres-gpu"></p>
 <p>该输出结果表明这个运行在node02上的作业得到了2张GPU卡的资源。</p>
 
       
@@ -481,14 +493,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://o6sdpimwf.bkt.clouddn.com/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://o6sdpimwf.bkt.clouddn.com/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
         <p>支付宝</p>
       </div>
     
@@ -546,6 +558,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/21/HPC-系列文章-14-账务与资源限制/" rel="prev" title="HPC 系列文章(14):账务与资源限制">
+                HPC 系列文章(14):账务与资源限制 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -612,7 +628,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
                 alt="张稀虹" />
             
               <p class="site-author-name" itemprop="name">张稀虹</p>
@@ -626,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -984,7 +1000,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
   
 
 
@@ -1085,7 +1101,7 @@
   
     
   
-  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
 
   <script>
     

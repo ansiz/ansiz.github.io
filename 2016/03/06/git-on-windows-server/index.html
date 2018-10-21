@@ -27,7 +27,7 @@
   
     
   
-  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
 
 
 
@@ -117,23 +117,23 @@
 
 
   <meta name="description" content="从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一">
-<meta name="keywords" content="工具,经验&amp;技巧,Git">
+<meta name="keywords" content="经验&amp;技巧,工具,Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Windows server2008上搭建git仓库(Git+ copssh+TortoiseGit)">
 <meta property="og:url" content="http://zxh.site/2016/03/06/git-on-windows-server/index.html">
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/branches.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/COPSSH.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/2.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/QQ图片20160306224435.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/6.png">
-<meta property="og:updated_time" content="2018-05-26T03:53:59.000Z">
+<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/03/branches.png">
+<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/03/COPSSH.png">
+<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/03/2.png">
+<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/03/QQ图片20160306224435.png">
+<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/03/6.png">
+<meta property="og:updated_time" content="2018-10-21T10:57:46.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Windows server2008上搭建git仓库(Git+ copssh+TortoiseGit)">
 <meta name="twitter:description" content="从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/branches.png">
+<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/03/branches.png">
 
 
 
@@ -266,7 +266,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">50</span></a>
   </li>
 
       
@@ -322,7 +322,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -376,7 +376,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-26 11:53:59" itemprop="dateModified" datetime="2018-05-26T11:53:59+08:00">2018-05-26</time>
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -437,16 +437,16 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/branches.png" alt="git"><br>从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一些坑，我反正是踩着这些坑弄了一下午才把这个仓库搭建好。所以就记录下来吧，我选择的方案是：Git+ copssh+TortoiseGit。<br><a id="more"></a></p>
+        <p><img src="http://img.chinahpc.club/uploads/2016/03/branches.png" alt="git"><br>从朋友手上接管了一台阿里的云服务器，我想在上面建立一个git代码仓库，不知道为什么他们竟然装了windows server 2008而且还是32bit的…而这个服务器上还有一些别的文件和服务在运行，所以也不方便直接重装系统，这让我感到一阵蛋蛋的忧伤。没办法，那就试试在windows上部署吧。谷歌百度查了一堆发现在windows上部署git的方法有很多种，而大家介绍的方法应该都是可以成功的，只是有一些坑，我反正是踩着这些坑弄了一下午才把这个仓库搭建好。所以就记录下来吧，我选择的方案是：Git+ copssh+TortoiseGit。<br><a id="more"></a></p>
 <h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><ol>
 <li>首先安装Git，这个没啥好说的，去官网根据系统版本下载对应的最新版本git即可。</li>
 <li>安装copssh，这里我使用的是4.1版本，官网下载可能会收费了，不想付费的话，去别的网站下载一下就可以，无需破解下载安装即可使用。安装的时候有一些坑要注意一下，第一，安装路径最好不要默认路径，而应该选择一个驱动器根目录下的文件夹，例如C:\copssh。第二，会要求指定一个用户，这个用户其实就是后面你需要建立仓库需要的账户信息，建议输入用户名:git，密码自定(反正不会使用的)。安装完成之后，网上别的网友分享的经验说需要将git下的libiconv-2.dll、git.exe、git-receive-pack.exe、git-upload-archive.exe、git-upload-pack.exe这五个文件拷贝到copssh的bin目录下，然而经过我的测试，不仅仅是这几个，还有好多…所以我建议直接将git安装目录下的mingw32/bin下的所有文件都拷贝过来（我是以32bit做示范的，如果是64bit，可能是git目录下的libexec\git-core目录下。</li>
 </ol>
-<h3 id="配置COPSSH"><a href="#配置COPSSH" class="headerlink" title="配置COPSSH"></a>配置COPSSH</h3><p>完成上述步骤之后，我们来配置一下ssh的账户，打开开始菜单下的COPSSH CONTROL PANEL，这时候我们会看到有个绿色的灯亮着，说明服务是正常启动着的。选择User选项卡，点击Add<a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/COPSSH.png" target="_blank" rel="noopener"><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/COPSSH.png" alt="COPSSH"></a>这时候选择刚才我们安装copssh的时候新建的那个用户名，然后将Allow password authentication选项去掉，其他两个保留，<strong>Access Type选择Linux and shell</strong>，完成之后，点击keys，生成一个git账户的key.ppk，放到C盘根目录下备用。这时候服务器端的配置基本就完成了<br><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/2.png" target="_blank" rel="noopener"><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/2.png" alt="2"></a></p>
-<h3 id="测试及使用"><a href="#测试及使用" class="headerlink" title="测试及使用"></a>测试及使用</h3><p>在server和client端都安装TortoiseGit，在server端使用TortoiseGit自带的工具PuTTYgen将上一步生成的key转换一下，就是打开工具，点击file，选好key，然后点一下保存，另存为一个新的名字。将这个key拷贝到client上<a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/QQ图片20160306224435.png" target="_blank" rel="noopener"><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/QQ图片20160306224435.png" alt="QQ图片20160306224435"></a></p>
+<h3 id="配置COPSSH"><a href="#配置COPSSH" class="headerlink" title="配置COPSSH"></a>配置COPSSH</h3><p>完成上述步骤之后，我们来配置一下ssh的账户，打开开始菜单下的COPSSH CONTROL PANEL，这时候我们会看到有个绿色的灯亮着，说明服务是正常启动着的。选择User选项卡，点击Add<a href="http://img.chinahpc.club/uploads/2016/03/COPSSH.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2016/03/COPSSH.png" alt="COPSSH"></a>这时候选择刚才我们安装copssh的时候新建的那个用户名，然后将Allow password authentication选项去掉，其他两个保留，<strong>Access Type选择Linux and shell</strong>，完成之后，点击keys，生成一个git账户的key.ppk，放到C盘根目录下备用。这时候服务器端的配置基本就完成了<br><a href="http://img.chinahpc.club/uploads/2016/03/2.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2016/03/2.png" alt="2"></a></p>
+<h3 id="测试及使用"><a href="#测试及使用" class="headerlink" title="测试及使用"></a>测试及使用</h3><p>在server和client端都安装TortoiseGit，在server端使用TortoiseGit自带的工具PuTTYgen将上一步生成的key转换一下，就是打开工具，点击file，选好key，然后点一下保存，另存为一个新的名字。将这个key拷贝到client上<a href="http://img.chinahpc.club/uploads/2016/03/QQ图片20160306224435.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2016/03/QQ图片20160306224435.png" alt="QQ图片20160306224435"></a></p>
 <p>进入copssh的home目录，这时候应该能看到一个上面设置的用户名所属的文件夹，例如我设置的是git，则文件夹为git，里面有.ssh之类的文件夹，进入git文件夹，然后在这里新建一个文件夹用来存储代码。我建立了一个project文件夹。打开git bash，输入下列命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir myproject　　　　//创建我的项目目录，命名为myproject</span><br><span class="line"><span class="built_in">cd</span> myproject　　　　　 //进入该目录</span><br><span class="line">git init --bare　　　　//初始化该仓库(--bare参数用于初始化“裸仓库”)</span><br></pre></td></tr></table></figure></p>
 <p>一切准备就绪，到client的某个希望pull代码的目录，右键Git Clone，这时候Load Putty Key，也就是第四步拷贝到client的那个转换过的privateKey文件。填写URL的时候要注意ssh://&lt;你设置的copssh用户名&gt;@&lt;服务器ip或者域名&gt;:22/copssh/home/git/project/test ，这里需要注意的是根目录是磁盘的根目录，也就是说项目地址要填写完整。唔~以上…</p>
-<p><a href="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/6.png" target="_blank" rel="noopener"><img src="http://o6sdpimwf.bkt.clouddn.com/uploads/2016/03/6.png" alt="6"></a></p>
+<p><a href="http://img.chinahpc.club/uploads/2016/03/6.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2016/03/6.png" alt="6"></a></p>
 <p>2016年3月6日 22:58:06</p>
 
       
@@ -471,14 +471,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://o6sdpimwf.bkt.clouddn.com/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://o6sdpimwf.bkt.clouddn.com/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
         <p>支付宝</p>
       </div>
     
@@ -497,9 +497,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"># 工具</a>
-          
             <a href="/tags/经验-技巧/" rel="tag"># 经验&技巧</a>
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
           
             <a href="/tags/Git/" rel="tag"># Git</a>
           
@@ -608,7 +608,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
                 alt="张稀虹" />
             
               <p class="site-author-name" itemprop="name">张稀虹</p>
@@ -622,7 +622,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -980,7 +980,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
   
 
 
@@ -1081,7 +1081,7 @@
   
     
   
-  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
 
   <script>
     

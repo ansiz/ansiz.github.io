@@ -27,7 +27,7 @@
   
     
   
-  <link rel="stylesheet" href="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.css">
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
 
 
 
@@ -124,13 +124,13 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="上一节中我们介绍了最简单的作业提交，我们将脚本编辑好之后交由Slurm调度，然后该脚本会运行在合适的节点上，并得到输出结果。在单台计算机上运行时，我们会觉得一切都很自然，就像是写几行代码然后编译运行得到结果一样。不过当你有一个集群时，就有一些区别了。假设我们有一个20个计算节点的集群，假设是如下配置： 123456789101112################################">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/09/slurm-script.png">
-<meta property="og:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/09/slurm-script.png">
-<meta property="og:updated_time" content="2018-09-16T13:33:49.471Z">
+<meta property="og:image" content="http://img.chinahpc.club/2018/09/slurm-script.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/09/slurm-script.png">
+<meta property="og:updated_time" content="2018-10-21T10:57:46.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(9):指定作业参数">
 <meta name="twitter:description" content="上一节中我们介绍了最简单的作业提交，我们将脚本编辑好之后交由Slurm调度，然后该脚本会运行在合适的节点上，并得到输出结果。在单台计算机上运行时，我们会觉得一切都很自然，就像是写几行代码然后编译运行得到结果一样。不过当你有一个集群时，就有一些区别了。假设我们有一个20个计算节点的集群，假设是如下配置： 123456789101112################################">
-<meta name="twitter:image" content="http://o6sdpimwf.bkt.clouddn.com/2018/09/slurm-script.png">
+<meta name="twitter:image" content="http://img.chinahpc.club/2018/09/slurm-script.png">
 
 
 
@@ -263,7 +263,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">50</span></a>
   </li>
 
       
@@ -319,7 +319,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
       <meta itemprop="description" content="迎风向前是唯一的方法">
-      <meta itemprop="image" content="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -356,12 +356,24 @@
                 
               
 
-              <time title="创建时间：2018-09-16 17:36:35 / 修改时间：21:33:49" itemprop="dateCreated datePublished" datetime="2018-09-16T17:36:35+08:00">2018-09-16</time>
+              <time title="创建时间：2018-09-16 17:36:35" itemprop="dateCreated datePublished" datetime="2018-09-16T17:36:35+08:00">2018-09-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -429,7 +441,7 @@
       
 
       
-        <p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/09/slurm-script.png" alt="parameter"></p>
+        <p><img src="http://img.chinahpc.club/2018/09/slurm-script.png" alt="parameter"></p>
 <p>上一节中我们介绍了最简单的作业提交，我们将脚本编辑好之后交由Slurm调度，然后该脚本会运行在合适的节点上，并得到输出结果。在单台计算机上运行时，我们会觉得一切都很自然，就像是写几行代码然后编译运行得到结果一样。不过当你有一个集群时，就有一些区别了。假设我们有一个20个计算节点的集群，假设是如下配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">################################################</span><br><span class="line">#           Nodes Configurations           #</span><br><span class="line">################################################</span><br><span class="line">NodeName=node[01-10] Sockets=2 CoresPerSocket=32 ThreadsPerCore=1 Gres=gpu:tesla:no_consume:2 RealMemory=65535 TmpDisk=100000 Weight=6 Feature=video</span><br><span class="line">NodeName=node[11-20] CPUs=4 RealMemory=8192 TmpDisk=14190</span><br><span class="line">#</span><br><span class="line">################################################</span><br><span class="line">#           Partition Configurations           #</span><br><span class="line">################################################</span><br><span class="line">PartitionName=node-all Nodes=node[01-20] State=UP Default=YES MaxTime=60</span><br><span class="line">PartitionName=performance MaxTime=UNLIMITED Nodes=node[01-10] State=UP</span><br><span class="line">PartitionName=common MaxTime=UNLIMITED Nodes=node[11-20] State=UP</span><br></pre></td></tr></table></figure>
 <p>一共有20个节点，我将他们分成了三个队列：高性能、普通、二者混合。<a id="more"></a></p>
@@ -442,7 +454,7 @@
 <p>上面的命令翻译一下就是，需要5个节点，每个需要4核处理器，8G内存，指定运行在node01,node02,node03,node11,node20这五个节点上运行。</p>
 <p>我们可以指定更多更详细的参数，包括处理器、内存、通用资源（GPU/IB网络/共享存储等）、License、优先级、预约资源等等，除此之外我们还可以指定开始时间、运行时长、作业名、输出文件等等。更多的选项可以参考文档：<a href="https://slurm.schedmd.com/sbatch.html" target="_blank" rel="noopener">sbatch</a>进行了解。</p>
 <h3 id="通过脚本注释指定参数"><a href="#通过脚本注释指定参数" class="headerlink" title="通过脚本注释指定参数"></a>通过脚本注释指定参数</h3><p>在命令行中指定参数很简单方便，不过不方便重复运行。Slurm还提供了另一种作业参数指定方式，将参数以注释的形式写到脚本中，Slurm会自动解析这些参数。</p>
-<p><img src="http://o6sdpimwf.bkt.clouddn.com/2018/09/slurm-script.png" alt="parameter"></p>
+<p><img src="http://img.chinahpc.club/2018/09/slurm-script.png" alt="parameter"></p>
 <h2 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h2><p>曾有人问我：我有4台8核处理器的服务器，为什么我提交一个需要16核的任务的时候，作业永远不会运行？</p>
 <p>其实这是很多人对调度系统的一个错误认识，我们必须清楚计算单元并不会自动融合，调度系统也并不会自动拆分作业，这是学习调度系统之前应该了解的要点。我们可以把集群具体的计算资源认为是用户无感知的，也就是说用户无需关心具体跑在某个服务器上，<strong>但并不是所有的计算资源可以看作是一台机器。</strong></p>
 <p>大家小学应该都学过乌鸦喝水的故事，这里我举一个例子，我们把集群中单台服务器看作是一个瓶子，作业看作是一颗一颗不规则的石头，集群则是一大堆瓶子，我们可以得到以下简单的结论：</p>
@@ -478,14 +490,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://o6sdpimwf.bkt.clouddn.com/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://o6sdpimwf.bkt.clouddn.com/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
         <p>支付宝</p>
       </div>
     
@@ -613,7 +625,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://o6sdpimwf.bkt.clouddn.com/uploads/2015/01/photoright-001.jpg"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
                 alt="张稀虹" />
             
               <p class="site-author-name" itemprop="name">张稀虹</p>
@@ -627,7 +639,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -985,7 +997,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://o6sdpimwf.bkt.clouddn.com/canvas-ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
   
 
 
@@ -1086,7 +1098,7 @@
   
     
   
-  <script src="http://o6sdpimwf.bkt.clouddn.com/needsharebutton.min.js"></script>
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
 
   <script>
     

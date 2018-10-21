@@ -116,20 +116,21 @@
 
 
 
-  <meta name="description" content="Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。errors就是一个“简陋”的原生package，原生的errors只支持一个方法">
-<meta name="keywords" content="Golang">
+  <meta name="description" content="经过前面的内容，大家应该对于Slurm最基本的功能使用有了认识。不过对于在生产环境中集群多用户使用作业调度系统，其实还没有深入了解。例如集群环境下如何统一作业运行时的用户权限？Slurm的资源限制究竟是如何实现的？如何为不同的用户配置不同的资源限制策略？如何得到集群资源使用情况的数据报表等等。下面我们就介绍这部分内容，先从Slurm的账务系统（accounting）说起。">
+<meta name="keywords" content="高性能计算,HPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang自定义error">
-<meta property="og:url" content="http://zxh.site/2016/05/20/customized-error/index.html">
+<meta property="og:title" content="HPC 系列文章(14):账务与资源限制">
+<meta property="og:url" content="http://zxh.site/2018/10/21/HPC-系列文章-14-账务与资源限制/index.html">
 <meta property="og:site_name" content="Ansiz">
-<meta property="og:description" content="Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。errors就是一个“简陋”的原生package，原生的errors只支持一个方法">
+<meta property="og:description" content="经过前面的内容，大家应该对于Slurm最基本的功能使用有了认识。不过对于在生产环境中集群多用户使用作业调度系统，其实还没有深入了解。例如集群环境下如何统一作业运行时的用户权限？Slurm的资源限制究竟是如何实现的？如何为不同的用户配置不同的资源限制策略？如何得到集群资源使用情况的数据报表等等。下面我们就介绍这部分内容，先从Slurm的账务系统（accounting）说起。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/05/golang.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.070Z">
+<meta property="og:image" content="http://img.chinahpc.club/2018/10/slurm-tmp-file.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/10/source1.jpeg">
+<meta property="og:updated_time" content="2018-10-21T12:40:47.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Golang自定义error">
-<meta name="twitter:description" content="Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。errors就是一个“简陋”的原生package，原生的errors只支持一个方法">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/05/golang.jpg">
+<meta name="twitter:title" content="HPC 系列文章(14):账务与资源限制">
+<meta name="twitter:description" content="经过前面的内容，大家应该对于Slurm最基本的功能使用有了认识。不过对于在生产环境中集群多用户使用作业调度系统，其实还没有深入了解。例如集群环境下如何统一作业运行时的用户权限？Slurm的资源限制究竟是如何实现的？如何为不同的用户配置不同的资源限制策略？如何得到集群资源使用情况的数据报表等等。下面我们就介绍这部分内容，先从Slurm的账务系统（accounting）说起。">
+<meta name="twitter:image" content="http://img.chinahpc.club/2018/10/slurm-tmp-file.png">
 
 
 
@@ -138,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="http://zxh.site/2016/05/20/customized-error/"/>
+  <link rel="canonical" href="http://zxh.site/2018/10/21/HPC-系列文章-14-账务与资源限制/"/>
 
 
 
@@ -148,7 +149,7 @@
   };
 </script>
 
-  <title>Golang自定义error | Ansiz</title>
+  <title>HPC 系列文章(14):账务与资源限制 | Ansiz</title>
   
 
 
@@ -313,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxh.site/2016/05/20/customized-error/">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/10/21/HPC-系列文章-14-账务与资源限制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张稀虹">
@@ -330,7 +331,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Golang自定义error
+          <h2 class="post-title" itemprop="name headline">HPC 系列文章(14):账务与资源限制
               
             
           </h2>
@@ -355,24 +356,12 @@
                 
               
 
-              <time title="创建时间：2016-05-20 23:07:07" itemprop="dateCreated datePublished" datetime="2016-05-20T23:07:07+08:00">2016-05-20</time>
+              <time title="创建时间：2018-10-21 17:06:57 / 修改时间：20:40:47" itemprop="dateCreated datePublished" datetime="2018-10-21T17:06:57+08:00">2018-10-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
               
             
           </span>
@@ -389,7 +378,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
 
                 
                 
@@ -404,8 +400,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/05/20/customized-error/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/05/20/customized-error/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/HPC-系列文章-14-账务与资源限制/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/HPC-系列文章-14-账务与资源限制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -433,16 +429,41 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2016/05/golang.jpg" alt="Golang"><br>Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。<br>errors就是一个“简陋”的原生package，原生的errors只支持一个方法  <a id="more"></a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">errors.New(<span class="string">"text"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>显然这并不能完全满足我们的需求。<br>但是errors被定义成了一个接口，而golang巧妙的设计使其可以通过实现接口所包含的方法的基础上额外扩展更多的方法，于是我就研究了一下弄了这么一个东西出来，这个包主要有一下几个特点：  </p>
+        <p>经过前面的内容，大家应该对于Slurm最基本的功能使用有了认识。不过对于在生产环境中集群多用户使用作业调度系统，其实还没有深入了解。例如集群环境下如何统一作业运行时的用户权限？Slurm的资源限制究竟是如何实现的？如何为不同的用户配置不同的资源限制策略？如何得到集群资源使用情况的数据报表等等。下面我们就介绍这部分内容，先从Slurm的账务系统（accounting）说起。<a id="more"></a></p>
+<h2 id="账务统计"><a href="#账务统计" class="headerlink" title="账务统计"></a>账务统计</h2><p>当我们将集群资源开放给多个用户使用时，肯定希望能为不同的用户设定不同的资源使用策略，并且希望知道整个集群的使用率以及作业的各种历史数据等等，也就是说我们希望通过查询历史记录来统计分析这些信息，既然要查询历史记录，那我们就应该有地方做数据存储，这就是Slurm的Accounting系统负责的工作。</p>
+<h3 id="状态临时存储"><a href="#状态临时存储" class="headerlink" title="状态临时存储"></a>状态临时存储</h3><p>在介绍Accounting之前，我们先回顾一下作业查询并说一下它们的区别。之前介绍过用<code>squeue</code>和<code>scontrol show job</code>的方式查询作业，不过你可能会发现这些命令所查询到的作业，并不是历史作业，而是正在运行和刚运行完不久的作业。这似乎也很好理解，毕竟如果通过这样的方式查询到的是所有的历史作业的话，一个包含大量作业的多用户系统光是查询作业就可能把服务拖垮了。不过更为关键的是，这样的查询方式实际上并不是从Accounting系统中所查询出来的，而是保存在slurm的临时文件中的。打开slurm.conf配置文件，其中有一个<code>StateSaveLocation</code>的配置项（默认值是/tmp)，它指定了Slurmctld工作时存储状态的临时文件路径。</p>
+<p><img src="http://img.chinahpc.club/2018/10/slurm-tmp-file.png" alt="tmp-files"></p>
+<p>去到这个目录下，你会看到很多由slurm所创建的文件，这些文件对于Slurm而言至关重要，包括job_state,node_state等等，他们存储了当前的各种状态。Slurmctld会不断更新这些文件，当机器意外重启后，也会根据这些文件来恢复工作。我们通过<code>squeue</code>和<code>scontrol show job</code>查询到的作业就是对加载到内存中的这个文件的解析。因为需要被加载到内存中，Slurm通过以下两种方式防止内存被耗尽：</p>
+<ol>
+<li>Slurm不允许无限制的提交作业，MaxJobCount限制了系统中允许运行的最大作业量。</li>
+<li>Slurm并不会无限期对存储作业状态，而是会定期清理掉已经结束运行的作业（包括错误退出以及正常退出的作业），通过MinJobAge限制作业完成后最大存留时长（默认为5分钟后清理）</li>
+</ol>
+<p>了解这些内容有助于你更好的了解Slurm的工作原理，不过这并不是我们所希望的持久化的数据记录。</p>
+<h4 id="扩展（如何快速删除大量的作业）"><a href="#扩展（如何快速删除大量的作业）" class="headerlink" title="扩展（如何快速删除大量的作业）"></a>扩展（如何快速删除大量的作业）</h4><p>因为上述状态文件记录了各种数据，所以通常情况下是不允许删除和修改的，随意修改和删除可能会导致数据丢失。不过如果你不小心写错了脚本往系统中提交了数以万计的作业，想快速删除掉这些作业，就可以利用删除文件的方式快速清除掉这些作业。</p>
+<p>Slurm本身提供了scancel -u $uid的方式批量删除某个用户提交的所有作业，但是这对于超大规模的作业来说并不好使。Slurm的作业取消中有一个比较特殊的逻辑，我们可以看一段儿源码：</p>
+<p><img src="http://img.chinahpc.club/2018/10/source1.jpeg" alt="source"></p>
+<p>简单阅读代码可知，为了防止RPC DOS攻击，当系统中大量取消作业时，会自动以斐波那契规律递增一个延迟，直到这个时间变成一秒。简单的说就是如果你删除大量的作业，系统会自动将请求速度降低到1秒钟一个，如果你不小心通过特殊的脚本提交了太多的作业，这个删除效率依然是比较低的。此时更加方便的方式是将slurmctld服务停止，然后删除job_state文件再重启服务。这样就可以快速的删掉所有的作业了。</p>
+<h3 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h3><h4 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h4><p>持久化存储才是我们要讨论的主题，Slurm可以将作业信息收集存储到文件或者数据库中。最简单的是存放到文件中，你只需要配置<code>AccountingStorageType=accounting_storage/filetxt</code>或者 <code>JobCompType=jobcomp/filetxt</code>并指定存储路径<code>AccountingStorageLoc</code>或者<code>JobCompLoc</code>，不过这并不是最理想的方式，你需要自行rotate文件，并且它使得Slurm作业无法与账户信息相关联。</p>
+<h4 id="数据库存储"><a href="#数据库存储" class="headerlink" title="数据库存储"></a>数据库存储</h4><p>利用slurmdbd将数据存储到数据库则是更有吸引力的方案。</p>
+<h5 id="数据库部署"><a href="#数据库部署" class="headerlink" title="数据库部署"></a>数据库部署</h5><p>首先我们需要安装数据库（Mysql或者Mariadb），这一步很简单就不赘述了。不过你需要适当的做一些优化，尤其是对于作业规模稍大的集群。主要有以下几点：</p>
 <ul>
-<li>支持打印错误堆栈信息，可以方便跟踪到具体是哪一行代码出错。</li>
-<li>支持字符串格式化</li>
-<li>支持json返回  </li>
+<li>使用InnoDB引擎</li>
+<li>适当增大innodb_buffer_pool_size</li>
+<li>建议将innodb_lock_wait_timeout和innodb_log_file_size设置为大于默认值的值</li>
 </ul>
-<p>实现的方法很简单，利用runtime包获取运行时信息，利用json包进行错误数据json输出，利用fmt包进行格式化。具体代码如下：  </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   Author: Ansiz</span></span><br><span class="line"><span class="comment">   Email: z332191120@hotmail.com</span></span><br><span class="line"><span class="comment">   General Usage:</span></span><br><span class="line"><span class="comment">      New error with a customized error code:</span></span><br><span class="line"><span class="comment">		errors.New(999,"some error in program")</span></span><br><span class="line"><span class="comment">		errors.Newf(600,"redis connect error:%v", err)</span></span><br><span class="line"><span class="comment">   	  Catch error just like common error</span></span><br><span class="line"><span class="comment">   	    err := webserver.SomeApi()</span></span><br><span class="line"><span class="comment">   	    if err!=nil&#123;</span></span><br><span class="line"><span class="comment">	       //do something</span></span><br><span class="line"><span class="comment">   	    &#125;</span></span><br><span class="line"><span class="comment">   Webserver Usage:</span></span><br><span class="line"><span class="comment">      import "your_go_src/errors"</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	  err:= webserver.SomeApi()</span></span><br><span class="line"><span class="comment">	  if e,ok := err.(*error.Error);ok&#123;</span></span><br><span class="line"><span class="comment">	      json := e.JsonError()</span></span><br><span class="line"><span class="comment">	      fmt.Println(json)  // a json string will be printed with Code,Msg &amp; StackTrace</span></span><br><span class="line"><span class="comment">	  &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> errors</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"path"</span></span><br><span class="line">	<span class="string">"runtime"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Error <span class="keyword">struct</span> &#123;</span><br><span class="line">	Code       <span class="keyword">int</span></span><br><span class="line">	Msg        <span class="keyword">string</span></span><br><span class="line">	StackTrace <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error with stack info</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(code <span class="keyword">int</span>, msg <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;Error&#123;code, msg, stack(<span class="number">3</span>)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Newf</span><span class="params">(code <span class="keyword">int</span>, format <span class="keyword">string</span>, args ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;Error&#123;code, fmt.Sprintf(format, args), stack(<span class="number">3</span>)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *Error)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> e.Msg + e.StackTrace</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *Error)</span> <span class="title">JsonError</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	err, _ := json.Marshal(e)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">stack</span><span class="params">(skip <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	stk := <span class="built_in">make</span>([]<span class="keyword">uintptr</span>, <span class="number">32</span>)</span><br><span class="line">	str := <span class="string">""</span></span><br><span class="line">	l := runtime.Callers(skip, stk[:])</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; l; i++ &#123;</span><br><span class="line">		f := runtime.FuncForPC(stk[i])</span><br><span class="line">		name := f.Name()</span><br><span class="line">		file, line := f.FileLine(stk[i])</span><br><span class="line">		str += fmt.Sprintf(<span class="string">"\n    %-30s [%s:%d]"</span>, name, path.Base(file), line)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>怎么样，是不是变得强大了很多？科科~</p>
+<p>示例配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES LIKE &apos;innodb_buffer_pool_size&apos;;</span><br><span class="line">+-------------------------+-----------+</span><br><span class="line">| Variable_name           | Value     |</span><br><span class="line">+-------------------------+-----------+</span><br><span class="line">| innodb_buffer_pool_size | 134217728 |</span><br><span class="line">+-------------------------+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">$cat my.cnf</span><br><span class="line">...</span><br><span class="line">[mysqld]</span><br><span class="line">innodb_buffer_pool_size=1024M</span><br><span class="line">innodb_log_file_size=64M</span><br><span class="line">innodb_lock_wait_timeout=900</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h5 id="slurmdbd服务部署"><a href="#slurmdbd服务部署" class="headerlink" title="slurmdbd服务部署"></a>slurmdbd服务部署</h5><p>slurmdbd是一个独立的服务，你需要单独安装它，它也可以独立部署在一台不包含其他slurm守护进程的服务器上，数据库也可以部署到任意服务器。直接使用rpm安装即可，然后你需要修改一下slurm配置以启用slurmdbd进行统计（为了方便，这里我给出的是比较基本的配置并且给出建议值）：</p>
+<ul>
+<li>AccountingStorageType: 设置为”accounting_storage/slurmdbd”.</li>
+<li>AccountingStorageEnforce：限制条件，以逗号分隔，可用的值包括：associations,limits,nojobs,nosteps,qos,safe,wckeys等，具体内容我们后面再详细讲解，可以参考一下<a href="https://slurm.schedmd.com/accounting.html" target="_blank" rel="noopener">slurm文档</a>，通常配置”associations,limits”即可。</li>
+<li>AccountingStorageHost: Slurmdbd服务地址，如果部署在本地可以直接写localhost</li>
+<li>AccountingStoragePort: Slurmdbd服务端口号，默认6819</li>
+<li>ClusterName：集群名称，因为支持多集群，所以要为每个集群配置一个名称</li>
+</ul>
+<p>然后需要配置一下slurmdbd.conf，这里我给出一个基本配置文件，具体项的意思可以直接查<a href="https://slurm.schedmd.com/accounting.html#slurmdbd-configuration" target="_blank" rel="noopener">文档</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Example slurmdbd.conf file.</span><br><span class="line">#</span><br><span class="line"># See the slurmdbd.conf man page for more information.</span><br><span class="line">#</span><br><span class="line"># Archive info</span><br><span class="line">#ArchiveJobs=yes</span><br><span class="line">#ArchiveDir=&quot;/tmp&quot;</span><br><span class="line">#ArchiveSteps=yes</span><br><span class="line">#ArchiveScript=</span><br><span class="line">#JobPurge=12</span><br><span class="line">#StepPurge=1</span><br><span class="line">#</span><br><span class="line"># Authentication info</span><br><span class="line">AuthType=auth/munge</span><br><span class="line">#AuthInfo=/var/run/munge/munge.socket.2</span><br><span class="line">#</span><br><span class="line"># slurmDBD info</span><br><span class="line">DbdAddr=localhost</span><br><span class="line">DbdHost=localhost</span><br><span class="line">#DbdPort=7031</span><br><span class="line">SlurmUser=slurm</span><br><span class="line">#MessageTimeout=300</span><br><span class="line">DebugLevel=4</span><br><span class="line">#DefaultQOS=normal,standby</span><br><span class="line">LogFile=/var/log/slurm/slurmdbd.log</span><br><span class="line">PidFile=/var/run/slurmdbd.pid</span><br><span class="line">#PluginDir=/usr/lib/slurm</span><br><span class="line">#PrivateData=accounts,users,usage,jobs</span><br><span class="line">#TrackWCKey=yes</span><br><span class="line">#</span><br><span class="line"># Database info</span><br><span class="line">StorageType=accounting_storage/mysql</span><br><span class="line">StorageHost=localhost</span><br><span class="line">#StoragePort=1234</span><br><span class="line">#StoragePass=some_pass</span><br><span class="line">StoragePass=slurm</span><br><span class="line">StorageUser=slurm</span><br><span class="line">StorageLoc=slurm_acct_db</span><br></pre></td></tr></table></figure>
+<p>启动mysql、slurmdbd，并重启slurmctld，各服务正常则说明配置完成了。后面我们再介绍具体的概念和使用方式。</p>
 
       
     </div>
@@ -492,7 +513,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Golang/" rel="tag"># Golang</a>
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
+          
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
           
         </div>
       
@@ -520,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/08/port-mapping/" rel="next" title="端口映射">
-                <i class="fa fa-chevron-left"></i> 端口映射
+              <a href="/2018/10/14/HPC-系列文章-13-GPU调度/" rel="next" title="HPC 系列文章(13):GPU调度">
+                <i class="fa fa-chevron-left"></i> HPC 系列文章(13):GPU调度
               </a>
             
           </div>
@@ -529,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/03/redis/" rel="prev" title="多机高可用Redis Sentinel配置">
-                多机高可用Redis Sentinel配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -584,8 +603,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -833,6 +861,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#账务统计"><span class="nav-number">1.</span> <span class="nav-text">账务统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态临时存储"><span class="nav-number">1.1.</span> <span class="nav-text">状态临时存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展（如何快速删除大量的作业）"><span class="nav-number">1.1.1.</span> <span class="nav-text">扩展（如何快速删除大量的作业）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化存储"><span class="nav-number">1.2.</span> <span class="nav-text">持久化存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件存储"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库存储"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据库存储</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库部署"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">数据库部署</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#slurmdbd服务部署"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">slurmdbd服务部署</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
