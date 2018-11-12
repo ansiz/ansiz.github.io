@@ -127,7 +127,7 @@
 <meta property="og:image" content="http://img.chinahpc.club/2018/10/salloc.png">
 <meta property="og:image" content="http://img.chinahpc.club/2018/10/env.png">
 <meta property="og:image" content="http://img.chinahpc.club/2018/10/salloc-srun.png">
-<meta property="og:updated_time" content="2018-10-21T11:13:24.954Z">
+<meta property="og:updated_time" content="2018-11-11T12:16:15.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(12):交互作业">
 <meta name="twitter:description" content="前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用sbatch命令提交是最为常见的方式，不过这种方式存在弊 端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候srun和salloc则是更好的方式。 sallocsalloc">
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 19:13:24" itemprop="dateModified" datetime="2018-10-21T19:13:24+08:00">2018-10-21</time>
+                <time title="修改时间：2018-11-11 20:16:15" itemprop="dateModified" datetime="2018-11-11T20:16:15+08:00">2018-11-11</time>
               
             
           </span>
@@ -469,7 +469,15 @@
 </code></pre><p>slurm会为你分配一个节点并运行bash，此时你执行的任何操作，都相当于在该分配的节点上运行，如果我们加上–pty参数，就会更明了了。</p>
 <pre><code>srun --pty bash
 </code></pre><p>这样你会得到类似salloc的体验，不过当前运行的bash是运行在你分配到的节点上的。</p>
-<p>上面的内容，一定要自己手动操作一遍才会彻底理解。后面我们会介绍一下这样的使用方式具体能实现什么功能。</p>
+<h3 id="sattach"><a href="#sattach" class="headerlink" title="sattach"></a>sattach</h3><p>上面介绍了srun的作用，假设你用srun运行了一个启动bash的作业。我们简单叙述一下整个作业流程：</p>
+<ol>
+<li>srun向系统中提出资源申请</li>
+<li>调度系统判断出当前的计算资源能满足该申请</li>
+<li>调度系统分配了某个计算节点执行指定的任务</li>
+<li>最后在某个节点上成功运行了bash</li>
+</ol>
+<p>这时候你的任何操作实际上是在一个远程节点上执行的，这种感觉有点像一台云主机。那我们要如何连接到这个云主机中呢？所以Slurm提供了一个sattach的工具，用于连接到某个作业步。无论你是运行的一个bash进程或者任何其他进行，在该作业运行期间，你都可以通过sattach直接连接到该作业。</p>
+<p>以上就是关于交互作业的内容，一定要自己手动操作一遍才会彻底理解。后面我们会介绍一下这样的使用方式具体能实现什么功能。</p>
 
       
     </div>
@@ -881,7 +889,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#salloc"><span class="nav-number">1.</span> <span class="nav-text">salloc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#srun"><span class="nav-number">2.</span> <span class="nav-text">srun</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#salloc"><span class="nav-number">1.</span> <span class="nav-text">salloc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#srun"><span class="nav-number">2.</span> <span class="nav-text">srun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sattach"><span class="nav-number">2.1.</span> <span class="nav-text">sattach</span></a></li></ol></li></ol></div>
             
 
           </div>
