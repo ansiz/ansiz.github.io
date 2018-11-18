@@ -126,7 +126,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.chinahpc.club/container-blog.jpg">
 <meta property="og:image" content="http://img.chinahpc.club/srun-demo.jpeg">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.070Z">
+<meta property="og:updated_time" content="2018-11-17T14:25:33.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Slurm+Singularity打造轻量级容器云">
 <meta name="twitter:description" content="Slurm是一套功能非常强大的集群调度系统，能够实现按需调度计算资源。Singularity是一套轻量的容器系统，它可以无缝的和现有的环境结合，为应用提供一个”运行时环境“，你可以把它想象成一个没有Daemon进程没有网络虚拟化技术的Docker。那二者相结合会产生什么有趣的结果呢？">
@@ -255,7 +255,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
   </li>
         
         
@@ -263,7 +263,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">51</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
   </li>
 
       
@@ -373,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+                <time title="修改时间：2018-11-17 22:25:33" itemprop="dateModified" datetime="2018-11-17T22:25:33+08:00">2018-11-17</time>
               
             
           </span>
@@ -452,7 +452,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srun -p demo01 -w node01 --pty test.sh</span><br></pre></td></tr></table></figure>
 <p>看看效果吧：<br><img src="http://img.chinahpc.club/srun-demo.jpeg" alt="demo"></p>
 <p>node01本身安装的系统是CentOS，从输出我们可以看到我们的bash实际运行在Ubuntu的系统内。并且这是一个Slurm的作业，这个环境下使用的硬件资源、时长等等都可以被限制。这样一来，有了资源调度、限制、环境隔离……再深入一点，我们如果能让用户随时重新连接到这个环境内，提供命令行或者web的操作，这不就是一个轻量级的容器云了吗？事实上笔者已经实现了上述内容，细节太多就不展开说了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一次有趣且有价值的尝试，也是一次技术的融合与碰撞。经过这次尝试再反观目前的虚拟化技术，以OpenStack为代表的一站式解决方案实际上是对各种虚拟化技术的整合，其中包含了许多云和虚拟化相关的技术，他们有多种替代品，而将各个组件拆分出来独立使用也可以打造出新的东西，打开新世界的大门。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一次有趣且有价值的尝试，也是一次技术的融合与碰撞。经过这次尝试再反观目前的云平台技术，以OpenStack为代表的一站式解决方案实际上是对各种虚拟化和云计算相关的技术的整合，其中包含了许多云和虚拟化相关的技术，但是也由于其架构和组件众多带来很多复杂性，无论是安装部署或者开发维护都变得较为复杂。但是OpenStack的架构以及其背后的各种技术是非常值得借鉴与参考的，他们有多种替代品，而将各个组件拆分出来独立使用也可以打造出新的东西，打开新世界的大门。</p>
 
       
     </div>
@@ -629,7 +629,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -710,7 +710,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2018-10-28T13:57:38.580Z</updated>
+  <updated>2018-11-18T13:44:14.880Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>探寻TTY的前世今生</title>
+    <link href="http://zxh.site/2018/11/17/SIGWINCH%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <id>http://zxh.site/2018/11/17/SIGWINCH踩坑记/</id>
+    <published>2018-11-17T14:32:48.000Z</published>
+    <updated>2018-11-18T13:44:14.880Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久以前我曾在<a href="http://blog.zxh.site/2017/04/01/web-tty/" target="_blank" rel="noopener">Golang实现多节点Web终端</a>一文中介绍了跨节点web终端的实现，那时候我用这个东西为用户提供在web界面上登陆远程节点的功能，一直用得非常好。后来我们的产品变得越来越复杂，我们不仅仅要让用户能使用shell程序，还要配合Slurm的交互作业，后来在交互作业的基础上又进一步加上容器作业，整个逻辑变成了下图的样子：</p><p><img src="http://img.chinahpc.club/2018/11/webtty.jpg" alt="webshell"></p><p>有了之前的经验，原本以为会一切顺利，结果花了好几天来踩坑。在web界面上输入的内容，经过xterm.js的处理发送到服务器，再一层一层的将信号传递，任何一个环节出问题都会直接影响到使用体验。在这个过程中我查了很多资料，最后整理成本文分享出来。<a id="more"></a></p><h2 id="console、terminator、tty、pty、shell傻傻分不清楚"><a href="#console、terminator、tty、pty、shell傻傻分不清楚" class="headerlink" title="console、terminator、tty、pty、shell傻傻分不清楚"></a>console、terminator、tty、pty、shell傻傻分不清楚</h2><p>用过类Unix系统的朋友，应该对console、terminator、tty、pty、shell这些单词都不陌生，但是却很少有人能清晰的解释他们的区别和原理（反正在这之前我也是很懵的），这里我们就来好好捋一捋。</p><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p><img src="http://img.chinahpc.club/2018/11/Women_in_Waldorf-Astoria.jpg" alt="Ticker tape"></p><p>美国电讯公司的雇员Edward A. Calahan于1867年发明了证券报价机，这是一台由打字机，一对长电缆和一个自动收录机打印机组成的电动机械机器，其目的是长距离实时传播股票的价格。<a href="https://en.wikipedia.org/wiki/Ticker_tape" target="_blank" rel="noopener">Ticker tape</a>是最早的数字电子通信媒介，通过电报线传输股票价格信息，在1870年至1970年间使用，这就是后来的电传打字机的原型。</p><p>TTY的历史要比计算机的出现更早，在计算机出现之前，人们就已经在使用电传打字机（英语：Teleprinter、TeletypewriterTele-Type，缩写为 TTY）来发送数据。它的工作原理跟前面的证券报价机类似，不过采用了更高级的编码形式，这时候电传打字机和电脑还没有任何关系，因为电脑还没被发明呢。</p><p>在我们今天常见的PC出现之前，计算机的形态是与如今的个人电脑截然不同的，我们小学的计算机教材上就提到过的<a href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E6%95%B8%E5%80%BC%E7%A9%8D%E5%88%86%E8%A8%88%E7%AE%97%E6%A9%9F" target="_blank" rel="noopener">ENIAC</a>是世界上第一台通用电子计算机（更早的计算机要么是机电计算机例如德国的Z3，要么就不是通用计算机例如美国的ABC），它是图灵完全的电子计算机，能够重新编程，解决各种计算问题。这玩意儿的体积非常庞大，占地167平米，重达27吨。它采用IBM的卡片阅读器用于输入，打卡器用于输出。<a href="https://zh.wikipedia.org/wiki/%E6%89%93%E5%AD%94%E5%8D%A1" target="_blank" rel="noopener">打孔卡</a>的技术最早出现在1801年，前面提到的Ticker tape和TTY实际上也采用了该技术。因为当时的计算机是给科学家用的，也不需要什么远程连接，所以输入输出设备的选择上并没有过多的考虑。这玩意儿用起来的场面相当壮观：</p><p><img src="http://img.chinahpc.club/2018/11/Eniac.jpg" alt="ENIAC"></p><p>不过科学家也忍受不了这么反人类的输入输出方式，于是就想把电传打字机和计算机相结合。于是第一台支持“键盘”输入的计算机<a href="https://en.wikipedia.org/wiki/PDP-1" target="_blank" rel="noopener">PDP1</a>诞生了，自此以后, 计算机的输入设备和输出设备有了根本改变:</p><p><img src="http://img.chinahpc.club/2018/11/pdp1.jpeg" alt="PDP1"></p><p>再后来电脑看起来像是一大堆具备一些奇怪按钮和指示灯的，衣柜一般大小的柜子，这些柜子里有的装的是处理单元，相当于今天的CPU，其中一个装着穿孔读卡器作为输入设备，其余的装着磁带、硬盘、打印机等等。就像这样子（下图是一套Univac 9400计算机）：</p><p><img src="http://img.chinahpc.club/2018/11/univac-9400.jpg" alt="univac-9400"></p><p>这张图右侧那些奇怪的按钮和一堆指示灯，就是所谓的console，它是早期计算机主机的一部分，通常和CPU共享一个机柜。在console左侧那个面前有个椅子的大桌子上的设备，就是传说中的Teletypewriter，当时的TTY指的就是这样的设备。下面还有一张图，展示的是<code>Teletype Model 33 ASR (1963)</code>：</p><p><img src="http://img.chinahpc.club/2018/11/teletype-model-33.jpg" alt="teletype-model-33"></p><p>随着技术的进步，电传打字机终端被视频显示终端所取代。计算机终端是用于将数据输入计算机或计算系统并从计算机或计算系统显示数据的电子或机电硬件设备，简单的说就是输出不再是打印在纸上的了，直接显示在屏幕上。于是操作电脑的方式变成了下图（A DEC VT52 video terminal connected to a PDP 11/55 computer.）这样，你可以坐在终端面前实现输入输出：</p><p><img src="http://img.chinahpc.club/2018/11/DEC-VT52-terminal-PDP-11-55-1920.jpg" alt="A DEC VT52 video terminal connected to a PDP 11/55 computer."></p><p>console与Terminal的区别：</p><p><img src="http://img.chinahpc.club/console.jpg" alt="console and term"></p><p>下面是一张DEC VT100 terminal的照片，看上去已经很像现在的个人电脑了，不过千万别误会，终端实际上是不具备计算能力的，它只是计算机的输入输出设备而已，相当于只有键盘+显示器+网线，其他的CPU、内存、硬盘等都在那些柜子一样大的计算机上：</p><p><img src="http://img.chinahpc.club/2018/11/DEC-VT100-terminal.jpg" alt="DEC-VT100-terminal"></p><p>我们可以简单总结一下console、terminator、tty了：</p><ul><li>tty 和 terminal 都是输入输出的外设，不过terminal输出到显示器，tty输出到纸上</li><li>console是集成在计算机机柜上的物理操作面板</li></ul><h2 id="回到问题"><a href="#回到问题" class="headerlink" title="回到问题"></a>回到问题</h2><p>楼歪得有点严重了，我们回到文章最开始讨论的那个问题。</p><p><img src="http://img.chinahpc.club/2018/11/webshell2%20%281%29.png" alt="webshell"></p><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><a href="https://zh.wikipedia.org/wiki/%E6%89%93%E5%AD%94%E5%8D%A1" target="_blank" rel="noopener">打孔卡</a></li><li><a href="https://en.wikipedia.org/wiki/Ticker_tape" target="_blank" rel="noopener">Ticker tape</a></li><li><a href="https://medium.com/@guanbeilang/%E6%97%A9%E6%9C%9F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87-f77597a3ab7" target="_blank" rel="noopener">早期计算机的输入输出设备</a></li><li><a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con" target="_blank" rel="noopener">What is the exact difference between a ‘terminal’, a ‘shell’, a ‘tty’ and a ‘console’?</a></li><li><a href="https://www.zhihu.com/question/21711307" target="_blank" rel="noopener">终端，Shell，“tty”和控制台（console）有什么区别？</a></li><li><a href="https://segmentfault.com/a/1190000009082089" target="_blank" rel="noopener">Linux TTY/PTS概述</a></li><li><a href="http://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener">The TTY demystified</a></li><li><a href="https://slurm.schedmd.com/sattach.html" target="_blank" rel="noopener">sattach</a></li><li><a href="https://github.com/moby/moby/issues/35407" target="_blank" rel="noopener">Docker Exec does not resize terminal #35407</a></li><li><a href="https://zhuanlan.zhihu.com/p/21767308" target="_blank" rel="noopener">带你逛西雅图活电脑博物馆</a></li><li><a href="http://www.it.uu.se/education/course/homepage/os/vt18/module-0/shell-and-terminal/" target="_blank" rel="noopener">The shell and terminal</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久以前我曾在&lt;a href=&quot;http://blog.zxh.site/2017/04/01/web-tty/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Golang实现多节点Web终端&lt;/a&gt;一文中介绍了跨节点web终端的实现，那时候我用这个东西为用户提供在web界面上登陆远程节点的功能，一直用得非常好。后来我们的产品变得越来越复杂，我们不仅仅要让用户能使用shell程序，还要配合Slurm的交互作业，后来在交互作业的基础上又进一步加上容器作业，整个逻辑变成了下图的样子：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://img.chinahpc.club/2018/11/webtty.jpg&quot; alt=&quot;webshell&quot;&gt;&lt;/p&gt;
+&lt;p&gt;有了之前的经验，原本以为会一切顺利，结果花了好几天来踩坑。在web界面上输入的内容，经过xterm.js的处理发送到服务器，再一层一层的将信号传递，任何一个环节出问题都会直接影响到使用体验。在这个过程中我查了很多资料，最后整理成本文分享出来。
+    
+    </summary>
+    
+      <category term="后端" scheme="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="Linux" scheme="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://zxh.site/tags/Linux/"/>
+    
+      <category term="后端" scheme="http://zxh.site/tags/%E5%90%8E%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>HPC 系列文章(15):资源限制</title>
@@ -556,32 +584,6 @@
       <category term="Docker" scheme="http://zxh.site/tags/Docker/"/>
     
       <category term="Slurm" scheme="http://zxh.site/tags/Slurm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>有趣的X11</title>
-    <link href="http://zxh.site/2018/06/24/x11/"/>
-    <id>http://zxh.site/2018/06/24/x11/</id>
-    <published>2018-06-24T08:07:04.000Z</published>
-    <updated>2018-10-21T10:57:45.883Z</updated>
-    
-    <content type="html"><![CDATA[<p>大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用<code>VNC</code>或<code>RDP</code>进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：<br><img src="http://img.chinahpc.club/2018/05/x11-fs8.png" alt="x11"><br><a id="more"></a></p><h2 id="什么是X11？"><a href="#什么是X11？" class="headerlink" title="什么是X11？"></a>什么是X11？</h2><p>这项有趣的技术自1984年第一版X1发布至今已经有三十多年，可以称得上是古老的技术了。1987年9月15日首次发布现有X窗口系统所用的协议<code>X11</code>（Protocol），后续发布的版本命名为<code>X11R2</code>、<code>X11R3</code>…而今最新的引用实现（引用性、示范性的实现体）版本则是2012年发布的X11R7.7（X11 Release 7.7），所以后来就简称<code>X11</code>了。</p><blockquote><p>X窗口系统（X Window System，也常称为X11或X）是一种以位图方式显示的软件窗口系统。最初是1984年麻省理工学院的研究，之后变成UNIX、类UNIX、以及OpenVMS等操作系统所一致适用的标准化软件工具包及显示架构的运作协定。X窗口系统通过软件工具及架构协定来创建操作系统所用的图形用户界面，此后则逐渐扩展适用到各形各色的其他操作系统上。现在几乎所有的操作系统都能支持与使用X。更重要的是，今日知名的桌面环境——GNOME和KDE也都是以X窗口系统为基础建构成的。————<a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1#.E5.8F.82.E8.A7.81" target="_blank" rel="noopener">维基百科-X窗口系统</a></p></blockquote><p><code>X11</code>最大的特点是它的C/S架构和我们一般认为的Server运行在远端Client运行在本地恰好相反，<code>X11</code>的Server反而通常运行在用户本地的机器上，而运行在远端的Client也并非特指某一个或一种程序，而是一切基于<code>X11</code>开发的GUI。通常我们把X Server安装在本地并启动，例如<code>Windows</code>上的<code>XManager</code>，<code>macOS</code>上的<code>XQuartz</code>等软件，用以接收远端的图像信号并将鼠标、键盘输入转发到远端。你可以把X11理解为将图像数据处理运行在服务器上，但显示信号通过网络输出到另外一台机器上，想象将平时我们使用显示器的HDMI或者DVI线被换成了一根网线。</p><h2 id="X11的优点"><a href="#X11的优点" class="headerlink" title="X11的优点"></a>X11的优点</h2><h3 id="让显示输出更加灵活"><a href="#让显示输出更加灵活" class="headerlink" title="让显示输出更加灵活"></a>让显示输出更加灵活</h3><p>客户端可以在远程服务器上执行计算任务，而X Server仅负责图形显示。既可以充分利用服务器的强大性能进行运算，还不用给服务器安装桌面环境或连接显示器就能看到图像输出，这种场景在集群环境下非常常见。</p><h3 id="让GUI变得可移植"><a href="#让GUI变得可移植" class="headerlink" title="让GUI变得可移植"></a>让GUI变得可移植</h3><p>只有X Server服务端与硬件打交道，所有的客户端都与硬件无关，这让不同的平台上的移植变得很容易。</p><h3 id="风格可自定义"><a href="#风格可自定义" class="headerlink" title="风格可自定义"></a>风格可自定义</h3><p>X系统只负责显示图形，并不限制显示和操作的风格，因此不同的X Window的风格并不相同，用户可以根据自己的喜好进行选择。</p><h2 id="X11的缺点"><a href="#X11的缺点" class="headerlink" title="X11的缺点"></a>X11的缺点</h2><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>X Window的C/S体系（C/S架构）设计在应用程序和视频硬件之间多加了一层软件，导致绘图效率下降，所以引起了一些批评。因此开发了若干扩展，在设备和客户机在同一个系统上时，通过在获取适当许可的情况下，以直接访问设备来改善这一问题。而在Linux上，一些视频驱动已经部分移入内核以提高效率。</p><h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>另一方面，X也被批评为需要（或者提供）了过多的对硬件的直接访问，从而影响了系统稳定性。行为不良的显卡驱动（有时也可能是应用程序）甚至能够导致整个系统崩溃或者重启；有时即使操作系统仍在工作，它也不能继续渲染其显示（这时除了重启，缺乏好的恢复手段）。目前所有的桌面GUI操作系统都提供某种对硬件的直接访问，支持者认为市场已经证明为了提供图形性能牺牲一点稳定性是值得的。或许将来随着技术和用户的演化这一平衡会有所变化。</p><h3 id="不规范的用户界面"><a href="#不规范的用户界面" class="headerlink" title="不规范的用户界面"></a>不规范的用户界面</h3><p>X刻意不去规范用户界面和程序之间大多数的通信，导致出现了许多非常不同的界面，同时造成程序之间协同的困难；而客户机之间的互操作规范ICCCM以难以正确实现而闻名。后来的标准化尝试，如Motif和CDE，也于事无补。长久以来这已经成为用户和程序员的噩梦。</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>X缺乏良好的网络与透明的音效系统。当用户对音效日益期盼时，各种不兼容的音效子系统便出现了。过去，大多数程序员只好忽略网络问题，简单地使用本地操作专用的音效API。第一代客户端-服务端音效系统有rplay和Network Audio System。而最近的努力产生了EsounD（GNOME）和ARts（KDE），而这也并非标准。而其他系统如Media Application Server则正在开发当中。<br>直到最近，X也没有好地解决显示与打印机所打印的内容一致性（所见即所得）的解决方案。许多X客户机完全用PostScript实现打印，而这与发送到服务端的几乎是分离的。从X11R6.3起包含了Xprint，此时客户端已经不错，但是服务器实现还不行。而从X11R6.8起实现的质量已经很好，并且获得了组件支持。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>X11是一个功能非常强大的 C/S 图形显示系统，具有很好的跨网络性能，也易于进行扩展，是一个值得学习研究的技术。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1" target="_blank" rel="noopener">X窗口系统</a></li><li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/" target="_blank" rel="noopener">X Window 系统的窗口显示原理</a></li><li><a href="https://baike.baidu.com/item/X%20Window/7249336" target="_blank" rel="noopener">X Window</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;大多数熟练使用Linux的用户都习惯于使用高效的命令行进行操作，尤其是在服务器上，安装桌面环境浪费资源、降低稳定性。但是有的应用程序又必须有显示输出才有意义，比如使用服务器运行一些有图像输出的程序时。你可以选择安装桌面环境，然后使用&lt;code&gt;VNC&lt;/code&gt;或&lt;code&gt;RDP&lt;/code&gt;进行远程桌面连接，但更好的选择其实是使用X窗口系统（以下简称X11）转发输出。这张图片就是一个神奇的Linux文件管理器和macOS文件管理器”运行”在同一桌面下的有趣效果：&lt;br&gt;&lt;img src=&quot;http://img.chinahpc.club/2018/05/x11-fs8.png&quot; alt=&quot;x11&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://zxh.site/categories/Linux/"/>
-    
-      <category term="工具" scheme="http://zxh.site/categories/Linux/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Linux" scheme="http://zxh.site/tags/Linux/"/>
-    
-      <category term="工具" scheme="http://zxh.site/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   

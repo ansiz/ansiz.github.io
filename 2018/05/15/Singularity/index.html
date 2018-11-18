@@ -125,7 +125,7 @@
 <meta property="og:description" content="高性能计算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.chinahpc.club/vm_vs_container.png">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.070Z">
+<meta property="og:updated_time" content="2018-11-17T14:19:08.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Singularity——HPC环境的绝佳容器解决方案">
 <meta name="twitter:description" content="高性能计算可以应用在非常多的领域，例如科学计算、深度学习、视频渲染、气象预测等等，各个行业使用完全不同的应用环境，相关的配套软件又可能只存在于各种不同的平台之上，这样的场景在HPC应用环境下非常常见。如何解决这样的问题呢？容器技术肯定是不二之选。">
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
   </li>
         
         
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">51</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
   </li>
 
       
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+                <time title="修改时间：2018-11-17 22:19:08" itemprop="dateModified" datetime="2018-11-17T22:19:08+08:00">2018-11-17</time>
               
             
           </span>
@@ -452,7 +452,8 @@
 <h2 id="为什么不用Docker？"><a href="#为什么不用Docker？" class="headerlink" title="为什么不用Docker？"></a>为什么不用Docker？</h2><p><code>Docker</code>绝对是目前最热的容器技术，但是它却不特别适合HPC环境。有几个重要的原因：</p>
 <ol>
 <li>调度管理器的资源限制无法施加到容器中</li>
-<li>非root用户使用授权问题</li>
+<li>多用户（非root用户）使用时的权限问题</li>
+<li>Docker包含了不必要的资源开销</li>
 </ol>
 <p>集群中的资源使用通常需要由调度管理器来进行分配，例如<code>Slurm</code>/<code>PBS</code>等系统负责资源分配。调度管理器根据用户需求为每个作业分配一定的资源，实质上是利用<code>cgroups</code>针对每个作业进行配置实现的。而<code>Docker</code>镜像的启动实际上是由<code>Docker Daemon</code>去执行的，如此一来资源限制自然会失效。并且<code>Docker Daemon</code>是由root用户启动的，无论是为普通用户设置<code>sudoer</code>还是将普通用户添加到docker用户组中都不是一个安全的方式。</p>
 <h2 id="Singularity的优势"><a href="#Singularity的优势" class="headerlink" title="Singularity的优势"></a>Singularity的优势</h2><p><code>Singularity</code>拥有容器技术所包含的大多数优势，例如启动迅速、资源开销小、轻松的迁移和扩展等等。除此之外，相较于<code>Docker</code>这样的容器技术，它还有一些独特的优势：</p>
@@ -650,7 +651,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -731,7 +732,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>

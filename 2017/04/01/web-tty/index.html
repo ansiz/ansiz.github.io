@@ -125,7 +125,7 @@
 <meta property="og:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.chinahpc.club/uploads/2017/04/screenshot.gif">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.196Z">
+<meta property="og:updated_time" content="2018-11-17T14:28:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang实现多节点Web终端">
 <meta name="twitter:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
   </li>
         
         
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">51</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
   </li>
 
       
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+                <time title="修改时间：2018-11-17 22:28:49" itemprop="dateModified" datetime="2018-11-17T22:28:49+08:00">2018-11-17</time>
               
             
           </span>
@@ -448,12 +448,14 @@
 <li>每个用户应该以自己的用户身份登陆节点。  </li>
 </ol>
 <p>要实现上述需求，首先WebServer要支持代理请求，并且在计算节点上要能够动态的同时启动多个tty服务。本着“避免重复造轮子”的原则，我先上著名同性交友网站GayHub进行了一番搜寻，最后发现了两个不错的工具能够实现我的需求：</p>
-<blockquote>
-<p><a href="https://github.com/yudai/gotty" target="_blank" rel="noopener">GoTTY</a> is a simple command line tool that turns your CLI tools into web applications.<br><a href="https://github.com/koding/websocketproxy" target="_blank" rel="noopener">WebsocketProxy </a> is an http.Handler interface build on top of gorilla/websocket that you can plug into your existing Go webserver to provide WebSocket reverse proxy.  </p>
-</blockquote>
+<ul>
+<li><a href="https://github.com/yudai/gotty" target="_blank" rel="noopener">GoTTY</a> is a simple command line tool that turns your CLI tools into web applications.</li>
+<li><a href="https://github.com/koding/websocketproxy" target="_blank" rel="noopener">WebsocketProxy</a> is an http.Handler interface build on top of gorilla/websocket that you can plug into your existing Go webserver to provide WebSocket reverse proxy.</li>
+</ul>
 <h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="启动多个GoTTY实例"><a href="#启动多个GoTTY实例" class="headerlink" title="启动多个GoTTY实例"></a>启动多个GoTTY实例</h3><p>要支持多用户不同身份同时访问，显然我们必须启动多个GoTTY服务，因为无法预计用户的身份和规模，我们不能在每个节点上预先启动多个服务，而应该动态的接受管理节点的命令去启动服务。这一步很简单，最简单的方法是直接在管理节点上执行ssh命令，更好的方式则是在管理节点和计算节点之间实现消息队列的机制，计算节点上能获取到管理节点的命令并执行。这里我利用Redis在管理节点和计算节点之间实现了Agent，这不是这篇文章的重点，所以具体方法这里不赘述。<br>简而言之我已经实现了动态的在计算节点上接收命令以不同身份在不同的接口启动多个GoTTY。</p>
 <h3 id="反向代理GoTTY接口"><a href="#反向代理GoTTY接口" class="headerlink" title="反向代理GoTTY接口"></a>反向代理GoTTY接口</h3><p>下载GoTTY运行后发现这个程序做得非常巧妙，它利用go-bindata将所有静态文件都打包到了二进制文件中，程序编译后只有一个可执行程序，但却能够提供web服务，我通过Chrome调试工具查看了它的网络请求，摸清了它的基本原理，其前端核心是一个websocket请求。前端没有秘密，我只需要将静态文件拆分出来单独提供文件服务就可以使用。于是我尝试在一台计算节点上启动gotty服务，将接口设置了代理，拆分出静态文件，发现服务能正常工作，这意味着成功了一半。</p>
-<p>在Web服务中proxy是很常见的，但大都是通过专门的软件去实现，并且这还是一个Websocket的接口，而WebsocketProxy恰好提供了这样的功能。利用WebsocketProxy我们只需要添加几行简单的代码：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">agentURL := fmt.Sprintf(<span class="string">"ws://%s:%d/ws"</span>, nodeIP, ttyPort)</span><br><span class="line">u, err := url.Parse(agentURL)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">       <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line">proxyHandler := websocketproxy.NewProxy(u)</span><br></pre></td></tr></table></figure></p>
+<p>在Web服务中proxy是很常见的，但大都是通过专门的软件去实现，并且这还是一个Websocket的接口，而WebsocketProxy恰好提供了这样的功能。利用WebsocketProxy我们只需要添加几行简单的代码：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">agentURL := fmt.Sprintf(<span class="string">"ws://%s:%d/ws"</span>, nodeIP, ttyPort)</span><br><span class="line">u, err := url.Parse(agentURL)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">       <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line">proxyHandler := websocketproxy.NewProxy(u)</span><br></pre></td></tr></table></figure>
 <p>接下来只需要动态新增这样一个Handler即可。</p>
 <h3 id="动态新增HTTP-Handler"><a href="#动态新增HTTP-Handler" class="headerlink" title="动态新增HTTP Handler"></a>动态新增HTTP Handler</h3><p>我的Web Server采用了Beego框架，仔细阅读框架文档和代码后发现Beego的<a href="https://godoc.org/github.com/astaxie/beego#Handler" target="_blank" rel="noopener">App.Handler</a>能用来添加一个新的HTTP Handler,如果我在一个已有的HTTP Handler中调用该方法，则可以实现动态的增加一个Handler。我们只需要在上述代码的基础上再添加两行：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsURL := fmt.Sprintf(<span class="string">"/ws_%s%d"</span>, nodeName, ttyPort)</span><br><span class="line">beego.Handler(wsURL, proxyHandler)</span><br></pre></td></tr></table></figure></p>
 <p>如此一来我们就动态的新增了一个handler，并且它的url是根据节点名和端口号动态变化的，接下来我们只需要告诉前端去这个新的URL上建立websocket连接即可。</p>
@@ -633,7 +635,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -714,7 +716,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
