@@ -135,7 +135,7 @@
 <meta property="og:image" content="http://img.chinahpc.club/console.jpg">
 <meta property="og:image" content="http://img.chinahpc.club/2018/11/DEC-VT100-terminal.jpg">
 <meta property="og:image" content="http://img.chinahpc.club/2018/11/webshell2%20%281%29.png">
-<meta property="og:updated_time" content="2018-11-18T13:50:47.033Z">
+<meta property="og:updated_time" content="2018-11-18T16:09:52.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探寻TTY的前世今生">
 <meta name="twitter:description" content="很久以前我曾在Golang实现多节点Web终端一文中介绍了跨节点web终端的实现，那时候我用这个东西为用户提供在web界面上登陆远程节点的功能，一直用得非常好。后来我们的产品变得越来越复杂，我们不仅仅要让用户能使用shell程序，还要配合Slurm的交互作业，后来在交互作业的基础上又进一步加上容器作业，整个逻辑变成了下图的样子：  有了之前的经验，原本以为会一切顺利，结果花了好几天来踩坑。在we">
@@ -382,7 +382,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-18 21:50:47" itemprop="dateModified" datetime="2018-11-18T21:50:47+08:00">2018-11-18</time>
+                <time title="修改时间：2018-11-19 00:09:52" itemprop="dateModified" datetime="2018-11-19T00:09:52+08:00">2018-11-19</time>
               
             
           </span>
@@ -454,10 +454,10 @@
 <p>很久以前我曾在<a href="http://blog.zxh.site/2017/04/01/web-tty/" target="_blank" rel="noopener">Golang实现多节点Web终端</a>一文中介绍了跨节点web终端的实现，那时候我用这个东西为用户提供在web界面上登陆远程节点的功能，一直用得非常好。后来我们的产品变得越来越复杂，我们不仅仅要让用户能使用shell程序，还要配合Slurm的交互作业，后来在交互作业的基础上又进一步加上容器作业，整个逻辑变成了下图的样子：</p>
 <p><img src="http://img.chinahpc.club/2018/11/webtty.jpg" alt="webshell"></p>
 <p>有了之前的经验，原本以为会一切顺利，结果花了好几天来踩坑。在web界面上输入的内容，经过xterm.js的处理发送到服务器，再一层一层的将信号传递，任何一个环节出问题都会直接影响到使用体验。在这个过程中我查了很多资料，最后整理成本文分享出来。<a id="more"></a></p>
-<h2 id="console、terminator、tty、pty、shell傻傻分不清楚"><a href="#console、terminator、tty、pty、shell傻傻分不清楚" class="headerlink" title="console、terminator、tty、pty、shell傻傻分不清楚"></a>console、terminator、tty、pty、shell傻傻分不清楚</h2><p>用过类Unix系统的朋友，应该对console、terminator、tty、pty、shell这些单词都不陌生，但是却很少有人能清晰的解释他们的区别和原理（反正在这之前我也是很懵的），这里我们就来好好捋一捋。</p>
-<h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p><img src="http://img.chinahpc.club/2018/11/Women_in_Waldorf-Astoria.jpg" alt="Ticker tape"></p>
+<h2 id="console、terminal、tty、pty、shell傻傻分不清楚"><a href="#console、terminal、tty、pty、shell傻傻分不清楚" class="headerlink" title="console、terminal、tty、pty、shell傻傻分不清楚"></a>console、terminal、tty、pty、shell傻傻分不清楚</h2><p>用过类Unix系统的朋友，应该对console、terminator、tty、pty、shell这些单词都不陌生，但是却很少有人能清晰的解释他们的区别和原理（反正在这之前我也是很懵的），这里我们就来好好捋一捋。</p>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p><img src="http://img.chinahpc.club/2018/11/Women_in_Waldorf-Astoria.jpg" alt="Ticker tape"></p>
 <p>美国电讯公司的雇员Edward A. Calahan于1867年发明了证券报价机，这是一台由打字机，一对长电缆和一个自动收录机打印机组成的电动机械机器，其目的是长距离实时传播股票的价格。<a href="https://en.wikipedia.org/wiki/Ticker_tape" target="_blank" rel="noopener">Ticker tape</a>是最早的数字电子通信媒介，通过电报线传输股票价格信息，在1870年至1970年间使用，这就是后来的电传打字机的原型。</p>
-<p>TTY的历史要比计算机的出现更早，在计算机出现之前，人们就已经在使用电传打字机（英语：Teleprinter、TeletypewriterTele-Type，缩写为 TTY）来发送数据。它的工作原理跟前面的证券报价机类似，不过采用了更高级的编码形式，这时候电传打字机和电脑还没有任何关系，因为电脑还没被发明呢。</p>
+<p>TTY的历史要比计算机的出现更早，在计算机出现之前，人们就已经在使用电传打字机（英语：Teleprinter、Teletypewriter，缩写为 TTY）来发送数据。它的工作原理跟前面的证券报价机类似，不过采用了更高级的编码形式，这时候电传打字机和电脑还没有任何关系，因为电脑还没被发明呢。</p>
 <p>在我们今天常见的PC出现之前，计算机的形态是与如今的个人电脑截然不同的，我们小学的计算机教材上就提到过的<a href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E6%95%B8%E5%80%BC%E7%A9%8D%E5%88%86%E8%A8%88%E7%AE%97%E6%A9%9F" target="_blank" rel="noopener">ENIAC</a>是世界上第一台通用电子计算机（更早的计算机要么是机电计算机例如德国的Z3，要么就不是通用计算机例如美国的ABC），它是图灵完全的电子计算机，能够重新编程，解决各种计算问题。这玩意儿的体积非常庞大，占地167平米，重达27吨。它采用IBM的卡片阅读器用于输入，打卡器用于输出。<a href="https://zh.wikipedia.org/wiki/%E6%89%93%E5%AD%94%E5%8D%A1" target="_blank" rel="noopener">打孔卡</a>的技术最早出现在1801年，前面提到的Ticker tape和TTY实际上也采用了该技术。因为当时的计算机是给科学家用的，也不需要什么远程连接，所以输入输出设备的选择上并没有过多的考虑。这玩意儿用起来的场面相当壮观：</p>
 <p><img src="http://img.chinahpc.club/2018/11/Eniac.jpg" alt="ENIAC"></p>
 <p>不过科学家也忍受不了这么反人类的输入输出方式，于是就想把电传打字机和计算机相结合。于是第一台支持“键盘”输入的计算机<a href="https://en.wikipedia.org/wiki/PDP-1" target="_blank" rel="noopener">PDP1</a>诞生了，自此以后, 计算机的输入设备和输出设备有了根本改变:</p>
@@ -472,11 +472,17 @@
 <p><img src="http://img.chinahpc.club/console.jpg" alt="console and term"></p>
 <p>下面是一张DEC VT100 terminal的照片，看上去已经很像现在的个人电脑了，不过千万别误会，终端实际上是不具备计算能力的，它只是计算机的输入输出设备而已，相当于只有键盘+显示器+网线，其他的CPU、内存、硬盘等都在那些柜子一样大的计算机上：</p>
 <p><img src="http://img.chinahpc.club/2018/11/DEC-VT100-terminal.jpg" alt="DEC-VT100-terminal"></p>
-<p>我们可以简单总结一下console、terminator、tty了：</p>
+<p>我们可以简单总结一下以前的console、terminator、tty了：</p>
 <ul>
 <li>tty 和 terminal 都是输入输出的外设，不过terminal输出到显示器，tty输出到纸上</li>
 <li>console是集成在计算机机柜上的物理操作面板</li>
+<li>它们都属于硬件，另外，它们都已经被淘汰了</li>
 </ul>
+<p>再后来计算机具备了多任务多用户操作的能力，也有了最原始的网络，为了让大家共享同一台计算机，终端系统就变成了这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">                                                                      +----------+ </span><br><span class="line">+----------+   +-------+     Physical Line     +-------+   +------+   |          |</span><br><span class="line">| Terminal |&lt;-&gt;| Modem |&lt;---------------------&gt;| Modem |&lt;-&gt;| UART |&lt;-&gt;| Computer |</span><br><span class="line">+----------+   +-------+                       +-------+   +------+   |          |</span><br><span class="line">                                                                      +----------+</span><br></pre></td></tr></table></figure>
+<p>简单的说就是通过<a href="https://zh.wikipedia.org/wiki/UART" target="_blank" rel="noopener">UART</a>实现了不同终端的信号统一转化，也就是说支持多用户用不同的终端连接使用计算机了。</p>
+<h3 id="如今"><a href="#如今" class="headerlink" title="如今"></a>如今</h3><p>现在在Unix系统中，tty的意思跟上面讲的东西没啥关系了。如今我们所谓的终端、tty等，实际上是软件和系统层面上对以上设备的模拟，上面讨论的这些概念都已经过时了，但是它们的设计思想对今天的操作系统依然有深远的影响。</p>
+<p>在Unix术语中，tty是一种特殊类型的设备文件，它实现了除读写之外的许多附加命令，例如控制换行、信号处理以及会话管理等。</p>
 <h2 id="回到问题"><a href="#回到问题" class="headerlink" title="回到问题"></a>回到问题</h2><p>楼歪得有点严重了，我们回到文章最开始讨论的那个问题。</p>
 <p><img src="http://img.chinahpc.club/2018/11/webshell2%20%281%29.png" alt="webshell"></p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
@@ -901,7 +907,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#console、terminator、tty、pty、shell傻傻分不清楚"><span class="nav-number">1.</span> <span class="nav-text">console、terminator、tty、pty、shell傻傻分不清楚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#历史"><span class="nav-number">2.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回到问题"><span class="nav-number">3.</span> <span class="nav-text">回到问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#console、terminal、tty、pty、shell傻傻分不清楚"><span class="nav-number">1.</span> <span class="nav-text">console、terminal、tty、pty、shell傻傻分不清楚</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史"><span class="nav-number">1.1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如今"><span class="nav-number">1.2.</span> <span class="nav-text">如今</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回到问题"><span class="nav-number">2.</span> <span class="nav-text">回到问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
