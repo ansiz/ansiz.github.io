@@ -373,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-19 00:09:52" itemprop="dateModified" datetime="2018-11-19T00:09:52+08:00">2018-11-19</time>
+                <time title="修改时间：2018-11-24 22:43:10" itemprop="dateModified" datetime="2018-11-24T22:43:10+08:00">2018-11-24</time>
               
             
           </span>
@@ -443,9 +443,7 @@
       
         
           <p><img src="http://img.chinahpc.club/2018/11/univac-9400.jpg" alt="univac-9400"></p>
-<p>很久以前我曾在<a href="http://blog.zxh.site/2017/04/01/web-tty/" target="_blank" rel="noopener">Golang实现多节点Web终端</a>一文中介绍了跨节点web终端的实现，那时候我用这个东西为用户提供在web界面上登陆远程节点的功能，一直用得非常好。后来我们的产品变得越来越复杂，我们不仅仅要让用户能使用shell程序，还要配合Slurm的交互作业，后来在交互作业的基础上又进一步加上容器作业，整个逻辑变成了下图的样子：</p>
-<p><img src="http://img.chinahpc.club/2018/11/webtty.jpg" alt="webshell"></p>
-<p>有了之前的经验，原本以为会一切顺利，结果花了好几天来踩坑。在web界面上输入的内容，经过xterm.js的处理发送到服务器，再一层一层的将信号传递，任何一个环节出问题都会直接影响到使用体验。在这个过程中我查了很多资料，最后整理成本文分享出来。
+<p>用过类Unix系统的朋友，应该对console、terminator、tty、pty、shell这些单词都不陌生，也应该听说过设备文件、Unix一切皆文件等等说法。但是却很少有人能清晰的解释他们的区别和原理（反正在这之前我也是很懵的），这里我们就来好好捋一捋。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/17/探寻TTY的前世今生/#more" rel="contents">
