@@ -139,14 +139,15 @@
 <meta property="og:image" content="http://img.chinahpc.club/2018/11/%E5%A4%9A%E7%BB%88%E7%AB%AF.png">
 <meta property="og:image" content="http://img.chinahpc.club/2018/11/software-hardware.png">
 <meta property="og:image" content="http://img.chinahpc.club/2018/11/linux-tty.png">
-<meta property="og:updated_time" content="2018-11-25T14:03:25.339Z">
+<meta property="og:image" content="http://img.chinahpc.club/2018/11/how.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/11/ptym.png">
+<meta property="og:image" content="http://img.chinahpc.club/2018/11/ssh.png">
+<meta property="og:updated_time" content="2018-11-25T14:50:31.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探寻TTY的前世今生">
 <meta name="twitter:description" content="用过类Unix系统的朋友，应该对console、terminator、tty、pty、shell这些单词都不陌生，也应该听说过设备文件、Unix一切皆文件等等说法。但是却很少有人能清晰的解释他们的区别和原理（反正在这之前我也是很懵的），这里我们就来好好捋一捋。">
 <meta name="twitter:image" content="http://img.chinahpc.club/2018/11/univac-9400.jpg">
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
@@ -388,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-25 22:03:25" itemprop="dateModified" datetime="2018-11-25T22:03:25+08:00">2018-11-25</time>
+                <time title="修改时间：2018-11-25 22:50:31" itemprop="dateModified" datetime="2018-11-25T22:50:31+08:00">2018-11-25</time>
               
             
           </span>
@@ -489,7 +490,7 @@
 <li>console是集成在计算机机柜上的物理操作面板</li>
 <li>它们都属于硬件，另外，它们都已经被淘汰了</li>
 </ul>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>上面只介绍了硬件，下面我们介绍一下它们是如何工作的。在Unix术语中，tty是一种特殊类型的设备文件，它实现了除读写之外的许多附加命令，例如控制换行、信号处理以及会话管理等。说到这里就顺便讲一下所谓的设备文件。</p>
+<h3 id="终端工作原理"><a href="#终端工作原理" class="headerlink" title="终端工作原理"></a>终端工作原理</h3><p>上面只介绍了硬件，下面我们介绍一下它们是如何工作的。在Unix术语中，tty是一种特殊类型的设备文件，它实现了除读写之外的许多附加命令，例如控制换行、信号处理以及会话管理等。说到这里就顺便讲一下所谓的设备文件。</p>
 <p>Unix系统采用了一种抽象的方法，将设备抽象成文件。我们先考虑一下一个普通的文件：包含数据，具备属性，通过目录中的名字被标示。可以从文件中读取数据，也可以将数据写入文件。想象一下将这种方法应用到设备上。一个带有键盘和显示器的终端也可以和文件类似，键盘输入的数据能被程序所读取，程序也能将数据写入终端显示在屏幕上。</p>
 <p>再顺便简单说一下内核，我们知道Unix是一个多用户系统，可能有多个用户运行多个程序，访问多个设备。这时候就可能会出现一些混乱的情况，而内核的作用就是让所有的资源访问都被集中管理，任何用户要访问系统的资源都要经过内核。我们所谓的操作系统实际上其核心就是内核，可以看作是一个特殊的程序，内核运行的空间称之为内核空间，其余的程序则运行在用户空间。</p>
 <img src="http://img.chinahpc.club/2018/11/no-kernel.png" width="400" height="300" title="no-kernel">
@@ -505,6 +506,22 @@
 <p>如果我们启动一台Linux操作系统的电脑，直接在键盘上按下ctrl+alt+FN切换的tty就是这个玩意儿。那pty又是什么呢？</p>
 <p>上图中的Terminal emulator是在内核中实现的，现在我们把它挪出来，如此一来你可以在一个显示器内控制多个终端，xterm就是这样工作的，更为常见的Windows平台上的Xshell和macOS上的iTerm2也是这样的东西。</p>
 <p>伪终端(Pseudo Terminal)是终端的发展，为满足现在需求（比如网络登陆、xwindow窗口的管理）。它是成对出现的逻辑终端设备(即master和slave设备, 对master的操作会反映到slave上)。它多用于模拟终端程序，是远程登陆(telnet、ssh、xterm等)后创建的控制台设备。</p>
+<img src="http://img.chinahpc.club/2018/11/how.png" width="500" height="300" title="how">
+<p>上图中描述了我们的本地程序跟远端的程序通讯的流程，不过我们无法将数据直接通过网络发送给面向终端的程序（我们接触到的命令行程序就是面向终端的程序），它期望的是一个终端进行通信。于是就有了pty的设计：</p>
+<img src="http://img.chinahpc.club/2018/11/ptym.png" width="500" height="300" title="pty">
+<p>面向终端程序的标准输入、输出及错误输出都连接到未终端的从设备上，它也是程序的控制终端。驱动程序则作为用户的代理，提供面向终端程序程序的输入并读取程序的输出。简单的说就是pty是成对出现的逻辑终端设备，slave端连接具体的面向终端程序，而master负责分配和管理slave，同时也是代理，与驱动程序交换输入输出。下面我们以ssh为例介绍一下具体的步骤</p>
+<img src="http://img.chinahpc.club/2018/11/ssh.png" width="500" height="300" title="ssh">
+<ol>
+<li>位于终端的用户通过终端模拟器使用ssh客户端</li>
+<li>ssh程序经过网络连接到sshd服务</li>
+<li>sshd服务与pty master进行数据交换</li>
+<li>ptmx收到数据后，根据fd找到对应的pts（该对应关系由ptmx自动维护），将数据包转发给对应的pts</li>
+<li>pts收到数据包后，检查绑定到自己上面的当前前端进程组，将数据包发给该进程组的leader，这里就是shell程序</li>
+<li>shell通过write函数将结果写入pts</li>
+<li>pts将结果转发给ptmx</li>
+<li>ptmx根据pts找到对应的fd，往该fd写入结果</li>
+<li>sshd收到该fd的结果后，找到对应的session，然后将结果发给对应的ssh客户端</li>
+</ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在可以总结一下console、terminal、tty和pty了：</p>
 <ul>
 <li>过去：<ul>
@@ -943,7 +960,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#console、terminal、tty、pty傻傻分不清楚"><span class="nav-number">1.</span> <span class="nav-text">console、terminal、tty、pty傻傻分不清楚</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史"><span class="nav-number">1.1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如今"><span class="nav-number">1.3.</span> <span class="nav-text">如今</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#console、terminal、tty、pty傻傻分不清楚"><span class="nav-number">1.</span> <span class="nav-text">console、terminal、tty、pty傻傻分不清楚</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史"><span class="nav-number">1.1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终端工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">终端工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如今"><span class="nav-number">1.3.</span> <span class="nav-text">如今</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
