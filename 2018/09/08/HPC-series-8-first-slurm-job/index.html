@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","width":240,"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
+<meta name="keywords" content="高性能计算,HPC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HPC 系列文章(8):第一个Slurm作业">
+<meta property="og:url" content="http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.chinahpc.club/2018/08/concept.gif">
+<meta property="og:updated_time" content="2019-01-04T01:57:47.595Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HPC 系列文章(8):第一个Slurm作业">
+<meta name="twitter:description" content="我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在HPC 系列文章(4):Slurm概览中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。 介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：">
+<meta name="twitter:image" content="http://img.chinahpc.club/2018/08/concept.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HPC 系列文章(8):第一个Slurm作业 | Ansiz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ansiz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">迎风向前是唯一的方法</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张稀虹">
+      <meta itemprop="description" content="迎风向前是唯一的方法">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ansiz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">HPC 系列文章(8):第一个Slurm作业
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-08 18:00:04" itemprop="dateCreated datePublished" datetime="2018-09-08T18:00:04+08:00">2018-09-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-04 09:57:47" itemprop="dateModified" datetime="2019-01-04T09:57:47+08:00">2019-01-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/" itemprop="url" rel="index"><span itemprop="name">高性能计算</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高性能计算/HPC/" itemprop="url" rel="index"><span itemprop="name">HPC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/08/HPC-series-8-first-slurm-job/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/HPC-series-8-first-slurm-job/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.chinahpc.club/2018/08/concept.gif" alt="concept"></p>
+<p>我们已经搭建好了一个简单的Slurm环境，包含两个计算节点和一个管理节点。接下来我们将尝试往作业系统中提交作业。在这之前我们已经在<a href="http://blog.zxh.site/2018/08/11/HPC-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0-4-Slurm%E6%A6%82%E8%A7%88/#more" target="_blank" rel="noopener">HPC 系列文章(4):Slurm概览</a>中介绍了包括节点、分区、作业等一些基本概念，在提交作业之前，我们进一步的学习一下这几个概念。</p>
+<p>介绍节点和分区的概念，我们先从配置文件中简单了解一下它们，这里我以一个自己编辑的范例配置来介绍，我们先只看节点和分区的部分：<a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># Sample /etc/slurm.conf</span><br><span class="line">################################################</span><br><span class="line">#           SCHEDULING &amp; ALLOCATION            #</span><br><span class="line">################################################</span><br><span class="line">FastSchedule=2</span><br><span class="line">#</span><br><span class="line">################################################</span><br><span class="line">#           Nodes Configurations           #</span><br><span class="line">################################################</span><br><span class="line">NodeName=master Sockets=2 CoresPerSocket=8 ThreadsPerCore=1 Gres=gpu:tesla:no_consume:2 RealMemory=65535 TmpDisk=100000 Weight=6 Feature=video</span><br><span class="line">NodeName=node01 CPUs=8 RealMemory=4096 TmpDisk=14190</span><br><span class="line">#</span><br><span class="line">################################################</span><br><span class="line">#           Partition Configurations           #</span><br><span class="line">################################################</span><br><span class="line">PartitionName=node-all Nodes=master,node01 State=UP Default=YES MaxTime=60</span><br><span class="line">PartitionName=master-only MaxTime=UNLIMITED Nodes=master State=UP</span><br></pre></td></tr></table></figure>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>先说节点，对于Slurm系统而言，每一台安装并正确配置了slurmd进程的服务器就是一个节点。安装了slurmctld的节点虽然我们称之为主控节点，但实际上它并不是我们这里讨论的节点，这里指的节点即计算资源。为了使节点的概念更符合我们的直觉，我们可以认为每个计算节点就是一台服务器。</p>
+<h3 id="节点配置"><a href="#节点配置" class="headerlink" title="节点配置"></a>节点配置</h3><p>回到配置文件中，我们先看master的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NodeName=master Sockets=2 CoresPerSocket=8 ThreadsPerCore=1 RealMemory=65535 TmpDisk=100000 Weight=6 Gres=gpu:tesla:no_consume:2 Feature=video</span><br></pre></td></tr></table></figure>
+<p>每一项简单介绍一下：</p>
+<ul>
+<li>NodeName=master 即节点名为master</li>
+<li>Sockets=2 CPU插槽两个</li>
+<li>CoresPerSocket=8 每个插槽上CPU的核心数量，这里即8核处理器</li>
+<li>ThreadsPerCore=1 单个物理核心中的逻辑线程数</li>
+</ul>
+<div class="note info"><p>CPU数量计算公式：CPUs = Sockets*CoresPerSocket*ThreadsPerCore，上面master包含16个逻辑CPU,也可以直接通过CPUs来设定逻辑CPU数量，上面node01就直接采用了CPUs配置项。</p></div>
+<ul>
+<li>RealMemory=65535 节点上实内存的大小，以兆字节为单位，即该节点内存为64G</li>
+<li>TmpDisk=100000 临时磁盘存储的总大小，以兆字节为单位，该节点有100G临时存储空间</li>
+<li>Weight=6 节点权重为6，在所有条件相同的情况下，作业将被分配到满足其要求的最低权重的节点。</li>
+<li>Gres=gpu:tesla:no_consume:2 GRES是Slurm中的通用资源配置项，属于比较高级的配置项，这个留到后面再仔细介绍，这里只需要知道根据配置文件显示该节点配备了两块Tesla的GPU</li>
+<li>Feature=video 以逗号分隔的任意字符串列表，表示与节点相关的某些特征。简单的说就是给节点打的tag。</li>
+</ul>
+<p>关于节点的配置项其实还有很多，更多内容可以参考<a href="https://slurm.schedmd.com/slurm.conf.html" target="_blank" rel="noopener">slurm.conf</a>，这里我们先就介绍这些。</p>
+<p>为什么要配置这些东西呢？原因很简单，调度系统的核心功能说白了就是帮你把作业分配到最合适的节点上运行。什么是合适的节点呢？能满足你作业需求并且符合当前分配策略的最优解就是合适的节点。你为节点和作业配置的参数越详尽，越能精细化分配条件。</p>
+<h3 id="配置我可以瞎写吗？"><a href="#配置我可以瞎写吗？" class="headerlink" title="配置我可以瞎写吗？"></a>配置我可以瞎写吗？</h3><p>答案是可以，我在配置文件中设置了FastSchedule=2，该设置项一共有三个有效值(0,1,2)，0则会严格检查节点的实际配置，1会使用配置文件中的值作为配置但会将实际低于配置值的节点自动设置为DRAIN状态（表示资源耗尽，该状态的节点不会接受任何作业），而2则完全不校验实际配置，你想怎么配置就怎么配置，这可以方便我们超配，也方便测试学习。</p>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>分区将一组节点组合成逻辑上的一个集合，也有人称之为“队列”，实际上节点间并没有队列的概念，所以我认为“分区”是一个更合适的翻译。</p>
+<h3 id="分区配置"><a href="#分区配置" class="headerlink" title="分区配置"></a>分区配置</h3><p>回到配置文件中，我配置了两个队列，分别是node-all包含了master和node01节点，master-only则只包含master节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PartitionName=node-all Nodes=master,node01 State=UP Default=YES MaxTime=60</span><br><span class="line">PartitionName=master-only MaxTime=UNLIMITED Nodes=master State=UP</span><br></pre></td></tr></table></figure>
+<p>以node-all为例简单介绍一下各个配置项：</p>
+<ul>
+<li>PartitionName=node-all 分区名</li>
+<li>Nodes=master,node01 包含的节点，可以用逗号分隔开，也可以使用类似node[01-05]这样的批量配置。</li>
+<li>State=UP 队列的状态</li>
+<li>Default=YES 是否为默认分区，如果没有给作业指明分区，则会分配到默认分区中。</li>
+<li>MaxTime=60 作业的最大运行时间限制。支持多种格式，默认为分钟。这里表示该队列中运行的作业最多可以运行60分钟。</li>
+</ul>
+<p>关于分区的配置项更多内容可以参考<a href="https://slurm.schedmd.com/slurm.conf.html" target="_blank" rel="noopener">slurm.conf</a>，后面我们也会更深入的去讲解一些高级的配置。</p>
+<h2 id="作业提交"><a href="#作业提交" class="headerlink" title="作业提交"></a>作业提交</h2><p><strong>特定时间为用户进行的一次资源申请或分配即可看作一个作业</strong>。这和我们惯性思维中的作业概念并不一致，传统意义上我们总是认为作业应该是某个运行的脚本或者程序，但事实上Slurm的作业只代表一次资源申请或分配。理解这个区别将有利于你理解Slurm中一些比较高级的用法。</p>
+<p>Slurm中有多种作业提交方式，分别是sbatch、srun和salloc，关于它们的区别和用法我们留到后面仔细讲解，这里我们就以sbatch为例提交作业。你需要将你要运行的内容编辑成脚本，然后由sbatch命令指定参数和该脚本。我们先编辑一个最简单的bash脚本命名为<code>test.sh</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Hello world"</span></span><br><span class="line">date</span><br><span class="line">hostname</span><br><span class="line">sleep 60</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Bye"</span></span><br></pre></td></tr></table></figure>
+<p>该脚本会依次输出”Hello world”、当前时间、节点名，休眠60秒后会输出Bye，我们试着提交它：</p>
+<p><code>sbatch -p master-only test.sh</code></p>
+<p>一切正常的话，你将得到一个slurm-1.out文件，其中包含了上述输出。你已经成功的提交了一个脚本并且slurm将其分配到了master节点上运行。不过似乎没有体现出调度系统的优势？下一节我们将继续探讨作业提交。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/高性能计算/" rel="tag"># 高性能计算</a>
+          
+            <a href="/tags/HPC/" rel="tag"># HPC</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/HPC-series-7-setup-slurm-debian/" rel="next" title="HPC 系列文章(7):Debian/Ubuntu安装Slurm">
+                <i class="fa fa-chevron-left"></i> HPC 系列文章(7):Debian/Ubuntu安装Slurm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/16/HPC-series-9-job-submit-options/" rel="prev" title="HPC 系列文章(9):指定作业参数">
+                HPC 系列文章(9):指定作业参数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
+                alt="张稀虹" />
+            
+              <p class="site-author-name" itemprop="name">张稀虹</p>
+              <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ansiz" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zzz332191120@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点"><span class="nav-number">1.</span> <span class="nav-text">节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点配置"><span class="nav-number">1.1.</span> <span class="nav-text">节点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置我可以瞎写吗？"><span class="nav-number">1.2.</span> <span class="nav-text">配置我可以瞎写吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分区配置"><span class="nav-number">2.1.</span> <span class="nav-text">分区配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业提交"><span class="nav-number">3.</span> <span class="nav-text">作业提交</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'DiMwS9dCwM7ojW7o3BNJ1ETz-gzGzoHsz',
+        appKey: '6KwKWihhxM4tDrKx6y9UVeEp',
+        placeholder: '欢迎留言交流',
+        avatar:'retro',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+  
+    
+  
+  <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
+  <script type="text/javascript">pangu.spacingPage();</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
