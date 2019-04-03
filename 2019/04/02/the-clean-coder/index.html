@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://img.chinahpc.club/needsharebutton.min.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","width":240,"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近团队凉了，下一份工作又还没有完全落实，除了帮着处理一些公司解散的琐事之外，基本赋闲在家，每天遛狗、吸猫、看书、写代码、玩游戏、做饭、打扫卫生，累了就困会儿，精神好就出去遛个弯，过着令人实名羡慕的生活，也算是个Gap Month吧。最近GitHub上有个996.ICU的项目大火，我最近参加了几场面试，也读/重读了几本书，借这篇文章谈谈我的看法和一些思考。 面试经历一周前我去某西二旗知名大厂面试，">
+<meta name="keywords" content="生活,技术漫谈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈996">
+<meta property="og:url" content="http://zxh.site/2019/04/02/the-clean-coder/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="最近团队凉了，下一份工作又还没有完全落实，除了帮着处理一些公司解散的琐事之外，基本赋闲在家，每天遛狗、吸猫、看书、写代码、玩游戏、做饭、打扫卫生，累了就困会儿，精神好就出去遛个弯，过着令人实名羡慕的生活，也算是个Gap Month吧。最近GitHub上有个996.ICU的项目大火，我最近参加了几场面试，也读/重读了几本书，借这篇文章谈谈我的看法和一些思考。 面试经历一周前我去某西二旗知名大厂面试，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-03T04:47:34.596Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈996">
+<meta name="twitter:description" content="最近团队凉了，下一份工作又还没有完全落实，除了帮着处理一些公司解散的琐事之外，基本赋闲在家，每天遛狗、吸猫、看书、写代码、玩游戏、做饭、打扫卫生，累了就困会儿，精神好就出去遛个弯，过着令人实名羡慕的生活，也算是个Gap Month吧。最近GitHub上有个996.ICU的项目大火，我最近参加了几场面试，也读/重读了几本书，借这篇文章谈谈我的看法和一些思考。 面试经历一周前我去某西二旗知名大厂面试，">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://zxh.site/2019/04/02/the-clean-coder/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>谈谈996 | Ansiz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ansiz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">迎风向前是唯一的方法</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">40</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">36</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">53</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2019/04/02/the-clean-coder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张稀虹">
+      <meta itemprop="description" content="迎风向前是唯一的方法">
+      <meta itemprop="image" content="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ansiz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">谈谈996
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-02 10:09:10" itemprop="dateCreated datePublished" datetime="2019-04-02T10:09:10+08:00">2019-04-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-03 12:47:34" itemprop="dateModified" datetime="2019-04-03T12:47:34+08:00">2019-04-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/生活/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/生活/技术漫谈/" itemprop="url" rel="index"><span itemprop="name">技术漫谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/02/the-clean-coder/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/02/the-clean-coder/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近团队凉了，下一份工作又还没有完全落实，除了帮着处理一些公司解散的琐事之外，基本赋闲在家，每天遛狗、吸猫、看书、写代码、玩游戏、做饭、打扫卫生，累了就困会儿，精神好就出去遛个弯，过着令人实名羡慕的生活，也算是个Gap Month吧。最近GitHub上有个<a href="https://github.com/996icu/996.ICU" target="_blank" rel="noopener">996.ICU</a>的项目大火，我最近参加了几场面试，也读/重读了几本书，借这篇文章谈谈我的看法和一些思考。</p>
+<h2 id="面试经历"><a href="#面试经历" class="headerlink" title="面试经历"></a>面试经历</h2><p>一周前我去某西二旗知名大厂面试，三轮技术面从两点聊到了晚上七点多，最后一轮的面试官在最后问了我两个问题：</p>
+<ul>
+<li>面试官：你能接受24小时随时待命吗？</li>
+<li>你之前工作的上班时间是怎样的？</li>
+</ul>
+<p>我知道如果我渴求这份工作的话，我应该回答可以接受，甚至谎称我之前就996以证明我有足够的“自驱力”，但是我的回答令她失望了，当时的对话内容大概是这样的：</p>
+<ul>
+<li>面试官：你能接受24小时随时待命吗？</li>
+<li>我：紧急情况下可以，但是长期24小时随时待命我恐怕不能</li>
+<li>面试官：你之前工作的上班时间是怎样的？</li>
+<li>我：我之前九点左右到公司，没有紧急的事情晚上七点左右走，偶尔晚一点</li>
+<li>面试官：我觉得你的工作时长偏短啊，我们这里自驱力比较强的同学早上六七点就出发来公司，晚上一般都会九点以后才走</li>
+<li>我：如果确实有工作未完成的话，我也会加班去做，紧急情况处理到凌晨的经历也有，甚至周末也会处理。</li>
+<li>面试官：那你周末加班的情况多吗？</li>
+<li>我：不多。</li>
+<li>面试官：……<a id="more"></a></li>
+</ul>
+<p>面试这种事情就像考试，如果你情商达到平均水平、对自己有清晰的认识并且不抱有侥幸心理，你其实可以得出结论，这次我不抱任何希望。回到前台归还临时身份牌的时候，碰到一个面试者过来告诉前台他约了七点半面试，希望他十一点之前能结束吧。</p>
+<h2 id="996是谁的错？"><a href="#996是谁的错？" class="headerlink" title="996是谁的错？"></a>996是谁的错？</h2><p>关于996的讨论非常多，有人提出了一个“不正确”的事实：</p>
+<blockquote>
+<p>996是个市场选择，不是某个企业家，某个企业可以只手遮天的，没有谁有这个本事，给他们底气的，是那些排队等offer的应聘者。</p>
+</blockquote>
+<p>上面是从经济学的角度得出的一个结论，但加班这件事不一定全是企业的问题，我观察到的加班分几种情况：</p>
+<ol>
+<li>公司强制或暗示必须996</li>
+<li>项目人手紧缺，项目时间紧任务重</li>
+<li>自己承诺的计划未完成而加班</li>
+<li>在项目中获得巨大成就感，加班一时爽，一直加班一直爽</li>
+<li>回家没事干，在公司还可以享受一些加班的额外福利</li>
+<li>并不想加班，但是Leader或者其他同事没走不敢走，担心与绩效挂钩</li>
+</ol>
+<p>当你选择了情况1的公司，你唯一要做的事情就是权衡一下收益，你是否得到包括但不限于优渥的薪酬、个人能力及影响力提升、附属资源等，而你又不介意做出一些牺牲来换取这一切，那这是你自己做出的决定，你不愿意还有其他人排队，这就是市场选择。如果没有诱人的福利待遇，没有加班费没有调休，也没有什么成就感，只是你没有更好的选择而被迫996，你应该考虑尽快提升自己的能力，然后换一家公司。</p>
+<p>偶尔出现情况2这样的情况是可以理解的，但是如果长期如此则是团队和公司资源的问题，通常是下面几类问题：</p>
+<ul>
+<li>对接客户时给了客户太多让步导致需求激增</li>
+<li>产品经理提出了太多反复修改的试（垃）错（圾）需求</li>
+<li>项目经理对成本核算有误，人员配比不当</li>
+<li>公司资源太过匮乏，一个人掰成两个人用</li>
+<li>团队凝聚力太差，效率太低</li>
+</ul>
+<p>遇到这种情况如果你做的事情让你觉得有成就感或者有较大的个人能力提升，可以坚持一段时间，给出恰当的建议期待后面类似情况变少，否则你可以考虑换一家公司；</p>
+<p>如果是情况3，说明你是一个言而有信的人，但是同时你错误的估算了周期。也有可能是你个人能力不足以至于需要花费本该用于工作的时间做知识储备，这种情况下你不应该计较加班，毕竟公司没有义务去付费培养你，而你有义务完成本职工作。坚持下去，后面类似的情况会越来越少。另外一种情况则是你给出了一个过于乐观的承诺，那你应该学会如何更准确的估算开发周期；还有可能是你轻易的答应了在原有的周期内增加新的来自客户或产品经理的需求，你应该学会处理这种情况。</p>
+<p>情况4大概是最为理想的加班，你可以全力以赴投入到你热爱到事业里，不过如果你是领导，我觉得有必要告诉其他人，他们可以不必这么做，也不应该把下属员工是否加班与绩效挂钩；</p>
+<p>情况5和情况6我认为是没有职业素养的表现。</p>
+<h2 id="学会拒绝与承诺"><a href="#学会拒绝与承诺" class="headerlink" title="学会拒绝与承诺"></a>学会拒绝与承诺</h2><h3 id="坚持原则"><a href="#坚持原则" class="headerlink" title="坚持原则"></a>坚持原则</h3><p>产品经理的需求一变再变，原定的计划增加了很多内容，但是deadline没有发生变化，那你很可能要加班去完成了，这时候我们经常会听到类似这样的对话：</p>
+<ul>
+<li>别在意那些细节了，我们没有那么多时间</li>
+<li>这里可以先“写死”</li>
+<li>后面再重构吧，先复制粘贴</li>
+<li>单元测试代码就先放一放吧</li>
+<li>……</li>
+</ul>
+<blockquote>
+<p>如果你此前并未有所保留，如果你没有新方案，如果你不会改变你的行为，如果你对自己原先的估计有充分的自信，那么，从本质上讲，承诺“尝试”就是一种不诚实的表现。你在<strong>说谎</strong>。你这么做的原因，可能是为了护住面子和避免冲突</p>
+</blockquote>
+<p>更具职业素养的做法应该是坚持自己的原则，去协商一个更合理的需求和期限。</p>
+<blockquote>
+<p>专业开发人员不随便承诺，除非他们确切知道可以完成。如果你被要求承诺做自己不确定的事情，那么就应当坚决拒绝。如果要求你承诺在某天完成，但是需要每天加班，周末加班，取消休假，那么最后的决定取决于你；不过，不要违背自己的意愿去勉强</p>
+</blockquote>
+<h3 id="做出承诺"><a href="#做出承诺" class="headerlink" title="做出承诺"></a>做出承诺</h3><blockquote>
+<p>承诺是必须做到的。如果你承诺在某天做成某事，就<strong>必须</strong>按时完成。即便它意味着你必须每天工作12个小时，放弃周末的休假，也不得不如此。既然承诺了，就必须兑现</p>
+</blockquote>
+<p>对比一下下面两种口吻，你觉得哪个听起来更靠谱？</p>
+<ol>
+<li>应该可以在这周完成</li>
+<li>我会在这周五之前完成</li>
+</ol>
+<p>显然第二种才是真正的承诺，对自己将会做某件事做了清晰的事实陈述，而且还明确说明了完成期限。这种信心来自于对需求和个人能力的合理估算，你应该尽早掌握估算的方法，避免因为估算错误导致无尽的加班。</p>
+<blockquote>
+<p>如果你无法兑现承诺，那么最重要的就是尽早向你的承诺对象发出预警，越快越好，越早越好；如果你不尽早告诉他人可能的问题，就错失了让他们帮助你达成目标、兑现承诺的机会。</p>
+</blockquote>
+<h2 id="如何估算开发周期"><a href="#如何估算开发周期" class="headerlink" title="如何估算开发周期"></a>如何估算开发周期</h2><p>提到估算，可能就让人想到被制定甘特图支配的恐惧。无论你是作为项目组的一个成员还是领队，给出尽可能准确的估算无疑是一项重要的技能。我在《The Clean Coder》这本书里了解到了计划评审技术（PERT，Program Evaluation and Review Technique》，据说是为支持美国海军的潜艇极地航行计划而诞生的。PERT的一部分内容就是对预估的计算方法。这种技术包含了一个非常简单而有效的办法，把预估变成概率分布。</p>
+<p>你可以根据3个数字预估某项任务：</p>
+<ul>
+<li>O：乐观预估。这是非常乐观的数字，如果一切都异常顺利，你可以在这个时间内完成。这个数字对应的发生概率应当小于1%</li>
+<li>N：标称预估。这是概率最大的数字。如果画一张概率分布的柱状图，标称预估就是最高的那个。</li>
+<li>P：悲观预估。这是最糟糕的数字，它应当考虑到各种意外，这个数字对应的发生概率也应当小于1%</li>
+</ul>
+<p>例如我们有一个任务，最乐观1天就能完成，不过大概率需要3天，而最悲观的情况下可能需要12天才能完成。我们可以用这个公式计算出期望完成时间：</p>
+<p><code>μ = (O+4N+P)/6</code></p>
+<p>代入公式后计算得出期望时间约为<code>(1+23+12)/6 = 4.2天</code>，然后用下面的公式计算概率分布的标准差：</p>
+<p><code>σ=(P-O)/6</code></p>
+<p>即标准差为<code>(12-1)/6 = 1.8</code>，所以这项任务大概率需要5（进位取舍）天完成，但是也可能需要6天(μ + σ)，极小概率下可能需要8天(μ + 2σ)。如果你有多个任务，只需要计算总的期望时间和总标准差即可。例如三个任务期望时间和标准差分别是：4.2/1.8、3.5/2.2、6.5/1.3，则</p>
+<p><code>μ = 4.2+3.5+6.5 = ~14</code></p>
+<p><code>σ=√(1.8^2+2.2^2+1.3^2)=~3.13</code></p>
+<p>即大概率需要14天，可能需要17天，极端情况下可能20天。</p>
+<h3 id="德尔菲法"><a href="#德尔菲法" class="headerlink" title="德尔菲法"></a>德尔菲法</h3><p>上面的方法主要是个人计算，不过在团队协作中，综合周围的人的意见能更为准确地预估任务。其实也很简单，我们可以让大家一起讨论任务，针对每个任务，参与者根据自己的判断同一时间说出数字，如果没有太大的分歧就讨论下一项，否则讨论分歧。如此重复直到统一。德尔菲法有很多种玩法，具体你可以参考<a href="https://zh.wikipedia.org/wiki/%E5%BE%B7%E5%B0%94%E8%8F%B2%E6%B3%95" target="_blank" rel="noopener">维基百科</a></p>
+<h3 id="拆分预估"><a href="#拆分预估" class="headerlink" title="拆分预估"></a>拆分预估</h3><p>你可以把一个大的任务拆分成较小的任务结合上面的方式去评估，最后再汇总到一起计算，通常这样会发现更多的细节问题，使得结果更加精确。但是也要把握好这个度，否则会适得其反。“度”听起来很玄学，因为这没有固定的标准，你需要你花时间去练习摸索，积累经验，这也是为什么资深工程师预估开发周期会更准确的原因。刚开始时你预估的周期也许会出入较大，坚持下去误差就会逐渐减小。</p>
+<hr>
+<p>文中提到的方法来自于<a href="https://book.douban.com/subject/11614538/" target="_blank" rel="noopener">《The Clean Coder》</a>一书，我认为这是一本工程师的必读手册，推荐大家阅读和践行。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://img.chinahpc.club/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://img.chinahpc.club/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/生活/" rel="tag"># 生活</a>
+          
+            <a href="/tags/技术漫谈/" rel="tag"># 技术漫谈</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/17/About-TTY/" rel="next" title="探寻TTY的前世今生">
+                <i class="fa fa-chevron-left"></i> 探寻TTY的前世今生
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://img.chinahpc.club/uploads/2015/01/photoright-001.jpg"
+                alt="张稀虹" />
+            
+              <p class="site-author-name" itemprop="name">张稀虹</p>
+              <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ansiz" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zzz332191120@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面试经历"><span class="nav-number">1.</span> <span class="nav-text">面试经历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#996是谁的错？"><span class="nav-number">2.</span> <span class="nav-text">996是谁的错？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学会拒绝与承诺"><span class="nav-number">3.</span> <span class="nav-text">学会拒绝与承诺</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坚持原则"><span class="nav-number">3.1.</span> <span class="nav-text">坚持原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做出承诺"><span class="nav-number">3.2.</span> <span class="nav-text">做出承诺</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何估算开发周期"><span class="nav-number">4.</span> <span class="nav-text">如何估算开发周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#德尔菲法"><span class="nav-number">4.1.</span> <span class="nav-text">德尔菲法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拆分预估"><span class="nav-number">4.2.</span> <span class="nav-text">拆分预估</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://img.chinahpc.club/canvas-ribbon.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'DiMwS9dCwM7ojW7o3BNJ1ETz-gzGzoHsz',
+        appKey: '6KwKWihhxM4tDrKx6y9UVeEp',
+        placeholder: '欢迎留言交流',
+        avatar:'retro',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+    
+  
+  <script src="http://img.chinahpc.club/needsharebutton.min.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+  
+    
+  
+  <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
+  <script type="text/javascript">pangu.spacingPage();</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

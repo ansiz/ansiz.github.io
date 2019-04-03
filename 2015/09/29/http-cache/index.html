@@ -16,7 +16,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -128,7 +128,7 @@
 <meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/015343_psx2_568818.png">
 <meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/015353_P04w_568818.png">
 <meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/021903_6FjX_568818.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:45.882Z">
+<meta property="og:updated_time" content="2018-10-21T10:57:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器 HTTP 协议缓存机制">
 <meta name="twitter:description" content="前几天项目里用到了一个简易的播放器进行SVG图片的播放，但是因为SVG尺寸较大，在网络环境差的情况下可能导致播放卡顿严重，这时候如果用上浏览器缓存的话，就能一定程度上（至少加载过的图片再次加载时可以秒加载）缓解这个问题。但是很奇怪的是尽管我们没有在前端和后端禁用浏览器缓存，用ajax发出的get请求在url完全相同的情况下依然没有从缓存中直接读取，找了各种资料大家似乎都说默认浏览器缓存是开启的，经">
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -249,7 +249,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">40</span></a>
   </li>
         
         
@@ -257,7 +257,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">36</span></a>
   </li>
         
         
@@ -265,7 +265,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">53</span></a>
   </li>
 
       
@@ -643,7 +643,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -726,7 +726,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -817,7 +819,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1098,6 +1102,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   
@@ -1131,7 +1142,24 @@
     
   
   <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
-  <script type="text/javascript">pangu.spacingPage();</script>
+  <script type="text/javascript">pangu.spacingPage();</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   

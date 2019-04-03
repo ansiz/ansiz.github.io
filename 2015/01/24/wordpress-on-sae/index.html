@@ -16,7 +16,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 <meta property="og:description" content="由于SAE环境的特殊性（不支持在线写入）在SAE下使用Wordpress的时候会有一些比较蛋疼的问题。比如没法儿上传文件到uploads目录 原因很简单，因为不支持在线写入嘛，你非要上传呢，就在本地弄好了SVN提交到平台上，但是我们的代码空间很有限，大部分人都只有100MB的空间，如果媒体放在代码空间中，很快就会耗完所有的空间。所以最好的办法是启动SAE提供的storage服务。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.chinahpc.club/uploads/2015/03/wordpress1.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.069Z">
+<meta property="og:updated_time" content="2018-10-21T10:57:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WordPress在SAE上部署的技巧">
 <meta name="twitter:description" content="由于SAE环境的特殊性（不支持在线写入）在SAE下使用Wordpress的时候会有一些比较蛋疼的问题。比如没法儿上传文件到uploads目录 原因很简单，因为不支持在线写入嘛，你非要上传呢，就在本地弄好了SVN提交到平台上，但是我们的代码空间很有限，大部分人都只有100MB的空间，如果媒体放在代码空间中，很快就会耗完所有的空间。所以最好的办法是启动SAE提供的storage服务。">
@@ -184,7 +184,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -195,7 +195,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,7 +246,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">40</span></a>
   </li>
         
         
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">35</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">36</span></a>
   </li>
         
         
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">52</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">53</span></a>
   </li>
 
       
@@ -615,7 +615,7 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -698,7 +698,9 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -789,7 +791,9 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1054,6 +1058,13 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   
@@ -1087,7 +1098,24 @@ define(&#39;SAE_URL&#39;, &#39;http://&#39;.$_SERVER[&#39;HTTP_APPNAME&#39;].&#3
     
   
   <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
-  <script type="text/javascript">pangu.spacingPage();</script>
+  <script type="text/javascript">pangu.spacingPage();</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   
