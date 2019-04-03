@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://zxh.site/2019/04/02/the-clean-coder/</loc>
-    <lastmod>2019-04-03T05:22:31.393Z</lastmod>
+    <lastmod>2019-04-03T07:17:45.051Z</lastmod>
     <data>
         <display>
         <title>谈谈996</title>
@@ -756,9 +756,9 @@
         <title>在Windows server2008上搭建git仓库(Git+ copssh+TortoiseGit)</title>
         <pubTime>2016-03-06T15:00:11.000Z</pubTime>
         
-        <tag>经验&amp;技巧</tag>
-         
         <tag>工具</tag>
+         
+        <tag>经验&amp;技巧</tag>
          
         <tag>Git</tag>
          
@@ -910,20 +910,18 @@
 
     
   <url>
-    <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
+    <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
     <lastmod>2018-10-21T10:57:46.000Z</lastmod>
     <data>
         <display>
-        <title>WEIPHP部署在SAE上的技巧</title>
-        <pubTime>2015-03-21T15:57:22.000Z</pubTime>
+        <title>WordPress在SAE上部署的技巧</title>
+        <pubTime>2015-01-24T12:23:14.000Z</pubTime>
         
         <tag>后端</tag>
          
         <tag>PHP</tag>
          
-        <tag>SAE</tag>
-         
-        <tag>WEIPHP</tag>
+        <tag>WordPress</tag>
          
          
            
@@ -939,18 +937,20 @@
 
     
   <url>
-    <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
+    <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
     <lastmod>2018-10-21T10:57:46.000Z</lastmod>
     <data>
         <display>
-        <title>WordPress在SAE上部署的技巧</title>
-        <pubTime>2015-01-24T12:23:14.000Z</pubTime>
+        <title>WEIPHP部署在SAE上的技巧</title>
+        <pubTime>2015-03-21T15:57:22.000Z</pubTime>
         
         <tag>后端</tag>
          
         <tag>PHP</tag>
          
-        <tag>WordPress</tag>
+        <tag>SAE</tag>
+         
+        <tag>WEIPHP</tag>
          
          
            
