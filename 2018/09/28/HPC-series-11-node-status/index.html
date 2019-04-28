@@ -124,15 +124,15 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="前面介绍了如何查看作业的状态，下面我们介绍一下如何查看节点的状态。跟作业状态查看类似，节点状态也可以通过命令行获取，有两种方式：sinfo和scontrol show node，命令行工具的使用时非常简单的，但是节点的状态理解比较复杂。还是先从简单的介绍命令行工具开始吧。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/sinfo.png">
-<meta property="og:image" content="http://img.chinahpc.club/sinfo.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/09/sinfo-help.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/09/show-node.png">
-<meta property="og:updated_time" content="2019-01-04T01:58:28.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/sinfo.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/sinfo.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/09/sinfo-help.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/09/show-node.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(11):节点状态">
 <meta name="twitter:description" content="前面介绍了如何查看作业的状态，下面我们介绍一下如何查看节点的状态。跟作业状态查看类似，节点状态也可以通过命令行获取，有两种方式：sinfo和scontrol show node，命令行工具的使用时非常简单的，但是节点的状态理解比较复杂。还是先从简单的介绍命令行工具开始吧。">
-<meta name="twitter:image" content="http://img.chinahpc.club/sinfo.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/sinfo.png">
 
 
 
@@ -375,7 +375,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-04 09:58:28" itemprop="dateModified" datetime="2019-01-04T09:58:28+08:00">2019-01-04</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -443,16 +443,16 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/sinfo.png" alt="sinfo"></p>
+        <p><img src="http://ansiz.motherland-flower.cn/sinfo.png" alt="sinfo"></p>
 <p>前面介绍了如何查看作业的状态，下面我们介绍一下如何查看节点的状态。跟作业状态查看类似，节点状态也可以通过命令行获取，有两种方式：<code>sinfo</code>和<code>scontrol show node</code>，命令行工具的使用时非常简单的，但是节点的状态理解比较复杂。还是先从简单的介绍命令行工具开始吧。<a id="more"></a></p>
 <h2 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h2><h3 id="sinfo"><a href="#sinfo" class="headerlink" title="sinfo"></a>sinfo</h3><p>查看节点信息最简单的方式是直接使用sinfo命令，该命令会输出当前系统中的所有队列及节点的基本状态，如果只是快速查看一下可用的节点等信息，sinfo所提供的信息就足够了。</p>
-<p><img src="http://img.chinahpc.club/sinfo.png" alt="sinfo"></p>
+<p><img src="http://ansiz.motherland-flower.cn/sinfo.png" alt="sinfo"></p>
 <p>此外sinfo还提供了一些简单的参数，用于提供格式化或者过滤特定节点等功能，都比较简单，可以通过–help自行查看，这里就不赘述了。</p>
-<p><img src="http://img.chinahpc.club/2018/09/sinfo-help.png" alt="sinfo-help"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/09/sinfo-help.png" alt="sinfo-help"></p>
 <h3 id="scontrol"><a href="#scontrol" class="headerlink" title="scontrol"></a>scontrol</h3><p>如果想查看更为详细的节点状态信息，则应该使用命令</p>
 <pre><code>scontrol show node [nodename]
 </code></pre><p>该命令会输出节点的详细信息，包括该节点的各种资源使用状态及负载，还包括该节点的系统信息、软件信息及启动信息等等，如果想要通过slurm了解具体节点的详情，则应用使用该方式。</p>
-<p><img src="http://img.chinahpc.club/2018/09/show-node.png" alt="show-node"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/09/show-node.png" alt="show-node"></p>
 <h2 id="Slurm节点状态"><a href="#Slurm节点状态" class="headerlink" title="Slurm节点状态"></a>Slurm节点状态</h2><p>Slurm中节点的状态非常多，而且节点状态由状态和特殊符号两部分构成。节点状态中可能会有一个特殊的字符后缀用于标识节点关联的状态标志。组合起来的作业状态就更复杂了，经验不足的使用者想要理解还是有一些难度的。这里我以官方文件加上我自己的理解逐一解释各个状态。</p>
 <h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>后缀特殊字符表示的含义如下：</p>
 <p>“*”:  </p>

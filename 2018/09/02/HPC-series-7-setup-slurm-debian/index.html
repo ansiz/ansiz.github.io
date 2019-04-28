@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="上一篇文章中简单介绍了CentOS/Redhat上如何部署Slurm，这里我们再介绍一下在Debian或Ubuntu上如何正确的安装Slurm。这里我们以Debian 8.5(Jessie)为例，其他更新的版本也类似。 通过包管理器安装最方便的方式是通过包管理器安装，不过apt源中只有较老的版本，通过软件包管理器安装的过程也比较简单，可以直接参考这篇文档：Slurm Installation o">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/2018/08/universal_install_script.png">
-<meta property="og:updated_time" content="2019-01-04T01:57:32.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/08/universal_install_script.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(7):Debian&#x2F;Ubuntu安装Slurm">
 <meta name="twitter:description" content="上一篇文章中简单介绍了CentOS/Redhat上如何部署Slurm，这里我们再介绍一下在Debian或Ubuntu上如何正确的安装Slurm。这里我们以Debian 8.5(Jessie)为例，其他更新的版本也类似。 通过包管理器安装最方便的方式是通过包管理器安装，不过apt源中只有较老的版本，通过软件包管理器安装的过程也比较简单，可以直接参考这篇文档：Slurm Installation o">
-<meta name="twitter:image" content="http://img.chinahpc.club/2018/08/universal_install_script.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/2018/08/universal_install_script.png">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-04 09:57:32" itemprop="dateModified" datetime="2019-01-04T09:57:32+08:00">2019-01-04</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -440,7 +440,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/2018/08/universal_install_script.png" alt="deploy"></p>
+        <p><img src="http://ansiz.motherland-flower.cn/2018/08/universal_install_script.png" alt="deploy"></p>
 <p>上一篇文章中简单介绍了CentOS/Redhat上如何部署Slurm，这里我们再介绍一下在Debian或Ubuntu上如何正确的安装Slurm。这里我们以Debian 8.5(Jessie)为例，其他更新的版本也类似。</p>
 <h2 id="通过包管理器安装"><a href="#通过包管理器安装" class="headerlink" title="通过包管理器安装"></a>通过包管理器安装</h2><p>最方便的方式是通过包管理器安装，不过apt源中只有较老的版本，通过软件包管理器安装的过程也比较简单，<br>可以直接参考这篇文档：<a href="http://wiki.sc3.uis.edu.co/index.php/Slurm_Installation_on_Debian" target="_blank" rel="noopener">Slurm Installation on Debian
 </a>，我们还是主要介绍如何安装最新版本的Slurm，为了简化流程，我们将在一台机器上部署所有的服务，该节点即是管理节点也是计算节点。<a id="more"></a></p>
@@ -454,10 +454,10 @@
 <p>最后将<code>slurm-17.11.9-2/etc</code>文件夹中的三个service启动脚本拷贝到<code>/etc/systemd/system/</code>目录下</p>
 <h3 id="配置修改"><a href="#配置修改" class="headerlink" title="配置修改"></a>配置修改</h3><p>在<code>slurm-17.11.9-2/etc</code>文件夹中包含了可能用到的各个配置文件的范例，将他们复制到/usr/local/etc下根据实际情况修改即可，这里提供一下我自己的配置文件：</p>
 <ul>
-<li><a href="http://img.chinahpc.club/2018/09/slurm.conf" target="_blank" rel="noopener">slurm.conf</a></li>
-<li><a href="http://img.chinahpc.club/2018/09/slurmdbd.conf" target="_blank" rel="noopener">slurmdbd.conf</a></li>
-<li><a href="http://img.chinahpc.club/2018/09/cgroup.conf" target="_blank" rel="noopener">cgroup.conf</a></li>
-<li><a href="http://img.chinahpc.club/2018/09/cgroup_allowed_devices_file.conf" target="_blank" rel="noopener">cgroup_allowed_devices_file.conf</a></li>
+<li><a href="http://ansiz.motherland-flower.cn/2018/09/slurm.conf" target="_blank" rel="noopener">slurm.conf</a></li>
+<li><a href="http://ansiz.motherland-flower.cn/2018/09/slurmdbd.conf" target="_blank" rel="noopener">slurmdbd.conf</a></li>
+<li><a href="http://ansiz.motherland-flower.cn/2018/09/cgroup.conf" target="_blank" rel="noopener">cgroup.conf</a></li>
+<li><a href="http://ansiz.motherland-flower.cn/2018/09/cgroup_allowed_devices_file.conf" target="_blank" rel="noopener">cgroup_allowed_devices_file.conf</a></li>
 </ul>
 <h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>在任意节点执行sinfo命令，你将看到类似输出，则证明服务工作正常：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PARTITION    AVAIL  TIMELIMIT  NODES  STATE NODELIST</span><br><span class="line">master-only*    up   infinite      1   idle debian</span><br></pre></td></tr></table></figure>

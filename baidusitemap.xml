@@ -4,85 +4,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2019/04/02/the-clean-coder/</loc>
-    <lastmod>2019-04-03T07:17:45.051Z</lastmod>
-    <data>
-        <display>
-        <title>谈谈996</title>
-        <pubTime>2019-04-02T02:09:10.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-        <tag>技术漫谈</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-             
-              <breadCrumb title="技术漫谈" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/02/28/Docker-in-LXC/</loc>
-    <lastmod>2019-04-02T02:11:04.140Z</lastmod>
-    <data>
-        <display>
-        <title>Docker in LXC踩坑</title>
-        <pubTime>2018-02-28T04:30:22.000Z</pubTime>
-        
-        <tag>虚拟化</tag>
-         
-        <tag>容器</tag>
-         
-        <tag>LXC</tag>
-         
-         
-           
-             
-              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-          
-             
-              <breadCrumb title="容器" url="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/15/DeepinOS/</loc>
-    <lastmod>2019-04-02T02:10:48.748Z</lastmod>
-    <data>
-        <display>
-        <title>Deepin——优秀的国产Linux发行版</title>
-        <pubTime>2018-07-15T04:01:27.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>评测</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
-          
-             
-              <breadCrumb title="评测" url="http://zxh.site/categories/Linux/%E8%AF%84%E6%B5%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2018/02/16/customize-linux-image/</loc>
-    <lastmod>2019-04-02T02:10:35.531Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.533Z</lastmod>
     <data>
         <display>
         <title>Linux定制化镜像制作指南</title>
@@ -101,483 +24,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2018/07/08/socks5/</loc>
-    <lastmod>2019-04-02T02:10:14.081Z</lastmod>
-    <data>
-        <display>
-        <title>安全的SOCKS5协议</title>
-        <pubTime>2018-07-08T07:27:48.000Z</pubTime>
-        
-        <tag>网络</tag>
-         
-        <tag>译文</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-             
-              <breadCrumb title="译文" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/15/install-tensorflow-on-deepinOS/</loc>
-    <lastmod>2019-04-02T02:09:56.901Z</lastmod>
-    <data>
-        <display>
-        <title>在Deepin上安装TensorFlow</title>
-        <pubTime>2018-07-15T11:51:33.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>深度学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
-          
-             
-              <breadCrumb title="深度学习" url="http://zxh.site/categories/Linux/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/11/17/About-TTY/</loc>
-    <lastmod>2019-01-04T01:59:28.000Z</lastmod>
-    <data>
-        <display>
-        <title>探寻TTY的前世今生</title>
-        <pubTime>2018-11-17T14:32:48.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>后端</tag>
-         
-         
-           
-             
-              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/10/28/HPC-series-15-resource-limit/</loc>
-    <lastmod>2019-01-04T01:59:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(15):资源限制</title>
-        <pubTime>2018-10-28T09:55:28.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/10/21/HPC-series-14-account/</loc>
-    <lastmod>2019-01-04T01:58:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(14):账务系统（Account）</title>
-        <pubTime>2018-10-21T09:06:57.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/10/14/HPC-series-13-schedule-GPU/</loc>
-    <lastmod>2019-01-04T01:58:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(13):GPU调度</title>
-        <pubTime>2018-10-14T13:47:13.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/10/07/HPC-series-12-interact-job/</loc>
-    <lastmod>2019-01-04T01:58:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(12):交互作业</title>
-        <pubTime>2018-10-07T12:12:15.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/09/28/HPC-series-11-node-status/</loc>
-    <lastmod>2019-01-04T01:58:28.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(11):节点状态</title>
-        <pubTime>2018-09-28T07:33:34.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/09/23/HPC-series-10-job-status/</loc>
-    <lastmod>2019-01-04T01:58:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(10):作业状态</title>
-        <pubTime>2018-09-23T11:04:44.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/09/16/HPC-series-9-job-submit-options/</loc>
-    <lastmod>2019-01-04T01:58:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(9):指定作业参数</title>
-        <pubTime>2018-09-16T09:36:35.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/</loc>
-    <lastmod>2019-01-04T01:57:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(8):第一个Slurm作业</title>
-        <pubTime>2018-09-08T10:00:04.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/09/02/HPC-series-7-setup-slurm-debian/</loc>
-    <lastmod>2019-01-04T01:57:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(7):Debian/Ubuntu安装Slurm</title>
-        <pubTime>2018-09-02T00:11:07.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/08/26/HPC-series-6-setup-slurm/</loc>
-    <lastmod>2019-01-04T01:57:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(6):Slurm部署</title>
-        <pubTime>2018-08-26T11:25:51.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/08/19/HPC-series-5-setup-dev/</loc>
-    <lastmod>2019-01-04T01:57:05.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(5):搭建实验环境</title>
-        <pubTime>2018-08-19T05:47:22.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/08/11/HPC-series-4-Slurm-overview/</loc>
-    <lastmod>2019-01-04T01:56:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(4):Slurm概览</title>
-        <pubTime>2018-08-11T10:25:31.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/08/05/HPC-series-3-scheduler-overview/</loc>
-    <lastmod>2019-01-04T01:56:42.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC 系列文章(3):调度系统概览</title>
-        <pubTime>2018-08-05T01:12:33.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/28/HPC-series-2-overview/</loc>
-    <lastmod>2019-01-04T01:55:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC系列文章(2)：HPC技术概览</title>
-        <pubTime>2018-07-28T08:57:13.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2018/07/22/HPC-series-1-startup/</loc>
-    <lastmod>2019-01-04T01:54:39.000Z</lastmod>
-    <data>
-        <display>
-        <title>HPC系列文章(1)：开篇</title>
-        <pubTime>2018-07-22T05:47:50.000Z</pubTime>
-        
-        <tag>高性能计算</tag>
-         
-        <tag>HPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2017/04/01/web-tty/</loc>
-    <lastmod>2018-11-17T14:28:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>Golang实现多节点Web终端</title>
-        <pubTime>2017-04-01T10:07:04.000Z</pubTime>
-        
-        <tag>Golang</tag>
-         
-        <tag>后端</tag>
-         
-         
-           
-             
-              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
-          
-             
-              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Golang/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
-    <lastmod>2018-11-17T14:25:33.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.532Z</lastmod>
     <data>
         <display>
         <title>Slurm+Singularity打造轻量级容器云</title>
@@ -605,8 +53,451 @@
 
     
   <url>
+    <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
+    <lastmod>2019-04-28T06:57:38.532Z</lastmod>
+    <data>
+        <display>
+        <title>WEIPHP部署在SAE上的技巧</title>
+        <pubTime>2015-03-21T15:57:22.000Z</pubTime>
+        
+        <tag>后端</tag>
+         
+        <tag>PHP</tag>
+         
+        <tag>SAE</tag>
+         
+        <tag>WEIPHP</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="PHP" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/PHP/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/10/14/HPC-series-13-schedule-GPU/</loc>
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(13):GPU调度</title>
+        <pubTime>2018-10-14T13:47:13.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/07/01/first-anniversary/</loc>
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    <data>
+        <display>
+        <title>入职一年工作总结</title>
+        <pubTime>2016-07-01T14:33:07.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/</loc>
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    <data>
+        <display>
+        <title>Windows平台OmniMarkupPreviewer配置引发的思考</title>
+        <pubTime>2016-06-03T15:08:45.000Z</pubTime>
+        
+        <tag>假装有思想</tag>
+         
+        <tag>OmniMarkupPreviewer</tag>
+         
+        <tag>Windows</tag>
+         
+         
+           
+             
+              <breadCrumb title="假装有思想" url="http://zxh.site/categories/%E5%81%87%E8%A3%85%E6%9C%89%E6%80%9D%E6%83%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/15/DeepinOS/</loc>
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    <data>
+        <display>
+        <title>Deepin——优秀的国产Linux发行版</title>
+        <pubTime>2018-07-15T04:01:27.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>评测</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+             
+              <breadCrumb title="评测" url="http://zxh.site/categories/Linux/%E8%AF%84%E6%B5%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/09/28/HPC-series-11-node-status/</loc>
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(11):节点状态</title>
+        <pubTime>2018-09-28T07:33:34.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/09/02/HPC-series-7-setup-slurm-debian/</loc>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(7):Debian/Ubuntu安装Slurm</title>
+        <pubTime>2018-09-02T00:11:07.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/05/20/customized-error/</loc>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    <data>
+        <display>
+        <title>Golang自定义error</title>
+        <pubTime>2016-05-20T15:07:07.000Z</pubTime>
+        
+        <tag>Golang</tag>
+         
+         
+           
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/Golang/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2015/09/28/fswatch/</loc>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    <data>
+        <display>
+        <title>使用fswatch工具进行热编译</title>
+        <pubTime>2015-09-28T13:48:10.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+             
+              <breadCrumb title="fswatch" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/fswatch/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/15/install-tensorflow-on-deepinOS/</loc>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    <data>
+        <display>
+        <title>在Deepin上安装TensorFlow</title>
+        <pubTime>2018-07-15T11:51:33.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>深度学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+             
+              <breadCrumb title="深度学习" url="http://zxh.site/categories/Linux/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/01/08/s1000/</loc>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    <data>
+        <display>
+        <title>漫步者S1000评测</title>
+        <pubTime>2016-01-08T13:26:13.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+        <tag>硬件评测</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="硬件评测" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/%E7%A1%AC%E4%BB%B6%E8%AF%84%E6%B5%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
+    <lastmod>2019-04-28T06:57:38.508Z</lastmod>
+    <data>
+        <display>
+        <title>HPC环境下使用Docker</title>
+        <pubTime>2018-07-01T04:29:09.000Z</pubTime>
+        
+        <tag>HPC</tag>
+         
+        <tag>Docker</tag>
+         
+        <tag>Slurm</tag>
+         
+         
+           
+             
+              <breadCrumb title="容器" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/08/11/HPC-series-4-Slurm-overview/</loc>
+    <lastmod>2019-04-28T06:57:38.499Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(4):Slurm概览</title>
+        <pubTime>2018-08-11T10:25:31.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2019/04/02/the-clean-coder/</loc>
+    <lastmod>2019-04-28T06:57:38.306Z</lastmod>
+    <data>
+        <display>
+        <title>谈谈996</title>
+        <pubTime>2019-04-02T02:09:10.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+        <tag>技术漫谈</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="技术漫谈" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/22/HPC-series-1-startup/</loc>
+    <lastmod>2019-04-28T06:57:38.305Z</lastmod>
+    <data>
+        <display>
+        <title>HPC系列文章(1)：开篇</title>
+        <pubTime>2018-07-22T05:47:50.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/10/28/HPC-series-15-resource-limit/</loc>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(15):资源限制</title>
+        <pubTime>2018-10-28T09:55:28.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/08/05/HPC-series-3-scheduler-overview/</loc>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(3):调度系统概览</title>
+        <pubTime>2018-08-05T01:12:33.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/09/16/HPC-series-9-job-submit-options/</loc>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(9):指定作业参数</title>
+        <pubTime>2018-09-16T09:36:35.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2018/05/15/Singularity/</loc>
-    <lastmod>2018-11-17T14:19:08.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
     <data>
         <display>
         <title>Singularity——HPC环境的绝佳容器解决方案</title>
@@ -637,26 +528,19 @@
 
     
   <url>
-    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
-    <lastmod>2018-11-05T03:26:21.000Z</lastmod>
+    <loc>http://zxh.site/2015/07/22/newlife/</loc>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
     <data>
         <display>
-        <title>HPC环境下使用Docker</title>
-        <pubTime>2018-07-01T04:29:09.000Z</pubTime>
+        <title>新的征程</title>
+        <pubTime>2015-07-22T09:15:53.000Z</pubTime>
         
-        <tag>HPC</tag>
-         
-        <tag>Docker</tag>
-         
-        <tag>Slurm</tag>
+        <tag>生活</tag>
          
          
            
              
-              <breadCrumb title="容器" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/"/>
-          
-             
-              <breadCrumb title="HPC" url="http://zxh.site/categories/%E5%AE%B9%E5%99%A8/HPC/"/>
+              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>
@@ -664,19 +548,24 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/05/20/customized-error/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <loc>http://zxh.site/2017/04/01/web-tty/</loc>
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
     <data>
         <display>
-        <title>Golang自定义error</title>
-        <pubTime>2016-05-20T15:07:07.000Z</pubTime>
+        <title>Golang实现多节点Web终端</title>
+        <pubTime>2017-04-01T10:07:04.000Z</pubTime>
         
         <tag>Golang</tag>
+         
+        <tag>后端</tag>
          
          
            
              
-              <breadCrumb title="Golang" url="http://zxh.site/categories/Golang/"/>
+              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Golang/"/>
           
         </display>
     </data>
@@ -685,7 +574,7 @@
     
   <url>
     <loc>http://zxh.site/2016/10/21/efficient/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>如何变得更高效</title>
@@ -706,59 +595,16 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/07/01/first-anniversary/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>入职一年工作总结</title>
-        <pubTime>2016-07-01T14:33:07.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2015/09/28/fswatch/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用fswatch工具进行热编译</title>
-        <pubTime>2015-09-28T13:48:10.000Z</pubTime>
-        
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-             
-              <breadCrumb title="fswatch" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/fswatch/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2016/03/06/git-on-windows-server/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>在Windows server2008上搭建git仓库(Git+ copssh+TortoiseGit)</title>
         <pubTime>2016-03-06T15:00:11.000Z</pubTime>
         
-        <tag>工具</tag>
-         
         <tag>经验&amp;技巧</tag>
+         
+        <tag>工具</tag>
          
         <tag>Git</tag>
          
@@ -773,52 +619,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>Windows平台OmniMarkupPreviewer配置引发的思考</title>
-        <pubTime>2016-06-03T15:08:45.000Z</pubTime>
-        
-        <tag>假装有思想</tag>
-         
-        <tag>OmniMarkupPreviewer</tag>
-         
-        <tag>Windows</tag>
-         
-         
-           
-             
-              <breadCrumb title="假装有思想" url="http://zxh.site/categories/%E5%81%87%E8%A3%85%E6%9C%89%E6%80%9D%E6%83%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2015/07/22/newlife/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>新的征程</title>
-        <pubTime>2015-07-22T09:15:53.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>简单聊聊元编程</title>
@@ -840,7 +642,7 @@
     
   <url>
     <loc>http://zxh.site/2016/12/01/phabricator-2/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>Phabricator仓库配置</title>
@@ -862,7 +664,7 @@
     
   <url>
     <loc>http://zxh.site/2016/04/08/port-mapping/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>端口映射</title>
@@ -883,35 +685,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2015/12/29/slurm/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>SLURM 安装与配置</title>
-        <pubTime>2015-12-29T04:38:11.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>高性能计算</tag>
-         
-        <tag>Slurm</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>WordPress在SAE上部署的技巧</title>
@@ -937,70 +712,16 @@
 
     
   <url>
-    <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>WEIPHP部署在SAE上的技巧</title>
-        <pubTime>2015-03-21T15:57:22.000Z</pubTime>
-        
-        <tag>后端</tag>
-         
-        <tag>PHP</tag>
-         
-        <tag>SAE</tag>
-         
-        <tag>WEIPHP</tag>
-         
-         
-           
-             
-              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
-          
-             
-              <breadCrumb title="PHP" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/PHP/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zxh.site/2016/01/08/s1000/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>漫步者S1000评测</title>
-        <pubTime>2016-01-08T13:26:13.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-        <tag>硬件评测</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-             
-              <breadCrumb title="硬件评测" url="http://zxh.site/categories/%E7%94%9F%E6%B4%BB/%E7%A1%AC%E4%BB%B6%E8%AF%84%E6%B5%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2015/08/22/javascript-convention/</loc>
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     <data>
         <display>
         <title>前端Javascript编码规范</title>
         <pubTime>2015-08-22T14:14:09.000Z</pubTime>
         
-        <tag>前端</tag>
-         
         <tag>JavaScript</tag>
+         
+        <tag>前端</tag>
          
          
            
@@ -1016,8 +737,307 @@
 
     
   <url>
+    <loc>http://zxh.site/2015/11/21/freedomnet/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>让你的设备自由上网</title>
+        <pubTime>2015-11-21T03:21:54.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+             
+              <breadCrumb title="梯子" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/%E6%A2%AF%E5%AD%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/02/29/javascript-artifice/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript奇技淫巧</title>
+        <pubTime>2016-02-29T03:18:12.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://zxh.site/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="JavaScript" url="http://zxh.site/categories/%E5%89%8D%E7%AB%AF/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2015/12/29/slurm/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>SLURM 安装与配置</title>
+        <pubTime>2015-12-29T04:38:11.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>高性能计算</tag>
+         
+        <tag>Slurm</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/06/24/x11/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>有趣的X11</title>
+        <pubTime>2018-06-24T08:07:04.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
+          
+             
+              <breadCrumb title="工具" url="http://zxh.site/categories/Linux/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/11/17/About-TTY/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>探寻TTY的前世今生</title>
+        <pubTime>2018-11-17T14:32:48.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>后端</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    <data>
+        <display>
+        <title>Golang实现并行命令</title>
+        <pubTime>2017-06-24T06:16:08.000Z</pubTime>
+        
+        <tag>Golang</tag>
+         
+        <tag>后端</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Golang/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/02/28/Docker-in-LXC/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>Docker in LXC踩坑</title>
+        <pubTime>2018-02-28T04:30:22.000Z</pubTime>
+        
+        <tag>虚拟化</tag>
+         
+        <tag>容器</tag>
+         
+        <tag>LXC</tag>
+         
+         
+           
+             
+              <breadCrumb title="虚拟化" url="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+          
+             
+              <breadCrumb title="容器" url="http://zxh.site/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/%E5%AE%B9%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/09/23/HPC-series-10-job-status/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(10):作业状态</title>
+        <pubTime>2018-09-23T11:04:44.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/10/21/HPC-series-14-account/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(14):账务系统（Account）</title>
+        <pubTime>2018-10-21T09:06:57.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/11/26/phabricator-configure/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS 7 Phabricator安装配置</title>
+        <pubTime>2016-11-26T14:16:24.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+        <tag>Phabricator</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/07/08/socks5/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>安全的SOCKS5协议</title>
+        <pubTime>2018-07-08T07:27:48.000Z</pubTime>
+        
+        <tag>网络</tag>
+         
+        <tag>译文</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="译文" url="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2016/06/12/redis-rpc/</loc>
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    <data>
+        <display>
+        <title>巧用Redis模拟RPC</title>
+        <pubTime>2016-06-12T13:29:09.000Z</pubTime>
+        
+        <tag>后端</tag>
+         
+        <tag>Redis</tag>
+         
+         
+           
+             
+              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+          
+             
+              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
     <data>
         <display>
         <title>CentOS7自动部署(PXE+Kickstart)</title>
@@ -1043,8 +1063,33 @@
 
     
   <url>
+    <loc>http://zxh.site/2018/08/26/HPC-series-6-setup-slurm/</loc>
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(6):Slurm部署</title>
+        <pubTime>2018-08-26T11:25:51.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zxh.site/2016/01/26/command-find/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
     <data>
         <display>
         <title>Find命令详解</title>
@@ -1063,31 +1108,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2015/11/21/freedomnet/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    <data>
-        <display>
-        <title>让你的设备自由上网</title>
-        <pubTime>2015-11-21T03:21:54.000Z</pubTime>
-        
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-             
-              <breadCrumb title="梯子" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/%E6%A2%AF%E5%AD%90/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2015/09/29/http-cache/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
     <data>
         <display>
         <title>浏览器 HTTP 协议缓存机制</title>
@@ -1108,33 +1130,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/02/29/javascript-artifice/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    <data>
-        <display>
-        <title>JavaScript奇技淫巧</title>
-        <pubTime>2016-02-29T03:18:12.000Z</pubTime>
-        
-        <tag>前端</tag>
-         
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://zxh.site/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-             
-              <breadCrumb title="JavaScript" url="http://zxh.site/categories/%E5%89%8D%E7%AB%AF/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
     <data>
         <display>
         <title>jQuery性能优化</title>
@@ -1158,21 +1155,24 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/11/26/phabricator-configure/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <loc>http://zxh.site/2018/10/07/HPC-series-12-interact-job/</loc>
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
     <data>
         <display>
-        <title>CentOS 7 Phabricator安装配置</title>
-        <pubTime>2016-11-26T14:16:24.000Z</pubTime>
+        <title>HPC 系列文章(12):交互作业</title>
+        <pubTime>2018-10-07T12:12:15.000Z</pubTime>
         
-        <tag>工具</tag>
+        <tag>高性能计算</tag>
          
-        <tag>Phabricator</tag>
+        <tag>HPC</tag>
          
          
            
              
-              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
           
         </display>
     </data>
@@ -1180,24 +1180,24 @@
 
     
   <url>
-    <loc>http://zxh.site/2016/06/12/redis-rpc/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <loc>http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/</loc>
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
     <data>
         <display>
-        <title>巧用Redis模拟RPC</title>
-        <pubTime>2016-06-12T13:29:09.000Z</pubTime>
+        <title>HPC 系列文章(8):第一个Slurm作业</title>
+        <pubTime>2018-09-08T10:00:04.000Z</pubTime>
         
-        <tag>后端</tag>
+        <tag>高性能计算</tag>
          
-        <tag>Redis</tag>
+        <tag>HPC</tag>
          
          
            
              
-              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
           
              
-              <breadCrumb title="工具" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
           
         </display>
     </data>
@@ -1206,7 +1206,7 @@
     
   <url>
     <loc>http://zxh.site/2016/06/03/redis/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
     <data>
         <display>
         <title>多机高可用Redis Sentinel配置</title>
@@ -1230,33 +1230,8 @@
 
     
   <url>
-    <loc>http://zxh.site/2018/06/24/x11/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    <data>
-        <display>
-        <title>有趣的X11</title>
-        <pubTime>2018-06-24T08:07:04.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://zxh.site/categories/Linux/"/>
-          
-             
-              <breadCrumb title="工具" url="http://zxh.site/categories/Linux/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zxh.site/2015/12/23/optimize-mysql-innodb/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
     <data>
         <display>
         <title>MySQL InnoDB性能优化</title>
@@ -1282,24 +1257,49 @@
 
     
   <url>
-    <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <loc>http://zxh.site/2018/07/28/HPC-series-2-overview/</loc>
+    <lastmod>2019-04-28T06:57:38.298Z</lastmod>
     <data>
         <display>
-        <title>Golang实现并行命令</title>
-        <pubTime>2017-06-24T06:16:08.000Z</pubTime>
+        <title>HPC系列文章(2)：HPC技术概览</title>
+        <pubTime>2018-07-28T08:57:13.000Z</pubTime>
         
-        <tag>Golang</tag>
+        <tag>高性能计算</tag>
          
-        <tag>后端</tag>
+        <tag>HPC</tag>
          
          
            
              
-              <breadCrumb title="后端" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/"/>
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
           
              
-              <breadCrumb title="Golang" url="http://zxh.site/categories/%E5%90%8E%E7%AB%AF/Golang/"/>
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zxh.site/2018/08/19/HPC-series-5-setup-dev/</loc>
+    <lastmod>2019-04-28T06:57:38.298Z</lastmod>
+    <data>
+        <display>
+        <title>HPC 系列文章(5):搭建实验环境</title>
+        <pubTime>2018-08-19T05:47:22.000Z</pubTime>
+        
+        <tag>高性能计算</tag>
+         
+        <tag>HPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="高性能计算" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+          
+             
+              <breadCrumb title="HPC" url="http://zxh.site/categories/%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97/HPC/"/>
           
         </display>
     </data>

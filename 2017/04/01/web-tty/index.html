@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/04/screenshot.gif">
-<meta property="og:updated_time" content="2018-11-17T14:28:49.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/04/screenshot.gif">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang实现多节点Web终端">
 <meta name="twitter:description" content="熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2017/04/screenshot.gif">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2017/04/screenshot.gif">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-17 22:28:49" itemprop="dateModified" datetime="2018-11-17T22:28:49+08:00">2018-11-17</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -440,7 +440,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2017/04/screenshot.gif" alt="Gotty"><br>熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。<a id="more"></a></p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2017/04/screenshot.gif" alt="Gotty"><br>熟悉Linux或MacOS的同学都应该对终端并不陌生，诸如XShell、PuTTY这样的工具大家也应该很熟悉。如今各种私有云、公有云、虚拟化技术正在蓬勃发展，工作在集群之上的Web应用程序如果能够提供可以执行命令的终端窗口，将大大改善用户的使用体验。这篇文章就跟大家介绍一下我是如何利用Golang实现支持多节点多用户的Web终端。<a id="more"></a></p>
 <h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>假设一个用户拥有若干台机器的管理权限，如果能够直接在Web界面上直接登陆任意节点，将给用户带来更好的使用体验。而实现这一功能的几大难点在于：</p>
 <ol>
 <li>供用户访问的Web服务启动在管理节点上，其他节点与管理节点之间通过内网连接，不能被直接访问；</li>

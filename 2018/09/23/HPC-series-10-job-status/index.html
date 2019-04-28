@@ -124,16 +124,16 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="前面介绍了作业的提交，下面我们介绍一下如何查看作业的状态。查看作业状态的方式有多种，Slurm提供了多个命令行工具，包括scontrol,squeue,sstat,sview等等都可以查看作业状态，不过由于我们暂时还没介绍到交互作业和作业步(sstat)，可视化(sview)也不是我们关心的重点，我们先只介绍scontrol和squeue查看作业状态。 如果只是讲这两个命令的使用的话，就大可不必">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/squeue.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/09/show_job.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/09/oneliner.png">
-<meta property="og:image" content="http://img.chinahpc.club/squeue.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/09/state_convert.png">
-<meta property="og:updated_time" content="2019-01-04T01:58:21.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/squeue.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/09/show_job.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/09/oneliner.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/squeue.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/09/state_convert.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(10):作业状态">
 <meta name="twitter:description" content="前面介绍了作业的提交，下面我们介绍一下如何查看作业的状态。查看作业状态的方式有多种，Slurm提供了多个命令行工具，包括scontrol,squeue,sstat,sview等等都可以查看作业状态，不过由于我们暂时还没介绍到交互作业和作业步(sstat)，可视化(sview)也不是我们关心的重点，我们先只介绍scontrol和squeue查看作业状态。 如果只是讲这两个命令的使用的话，就大可不必">
-<meta name="twitter:image" content="http://img.chinahpc.club/squeue.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/squeue.png">
 
 
 
@@ -376,7 +376,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-04 09:58:21" itemprop="dateModified" datetime="2019-01-04T09:58:21+08:00">2019-01-04</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -444,18 +444,18 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/squeue.png" alt="squeue"></p>
+        <p><img src="http://ansiz.motherland-flower.cn/squeue.png" alt="squeue"></p>
 <p>前面介绍了作业的提交，下面我们介绍一下如何查看作业的状态。查看作业状态的方式有多种，Slurm提供了多个命令行工具，包括scontrol,squeue,sstat,sview等等都可以查看作业状态，不过由于我们暂时还没介绍到交互作业和作业步(sstat)，可视化(sview)也不是我们关心的重点，我们先只介绍scontrol和squeue查看作业状态。</p>
 <p>如果只是讲这两个命令的使用的话，就大可不必单独写一篇文章来赘述了，我们要关注的核心是状态对应的具体含义。不过在开始之前我们还是先简单介绍一下如何使用这两个命令行工具。<a id="more"></a></p>
 <h2 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h2><h3 id="scontrol"><a href="#scontrol" class="headerlink" title="scontrol"></a>scontrol</h3><p>通过<code>scontrol show job [jobid]</code>可以查看作业（或指定jobid的作业）的详细状态。</p>
-<p><img src="http://img.chinahpc.club/2018/09/show_job.png" alt="状态查看"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/09/show_job.png" alt="状态查看"></p>
 <p>可以看到输出了非常多的信息，包括节点状态、优先级、资源需求、作业时间、运行的节点、输出文件等等。如果希望输出的内容更方便解析，可以加上<code>--oneliner</code>参数，则会按行以空格分割的键值对形式输出。</p>
-<p><img src="http://img.chinahpc.club/2018/09/oneliner.png" alt="oneliner"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/09/oneliner.png" alt="oneliner"></p>
 <h3 id="squeue"><a href="#squeue" class="headerlink" title="squeue"></a>squeue</h3><p>scontrol输出的信息非常完整，不过缺点是效率较低，如果系统中存在大量的作业，该命令的输出响应速度则会变得非常慢，而有时候我们并不需要那么详细的信息，如果只是查看作业的状态的话，<code>squeue</code>则是更好的选择</p>
-<p><img src="http://img.chinahpc.club/squeue.png" alt="squeue"></p>
+<p><img src="http://ansiz.motherland-flower.cn/squeue.png" alt="squeue"></p>
 <h2 id="作业状态"><a href="#作业状态" class="headerlink" title="作业状态"></a>作业状态</h2><p>每个作业的执行过程中通常要经历多个状态，典型的作业状态包括PENDING, RUNNING, SUSPENDED, COMPLETING和COMPLETED。</p>
 <h3 id="作业的生命周期"><a href="#作业的生命周期" class="headerlink" title="作业的生命周期"></a>作业的生命周期</h3><p>对于一个作业而言，从提交到结束，有一个状态转换的过程，用流行的说法，我们也可以称之为作业的生命周期。下图是我整理的一个作业状态转换图：</p>
-<p><img src="http://img.chinahpc.club/2018/09/state_convert.png" alt="状态转换图"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/09/state_convert.png" alt="状态转换图"></p>
 <h3 id="状态对照表"><a href="#状态对照表" class="headerlink" title="状态对照表"></a>状态对照表</h3><p>下面是所有可能出现的作业状态对应的编码以及其含义解释</p>
 <table>
 <thead>

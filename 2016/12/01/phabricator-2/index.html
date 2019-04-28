@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="上一篇博客中介绍了如何安装部署Phabricator，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/11/hero.png">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2016/11/hero.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phabricator仓库配置">
 <meta name="twitter:description" content="上一篇博客中介绍了如何安装部署Phabricator，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/11/hero.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2016/11/hero.png">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -433,7 +433,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2016/11/hero.png" alt="CLI"><br><a href="http://blog.zxh.site/2016/11/26/phabricator-configure/#more" target="_blank" rel="noopener">上一篇博客</a>中介绍了如何安装部署<code>Phabricator</code>，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑<a id="more"></a>，在安装部署完成的基础之上还需要配置不少东西才能真正的用起来，<code>Phabricator</code>看起来是很不错，但是作为一个工具，不得不说使用门槛还是偏高（可能是我太菜了[/捂脸]），最后终于用上了，简单总结分享一下吧</p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2016/11/hero.png" alt="CLI"><br><a href="http://blog.zxh.site/2016/11/26/phabricator-configure/#more" target="_blank" rel="noopener">上一篇博客</a>中介绍了如何安装部署<code>Phabricator</code>，本以为安装完成之后就可以愉快的使用了，但是没想到只是完成了一半，打算迁徙几个代码库进来试试，结果又踩了不少坑<a id="more"></a>，在安装部署完成的基础之上还需要配置不少东西才能真正的用起来，<code>Phabricator</code>看起来是很不错，但是作为一个工具，不得不说使用门槛还是偏高（可能是我太菜了[/捂脸]），最后终于用上了，简单总结分享一下吧</p>
 <h2 id="Repository-Hosting"><a href="#Repository-Hosting" class="headerlink" title="Repository Hosting"></a>Repository Hosting</h2><p><code>Phabricator</code>支持Git、SVN以及Mercurial在SSH以及HTTP(Mercurial不支持HTTP)协议下进行代码托管，具体可以参见<a href="https://secure.phabricator.com/book/phabricator/article/diffusion_hosting/" target="_blank" rel="noopener">官方文档</a>，这里只介绍Git+SSH的方式，文档比较长，但是简化翻译后一共要进行如下几步操作：</p>
 <h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p>Phabricator需要设置三个账户：</p>
 <ol>

@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="Redis是一个非常灵活的工具，利用Redis我们可以很方便的完成一些数据的缓存和交换。这种数据交换不依赖语言，在各种语言下都有很简单方便的实现，并且redis-cli可以直接命令行操作，在脚本中也能很方便的实现数据交换。正是因为它具备这样的特性，就算是shell脚本，也可以很容易模拟实现RPC。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/06/rpc.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:45.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2016/06/rpc.jpg">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="巧用Redis模拟RPC">
 <meta name="twitter:description" content="Redis是一个非常灵活的工具，利用Redis我们可以很方便的完成一些数据的缓存和交换。这种数据交换不依赖语言，在各种语言下都有很简单方便的实现，并且redis-cli可以直接命令行操作，在脚本中也能很方便的实现数据交换。正是因为它具备这样的特性，就算是shell脚本，也可以很容易模拟实现RPC。">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/06/rpc.jpg">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2016/06/rpc.jpg">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -440,7 +440,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2016/06/rpc.jpg" alt="redis"></p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2016/06/rpc.jpg" alt="redis"></p>
 <p>Redis是一个非常灵活的工具，利用Redis我们可以很方便的完成一些数据的缓存和交换。这种数据交换不依赖语言，在各种语言下都有很简单方便的实现，并且redis-cli可以直接命令行操作，在脚本中也能很方便的实现数据交换。正是因为它具备这样的特性，就算是shell脚本，也可以很容易模拟实现RPC。<br><a id="more"></a></p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>实现RPC如果不考虑底层如何实现，不考虑信息如何在网络中传输，那么主要操作就是在客户端发起请求，服务端进行响应并且通知客户端完成了该操作返回数据。也就是说只要客户端和服务端都可以与Redis数据库建立连接，两端就可以通过它实现相互通讯。Redis支持订阅消息事件，支持事件广播，还有<code>BRPOP</code>这样的阻塞式数据弹出方式。所以我们只要在Server中订阅与Client约定好的<code>Channel</code>，就可以实现通知，再把完成操作之后希望返回的数据<code>PUSH</code>到队列中，在Client中利用<code>BRPOP</code>就可以实现超时或者取出Server返回的消息。  </p>
 <blockquote>

@@ -124,17 +124,17 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="在程序部署的过程中我们经常需要批量部署操作系统，本着“能自动化的绝不手动做”的原则，显然重复部署操作系统这种活儿，我们应该交给脚本去完成。这篇文章就跟大家分享一下如何基于PXE、Kickstart以及dnsmasq实现CentOS7自动部署。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/auto.jpg">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/PXE.jpg">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/PXEAndKickstart.jpg">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/method.png">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/bootloader.png">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/03/Partition.png">
-<meta property="og:updated_time" content="2018-10-21T10:57:45.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/auto.jpg">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/PXE.jpg">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/PXEAndKickstart.jpg">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/method.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/bootloader.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/Partition.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7自动部署(PXE+Kickstart)">
 <meta name="twitter:description" content="在程序部署的过程中我们经常需要批量部署操作系统，本着“能自动化的绝不手动做”的原则，显然重复部署操作系统这种活儿，我们应该交给脚本去完成。这篇文章就跟大家分享一下如何基于PXE、Kickstart以及dnsmasq实现CentOS7自动部署。">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2017/03/auto.jpg">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2017/03/auto.jpg">
 
 
 
@@ -377,7 +377,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -445,11 +445,11 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2017/03/auto.jpg" alt="AutoDeploy"><br>在程序部署的过程中我们经常需要批量部署操作系统，本着“能自动化的绝不手动做”的原则，显然重复部署操作系统这种活儿，我们应该交给脚本去完成。这篇文章就跟大家分享一下如何基于<code>PXE</code>、<code>Kickstart</code>以及<code>dnsmasq</code>实现CentOS7自动部署。<a id="more"></a></p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/auto.jpg" alt="AutoDeploy"><br>在程序部署的过程中我们经常需要批量部署操作系统，本着“能自动化的绝不手动做”的原则，显然重复部署操作系统这种活儿，我们应该交给脚本去完成。这篇文章就跟大家分享一下如何基于<code>PXE</code>、<code>Kickstart</code>以及<code>dnsmasq</code>实现CentOS7自动部署。<a id="more"></a></p>
 <hr>
 <h2 id="什么是PXE"><a href="#什么是PXE" class="headerlink" title="什么是PXE"></a>什么是PXE</h2><p>PXE(Pre-boot Execution Environment，预启动执行环境)其实是一种算得上“古老”的技术，Intel和Systemsoft早在1999年对外发布了<a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf" target="_blank" rel="noopener">PXE2.1规范</a>，而PXE背后的概念起源于BOOTP/DHCP/TFTP协议的早期阶段，所以严格来说它的历史可以追溯到1985年之前。这项技术诞生的主要目的就是通过网络进行操作系统的自动化部署。  </p>
 <p>简单来说，PXE就是用来通过网络进行操作系统的自动化部署的一种技术集合，它依赖于DHCP以及TFTP服务，每一台支持PXE启动的机器都可以看作一台PXE Client(PXE Client的ROM中包含TFTP Client)，PXE Client会向其所在网络中的DHCP服务索取IP地址以及PXE文件位置，之后经过TFTP服务器获取并执行pxelinux.0、pxelinux.cfg、vmlinuz、initrd.img等文件，实现系统的下载、引导以及安装。其具体原理可以参考<a href="https://en.wikipedia.org/wiki/Preboot_Execution_Environment" target="_blank" rel="noopener">维基百科</a>。 </p>
-<p><img src="http://img.chinahpc.club/uploads/2017/03/PXE.jpg" alt="原理图"></p>
+<p><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/PXE.jpg" alt="原理图"></p>
 <h2 id="那什么是Kickstart呢"><a href="#那什么是Kickstart呢" class="headerlink" title="那什么是Kickstart呢"></a>那什么是Kickstart呢</h2><p>手动安装操作系统的时候，往往有很多选项需要进行配置，我们想要实现自动化，就需要一个工具来代替我们做出选择，我们只需要把这个工具配置好，剩下的都交给它。Kickstart就是这样的一个工具，它是<a href="https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux" target="_blank" rel="noopener">Red Hat Enterprise Linux</a>操作系统自动执行无人值守的操作系统安装和配置的一种常用方法。  </p>
 <p>Kickstart安装系统时需要有相应的配置文件才能正常工作，这个文件中记录了我们需要安装的操作系统的各种配置、依赖的软件包、安装过程以及安装完成后要执行的脚本等等，它是安装过程的核心文件。我们有很多方式去生成这个配置文件：</p>
 <ol>
@@ -458,7 +458,7 @@
 <li>你还可以使用系统安装程序<code>Anaconda</code>来生成配置文件。  </li>
 </ol>
 <p>除此之外如果你有兴趣，还可以了解一下<a href="https://en.wikipedia.org/wiki/Cobbler_(software" target="_blank" rel="noopener">Cobbler</a>)这款安装部署软件。</p>
-<p>找一张图来说明一下完整过程(实际情况中OS Server、install/boot Server以及DHCP Server可以在一台机器上)：<br><img src="http://img.chinahpc.club/uploads/2017/03/PXEAndKickstart.jpg" alt="原理图"></p>
+<p>找一张图来说明一下完整过程(实际情况中OS Server、install/boot Server以及DHCP Server可以在一台机器上)：<br><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/PXEAndKickstart.jpg" alt="原理图"></p>
 <h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>下面简单的记录一下我的安装步骤，为了方便我采用了GUI工具配置kickstart配置文件，具体步骤如下：</p>
 <h3 id="安装所需要的服务于平台"><a href="#安装所需要的服务于平台" class="headerlink" title="安装所需要的服务于平台"></a>安装所需要的服务于平台</h3><pre><code>[root@localhost file]# yum -y install tftp tftp-server dnsmasq syslinux nfs-* rpc* vim xinetd system-config-kickstart
 </code></pre><h3 id="配置tftp"><a href="#配置tftp" class="headerlink" title="配置tftp"></a>配置tftp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost file]# vim /etc/xinetd.d/tftp </span><br><span class="line"># default: off</span><br><span class="line"># description: The tftp server serves files using the trivial file transfer \</span><br><span class="line">#       protocol.  The tftp protocol is often used to boot diskless \</span><br><span class="line">#       workstations, download configuration files to network-aware printers, \</span><br><span class="line">#       and to start the installation process for some operating systems.</span><br><span class="line">service tftp</span><br><span class="line">&#123;</span><br><span class="line">        socket_type             = dgram</span><br><span class="line">        protocol                = udp</span><br><span class="line">        wait                    = yes</span><br><span class="line">        user                    = root</span><br><span class="line">        server                  = /usr/sbin/in.tftpd</span><br><span class="line">        server_args             = -s /var/lib/tftpboot #tftp的工作目录</span><br><span class="line">        disable                 = yes                  #将这一行改为no</span><br><span class="line">        per_source              = 11</span><br><span class="line">        cps                     = 100 2</span><br><span class="line">        flags                   = IPv4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -469,9 +469,9 @@
 <h3 id="配置kicksatrt"><a href="#配置kicksatrt" class="headerlink" title="配置kicksatrt"></a>配置kicksatrt</h3><p><strong>此步骤采用桌面环境下的Kickstart工具进行辅助配置，实际可根据需求手动修改ks.cfg文件</strong></p>
 <ol>
 <li>设置基本配置：<br>配置时区、键盘、密码等信息，<strong>勾选安装后重启</strong></li>
-<li>设置安装方法：<br><img src="http://img.chinahpc.club/uploads/2017/03/method.png" alt="设置安装方法"></li>
-<li>设置是否加载引导程序：<br><img src="http://img.chinahpc.club/uploads/2017/03/bootloader.png" alt="引导程序"></li>
-<li>设置分区信息：<br><img src="http://img.chinahpc.club/uploads/2017/03/Partition.png" alt="设置分区信息"></li>
+<li>设置安装方法：<br><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/method.png" alt="设置安装方法"></li>
+<li>设置是否加载引导程序：<br><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/bootloader.png" alt="引导程序"></li>
+<li>设置分区信息：<br><img src="http://ansiz.motherland-flower.cn/uploads/2017/03/Partition.png" alt="设置分区信息"></li>
 <li><p>设置网络：<br>默认即可</p>
 </li>
 <li><p>设置验证信息：<br>默认即可</p>

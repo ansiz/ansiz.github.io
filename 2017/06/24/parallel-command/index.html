@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="在集群中经常我们会需要在多个节点上执行相同的操作，有不少的软件能帮助我们实现这样的需求，例如大名鼎鼎的Salt，或者更加轻量级的dsh。但是一方面如果在我们自己编写的程序里面再调用这些软件获取并行命令的输出结果，这个命令的执行其实是阻塞的，需要一直等待salt/dsh命令执行完毕后获取输出。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2017/06/parallel.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:45.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2017/06/parallel.jpg">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang实现并行命令">
 <meta name="twitter:description" content="在集群中经常我们会需要在多个节点上执行相同的操作，有不少的软件能帮助我们实现这样的需求，例如大名鼎鼎的Salt，或者更加轻量级的dsh。但是一方面如果在我们自己编写的程序里面再调用这些软件获取并行命令的输出结果，这个命令的执行其实是阻塞的，需要一直等待salt/dsh命令执行完毕后获取输出。">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2017/06/parallel.jpg">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2017/06/parallel.jpg">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -440,7 +440,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2017/06/parallel.jpg" alt="Gotty"> </p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2017/06/parallel.jpg" alt="Gotty"> </p>
 <p>在集群中经常我们会需要在多个节点上执行相同的操作，有不少的软件能帮助我们实现这样的需求，例如大名鼎鼎的Salt，或者更加轻量级的dsh。但是一方面如果在我们自己编写的程序里面再调用这些软件获取并行命令的输出结果，这个命令的执行其实是阻塞的，需要一直等待salt/dsh命令执行完毕后获取输出。<a id="more"></a>另一方面引入salt这样的软件会给部署和维护带来更大的成本，而实际上我们用到的功能仅仅是salt的一小部分，实在是有些得不偿失。如果我们想不依赖其他软件，自己实现一个简单的并行命令的功能，难度会如何呢？这篇文章就为大家介绍一下我是如何利用Redis和共享存储实现简单的并行命令的。</p>
 <h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ul>
 <li>支持异步批量执行命令<ul>

@@ -124,14 +124,14 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用sbatch命令提交是最为常见的方式，不过这种方式存在弊 端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候srun和salloc则是更好的方式。 sallocsalloc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/2018/10/salloc.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/10/env.png">
-<meta property="og:image" content="http://img.chinahpc.club/2018/10/salloc-srun.png">
-<meta property="og:updated_time" content="2019-01-04T01:58:38.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/10/salloc.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/10/env.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2018/10/salloc-srun.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HPC 系列文章(12):交互作业">
 <meta name="twitter:description" content="前面介绍了如何提交作业，不过我们只讲了最简单的作业提交。实际上Slurm的作业提交方式也有多种，将所需的作业编写成脚本再用sbatch命令提交是最为常见的方式，不过这种方式存在弊 端，你可能会因为脚本中某一个命令执行失败而反复编辑脚本，再不断的查看新提交的任务的输出，在调试时显得很不灵活；又或者你的程序需要交互式的应答才能跑通，这时候srun和salloc则是更好的方式。 sallocsalloc">
-<meta name="twitter:image" content="http://img.chinahpc.club/2018/10/salloc.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/2018/10/salloc.png">
 
 
 
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-04 09:58:38" itemprop="dateModified" datetime="2019-01-04T09:58:38+08:00">2019-01-04</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -452,15 +452,15 @@
 </blockquote>
 <p>无论是sbatch、srun还是salloc，<strong>其本质都是一种对资源的申请并将你所要执行的内容运行在限定的资源内的一种行为</strong>，三者提交时对资源指定的参数都是一样的，例如：</p>
 <pre><code>salloc -N 2 -n 2 -p node-all
-</code></pre><p><img src="http://img.chinahpc.club/2018/10/salloc.png" alt="salloc"></p>
+</code></pre><p><img src="http://ansiz.motherland-flower.cn/2018/10/salloc.png" alt="salloc"></p>
 <p>如果当前资源满足的话，将会显示该资源已分配，你似乎没察觉到任何变化，但实际上你当前使用的shell程序（泛指sh、bash、zsh等）已经发生了变化。你进入了一个新的环境下，不信你可以试试执行exit，你会得到如下输出：</p>
 <pre><code>salloc: Relinquishing job allocation 5914
 </code></pre><p>这正是退出salloc任务的方式。</p>
 <p>那么这个新的环境有什么玄机呢？实际上slurm在这个过程中完成了资源的申请，然后为新的bash进程配置了一堆环境变量，我们可以通过env来查看，会得到类似如下输出：</p>
-<p><img src="http://img.chinahpc.club/2018/10/env.png" alt="env"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/10/env.png" alt="env"></p>
 <p>可以看到其包含了本次作业的各项参数，包括申请到的资源等信息。你肯定好奇那如果我手动修改环境变量，是不是可以改变本次作业的资源呢？答案是当然不能。这些环境变量是可读的，但仅仅是为了让你的作业可以获知这些信息，作业真正的资源分配信息依然是保存在特定的文件中的（这个后面再介绍）</p>
 <p>在这个环境下你可以通过<code>srun</code>命令提交任意命令，根据我的设置，每条命令会执行两次，分别在两个节点上。我们可以通过执行命令验证一下：</p>
-<p><img src="http://img.chinahpc.club/2018/10/salloc-srun.png" alt="srun"></p>
+<p><img src="http://ansiz.motherland-flower.cn/2018/10/salloc-srun.png" alt="srun"></p>
 <p>这就是salloc的使用方式。</p>
 <h2 id="srun"><a href="#srun" class="headerlink" title="srun"></a>srun</h2><p>上面的试验中，我们使用了srun提交命令，看到一次输出了两个hostname，证明该命令同时在两个节点上被执行了。事实上在作业中通过srun执行命令才是是slurm中正确使用多个节点资源的方式。srun不仅仅可以在salloc中使用，你可以在sbatch的脚本中使用srun，还可以直接使用srun，在某个作业中多次调用srun指令会生成多个作业步。</p>
 <p>你还可以单独使用srun，这样会生成一个单步的作业，执行完成后就会退出。</p>

@@ -124,20 +124,20 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="为什么需要定制化？一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成垃圾软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个Dockerfile或者docker-compo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-3.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-1.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-2.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-3.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-4.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-5.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-6.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-7.png">
-<meta property="og:image" content="http://img.chinahpc.club/customized-cd-8.png">
-<meta property="og:updated_time" content="2019-04-02T02:10:35.531Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-3.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-1.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-2.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-3.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-4.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-5.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-6.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-7.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/customized-cd-8.png">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux定制化镜像制作指南">
 <meta name="twitter:description" content="为什么需要定制化？一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成垃圾软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个Dockerfile或者docker-compo">
-<meta name="twitter:image" content="http://img.chinahpc.club/customized-cd-3.png">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/customized-cd-3.png">
 
 
 
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-02 10:10:35" itemprop="dateModified" datetime="2019-04-02T10:10:35+08:00">2019-04-02</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -441,7 +441,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/customized-cd-3.png" alt="image3"></p>
+        <p><img src="http://ansiz.motherland-flower.cn/customized-cd-3.png" alt="image3"></p>
 <h2 id="为什么需要定制化？"><a href="#为什么需要定制化？" class="headerlink" title="为什么需要定制化？"></a>为什么需要定制化？</h2><p>一款软件的正式发布，往往需要完善各个细节。其中安装部署是否方便友好很大程度上会影响到用户对该产品的易用性的评价。所以我们往往会看到软件厂商会给用户提供安装包，用户只需要一股脑儿的下一步，就可以完成<del>垃圾</del>软件的安装了。但一套大型的系统软件往往会有很多依赖，所以我们不仅要封装软件，最好连运行环境都要进行打包。于是现在很流行给用户提供一个<code>Dockerfile</code>或者<code>docker-compose.yml</code>，让用户开箱即用。但是如果用户需要从裸机开始部署呢？既然连系统都没有，当然是做成安装光盘。系统、软件、依赖环境一股脑全部部署。我们从头说起。<a id="more"></a></p>
 <h2 id="当我谈“定制化Linux安装镜像”，我在定制什么？"><a href="#当我谈“定制化Linux安装镜像”，我在定制什么？" class="headerlink" title="当我谈“定制化Linux安装镜像”，我在定制什么？"></a>当我谈“定制化Linux安装镜像”，我在定制什么？</h2><ul>
 <li>安装界面定制化<ul>
@@ -462,13 +462,13 @@
 <li>Mac:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/CentOS7</span><br><span class="line">hdiutil attach -nomount ./CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line">mount -t cd9660 /dev/disk4 /tmp/CentOS7</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.chinahpc.club/customized-cd-1.png" alt="image1"></p>
+<p><img src="http://ansiz.motherland-flower.cn/customized-cd-1.png" alt="image1"></p>
 <p>上图即该镜像包含的所有文件，分别介绍一下：</p>
 <ul>
 <li>EFI 负责引导的，包含bootloader</li>
 <li>images PXE安装时需要的内核和引导程序（其实和isolinux中的内核及引导程序是相同的，不知道为啥放两个…）</li>
 </ul>
-<p><img src="http://img.chinahpc.club/customized-cd-2.png" alt="image2"></p>
+<p><img src="http://ansiz.motherland-flower.cn/customized-cd-2.png" alt="image2"></p>
 <ul>
 <li>isolinux 系统内核及引导程序</li>
 <li>LiveOS 包含了压缩的rootfs.img</li>
@@ -481,12 +481,12 @@
 <p>以下实验环境为CentOS(7.2.1511)，其他发行版本可能略有区别</p>
 </blockquote>
 <p>当我们启动安装光盘时，我们看到的是什么？<br>首先是ISOLINUX Boot Menu</p>
-<p><img src="http://img.chinahpc.club/customized-cd-3.png" alt="image3"></p>
+<p><img src="http://ansiz.motherland-flower.cn/customized-cd-3.png" alt="image3"></p>
 <p>然后是Anaconda</p>
 <blockquote>
 <p>Anaconda is the installer used by Red Hat Enterprise Linux, Fedora, and their derivatives.</p>
 </blockquote>
-<p><img src="http://img.chinahpc.club/customized-cd-4.png" alt="image"></p>
+<p><img src="http://ansiz.motherland-flower.cn/customized-cd-4.png" alt="image"></p>
 <p>从光盘加载到系统安装完成经历了什么呢？</p>
 <ol>
 <li>开机</li>
@@ -510,14 +510,14 @@
 </blockquote>
 <p>执行命令解压开，你会得到一个包含了<code>LiveOS/rootfs.img</code>的名为<code>squashfs-root</code>的文件夹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unsquashfs squashfs.img</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.chinahpc.club/customized-cd-5.png" alt="image"><br>可以看到该文件其实是<code>ext4</code>的文件系统，启动一个Linux环境，挂载该文件，就能看到里面的所有东西了。这里我用docker启动了一个centos7环境<br><img src="http://img.chinahpc.club/customized-cd-6.png" alt="image"><br>是不是跟Linux的根目录文件一样？这就是在安装时系统加载的rootfs，而Anaconda的入口文件就是usr/sbin/anaconda，这是一个Python脚本。我们打开它找到它的入口，在这里调用其他的脚本或者程序，就可以在Anaconda之前插一脚了。这里我自己写了一个小程序来收集用户的信息，在anaconda的入口处先调用这个程序。<br><img src="http://img.chinahpc.club/customized-cd-7.png" alt="image"></p>
+<p><img src="http://ansiz.motherland-flower.cn/customized-cd-5.png" alt="image"><br>可以看到该文件其实是<code>ext4</code>的文件系统，启动一个Linux环境，挂载该文件，就能看到里面的所有东西了。这里我用docker启动了一个centos7环境<br><img src="http://ansiz.motherland-flower.cn/customized-cd-6.png" alt="image"><br>是不是跟Linux的根目录文件一样？这就是在安装时系统加载的rootfs，而Anaconda的入口文件就是usr/sbin/anaconda，这是一个Python脚本。我们打开它找到它的入口，在这里调用其他的脚本或者程序，就可以在Anaconda之前插一脚了。这里我自己写了一个小程序来收集用户的信息，在anaconda的入口处先调用这个程序。<br><img src="http://ansiz.motherland-flower.cn/customized-cd-7.png" alt="image"></p>
 <p>修改完毕之后，我们需要重新压缩squashfs.img</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mksquashfs squashfs-root squashfs.img -b 1024k -comp xz</span><br></pre></td></tr></table></figure>
 <p>把新的squashfs.img替换复制出来的光盘镜像文件中的squashfs.img。用dd命令将原来的iso引导信息导出</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp squashfs.img CentOS-7-x86_64-Minimal-1511/LiveOS/</span><br><span class="line">dd <span class="keyword">if</span>=CentOS-7-x86_64-Minimal-1511.iso bs=512 count=1 of=boot.mbr</span><br></pre></td></tr></table></figure>
 <p>最后重新制作iso镜像，这里我用的是<code>xorriso</code>，命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xorriso -pathspecs as_mkisofs -as mkisofs -iso-level 3 -full-iso9660-filenames -volid <span class="string">"CentOS 7 x86_64"</span> -appid  -publisher  -preparer <span class="string">"prepared by me"</span> -eltorito-boot isolinux/isolinux.bin -eltorito-catalog isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -isohybrid-mbr ../boot.mbr -eltorito-alt-boot -e images/efiboot.img -no-emul-boot -isohybrid-gpt-basdat -output ../repacked.iso .</span><br></pre></td></tr></table></figure>
-<p>现在让我们看看repacked.iso运行起来是什么样的吧：<br><img src="http://img.chinahpc.club/customized-cd-8.png" alt="image"></p>
+<p>现在让我们看看repacked.iso运行起来是什么样的吧：<br><img src="http://ansiz.motherland-flower.cn/customized-cd-8.png" alt="image"></p>
 <hr>
 <h2 id="界面定制化"><a href="#界面定制化" class="headerlink" title="界面定制化"></a>界面定制化</h2><h3 id="Boot-Menu定制"><a href="#Boot-Menu定制" class="headerlink" title="Boot Menu定制"></a>Boot Menu定制</h3><p>只需要修改isolinux/isolinux.cfg文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-boot-menu-customization" target="_blank" rel="noopener">boot-menu-customization</a> </p>
 <h3 id="Anaconda界面定制"><a href="#Anaconda界面定制" class="headerlink" title="Anaconda界面定制"></a>Anaconda界面定制</h3><p>Anaconda界面定制的修改稍微复杂一些，需要修改css文件，文档参考：<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-anaconda-visuals#sect-anaconda-visuals-graphics" target="_blank" rel="noopener">customized-anaconda</a></p>

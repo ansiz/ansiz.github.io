@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。errors就是一个“简陋”的原生package，原生的errors只支持一个方法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/05/golang.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:46.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2016/05/golang.jpg">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang自定义error">
 <meta name="twitter:description" content="Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。errors就是一个“简陋”的原生package，原生的errors只支持一个方法">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/05/golang.jpg">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2016/05/golang.jpg">
 
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:46" itemprop="dateModified" datetime="2018-10-21T18:57:46+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -433,7 +433,7 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2016/05/golang.jpg" alt="Golang"><br>Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。<br>errors就是一个“简陋”的原生package，原生的errors只支持一个方法  <a id="more"></a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">errors.New(<span class="string">"text"</span>)</span><br></pre></td></tr></table></figure></p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2016/05/golang.jpg" alt="Golang"><br>Go语言的一大特点就是简洁高效，最近开始有越来越多的团队和开发人员开始尝试使用golang进行开发。Golang自带了很多原生的包，可以满足基础的开发需要，但是就如语言本身一样，自带的各种package也跟golang一样追求高效简洁，有时候甚至有些简陋。<br>errors就是一个“简陋”的原生package，原生的errors只支持一个方法  <a id="more"></a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">errors.New(<span class="string">"text"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>显然这并不能完全满足我们的需求。<br>但是errors被定义成了一个接口，而golang巧妙的设计使其可以通过实现接口所包含的方法的基础上额外扩展更多的方法，于是我就研究了一下弄了这么一个东西出来，这个包主要有一下几个特点：  </p>
 <ul>
 <li>支持打印错误堆栈信息，可以方便跟踪到具体是哪一行代码出错。</li>

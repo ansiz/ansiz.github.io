@@ -124,15 +124,15 @@
 <meta property="og:site_name" content="Ansiz">
 <meta property="og:description" content="前几天项目里用到了一个简易的播放器进行SVG图片的播放，但是因为SVG尺寸较大，在网络环境差的情况下可能导致播放卡顿严重，这时候如果用上浏览器缓存的话，就能一定程度上（至少加载过的图片再次加载时可以秒加载）缓解这个问题。但是很奇怪的是尽管我们没有在前端和后端禁用浏览器缓存，用ajax发出的get请求在url完全相同的情况下依然没有从缓存中直接读取，找了各种资料大家似乎都说默认浏览器缓存是开启的，经">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2016/05/http.jpg">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/015343_psx2_568818.png">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/015353_P04w_568818.png">
-<meta property="og:image" content="http://img.chinahpc.club/uploads/2015/09/021903_6FjX_568818.jpg">
-<meta property="og:updated_time" content="2018-10-21T10:57:45.000Z">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2016/05/http.jpg">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2015/09/015343_psx2_568818.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2015/09/015353_P04w_568818.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/uploads/2015/09/021903_6FjX_568818.jpg">
+<meta property="og:updated_time" content="2019-04-28T06:57:38.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器 HTTP 协议缓存机制">
 <meta name="twitter:description" content="前几天项目里用到了一个简易的播放器进行SVG图片的播放，但是因为SVG尺寸较大，在网络环境差的情况下可能导致播放卡顿严重，这时候如果用上浏览器缓存的话，就能一定程度上（至少加载过的图片再次加载时可以秒加载）缓解这个问题。但是很奇怪的是尽管我们没有在前端和后端禁用浏览器缓存，用ajax发出的get请求在url完全相同的情况下依然没有从缓存中直接读取，找了各种资料大家似乎都说默认浏览器缓存是开启的，经">
-<meta name="twitter:image" content="http://img.chinahpc.club/uploads/2016/05/http.jpg">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/uploads/2016/05/http.jpg">
 
 
 
@@ -375,7 +375,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 18:57:45" itemprop="dateModified" datetime="2018-10-21T18:57:45+08:00">2018-10-21</time>
+                <time title="修改时间：2019-04-28 14:57:38" itemprop="dateModified" datetime="2019-04-28T14:57:38+08:00">2019-04-28</time>
               
             
           </span>
@@ -436,8 +436,8 @@
       
 
       
-        <p><img src="http://img.chinahpc.club/uploads/2016/05/http.jpg" alt="jQuery"><br>前几天项目里用到了一个简易的播放器进行SVG图片的播放，但是因为SVG尺寸较大，在网络环境差的情况下可能导致播放卡顿严重，这时候如果用上浏览器缓存的话，就能一定程度上（至少加载过的图片再次加载时可以秒加载）缓解这个问题。但是很奇怪的是尽管我们没有在前端和后端禁用浏览器缓存，用ajax发出的get请求在url完全相同的情况下依然没有从缓存中直接读取，找了各种资料大家似乎都说默认浏览器缓存是开启的，经过我们反复的测试静态文件都能直接缓存，但是ajax的请求却不行，后来国勇哥丢给我们一个链接：<a href="http://my.oschina.net/leejun2005/blog/369148" target="_blank" rel="noopener">【原文地址】</a>看完之后顿觉醍醐灌顶，终于问题得到了解决，这里在原文的基础上再次整理一下。<br><a id="more"></a></p>
-<h3 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h3><p>我们先来看看浏览器的缓存机制，浏览器第一次访问时：<br><a href="http://img.chinahpc.club/uploads/2015/09/015343_psx2_568818.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2015/09/015343_psx2_568818.png" alt="第一次访问时"></a></p>
+        <p><img src="http://ansiz.motherland-flower.cn/uploads/2016/05/http.jpg" alt="jQuery"><br>前几天项目里用到了一个简易的播放器进行SVG图片的播放，但是因为SVG尺寸较大，在网络环境差的情况下可能导致播放卡顿严重，这时候如果用上浏览器缓存的话，就能一定程度上（至少加载过的图片再次加载时可以秒加载）缓解这个问题。但是很奇怪的是尽管我们没有在前端和后端禁用浏览器缓存，用ajax发出的get请求在url完全相同的情况下依然没有从缓存中直接读取，找了各种资料大家似乎都说默认浏览器缓存是开启的，经过我们反复的测试静态文件都能直接缓存，但是ajax的请求却不行，后来国勇哥丢给我们一个链接：<a href="http://my.oschina.net/leejun2005/blog/369148" target="_blank" rel="noopener">【原文地址】</a>看完之后顿觉醍醐灌顶，终于问题得到了解决，这里在原文的基础上再次整理一下。<br><a id="more"></a></p>
+<h3 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h3><p>我们先来看看浏览器的缓存机制，浏览器第一次访问时：<br><a href="http://ansiz.motherland-flower.cn/uploads/2015/09/015343_psx2_568818.png" target="_blank" rel="noopener"><img src="http://ansiz.motherland-flower.cn/uploads/2015/09/015343_psx2_568818.png" alt="第一次访问时"></a></p>
 <p>&nbsp;</p>
 <p>当浏览器第一次访问时向浏览器发送请求，然后响应请求，根据返回的Cache-Control等信息将资源缓存，然后呈现在页面上，这个时候我们应该试着了解一下Cache-Control之类的参数如何配置：</p>
 <ul>
@@ -464,10 +464,10 @@
 <hr>
 </li>
 </ul>
-<p>好了让我们来看看当浏览器第二次访问资源的时候是怎样的一个流程：<br><a href="http://img.chinahpc.club/uploads/2015/09/015353_P04w_568818.png" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2015/09/015353_P04w_568818.png" alt="第二次访问时"></a></p>
+<p>好了让我们来看看当浏览器第二次访问资源的时候是怎样的一个流程：<br><a href="http://ansiz.motherland-flower.cn/uploads/2015/09/015353_P04w_568818.png" target="_blank" rel="noopener"><img src="http://ansiz.motherland-flower.cn/uploads/2015/09/015353_P04w_568818.png" alt="第二次访问时"></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>最后我们来适当了解一下上图出现的几个状态码：<a href="http://img.chinahpc.club/uploads/2015/09/021903_6FjX_568818.jpg" target="_blank" rel="noopener"><img src="http://img.chinahpc.club/uploads/2015/09/021903_6FjX_568818.jpg" alt="状态码"></a></p>
+<p>最后我们来适当了解一下上图出现的几个状态码：<a href="http://ansiz.motherland-flower.cn/uploads/2015/09/021903_6FjX_568818.jpg" target="_blank" rel="noopener"><img src="http://ansiz.motherland-flower.cn/uploads/2015/09/021903_6FjX_568818.jpg" alt="状态码"></a></p>
 <p>相信这些内容已经足够用于解决浏览器缓存问题了</p>
 <p>2015年9月29日 23:17:22</p>
 <p>&nbsp;</p>

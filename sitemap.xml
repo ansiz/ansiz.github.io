@@ -2,373 +2,373 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zxh.site/2019/04/02/the-clean-coder/</loc>
-    
-    <lastmod>2019-04-03T07:17:45.051Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/02/28/Docker-in-LXC/</loc>
-    
-    <lastmod>2019-04-02T02:11:04.140Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/15/DeepinOS/</loc>
-    
-    <lastmod>2019-04-02T02:10:48.748Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zxh.site/2018/02/16/customize-linux-image/</loc>
     
-    <lastmod>2019-04-02T02:10:35.531Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/08/socks5/</loc>
-    
-    <lastmod>2019-04-02T02:10:14.081Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/15/install-tensorflow-on-deepinOS/</loc>
-    
-    <lastmod>2019-04-02T02:09:56.901Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/11/17/About-TTY/</loc>
-    
-    <lastmod>2019-01-04T01:59:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/10/28/HPC-series-15-resource-limit/</loc>
-    
-    <lastmod>2019-01-04T01:59:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/10/21/HPC-series-14-account/</loc>
-    
-    <lastmod>2019-01-04T01:58:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/10/14/HPC-series-13-schedule-GPU/</loc>
-    
-    <lastmod>2019-01-04T01:58:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/10/07/HPC-series-12-interact-job/</loc>
-    
-    <lastmod>2019-01-04T01:58:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/09/28/HPC-series-11-node-status/</loc>
-    
-    <lastmod>2019-01-04T01:58:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/09/23/HPC-series-10-job-status/</loc>
-    
-    <lastmod>2019-01-04T01:58:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/09/16/HPC-series-9-job-submit-options/</loc>
-    
-    <lastmod>2019-01-04T01:58:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/</loc>
-    
-    <lastmod>2019-01-04T01:57:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/09/02/HPC-series-7-setup-slurm-debian/</loc>
-    
-    <lastmod>2019-01-04T01:57:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/08/26/HPC-series-6-setup-slurm/</loc>
-    
-    <lastmod>2019-01-04T01:57:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/08/19/HPC-series-5-setup-dev/</loc>
-    
-    <lastmod>2019-01-04T01:57:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/08/11/HPC-series-4-Slurm-overview/</loc>
-    
-    <lastmod>2019-01-04T01:56:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/08/05/HPC-series-3-scheduler-overview/</loc>
-    
-    <lastmod>2019-01-04T01:56:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/28/HPC-series-2-overview/</loc>
-    
-    <lastmod>2019-01-04T01:55:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/22/HPC-series-1-startup/</loc>
-    
-    <lastmod>2019-01-04T01:54:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2017/04/01/web-tty/</loc>
-    
-    <lastmod>2018-11-17T14:28:49.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.533Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/05/25/slurm-singularity/</loc>
     
-    <lastmod>2018-11-17T14:25:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/05/15/Singularity/</loc>
-    
-    <lastmod>2018-11-17T14:19:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
-    
-    <lastmod>2018-11-05T03:26:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/05/20/customized-error/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/10/21/efficient/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/07/01/first-anniversary/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2015/09/28/fswatch/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/03/06/git-on-windows-server/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2015/07/22/newlife/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/12/01/phabricator-2/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/04/08/port-mapping/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2015/12/29/slurm/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
-    
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.532Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/03/21/weiphp-on-sae/</loc>
     
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.532Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/10/14/HPC-series-13-schedule-GPU/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/07/01/first-anniversary/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/06/03/markdown-plugin-for-sublime-text/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/15/DeepinOS/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/09/28/HPC-series-11-node-status/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/09/02/HPC-series-7-setup-slurm-debian/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/05/20/customized-error/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/09/28/fswatch/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/15/install-tensorflow-on-deepinOS/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/01/08/s1000/</loc>
     
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/01/docker-on-cluster/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.508Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/08/11/HPC-series-4-Slurm-overview/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2019/04/02/the-clean-coder/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.306Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/22/HPC-series-1-startup/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.305Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/10/28/HPC-series-15-resource-limit/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/08/05/HPC-series-3-scheduler-overview/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/09/16/HPC-series-9-job-submit-options/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/05/15/Singularity/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/07/22/newlife/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2017/04/01/web-tty/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/10/21/efficient/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/03/06/git-on-windows-server/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/02/01/meta-programming/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/12/01/phabricator-2/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/04/08/port-mapping/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/01/24/wordpress-on-sae/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/08/22/javascript-convention/</loc>
     
-    <lastmod>2018-10-21T10:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/01/26/command-find/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.303Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2015/11/21/freedomnet/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2015/09/29/http-cache/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2016/02/29/javascript-artifice/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/</loc>
+    <loc>http://zxh.site/2015/12/29/slurm/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/11/26/phabricator-configure/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/06/12/redis-rpc/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zxh.site/2016/06/03/redis/</loc>
-    
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2018/06/24/x11/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zxh.site/2015/12/23/optimize-mysql-innodb/</loc>
+    <loc>http://zxh.site/2018/11/17/About-TTY/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zxh.site/2017/06/24/parallel-command/</loc>
     
-    <lastmod>2018-10-21T10:57:45.000Z</lastmod>
+    <lastmod>2019-04-28T06:57:38.302Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/02/28/Docker-in-LXC/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/09/23/HPC-series-10-job-status/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/10/21/HPC-series-14-account/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/11/26/phabricator-configure/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/08/socks5/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/06/12/redis-rpc/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2017/03/06/CentOS7AutoDeploy/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/08/26/HPC-series-6-setup-slurm/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/01/26/command-find/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/09/29/http-cache/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/10/31/jquery-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/10/07/HPC-series-12-interact-job/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/09/08/HPC-series-8-first-slurm-job/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2016/06/03/redis/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2015/12/23/optimize-mysql-innodb/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/07/28/HPC-series-2-overview/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.298Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zxh.site/2018/08/19/HPC-series-5-setup-dev/</loc>
+    
+    <lastmod>2019-04-28T06:57:38.298Z</lastmod>
     
   </url>
   
