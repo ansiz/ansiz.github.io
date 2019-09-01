@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zxh.site/"/>
-  <updated>2019-04-28T06:57:38.306Z</updated>
+  <updated>2019-09-01T15:14:43.810Z</updated>
   <id>http://zxh.site/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅析TCP Vegas拥塞控制算法</title>
+    <link href="http://zxh.site/2019/07/01/tcp-vegas/"/>
+    <id>http://zxh.site/2019/07/01/tcp-vegas/</id>
+    <published>2019-07-01T15:08:08.000Z</published>
+    <updated>2019-09-01T15:14:43.810Z</updated>
+    
+    <content type="html"><![CDATA[<p>TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，在了解Vegas算法的基础上很容易触类旁通）</p><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>先让我们看看维基百科上是如何解释TCP Vegas算法的：</p><blockquote><p>TCP Vegas is a TCP congestion avoidance algorithm that emphasizes packet delay, rather than packet loss, as a signal to help determine the rate at which to send packets.——Wikipedia</p></blockquote><p>TCP Vegas算法是一种拥塞避免算法，它通过关注延迟而不是关注丢包来决定如何调节发包率。<a id="more"></a></p><p><img src="http://ansiz.motherland-flower.cn/2019/08/pipe.png" alt="TCP-BBR-pipe"></p><p>在很多解释Vegas或者BBR算法的文章中，都扔出这张经典的水管流量示意图，实际上我个人认为这张图片并不够形象，因为我们的直觉会认为水管的流量是由外部水压和水管宽度共同决定的，而不是仅仅靠水管宽度。</p><p><img src="http://ansiz.motherland-flower.cn/2019/08/queue.jpeg" alt="img"></p><p>让我们做一个更形象的比喻，无论是坐地铁、火车还是飞机，我们都需要过安检，当人流量比较大的时候，会有专门的人负责控制通过安检通道的人数，我们先称这个控制流量的角色为观察员。为了尽可能提高通过的效率，观察员需要尽量让安检人员持续有活儿干并且不能让太多人涌进来影响安检效率。让我们把这个例子和专业术语对应起来：</p><ul><li>每次允许通过的最大人数cwnd（拥塞窗口尺寸）</li><li>假设完全没有人排队时，执行完一次安检的时间为RTTnoload</li><li>而实际安检的时间RTTactual = RTTnoload + 排队时间</li><li>期望通过速率Expect = cwnd/RTTnoload</li><li>实际通过速率Actual = cwnd/RTTactual</li><li>速率差值Diff = Expect-Actual</li></ul><p>由上述条件我们可以作如下推导：</p><ul><li>Diff = queueSize/RTTnoload = cwnd/RTTnoload - cwnd/RTTactual = cwnd(1/RTTnoload - 1/RTTactual)</li><li>最后推导出queueSize = cwnd * (1 - RTTnoload/RTTactual)</li></ul><p>从这个公式我们可以看到排队的队列大小与观测到的RTTnoload和RTTactual直接相关联，而且趋势是若RTTactual越接近RTTnoload（比值接近1），则队列尺寸越小。</p><h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>Vegas 定义了两个阈值α和β，当 queueSize &gt; β 时，拥塞窗口减小，当 α &lt;= queueSize &lt;=β 时，拥塞窗口不变，当 queueSize &lt; α 时，拥塞窗口增加。α和β的通常是一个较小的取值，例如α=1, β=3，则表示在传输过程中最多只使用2个buffer。这样可以保证系统容量评估得尽可能精准，但是带来的坏处是需要进行非常频繁的调节，适当增大α,β的范围可以减少频繁的调整cwnd。</p><p>Vegas算法被认为是最为平滑的控制算法，因为它的通常采用线性的方式增减cwnd(与之相对的是例如slow-start之类的方式），例如每次+1/-1，优点依然是精准，缺点是需要较长的时间才能找到那个平衡点。</p><p>虽然我们重点讲的是Vegas算法，但综上所述，拥塞控制协议的原理可以归纳为通过判断某些特定的条件（例如Vegas以RTT为基准，Reno以丢包为条件）确定系统是否在恶化，然后使用特定的算法（例如线性增减、slow-start等）对cwnd进行调节。</p><h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><h3 id="Vegas算法的缺点"><a href="#Vegas算法的缺点" class="headerlink" title="Vegas算法的缺点"></a>Vegas算法的缺点</h3><p>Vegas算法以RTT作为判断依据，如果系统中允许存在超大的buffer或者允许一定程度的服务恶化，则该算法会无法正常工作。这些情况在现实场景中是非常常见的，所以Vegas最终没有广泛部署。</p><h3 id="现实场景下的利用"><a href="#现实场景下的利用" class="headerlink" title="现实场景下的利用"></a>现实场景下的利用</h3><p>拥塞控制协议设计非常巧妙，那我们还能用在其他地方产生价值吗？在服务流量限制这个场景中，就可以参考拥塞控制协议。以Vegas算法为例，我们同样可以通过计算RTT来调节流量，如果我们有无穷多的资源可以动态扩容，并且永远给用户提供最佳的请求响应速度，那我们基本可以照搬Vegas算法，不过现实情况下我们需要做一些改进。</p><ul><li>我们通常不可能有近似无穷多的资源可以动态扩容，也不必永远给用户提供最佳的请求速度，在用户能接受的范围内我们应该适当允许RTTactual &gt; RTTnoload，以提高资源利用率，这里我们可以将RTTnoload换成过去某段时间内统计到的一个基线数据，该值应当不会使服务不可用同时又有较高的资源利用率。</li><li>频繁的进行cwnd的调节没有太大必要，可以适当增大α,β的差值。</li><li>Vegas算法探测到服务恶化后会不断缩小cwnd，但如果由于其他的一些原因（例如其他的服务抢占了系统资源）导致RTTactual再也不可能接近RTTnoload则该算法会导致最后流量跌零，所以RTTnoload不应该固定为历史采样的最小值，可以参考BBR算法的周期性探测计算RTTnoload。</li></ul><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><p><a href="[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.100.9587&amp;rep=rep1&amp;type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.100.9587&amp;rep=rep1&amp;type=pdf">TCP Vegas: New Techniques for Congestion<br>Detection and Avoidance</a>)</p></li><li><p><a href="https://juejin.im/entry/5b7fcd13f265da4372473199" target="_blank" rel="noopener">浅谈 TCP 拥塞控制算法</a></p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，在了解Vegas算法的基础上很容易触类旁通）&lt;/p&gt;
+&lt;h2 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h2&gt;&lt;p&gt;先让我们看看维基百科上是如何解释TCP Vegas算法的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;TCP Vegas is a TCP congestion avoidance algorithm that emphasizes packet delay, rather than packet loss, as a signal to help determine the rate at which to send packets.——Wikipedia&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;TCP Vegas算法是一种拥塞避免算法，它通过关注延迟而不是关注丢包来决定如何调节发包率。
+    
+    </summary>
+    
+      <category term="网络" scheme="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="限流熔断" scheme="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E9%99%90%E6%B5%81%E7%86%94%E6%96%AD/"/>
+    
+    
+      <category term="网络" scheme="http://zxh.site/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="限流熔断" scheme="http://zxh.site/tags/%E9%99%90%E6%B5%81%E7%86%94%E6%96%AD/"/>
+    
+  </entry>
   
   <entry>
     <title>谈谈996</title>
@@ -560,33 +591,6 @@
       <category term="Linux" scheme="http://zxh.site/tags/Linux/"/>
     
       <category term="评测" scheme="http://zxh.site/tags/%E8%AF%84%E6%B5%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安全的SOCKS5协议</title>
-    <link href="http://zxh.site/2018/07/08/socks5/"/>
-    <id>http://zxh.site/2018/07/08/socks5/</id>
-    <published>2018-07-08T07:27:48.000Z</published>
-    <updated>2019-04-28T06:57:38.301Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ansiz.motherland-flower.cn/2018/07/malicious.png" alt="malicious"></p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在<code>HTTP</code>/<code>HTTPS</code>的世界里，<code>TCP/IP</code>数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。<a id="more"></a></p><p>目前已知的攻击手段包括：</p><ul><li>IP封锁 - 对指定IP地址的任何连接尝试都会被恶意的第三方阻止。</li><li>DNS欺骗 - 返回错误的IP地址。</li><li>包过滤 - 当包中被检测到特定的词句时该数据包将会被阻止或丢弃。</li><li>TCP RST - 对在黑名单中的目的地址进行访问时会发送<code>RST</code>包，TCP连接将会立即中断。</li><li>深度学习 - 利用集群深度学习，恶意方可以快速找到可疑的IP地址。</li></ul><p>在这样的封锁下，想要在自由的网络中呼吸新鲜空气听起来像是在做梦。但是极客们显然不愿意因此丢失任何一个数据包。</p><p>解决方案是利用强加密算法的<a href="https://zh.wikipedia.org/wiki/SOCKS" target="_blank" rel="noopener">SOCKS5</a>协议。</p><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul><li>穿透防火墙封锁</li><li>隐藏所有数据包数据，包括源，目标，载荷等</li></ul><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>下面介绍常见的安全SOCKS5代理的开发技术及其工作原理</p><h3 id="工作模式介绍"><a href="#工作模式介绍" class="headerlink" title="工作模式介绍"></a>工作模式介绍</h3><h4 id="自由网络"><a href="#自由网络" class="headerlink" title="自由网络"></a>自由网络</h4><p>在没有恶意攻击者的情况下，客户端与服务器端可以正常通讯。</p><p><img src="http://ansiz.motherland-flower.cn/2018/07/free-client-server.gif" alt="free"></p><h4 id="被封锁的网络"><a href="#被封锁的网络" class="headerlink" title="被封锁的网络"></a>被封锁的网络</h4><p>恶意攻击者可以在客户端和服务器之间部署类似防火墙的系统，这样任何请求都不会到达服务器。因此，最终用户无法从服务器获取任何数据。</p><p><img src="http://ansiz.motherland-flower.cn/2018/07/blocking.gif" alt="blocked"></p><h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>一种合理的方法是在防火墙之外设置代理服务器。所有流量都需要先通过代理服务器，然后由代理服务器中继。目前代理技术包括HTTP代理，Socks服务，VPN服务，SSH隧道等。SOCKS5也是其中一种代理协议。</p><p><img src="http://ansiz.motherland-flower.cn/2018/07/proxying.gif" alt="proxy"></p><p>举个例子，当请求通过SSH隧道传输时，防火墙无法识别流量，因为数据已加密。但问题是，在创建隧道时进行SSH握手时，很可能会发现代理服务器被用作代理。因此防火墙可以阻止SSH隧道创建步骤的网络连接。</p><h4 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h4><p>安全的socks代理不应向防火墙公开以下信息：</p><ul><li>任何表明它被用作代理的特征</li><li>任何真实传输的数据</li></ul><p><img src="http://ansiz.motherland-flower.cn/2018/07/secure-proxy.gif" alt="secure-proxy"></p><p>要解决上述模型中存在的问题，<code>SOCKS5</code>需要进行改进。我们可以把<code>SOCKS5</code>拆分成两部分，<code>socks5-local</code>和<code>socks5-remote</code></p><p>上图中SOCKS5的工作原理主要可以概括为以下几步：</p><ul><li>客户端通过<code>SOCKS5</code>协议向本地代理发送请求。</li><li>本地代理通过<code>HTTP</code>协议发送加密后的请求数据。</li><li>因为HTTP协议没有明显的特征，并且远程代理服务器尚未被识别为代理，因此请求可以穿透防火墙。</li><li>远程代理服务器解密数据后中继到真实服务。</li><li>真实服务将响应返回到远程代理服务器，并通过相同的路径传播回客户端。</li></ul><h3 id="使用SOCKS5作为本地代理协议"><a href="#使用SOCKS5作为本地代理协议" class="headerlink" title="使用SOCKS5作为本地代理协议"></a>使用SOCKS5作为本地代理协议</h3><p><code>SOCKS5</code>在客户端有广泛的支持。我们很容易得到通过SOCKS5从客户端传输数据到本地代理服务器的好处。 SOCKS5在第5层上执行数据传输。</p><p>下面的curl命令演示了客户端能够使用SOCKS5连接到SOCKS5代理服务器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 127.0.0.1:1080 https://google.com</span><br></pre></td></tr></table></figure><h3 id="为什么使用HTTP作为传输协议"><a href="#为什么使用HTTP作为传输协议" class="headerlink" title="为什么使用HTTP作为传输协议"></a>为什么使用HTTP作为传输协议</h3><p>HTTP可能是整个互联网上最常见的流量类型。选择HTTP作为传输协议以突破防火墙使得数据包和服务器不太可能被识别用于代理使用。</p><p>HTTPS不适合防火墙突破。因为HTTPS的设计目的是：</p><ul><li>避免恶意方改变内容</li><li>避免恶意方伪装成目标服务器</li><li>数据加密</li></ul><p>而代理软件的目的应满足以下要求：</p><ul><li>避免目标服务器被识别</li><li>避免代理服务器被识别为代理</li><li>数据加密</li></ul><p>基于以上原因，HTTP是突破防火墙比HTTPS或任何其他协议更好的选择。</p><h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>密码算法对数据进行加密和解密，这样任何人都无法从加密流中读取数据，除了LocalProxy和RemoteProxy。由于<code>AEAD</code>密码同时提供机密性，完整性和真实性，建议选择下面列出的AEAD系列之一作为在本地代理和远程代理中使用的密码算法：</p><ul><li>chacha20-ietf-poly1305</li><li>aes-256-gcm</li><li>aes-128-gcm</li></ul><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>Shadowsocks是一款出色的安全socks5代理解决方案。查看其<a href="https://shadowsocks.org/en/index.html" target="_blank" rel="noopener">官方网站</a>了解更多信息。</p><h2 id="挑战和风险"><a href="#挑战和风险" class="headerlink" title="挑战和风险"></a>挑战和风险</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ul><li>恶意方可以在客户端安装干扰软件，以阻止本地软件和LocalProxy之间的连接。<ul><li>这可以通过强制安装来实现</li><li>它也可以通过嵌入广泛安装的软件来实现</li></ul></li><li>恶意方可能会强制该人卸载LocalProxy</li></ul><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>必须将服务器端部署到没有防火墙阻止的环境中</p><ul><li>恶意方可以强制云提供商或潜入云服务器做以下事情：<ul><li>窃取服务器日志文件</li><li>杀死ServerProxy进程</li></ul></li><li>恶意方也可以是云提供商</li></ul><h3 id="不安全的加密算法"><a href="#不安全的加密算法" class="headerlink" title="不安全的加密算法"></a>不安全的加密算法</h3><p>使用何种加密算法取决于用户，如果最终用户选择不安全的密码算法，可能会增加服务器被识别为代理服务器的风险。提供代理服务的服务器将被封锁。</p><h3 id="IP白名单限制"><a href="#IP白名单限制" class="headerlink" title="IP白名单限制"></a>IP白名单限制</h3><p>如果最终用户只能连接到选定范围的IP列表（即IP白名单），则用户无法使用SOCKS5服务器，因为SOCKS5服务器IP不太可能包含在IP白名单中。</p><h3 id="进一步的风险"><a href="#进一步的风险" class="headerlink" title="进一步的风险"></a>进一步的风险</h3><p>当最终用户泄露密码密钥和流量历史记录时，恶意方可以解密过去的所有流量。</p><h3 id="执法监管"><a href="#执法监管" class="headerlink" title="执法监管"></a>执法监管</h3><p>即使使用安全的SOCKS5代理，也要注意不要泄露任何个人信息。卸载掉那些不可信任的安全证书和软件，据说<code>Shadowsocks</code>的发明者因为通过QQ与朋友聊天最后被“喝茶”。 :)</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过秘密部署安全的SOCKS5代理服务器并选择强密码算法，人们可以突破严重的网络封锁。 <code>Shadowsocks</code>可能是您的首选。</p><hr><p>本文翻译自<a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">secure-socks5-proxy</a>，包含少量修改。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://enqueuezero.com/secure-socks5-proxy.html" target="_blank" rel="noopener">原文</a></li><li><a href="https://zhuanlan.zhihu.com/p/28566058" target="_blank" rel="noopener">什么是AEAD加密</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://ansiz.motherland-flower.cn/2018/07/malicious.png&quot; alt=&quot;malicious&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在&lt;code&gt;HTTP&lt;/code&gt;/&lt;code&gt;HTTPS&lt;/code&gt;的世界里，&lt;code&gt;TCP/IP&lt;/code&gt;数据包的源和目标是公开的。恶意的第三方可以干扰网络连接，将污染过的数据包发送给请求源，从而实现阻止或中断连接。
-    
-    </summary>
-    
-      <category term="网络" scheme="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="译文" scheme="http://zxh.site/categories/%E7%BD%91%E7%BB%9C/%E8%AF%91%E6%96%87/"/>
-    
-    
-      <category term="网络" scheme="http://zxh.site/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="译文" scheme="http://zxh.site/tags/%E8%AF%91%E6%96%87/"/>
     
   </entry>
   

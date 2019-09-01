@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="http://ansiz.motherland-flower.cn/needsharebutton.min.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="bMC_ou8kAR1whQgISf5rsn3Zv1CWT6cl-rvmnri4Fho" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","width":240,"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，">
+<meta name="keywords" content="网络,限流熔断">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析TCP Vegas拥塞控制算法">
+<meta property="og:url" content="http://zxh.site/2019/07/01/tcp-vegas/index.html">
+<meta property="og:site_name" content="Ansiz">
+<meta property="og:description" content="TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2019/08/pipe.png">
+<meta property="og:image" content="http://ansiz.motherland-flower.cn/2019/08/queue.jpeg">
+<meta property="og:updated_time" content="2019-09-01T15:14:43.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析TCP Vegas拥塞控制算法">
+<meta name="twitter:description" content="TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，">
+<meta name="twitter:image" content="http://ansiz.motherland-flower.cn/2019/08/pipe.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ansiz" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://zxh.site/2019/07/01/tcp-vegas/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>浅析TCP Vegas拥塞控制算法 | Ansiz</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ansiz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">迎风向前是唯一的方法</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">41</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">37</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">54</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxh.site/2019/07/01/tcp-vegas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张稀虹">
+      <meta itemprop="description" content="迎风向前是唯一的方法">
+      <meta itemprop="image" content="http://ansiz.motherland-flower.cn/uploads/2015/01/photoright-001.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ansiz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅析TCP Vegas拥塞控制算法
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-01 23:08:08" itemprop="dateCreated datePublished" datetime="2019-07-01T23:08:08+08:00">2019-07-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-01 23:14:43" itemprop="dateModified" datetime="2019-09-01T23:14:43+08:00">2019-09-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/限流熔断/" itemprop="url" rel="index"><span itemprop="name">限流熔断</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/01/tcp-vegas/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/07/01/tcp-vegas/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>TCP拥塞控制算法是令TCP协议保持高效率传输的重要设计，不过由于大多数人平时并不需要关心它，大家并不会深入去了解各种拥塞协议之间的差异。提到TCP拥塞控制算法，总令人想到一大堆专业名词，例如拥塞窗口、重传、丢包、RTT……等等，不过其本质可以用”排队论”（Queuing Theory）进行解释。本文将尝试用通俗易懂的方式讲解TCP Vegas算法的设计与实现（其他拥塞控制算法其本质并无太大差异，在了解Vegas算法的基础上很容易触类旁通）</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>先让我们看看维基百科上是如何解释TCP Vegas算法的：</p>
+<blockquote>
+<p>TCP Vegas is a TCP congestion avoidance algorithm that emphasizes packet delay, rather than packet loss, as a signal to help determine the rate at which to send packets.——Wikipedia</p>
+</blockquote>
+<p>TCP Vegas算法是一种拥塞避免算法，它通过关注延迟而不是关注丢包来决定如何调节发包率。<a id="more"></a></p>
+<p><img src="http://ansiz.motherland-flower.cn/2019/08/pipe.png" alt="TCP-BBR-pipe"></p>
+<p>在很多解释Vegas或者BBR算法的文章中，都扔出这张经典的水管流量示意图，实际上我个人认为这张图片并不够形象，因为我们的直觉会认为水管的流量是由外部水压和水管宽度共同决定的，而不是仅仅靠水管宽度。</p>
+<p><img src="http://ansiz.motherland-flower.cn/2019/08/queue.jpeg" alt="img"></p>
+<p>让我们做一个更形象的比喻，无论是坐地铁、火车还是飞机，我们都需要过安检，当人流量比较大的时候，会有专门的人负责控制通过安检通道的人数，我们先称这个控制流量的角色为观察员。为了尽可能提高通过的效率，观察员需要尽量让安检人员持续有活儿干并且不能让太多人涌进来影响安检效率。让我们把这个例子和专业术语对应起来：</p>
+<ul>
+<li>每次允许通过的最大人数cwnd（拥塞窗口尺寸）</li>
+<li>假设完全没有人排队时，执行完一次安检的时间为RTTnoload</li>
+<li>而实际安检的时间RTTactual = RTTnoload + 排队时间</li>
+<li>期望通过速率Expect = cwnd/RTTnoload</li>
+<li>实际通过速率Actual = cwnd/RTTactual</li>
+<li>速率差值Diff = Expect-Actual</li>
+</ul>
+<p>由上述条件我们可以作如下推导：</p>
+<ul>
+<li>Diff = queueSize/RTTnoload = cwnd/RTTnoload - cwnd/RTTactual = cwnd(1/RTTnoload - 1/RTTactual)</li>
+<li>最后推导出queueSize = cwnd * (1 - RTTnoload/RTTactual)</li>
+</ul>
+<p>从这个公式我们可以看到排队的队列大小与观测到的RTTnoload和RTTactual直接相关联，而且趋势是若RTTactual越接近RTTnoload（比值接近1），则队列尺寸越小。</p>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>Vegas 定义了两个阈值α和β，当 queueSize &gt; β 时，拥塞窗口减小，当 α &lt;= queueSize &lt;=β 时，拥塞窗口不变，当 queueSize &lt; α 时，拥塞窗口增加。α和β的通常是一个较小的取值，例如α=1, β=3，则表示在传输过程中最多只使用2个buffer。这样可以保证系统容量评估得尽可能精准，但是带来的坏处是需要进行非常频繁的调节，适当增大α,β的范围可以减少频繁的调整cwnd。</p>
+<p>Vegas算法被认为是最为平滑的控制算法，因为它的通常采用线性的方式增减cwnd(与之相对的是例如slow-start之类的方式），例如每次+1/-1，优点依然是精准，缺点是需要较长的时间才能找到那个平衡点。</p>
+<p>虽然我们重点讲的是Vegas算法，但综上所述，拥塞控制协议的原理可以归纳为通过判断某些特定的条件（例如Vegas以RTT为基准，Reno以丢包为条件）确定系统是否在恶化，然后使用特定的算法（例如线性增减、slow-start等）对cwnd进行调节。</p>
+<h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><h3 id="Vegas算法的缺点"><a href="#Vegas算法的缺点" class="headerlink" title="Vegas算法的缺点"></a>Vegas算法的缺点</h3><p>Vegas算法以RTT作为判断依据，如果系统中允许存在超大的buffer或者允许一定程度的服务恶化，则该算法会无法正常工作。这些情况在现实场景中是非常常见的，所以Vegas最终没有广泛部署。</p>
+<h3 id="现实场景下的利用"><a href="#现实场景下的利用" class="headerlink" title="现实场景下的利用"></a>现实场景下的利用</h3><p>拥塞控制协议设计非常巧妙，那我们还能用在其他地方产生价值吗？在服务流量限制这个场景中，就可以参考拥塞控制协议。以Vegas算法为例，我们同样可以通过计算RTT来调节流量，如果我们有无穷多的资源可以动态扩容，并且永远给用户提供最佳的请求响应速度，那我们基本可以照搬Vegas算法，不过现实情况下我们需要做一些改进。</p>
+<ul>
+<li>我们通常不可能有近似无穷多的资源可以动态扩容，也不必永远给用户提供最佳的请求速度，在用户能接受的范围内我们应该适当允许RTTactual &gt; RTTnoload，以提高资源利用率，这里我们可以将RTTnoload换成过去某段时间内统计到的一个基线数据，该值应当不会使服务不可用同时又有较高的资源利用率。</li>
+<li>频繁的进行cwnd的调节没有太大必要，可以适当增大α,β的差值。</li>
+<li>Vegas算法探测到服务恶化后会不断缩小cwnd，但如果由于其他的一些原因（例如其他的服务抢占了系统资源）导致RTTactual再也不可能接近RTTnoload则该算法会导致最后流量跌零，所以RTTnoload不应该固定为历史采样的最小值，可以参考BBR算法的周期性探测计算RTTnoload。</li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.100.9587&amp;rep=rep1&amp;type=pdf](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.100.9587&amp;rep=rep1&amp;type=pdf">TCP Vegas: New Techniques for Congestion<br>Detection and Avoidance</a>)</p>
+</li>
+<li><p><a href="https://juejin.im/entry/5b7fcd13f265da4372473199" target="_blank" rel="noopener">浅谈 TCP 拥塞控制算法</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://ansiz.motherland-flower.cn/wechat_qr1.jpg" alt="张稀虹 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://ansiz.motherland-flower.cn/alipay_qr1.jpg" alt="张稀虹 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+            <a href="/tags/限流熔断/" rel="tag"># 限流熔断</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/02/the-clean-coder/" rel="next" title="谈谈996">
+                <i class="fa fa-chevron-left"></i> 谈谈996
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ansiz.motherland-flower.cn/uploads/2015/01/photoright-001.jpg"
+                alt="张稀虹" />
+            
+              <p class="site-author-name" itemprop="name">张稀虹</p>
+              <p class="site-description motion-element" itemprop="description">迎风向前是唯一的方法</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ansiz" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2548716042" target="_blank" title="Weibo" rel="external nofollow"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zzz332191120@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhxh" target="_blank" title="Zhihu" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拥塞控制"><span class="nav-number">2.</span> <span class="nav-text">拥塞控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些思考"><span class="nav-number">3.</span> <span class="nav-text">一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vegas算法的缺点"><span class="nav-number">3.1.</span> <span class="nav-text">Vegas算法的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现实场景下的利用"><span class="nav-number">3.2.</span> <span class="nav-text">现实场景下的利用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张稀虹</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="120" alpha="0.6"  zIndex="-1" src="http://ansiz.motherland-flower.cn/canvas-ribbon.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'DiMwS9dCwM7ojW7o3BNJ1ETz-gzGzoHsz',
+        appKey: '6KwKWihhxM4tDrKx6y9UVeEp',
+        placeholder: '欢迎留言交流',
+        avatar:'retro',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+    
+  
+  <script src="http://ansiz.motherland-flower.cn/needsharebutton.min.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+  
+    
+  
+  <script src="https://cdn.bootcss.com/pangu/3.3.0/pangu.js"></script>
+  <script type="text/javascript">pangu.spacingPage();</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
